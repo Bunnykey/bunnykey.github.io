@@ -1,18 +1,23 @@
-# Archive Construction Complete (v1.0.0)
+# Next Prompt: Project Detail Pages (project.html)
 
-## Status
-The Personal Archive of Bunnykey is fully constructed, optimized, and ready for deployment.
+## 🎯 Objective
+Create a dynamic template to display detailed information for individual projects from the gallery.
 
-## Final Roadmap
-- [x] Phase 1: Core Structure (Home, Gallery, History)
-- [x] Phase 2: Blog Engine (Log, Posts, Data Core)
-- [x] Phase 3: Interactive Enhancements (Terminal, Themes, Optimization)
+## 🛠️ Requirements & Scope
+- [ ] Create `project.html` template.
+- [ ] Implement URL parameter handling (`?id=...`) to fetch specific project data.
+- [ ] Display rich content: Title, Year, Full Description, Tech Stack, and Placeholder Image.
+- [!] Boundary: Only static JSON data will be used; no external API calls.
 
-## Summary of Features
-- **Luxury Minimalist UI:** Glassmorphic design system with Neon Teal accents.
-- **Dynamic Content:** Blog and Gallery powered by flexible JSON data.
-- **Interactive CLI:** A functional terminal interface for power-user navigation.
-- **Bimodal Theme:** High-contrast Dark and Light modes with persistent memory.
-- **Optimized:** Accessible ARIA attributes, mobile-responsive layouts, and skeleton loading states.
+## 📈 Measurable Outcomes
+- **Visual:** 100% alignment with the centered reading experience of `post.html`.
+- **Technical:** Functional dynamic routing using JavaScript and `projects.json`.
 
-The archive is ready. Awaiting further instructions or deployment protocols.
+## 🏗️ Technical Context
+- **Files:** `project.html`, `gallery.html` (links), `projects.json`.
+- **Design:** Sections 1-4 of DESIGN.md.
+
+## 🏁 Definition of Done
+- [ ] `project.html` renders correctly for all IDs in `projects.json`.
+- [ ] Navigation back to `gallery.html` is functional.
+- [ ] Light/Dark theme transition is smooth.

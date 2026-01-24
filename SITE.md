@@ -6,6 +6,18 @@ Personal Archive of Bunnykey
 ## Mission
 A comprehensive, high-aesthetic archive of my projects, thoughts, and history.
 
+## Project Scope
+- **Core:** Fully responsive, bimodal (light/dark) static site.
+- **Content:** Project gallery, blog system with JSON data core, and personal timeline.
+- **Interactivity:** Functional CLI terminal, dynamic glassmorphic effects.
+- **Exclusions:** Backend databases, user accounts, real-time server-side comments.
+
+## Measurable Outcomes
+- **Performance:** 90+ Lighthouse score for Performance and Best Practices.
+- **Accessibility:** 100% WCAG AA compliance for color contrast and ARIA labeling.
+- **Visual Identity:** Zero deviation from the "Luxury Minimalism" system defined in DESIGN.md.
+- **Maintainability:** 100% data-driven content for Blog and Gallery (via JSON).
+
 ## Roadmap
 - [x] index.html (Home)
 - [x] gallery.html (Project Showcase)
@@ -24,6 +36,10 @@ A comprehensive, high-aesthetic archive of my projects, thoughts, and history.
 - [x] Accessibility & Performance Optimization
 
 ### Phase 4: Advanced Glassmorphism
-- [ ] Dynamic Light Follow (Background glow)
-- [ ] Refraction & Border Highlights
-- [ ] Layered Depth (Multi-stack glass)
+- [x] Dynamic Light Follow (Background glow)
+- [x] Refraction & Border Highlights
+- [x] Layered Depth (Multi-stack glass)
+
+### Phase 5: Content Expansion
+- [x] project.html (Dynamic Template)
+- [x] projects.json (Data Core)

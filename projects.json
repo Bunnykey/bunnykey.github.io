@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": "stitch-protocol",
+      "title": "Stitch Protocol",
+      "year": "2025",
+      "category": "Automation",
+      "description": "An autonomous design-to-code execution framework utilizing iterative loops and semantic design systems. Stitch allows for rapid prototyping by bridging the gap between natural language intent and architectural code output.",
+      "tech": ["TypeScript", "Tailwind", "MCP"],
+      "image": "ARTIFACT_01"
+    },
+    {
+      "id": "glass-ui",
+      "title": "Glassmorphism UI",
+      "year": "2026",
+      "category": "Design System",
+      "description": "An exploration of depth, translucency, and light-refraction in digital interface design. This system focuses on user-centric spatial cues and high-end editorial aesthetics.",
+      "tech": ["CSS", "HTML", "Figma"],
+      "image": "ARTIFACT_02"
+    },
+    {
+      "id": "neural-archive",
+      "title": "Neural Archive",
+      "year": "2026",
+      "category": "Data Science",
+      "description": "A conceptual database mapping personal history through decentralized memory nodes. The project investigates the long-term preservation of digital consciousness.",
+      "tech": ["Node.js", "Encryption", "Graphs"],
+      "image": "ARTIFACT_03"
+    }
+  ]
+}
