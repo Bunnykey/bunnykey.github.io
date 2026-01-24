@@ -15,8 +15,14 @@ A comprehensive, high-aesthetic archive of my projects, thoughts, and history.
 ## Measurable Outcomes
 - **Performance:** 90+ Lighthouse score for Performance and Best Practices.
 - **Accessibility:** 100% WCAG AA compliance for color contrast and ARIA labeling.
+- **SEO:** WordPress-style titles (50-60 chars) and unique meta descriptions on all pages.
 - **Visual Identity:** Zero deviation from the "Luxury Minimalism" system defined in DESIGN.md.
 - **Maintainability:** 100% data-driven content for Blog and Gallery (via JSON).
+
+### Phase 6: SEO & Visibility
+- [x] Unique Meta Titles (WordPress Style)
+- [x] Meta Description Optimization
+- [x] Keyword Integration (Design, Archive, Protocol)
 
 ## Roadmap
 - [x] index.html (Home)
