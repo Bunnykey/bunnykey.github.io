@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article | Bunnykey Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-graphite: #1A1A1B;
+            --neon-teal: #00F2FF;
+            --bg-color: var(--deep-graphite);
+            --text-color: #FFFFFF;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="light"] {
+            --bg-color: #F4F4F4;
+            --text-color: #1A1A1B;
+            --panel-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+        .text-neon { color: var(--neon-teal); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .article-content p {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        .article-content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .comment-thread {
+            border-left: 2px solid var(--neon-teal);
+            margin-left: 1rem;
+            padding-left: 1.5rem;
+        }
+    </style>
+</head>
+<body class="p-8 md:p-24">
+    <div class="fixed top-8 right-8 z-50">
+        <button id="themeToggle" class="mono text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity flex items-center space-x-2">
+            <span id="themeLabel">DARK // MODE</span>
+            <div class="w-8 h-[1px] bg-current opacity-30"></div>
+        </button>
+    </div>
+
+    <nav class="w-full max-w-3xl mx-auto mb-16 flex justify-between items-center z-10 relative">
+        <a href="blog.html" class="mono text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">
+            ← Back to Log
+        </a>
+        <div class="mono text-xs opacity-30">READING_MODE: ACTIVE</div>
+    </nav>
+
+    <article class="w-full max-w-3xl mx-auto">
+        <header class="mb-12">
+            <div class="flex items-center space-x-4 mb-4">
+                <span class="text-neon mono text-xs uppercase tracking-tighter">Design // UI</span>
+                <span class="mono text-xs opacity-40">2026.01.25</span>
+                <span class="mono text-xs opacity-40">— 5 MIN READ</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black leading-tight uppercase">
+                The Glassmorphism<br>Manifesto
+            </h1>
+        </header>
+
+        <section class="article-content text-lg mb-20">
+            <p>
+                In the digital landscape of 2026, depth is no longer just a visual flourish—it is a functional necessity. 
+                As interfaces become increasingly complex, the human eye requires spatial cues to navigate layers of information.
+            </p>
+            <h2>The Utility of Translucency</h2>
+            <p>
+                Glassmorphism provides a "frosted glass" effect that allows background context to persist while focusing on 
+                foreground actions. This is achieved through <code>backdrop-filter: blur()</code> and semi-transparent layers.
+            </p>
+            <p>
+                By maintaining a connection to the underlying environment, we reduce cognitive load and create a sense of 
+                architectural permanence in a medium that is inherently ephemeral.
+            </p>
+            <blockquote class="border-l-4 border-neon pl-6 my-8 italic opacity-90">
+                "We don't just see the interface; we see through it to the structure beneath."
+            </blockquote>
+        </section>
+
+        <!-- Author Card -->
+        <section class="glass-panel p-8 mb-20 flex items-center space-x-8">
+            <div class="w-20 h-20 rounded-none border border-neon flex-shrink-0 flex items-center justify-center bg-white/5">
+                <span class="mono text-neon text-xl font-bold">BK</span>
+            </div>
+            <div>
+                <span class="mono text-[10px] opacity-30 uppercase block">Author</span>
+                <h3 class="text-xl font-bold">BUNNYKEY</h3>
+                <p class="text-sm opacity-50">Lead Architect & Digital Curator. Developing autonomous design protocols for the next era of the web.</p>
+            </div>
+        </section>
+
+        <!-- Comments Section -->
+        <section class="mb-20" aria-labelledby="commentTitle">
+            <h3 id="commentTitle" class="mono text-xs uppercase tracking-widest opacity-30 mb-8">Comments // <span id="commentCount">02</span>_ENTRIES</h3>
+            
+            <!-- Comment Form -->
+            <div class="glass-panel p-8 mb-12">
+                <form id="commentForm" class="space-y-6" aria-label="Post a comment">
+                    <div>
+                        <label for="commenterName" class="mono text-[10px] opacity-30 uppercase block mb-2">Identifier</label>
+                        <input type="text" id="commenterName" name="name" placeholder="USER_NAME..." required aria-required="true" class="w-full bg-white/5 border border-white/10 p-4 mono text-sm focus:outline-none focus:border-neon">
+                    </div>
+                    <div>
+                        <label for="commentText" class="mono text-[10px] opacity-30 uppercase block mb-2">Message</label>
+                        <textarea id="commentText" name="comment" rows="4" placeholder="TRANSMIT_THOUGHTS..." required aria-required="true" class="w-full bg-white/5 border border-white/10 p-4 mono text-sm focus:outline-none focus:border-neon"></textarea>
+                    </div>
+                    <button type="submit" class="bg-neon text-deep-graphite px-8 py-3 font-bold uppercase text-xs tracking-widest hover:bg-white transition-colors" aria-label="Submit your comment">Submit_Transmission</button>
+                </form>
+            </div>
+
+            <div class="space-y-8" id="commentList">
+                <div class="glass-panel p-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="mono text-xs text-neon">USER_882</span>
+                        <span class="mono text-[10px] opacity-30">2 HOURS AGO</span>
+                    </div>
+                    <p class="text-sm opacity-70">The implementation of the frosted glass effect in the gallery is particularly smooth. What blur values are you recommending for readability?</p>
+                    
+                    <div class="comment-thread mt-6">
+                        <div class="glass-panel p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="mono text-xs text-neon">BUNNYKEY</span>
+                                <span class="mono text-[10px] opacity-30">JUST NOW</span>
+                            </div>
+                            <p class="text-sm opacity-70">Standardizing on 20px. It provides enough distortion to clear the visual noise while maintaining the underlying color palette.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <script>
+        const commentForm = document.getElementById('commentForm');
+        const commentList = document.getElementById('commentList');
+        const commentCount = document.getElementById('commentCount');
+        let count = 2;
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('commenterName').value || 'ANONYMOUS_USER';
+            const text = document.getElementById('commentText').value;
+
+            if (!text) return;
+
+            const newComment = document.createElement('div');
+            newComment.className = 'glass-panel p-6 transform translate-x-4 opacity-0 transition-all duration-500';
+            newComment.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                    <span class="mono text-xs text-neon">${name.toUpperCase()}</span>
+                    <span class="mono text-[10px] opacity-30">JUST NOW</span>
+                </div>
+                <p class="text-sm opacity-70">${text}</p>
+            `;
+
+            commentList.prepend(newComment);
+            
+            // Animation trigger
+            setTimeout(() => {
+                newComment.classList.remove('translate-x-4', 'opacity-0');
+            }, 10);
+
+            commentForm.reset();
+            count++;
+            commentCount.innerText = count.toString().padStart(2, '0');
+        });
+
+        // Theme Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeLabel.innerText = theme === 'light' ? 'LIGHT // MODE' : 'DARK // MODE';
+            localStorage.setItem('theme', theme);
+        };
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+  "authors": [
+    {
+      "id": "bunnykey",
+      "name": "Bunnykey",
+      "role": "Lead Architect",
+      "bio": "Digital artifact curator and protocol developer."
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "The Glassmorphism Manifesto",
+      "slug": "glassmorphism-manifesto",
+      "date": "2026-01-25",
+      "authorId": "bunnykey",
+      "tags": ["Design", "UI"],
+      "excerpt": "Exploring the aesthetic utility of translucency and depth in modern interfaces.",
+      "content": "Full content of the manifesto..."
+    },
+    {
+      "id": "2",
+      "title": "Stitch: Autonomous Cycles",
+      "slug": "stitch-autonomous-cycles",
+      "date": "2026-01-20",
+      "authorId": "bunnykey",
+      "tags": ["Protocol", "History"],
+      "excerpt": "Breaking down the mechanics of the iterative design-to-code loop.",
+      "content": "Full content of the article..."
+    }
+  ]
+}

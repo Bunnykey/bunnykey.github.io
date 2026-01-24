@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bunnykey Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-graphite: #1A1A1B;
+            --neon-teal: #00F2FF;
+            --bg-color: var(--deep-graphite);
+            --text-color: #FFFFFF;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        [data-theme="light"] {
+            --bg-color: #F4F4F4;
+            --text-color: #1A1A1B;
+            --panel-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+        .text-neon {
+            color: var(--neon-teal);
+        }
+        .border-neon {
+            border-color: var(--neon-teal);
+        }
+        .bg-neon {
+            background-color: var(--neon-teal);
+        }
+        .header-main {
+            font-weight: 900;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+        .nav-grid-item {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .nav-grid-item:hover {
+            transform: scale(1.02);
+            border-color: var(--neon-teal);
+            background: rgba(0, 242, 255, 0.05);
+        }
+        .nav-grid-item:hover .item-title {
+            color: var(--neon-teal);
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-8 md:p-24">
+    <!-- Theme Toggle -->
+    <div class="fixed top-8 right-8 z-50">
+        <button id="themeToggle" aria-label="Toggle between dark and light mode" class="mono text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity flex items-center space-x-2">
+            <span id="themeLabel">DARK // MODE</span>
+            <div class="w-8 h-[1px] bg-current opacity-30"></div>
+        </button>
+    </div>
+
+    <!-- Subtle Background Element -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none opacity-20">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-neon blur-[150px] rounded-full opacity-10"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-neon blur-[150px] rounded-full opacity-10"></div>
+    </div>
+
+    <header class="w-full max-w-6xl mb-24 z-10">
+        <h1 class="header-main text-6xl md:text-9xl leading-none">
+            Bunnykey<br>
+            <span class="text-neon">Archive</span>
+        </h1>
+        <div class="mt-8 flex items-center space-x-4">
+            <span class="mono text-xs uppercase tracking-widest opacity-50">Established 2026</span>
+            <div class="h-[1px] w-24 bg-white opacity-20"></div>
+            <span class="mono text-xs uppercase tracking-widest opacity-50">v1.0.0</span>
+        </div>
+    </header>
+
+    <main class="w-full max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-6 z-10">
+        <!-- Navigation Grid -->
+        <a href="gallery.html" aria-label="View Project Showcase" class="nav-grid-item glass-panel p-12 flex flex-col justify-between aspect-square group">
+            <span class="mono text-xs opacity-50">01</span>
+            <div>
+                <h2 class="item-title text-3xl font-bold transition-colors">Showcase</h2>
+                <p class="text-sm opacity-60 mt-2">A curated gallery of digital works and physical experiments.</p>
+            </div>
+        </a>
+
+        <a href="blog.html" aria-label="View Archive Log" class="nav-grid-item glass-panel p-12 flex flex-col justify-between aspect-square group">
+            <span class="mono text-xs opacity-50">02</span>
+            <div>
+                <h2 class="item-title text-3xl font-bold transition-colors">Log</h2>
+                <p class="text-sm opacity-60 mt-2">Documentation of history, protocols, and digital theory.</p>
+            </div>
+        </a>
+
+        <a href="history.md" aria-label="View Timeline" class="nav-grid-item glass-panel p-12 flex flex-col justify-between aspect-square group">
+            <span class="mono text-xs opacity-50">03</span>
+            <div>
+                <h2 class="item-title text-3xl font-bold transition-colors">Timeline</h2>
+                <p class="text-sm opacity-60 mt-2">Chronological documentation of history and milestones.</p>
+            </div>
+        </a>
+    </main>
+
+    <footer class="w-full max-w-6xl mt-24 flex justify-between items-end z-10 pb-32 md:pb-0">
+        <div class="mono text-[10px] opacity-30 uppercase vertical-text">
+            System Status: Optimal
+        </div>
+        <div class="text-right">
+            <p class="mono text-xs opacity-40">© 2026 BUNNYKEY ARCHIVE</p>
+            <p class="mono text-xs opacity-20">ENCRYPTED // ANONYMOUS</p>
+        </div>
+    </footer>
+
+    <!-- Terminal Interface -->
+    <div id="terminalContainer" class="fixed bottom-0 right-0 md:bottom-8 md:right-8 w-full md:max-w-md z-50 transition-transform duration-500 translate-y-[calc(100%-40px)] md:translate-y-0">
+        <div class="glass-panel p-4 rounded-t-lg md:rounded-sm border-neon/20 shadow-2xl overflow-hidden" style="background: rgba(10, 10, 11, 0.9);">
+            <div id="terminalHeader" class="flex items-center justify-between mb-2 border-b border-white/5 pb-2 cursor-pointer">
+                <div class="flex space-x-1.5">
+                    <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                </div>
+                <div class="mono text-[10px] opacity-30 uppercase tracking-tighter">BUNNY_TERM_v1.0 (TAP TO TOGGLE)</div>
+            </div>
+            <div id="terminalBody" class="mono text-xs text-neon/80 h-40 overflow-y-auto mb-2 space-y-1 custom-scrollbar">
+                <div class="opacity-50 text-[10px]">INITIALIZING_KERNEL...</div>
+                <div class="opacity-50 text-[10px]">ESTABLISHING_ENCRYPTED_LINK...</div>
+                <div class="pt-2">WELCOME TO BUNNYKEY_ARCHIVE.</div>
+                <div class="opacity-70">TYPE 'HELP' FOR COMMANDS.</div>
+            </div>
+            <div class="flex items-center space-x-2 text-neon">
+                <span class="mono">>></span>
+                <input type="text" id="terminalInput" class="bg-transparent border-none outline-none flex-grow mono text-xs text-neon lowercase" autofocus spellcheck="false">
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 242, 255, 0.1);
+        }
+        #terminalInput:focus {
+            caret-color: var(--neon-teal);
+        }
+    </style>
+
+    <script>
+        const terminalInput = document.getElementById('terminalInput');
+        const terminalBody = document.getElementById('terminalBody');
+
+        const commands = {
+            'help': () => 'AVAILABLE_COMMANDS: ABOUT, CLEAR, GOTO [GALLERY|BLOG|TIMELINE], HELP',
+            'about': () => 'BUNNYKEY ARCHIVE: A HIGH-AESTHETIC DIGITAL PRESERVATION PROTOCOL.',
+            'clear': () => {
+                terminalBody.innerHTML = '';
+                return null;
+            },
+            'goto': (args) => {
+                const target = args[0];
+                const routes = {
+                    'gallery': 'gallery.html',
+                    'blog': 'blog.html',
+                    'timeline': 'history.md'
+                };
+                if (routes[target]) {
+                    setTimeout(() => window.location.href = routes[target], 500);
+                    return `REDIRECTING_TO_${target.toUpperCase()}...`;
+                }
+                return `ERROR: TARGET_${target ? target.toUpperCase() : 'NULL'}_NOT_FOUND`;
+            }
+        };
+
+        terminalInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const val = terminalInput.value.trim().toLowerCase();
+                const [cmd, ...args] = val.split(' ');
+                
+                // Print user command
+                const userLine = document.createElement('div');
+                userLine.innerHTML = `<span class="opacity-40">>></span> ${val}`;
+                terminalBody.appendChild(userLine);
+
+                if (commands[cmd]) {
+                    const output = commands[cmd](args);
+                    if (output) {
+                        const responseLine = document.createElement('div');
+                        responseLine.className = 'text-white opacity-80';
+                        responseLine.innerText = output;
+                        terminalBody.appendChild(responseLine);
+                    }
+                } else if (val !== '') {
+                    const errorLine = document.createElement('div');
+                    errorLine.className = 'text-red-400 opacity-80';
+                    errorLine.innerText = `COMMAND_NOT_FOUND: ${cmd}`;
+                    terminalBody.appendChild(errorLine);
+                }
+
+                terminalInput.value = '';
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+            }
+        });
+
+        // Focus input on terminal click
+        document.querySelector('.glass-panel').addEventListener('click', () => {
+            terminalInput.focus();
+        });
+
+        // Terminal Toggle for Mobile
+        const terminalContainer = document.getElementById('terminalContainer');
+        const terminalHeader = document.getElementById('terminalHeader');
+        let isExpanded = window.innerWidth > 768;
+
+        terminalHeader.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                isExpanded = !isExpanded;
+                terminalContainer.style.transform = isExpanded ? 'translateY(0)' : 'translateY(calc(100% - 40px))';
+            }
+        });
+
+        // Theme Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeLabel.innerText = theme === 'light' ? 'LIGHT // MODE' : 'DARK // MODE';
+            localStorage.setItem('theme', theme);
+        };
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+
+        // Init Theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Showcase | Bunnykey Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-graphite: #1A1A1B;
+            --neon-teal: #00F2FF;
+            --bg-color: var(--deep-graphite);
+            --text-color: #FFFFFF;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="light"] {
+            --bg-color: #F4F4F4;
+            --text-color: #1A1A1B;
+            --panel-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            min-height: screen;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+        .text-neon {
+            color: var(--neon-teal);
+        }
+        .bg-neon {
+            background-color: var(--neon-teal);
+        }
+        .border-neon {
+            border-color: var(--neon-teal);
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .sharp-btn {
+            position: relative;
+            background: var(--neon-teal);
+            color: var(--deep-graphite);
+            font-weight: 700;
+            padding: 0.75rem 1.5rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+        .sharp-btn:hover {
+            background: white;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        }
+        .gallery-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-teal);
+        }
+        .placeholder-gradient {
+            background: linear-gradient(135deg, #1A1A1B 0%, #00F2FF 100%);
+            opacity: 0.2;
+            transition: opacity 0.5s ease;
+        }
+        .gallery-card:hover .placeholder-gradient {
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="p-8 md:p-24">
+    <div class="fixed top-8 right-8 z-50">
+        <button id="themeToggle" class="mono text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity flex items-center space-x-2">
+            <span id="themeLabel">DARK // MODE</span>
+            <div class="w-8 h-[1px] bg-current opacity-30"></div>
+        </button>
+    </div>
+
+    <nav class="w-full max-w-7xl mx-auto mb-16 flex justify-between items-center z-10 relative">
+        <a href="index.html" class="mono text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">
+            ← Back to Home
+        </a>
+        <div class="mono text-xs opacity-30">ARCHIVE_SECTION: 01_SHOWCASE</div>
+    </nav>
+
+    <header class="w-full max-w-7xl mx-auto mb-20">
+        <h1 class="text-6xl md:text-8xl font-black text-neon uppercase leading-none">
+            Project<br>Showcase
+        </h1>
+        <p class="mt-6 max-w-xl text-lg opacity-60 leading-relaxed">
+            A curated collection of digital artifacts, conceptual frameworks, and architectural experiments documenting the evolution of Bunnykey.
+        </p>
+    </header>
+
+    <main class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project Card 1 -->
+        <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Stitch Protocol">
+            <div class="aspect-video relative overflow-hidden">
+                <div class="placeholder-gradient absolute inset-0"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span class="mono text-4xl">ARTIFACT_01</span>
+                </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold">Stitch Protocol</h2>
+                    <span class="mono text-xs opacity-40">2025</span>
+                </div>
+                <p class="text-sm opacity-60 mb-8 flex-grow">
+                    An autonomous design-to-code execution framework utilizing iterative loops and semantic design systems.
+                </p>
+                <button class="sharp-btn self-start" aria-label="View Stitch Protocol details">View Details</button>
+            </div>
+        </div>
+
+        <!-- Project Card 2 -->
+        <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Glassmorphism UI">
+            <div class="aspect-video relative overflow-hidden">
+                <div class="placeholder-gradient absolute inset-0" style="background: linear-gradient(135deg, #1A1A1B 0%, #FFFFFF 100%);"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span class="mono text-4xl">ARTIFACT_02</span>
+                </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold">Glassmorphism UI</h2>
+                    <span class="mono text-xs opacity-40">2026</span>
+                </div>
+                <p class="text-sm opacity-60 mb-8 flex-grow">
+                    Exploration of depth, translucency, and light-refraction in digital interface design.
+                </p>
+                <button class="sharp-btn self-start" aria-label="View Glassmorphism UI details">View Details</button>
+            </div>
+        </div>
+
+        <!-- Project Card 3 -->
+        <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Neural Archive">
+            <div class="aspect-video relative overflow-hidden">
+                <div class="placeholder-gradient absolute inset-0"></div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
+                    <span class="mono text-4xl">ARTIFACT_03</span>
+                </div>
+            </div>
+            <div class="p-8 flex flex-col flex-grow">
+                <div class="flex justify-between items-start mb-4">
+                    <h2 class="text-2xl font-bold">Neural Archive</h2>
+                    <span class="mono text-xs opacity-40">2026</span>
+                </div>
+                <p class="text-sm opacity-60 mb-8 flex-grow">
+                    Conceptual database mapping personal history through decentralized memory nodes.
+                </p>
+                <button class="sharp-btn self-start" aria-label="View Neural Archive details">View Details</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full max-w-7xl mx-auto mt-32 border-t border-white/10 pt-8 flex justify-between items-center">
+        <div class="mono text-[10px] opacity-30 uppercase">
+            Status: Synchronized
+        </div>
+        <div class="mono text-[10px] opacity-30 uppercase">
+            Bunnykey Archive // Showcase
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeLabel.innerText = theme === 'light' ? 'LIGHT // MODE' : 'DARK // MODE';
+            localStorage.setItem('theme', theme);
+        };
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+    </script>
+</body>
+</html>

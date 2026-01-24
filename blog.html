@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log | Bunnykey Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-graphite: #1A1A1B;
+            --neon-teal: #00F2FF;
+            --bg-color: var(--deep-graphite);
+            --text-color: #FFFFFF;
+            --panel-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="light"] {
+            --bg-color: #F4F4F4;
+            --text-color: #1A1A1B;
+            --panel-bg: rgba(0, 0, 0, 0.05);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+        .glass-panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+        .text-neon { color: var(--neon-teal); }
+        .border-neon { border-color: var(--neon-teal); }
+        .bg-neon { background-color: var(--neon-teal); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        .search-input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            width: 100%;
+        }
+        .search-input:focus {
+            outline: none;
+            border-bottom-color: var(--neon-teal);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tag-pill {
+            font-size: 0.7rem;
+            padding: 0.25rem 0.75rem;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .tag-pill:hover, .tag-pill.active {
+            background: var(--neon-teal);
+            color: var(--deep-graphite);
+        }
+
+        .post-card {
+            transition: all 0.3s ease;
+        }
+        .post-card:hover {
+            border-color: var(--neon-teal);
+            transform: translateX(10px);
+        }
+    </style>
+</head>
+<body class="p-8 md:p-24">
+    <div class="fixed top-8 right-8 z-50">
+        <button id="themeToggle" class="mono text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity flex items-center space-x-2">
+            <span id="themeLabel">DARK // MODE</span>
+            <div class="w-8 h-[1px] bg-current opacity-30"></div>
+        </button>
+    </div>
+
+    <nav class="w-full max-w-5xl mx-auto mb-16 flex justify-between items-center z-10 relative">
+        <a href="index.html" class="mono text-xs uppercase tracking-widest opacity-50 hover:opacity-100 transition-opacity">
+            ← Back to Home
+        </a>
+        <div class="mono text-xs opacity-30">ARCHIVE_SECTION: 02_LOG</div>
+    </nav>
+
+    <header class="w-full max-w-5xl mx-auto mb-16">
+        <h1 class="text-6xl md:text-8xl font-black uppercase leading-none">
+            Archive<br><span class="text-neon">Log</span>
+        </h1>
+    </header>
+
+    <section class="w-full max-w-5xl mx-auto mb-12">
+        <div class="mb-8">
+            <input type="text" id="searchInput" aria-label="Search archive posts" placeholder="SEARCH_DATABASE..." class="search-input mono py-4 text-xl">
+        </div>
+        <div class="flex flex-wrap gap-4 mb-12" id="tagFilters" role="group" aria-label="Filter posts by tag">
+            <button class="tag-pill mono active" data-tag="all" aria-pressed="true">ALL</button>
+            <button class="tag-pill mono" data-tag="design" aria-pressed="false">DESIGN</button>
+            <button class="tag-pill mono" data-tag="protocol" aria-pressed="false">PROTOCOL</button>
+            <button class="tag-pill mono" data-tag="ui" aria-pressed="false">UI</button>
+            <button class="tag-pill mono" data-tag="history" aria-pressed="false">HISTORY</button>
+        </div>
+    </section>
+
+    <main class="w-full max-w-5xl mx-auto flex flex-col gap-6" id="postList">
+        <!-- Skeleton Loader -->
+        <div id="skeletonLoader" class="space-y-6">
+            <div class="glass-panel p-12 animate-pulse">
+                <div class="h-4 bg-white/10 w-24 mb-4"></div>
+                <div class="h-8 bg-white/10 w-3/4 mb-4"></div>
+                <div class="h-4 bg-white/10 w-full"></div>
+            </div>
+        </div>
+        <div class="mono text-xs opacity-30 text-center py-20 hidden" id="loadingIndicator">INITIALIZING_DATABASE...</div>
+    </main>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const tagPills = document.querySelectorAll('.tag-pill');
+        const postList = document.getElementById('postList');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const skeletonLoader = document.getElementById('skeletonLoader');
+
+        let allPosts = [];
+        let activeTag = 'all';
+
+        async function init() {
+            try {
+                // Simulate delay for skeleton demo
+                await new Promise(resolve => setTimeout(resolve, 800));
+                const response = await fetch('posts.json');
+                const data = await response.json();
+                allPosts = data.posts;
+                skeletonLoader.classList.add('hidden');
+                renderPosts();
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                skeletonLoader.classList.add('hidden');
+                loadingIndicator.classList.remove('hidden');
+                loadingIndicator.innerText = 'ERROR: DATABASE_OFFLINE';
+            }
+        }
+
+        function renderPosts() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredPosts = allPosts.filter(post => {
+                const matchesSearch = post.title.toLowerCase().includes(searchTerm) || 
+                                     post.excerpt.toLowerCase().includes(searchTerm);
+                const matchesTag = activeTag === 'all' || post.tags.map(t => t.toLowerCase()).includes(activeTag);
+                return matchesSearch && matchesTag;
+            });
+
+            if (filteredPosts.length === 0) {
+                postList.innerHTML = '<div class="mono text-xs opacity-30 text-center py-20">NO_MATCHING_ENTRIES_FOUND</div>';
+                return;
+            }
+
+            postList.innerHTML = filteredPosts.map(post => `
+                <article class="post-card glass-panel p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer" onclick="window.location.href='post.html?id=${post.id}'">
+                    <div class="flex-grow">
+                        <div class="flex items-center space-x-4 mb-2">
+                            <span class="mono text-[10px] opacity-40">${post.date.replace(/-/g, '.')}</span>
+                            <span class="text-neon mono text-[10px] uppercase">${post.tags.join(' // ')}</span>
+                        </div>
+                        <h2 class="text-2xl md:text-3xl font-bold group-hover:text-neon transition-colors">${post.title}</h2>
+                        <p class="text-sm opacity-50 mt-2 max-w-2xl">${post.excerpt}</p>
+                    </div>
+                    <div class="mt-6 md:mt-0 md:ml-12 text-right">
+                        <span class="mono text-[10px] opacity-30 block">AUTHOR</span>
+                        <span class="mono text-xs">${post.authorId.toUpperCase()}</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        searchInput.addEventListener('input', renderPosts);
+
+        tagPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                tagPills.forEach(p => {
+                    p.classList.remove('active');
+                    p.setAttribute('aria-pressed', 'false');
+                });
+                pill.classList.add('active');
+                pill.setAttribute('aria-pressed', 'true');
+                activeTag = pill.getAttribute('data-tag');
+                renderPosts();
+            });
+        });
+
+        // Theme Logic
+        const themeToggle = document.getElementById('themeToggle');
+        const themeLabel = document.getElementById('themeLabel');
+        const setTheme = (theme) => {
+            document.documentElement.setAttribute('data-theme', theme);
+            themeLabel.innerText = theme === 'light' ? 'LIGHT // MODE' : 'DARK // MODE';
+            localStorage.setItem('theme', theme);
+        };
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            setTheme(currentTheme === 'light' ? 'dark' : 'light');
+        });
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        setTheme(savedTheme);
+
+        init();
+    </script>
+</body>
+</html>
