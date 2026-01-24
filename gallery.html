@@ -35,7 +35,21 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--border-color);
+            position: relative;
         }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(0,242,255,0.05) 100%) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        .depth-2 { backdrop-filter: blur(40px); }
+        .depth-0 { backdrop-filter: blur(10px); }
         .text-neon {
             color: var(--neon-teal);
         }
@@ -105,8 +119,8 @@
     </header>
 
     <main class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project Card 1 -->
-        <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Stitch Protocol">
+        <!-- Project Card 1: Elevated Depth -->
+        <div class="gallery-card glass-panel depth-2 flex flex-col overflow-hidden group shadow-2xl" role="article" aria-label="Project: Stitch Protocol">
             <div class="aspect-video relative overflow-hidden">
                 <div class="placeholder-gradient absolute inset-0"></div>
                 <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
@@ -125,7 +139,7 @@
             </div>
         </div>
 
-        <!-- Project Card 2 -->
+        <!-- Project Card 2: Standard Depth -->
         <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Glassmorphism UI">
             <div class="aspect-video relative overflow-hidden">
                 <div class="placeholder-gradient absolute inset-0" style="background: linear-gradient(135deg, #1A1A1B 0%, #FFFFFF 100%);"></div>
@@ -145,8 +159,8 @@
             </div>
         </div>
 
-        <!-- Project Card 3 -->
-        <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Neural Archive">
+        <!-- Project Card 3: Shallow Depth -->
+        <div class="gallery-card glass-panel depth-0 flex flex-col overflow-hidden group opacity-80" role="article" aria-label="Project: Neural Archive">
             <div class="aspect-video relative overflow-hidden">
                 <div class="placeholder-gradient absolute inset-0"></div>
                 <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">

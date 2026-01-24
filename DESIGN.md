@@ -30,3 +30,8 @@ The archive embodies a **Modern Luxury Minimalism** aesthetic, blending high-end
 ## 7. Interactive Components
 *   **Terminal Interface:** A fixed or docked glassmorphic window using Mono-spaced fonts exclusively. Use a 1px Neon Teal prompt cursor (`_`). Background should be slightly darker than the base Graphite to suggest depth.
 *   **Theme Switcher:** A minimalist toggle (circle or line) that shifts the base Graphite to a high-contrast Off-White while preserving Neon Teal as the primary accent.
+
+## 8. Advanced Visual Effects
+*   **Light Follow:** A subtle, low-opacity Neon Teal radial gradient that follows the cursor behind the glass panels, creating a "torch" effect.
+*   **Refraction Borders:** Use 1px linear gradients for borders (Top-Left: Transparent to White, Bottom-Right: Transparent to Teal) to simulate light catching on the edges of the glass.
+*   **Layered Depth:** Utilize `z-index` and varying `backdrop-filter` strengths to suggest that some panels are closer to the user than others.

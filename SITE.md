@@ -22,3 +22,8 @@ A comprehensive, high-aesthetic archive of my projects, thoughts, and history.
 - [x] Terminal Interface (on index.html)
 - [x] Theme Switcher (Light/Dark Mode)
 - [x] Accessibility & Performance Optimization
+
+### Phase 4: Advanced Glassmorphism
+- [ ] Dynamic Light Follow (Background glow)
+- [ ] Refraction & Border Highlights
+- [ ] Layered Depth (Multi-stack glass)

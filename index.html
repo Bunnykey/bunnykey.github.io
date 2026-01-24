@@ -69,6 +69,9 @@
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-8 md:p-24">
+    <!-- Dynamic Light Follow -->
+    <div id="lightFollow" class="fixed pointer-events-none z-0 w-[600px] h-[600px] rounded-full opacity-10 blur-[120px] bg-neon transition-opacity duration-1000" style="transform: translate(-50%, -50%); left: 50%; top: 50%;"></div>
+
     <!-- Theme Toggle -->
     <div class="fixed top-8 right-8 z-50">
         <button id="themeToggle" aria-label="Toggle between dark and light mode" class="mono text-[10px] uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-opacity flex items-center space-x-2">
@@ -262,6 +265,13 @@
         // Init Theme
         const savedTheme = localStorage.getItem('theme') || 'dark';
         setTheme(savedTheme);
+
+        // Light Follow Logic
+        const lightFollow = document.getElementById('lightFollow');
+        document.addEventListener('mousemove', (e) => {
+            lightFollow.style.left = e.clientX + 'px';
+            lightFollow.style.top = e.clientY + 'px';
+        });
     </script>
 
 </body>
