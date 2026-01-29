@@ -125,8 +125,11 @@
             try {
                 const response = await fetch('posts.json');
                 const data = await response.json();
-                const post = data.posts.find(p => p.id === id);
+                const postIndex = data.posts.findIndex(p => p.id === id);
+                const post = data.posts[postIndex];
                 const author = data.authors.find(a => a.id === post.authorId);
+                const prevPost = postIndex < data.posts.length - 1 ? data.posts[postIndex + 1] : null;
+                const nextPost = postIndex > 0 ? data.posts[postIndex - 1] : null;
 
                 if (!post) {
                     container.innerHTML = '<div class="mono text-xs opacity-30 text-center py-20">ERROR: ARTICLE_NOT_FOUND</div>';
@@ -244,8 +247,14 @@
                     </section>
 
                     <footer class="border-t border-white/10 pt-12 flex justify-between">
-                        <a href="blog.html" class="mono text-xs opacity-50 hover:text-neon transition-colors">BACK_TO_LOG</a>
-                        <a href="#" class="mono text-xs opacity-50 hover:text-neon transition-colors">NEXT_LOG</a>
+                        ${prevPost
+                            ? `<a href="post.html?id=${prevPost.id}" class="mono text-xs opacity-50 hover:text-neon transition-colors">← PREV_LOG</a>`
+                            : `<a href="blog.html" class="mono text-xs opacity-50 hover:text-neon transition-colors">BACK_TO_LOG</a>`
+                        }
+                        ${nextPost
+                            ? `<a href="post.html?id=${nextPost.id}" class="mono text-xs opacity-50 hover:text-neon transition-colors">NEXT_LOG →</a>`
+                            : `<span class="mono text-xs opacity-20">END_OF_LOG</span>`
+                        }
                     </footer>
                 `;
                 
