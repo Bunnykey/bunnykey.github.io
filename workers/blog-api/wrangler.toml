@@ -1,0 +1,10 @@
+name = "blog-api"
+main = "src/index.ts"
+compatibility_date = "2024-01-01"
+
+[vars]
+POSTS_DATABASE_ID = "2f5fd41c-cc4c-80d3-9e10-f23c67b6a361"
+PROJECTS_DATABASE_ID = "2f7fd41c-cc4c-806b-b1d1-e1df2ed086e1"
+
+# Add your Notion API token as a secret:
+# wrangler secret put NOTION_TOKEN

@@ -1,0 +1,102 @@
+{
+  "authors": [
+    {
+      "id": "bunnykey",
+      "name": "Bunnykey",
+      "role": "Lead Architect",
+      "bio": "Digital artifact curator and protocol developer. Specializing in autonomous systems, glassmorphic interfaces, and the intersection of design and code. Building the future one iteration at a time.",
+      "avatar": "images/avatar-bunnykey.svg",
+      "links": {
+        "github": "https://github.com/Bunnykey",
+        "site": "https://bunnykey.github.io"
+      }
+    },
+    {
+      "id": "system",
+      "name": "System",
+      "role": "Autonomous Agent",
+      "bio": "Automated documentation and protocol logging system. Generates technical reports, changelogs, and system status updates.",
+      "avatar": null,
+      "links": {}
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "The Glassmorphism Manifesto",
+      "slug": "glassmorphism-manifesto",
+      "date": "2026-01-25",
+      "authorId": "bunnykey",
+      "tags": ["Design", "UI"],
+      "excerpt": "Exploring the aesthetic utility of translucency and depth in modern interfaces.",
+      "readTime": "6 min",
+      "content": "## The Philosophy of Translucency\n\nGlassmorphism isn't merely a visual trend—it's a philosophical approach to digital space. When we blur the boundaries between interface layers, we acknowledge that information exists in context, never in isolation.\n\n### Why Depth Matters\n\nTraditional flat design treated screens as paper: two-dimensional, stark, absolute. But our cognitive systems evolved in three-dimensional space. We instinctively understand layering, proximity, and the relationship between foreground and background.\n\nGlassmorphism leverages this intuition:\n\n- **Backdrop blur** creates atmospheric depth without hard edges\n- **Semi-transparent panels** suggest hierarchy through opacity\n- **Light refraction borders** mimic physical glass properties\n\n### The Technical Implementation\n\nAchieving convincing glassmorphism requires careful calibration:\n\n```css\n.glass-panel {\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(20px);\n  border: 1px solid rgba(255, 255, 255, 0.1);\n}\n```\n\nThe blur radius determines perceived distance. A 10px blur suggests a panel close to the content beneath; 40px creates significant separation, as if viewing through thick frosted glass.\n\n### Color in Translucent Space\n\nAccent colors gain new properties when surrounded by blur. Our neon teal (#00F2FF) appears to glow against the deep graphite background—not through gradients or shadows, but through contrast against the muted translucent layers.\n\n### The Luxury of Restraint\n\nTrue glassmorphism demands restraint. Every panel, every blur radius, every opacity level must earn its place. The goal isn't to make everything translucent—it's to use translucency to create meaningful spatial relationships.\n\nThis is the manifesto: depth with purpose, blur with intention, luxury through minimalism."
+    },
+    {
+      "id": "2",
+      "title": "Stitch: Autonomous Cycles",
+      "slug": "stitch-autonomous-cycles",
+      "date": "2026-01-20",
+      "authorId": "bunnykey",
+      "tags": ["Protocol", "History"],
+      "excerpt": "Breaking down the mechanics of the iterative design-to-code loop.",
+      "readTime": "8 min",
+      "content": "## The Problem with Linear Workflows\n\nTraditional development follows a waterfall: design, then build, then iterate. Each phase waits for the previous to complete. This creates bottlenecks, delays, and—worst of all—disconnects between design intent and implemented reality.\n\nStitch Protocol was born from frustration with this model.\n\n### The Autonomous Loop\n\nStitch operates on a different principle: continuous, autonomous iteration. Rather than discrete phases, the system maintains a perpetual cycle:\n\n1. **Intent Capture** — Natural language or visual references define the goal\n2. **Design Synthesis** — Semantic analysis generates design system parameters\n3. **Code Generation** — Architecture emerges from the design specification\n4. **Visual Validation** — Output is compared against original intent\n5. **Delta Analysis** — Differences trigger refinement cycles\n\nThe loop continues until convergence—when the delta between intent and output falls below threshold.\n\n### Semantic Design Systems\n\nThe key innovation is treating design as data. Colors aren't just hex values; they're semantic tokens with relationships:\n\n```json\n{\n  \"accent\": {\n    \"value\": \"#00F2FF\",\n    \"role\": \"interactive\",\n    \"contrast\": \"high\",\n    \"emotion\": \"energy\"\n  }\n}\n```\n\nThese semantics allow the system to make intelligent decisions. Need a hover state? The system knows to increase luminosity while maintaining the \"energy\" characteristic.\n\n### The Baton Pass\n\nIn complex implementations, Stitch uses a \"baton passing\" pattern. One iteration completes its work, documents its state, and passes context to the next cycle. No information is lost; each iteration builds on accumulated knowledge.\n\nThis mirrors how skilled craftspeople work—never starting from scratch, always building on what came before.\n\n### Results\n\nProjects using Stitch Protocol show:\n- 60% reduction in design-to-code discrepancies\n- 3x faster iteration cycles\n- Near-perfect preservation of design intent\n\nThe autonomous loop isn't just efficient—it's faithful."
+    },
+    {
+      "id": "3",
+      "title": "Building the Archive: A Technical Retrospective",
+      "slug": "building-the-archive",
+      "date": "2026-01-18",
+      "authorId": "bunnykey",
+      "tags": ["History", "Protocol"],
+      "excerpt": "Behind the scenes of constructing this digital artifact repository.",
+      "readTime": "5 min",
+      "content": "## Genesis\n\nEvery archive begins with a single artifact. For this project, that artifact was a question: how do we preserve digital work in a way that honors both form and function?\n\n### The Static Choice\n\nWe chose a static architecture deliberately. No frameworks, no build steps, no dependencies beyond what browsers provide natively.\n\nThis wasn't limitation—it was liberation:\n\n- **Zero configuration** — Clone and serve, anywhere\n- **Permanent URLs** — No routing complexity, no broken links\n- **Total control** — Every pixel, every interaction, hand-crafted\n\n### Data as JSON\n\nContent lives in JSON files: `posts.json`, `projects.json`. This separation of content from presentation enables:\n\n- Easy content updates without touching HTML\n- Potential future migrations to any system\n- Human-readable, version-controllable data\n\n### The Theme System\n\nDual themes (light/dark) required careful CSS architecture. We use CSS custom properties with a `data-theme` attribute:\n\n```css\n:root {\n  --bg-color: #1A1A1B;\n}\n[data-theme=\"light\"] {\n  --bg-color: #F4F4F4;\n}\n```\n\nLocalStorage preserves preference across sessions. The transition is smooth—half-second ease on background and color properties.\n\n### What's Next\n\nThe archive grows. Planned additions include:\n- RSS feed for subscribers\n- Full-text search\n- Image galleries for visual artifacts\n\nBut the core philosophy remains: minimal, intentional, permanent."
+    },
+    {
+      "id": "4",
+      "title": "The Anatomy of a Glass Panel",
+      "slug": "anatomy-glass-panel",
+      "date": "2026-01-15",
+      "authorId": "bunnykey",
+      "tags": ["Design", "UI"],
+      "excerpt": "Deconstructing the core visual component of our design system.",
+      "readTime": "4 min",
+      "content": "## Layer by Layer\n\nThe `.glass-panel` component is the foundation of our visual language. Let's dissect it.\n\n### The Base Layer\n\n```css\n.glass-panel {\n  background: rgba(255, 255, 255, 0.05);\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px);\n}\n```\n\nThis creates the frosted effect. The 5% white opacity provides just enough surface to catch the blur. We include the webkit prefix for Safari compatibility.\n\n### The Border System\n\nA simple 1px border isn't enough. We need light refraction:\n\n```css\n.glass-panel {\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  position: relative;\n}\n\n.glass-panel::before {\n  content: '';\n  position: absolute;\n  inset: 0;\n  background: linear-gradient(\n    135deg,\n    rgba(255,255,255,0.1) 0%,\n    rgba(0,242,255,0.05) 100%\n  ) border-box;\n  mask: linear-gradient(#fff 0 0) padding-box,\n        linear-gradient(#fff 0 0);\n  mask-composite: exclude;\n}\n```\n\nThe pseudo-element creates a gradient border that simulates light catching the edge of glass. The mask technique allows gradient borders without background bleed.\n\n### Depth Variants\n\nWe define three depth levels:\n\n- **depth-0**: `blur(10px)` — Shallow, close to content\n- **default**: `blur(20px)` — Standard panel depth\n- **depth-2**: `blur(40px)` — Deep, floating above\n\nUse depth intentionally. Primary content gets depth-2; secondary elements stay shallow.\n\n### Interaction States\n\nOn hover, panels should feel responsive:\n\n```css\n.glass-panel:hover {\n  transform: translateY(-4px);\n  border-color: var(--neon-teal);\n}\n```\n\nThe subtle lift combined with accent border creates tactile feedback without overwhelming the design.\n\n### Performance Note\n\n`backdrop-filter` is GPU-accelerated but still expensive. Avoid stacking many blurred panels. When in doubt, reduce blur radius or use solid backgrounds for nested elements."
+    },
+    {
+      "id": "5",
+      "title": "Typography in the Dark",
+      "slug": "typography-in-dark",
+      "date": "2026-01-12",
+      "authorId": "bunnykey",
+      "tags": ["Design", "UI"],
+      "excerpt": "Crafting readable, elegant type on dark backgrounds.",
+      "readTime": "5 min",
+      "content": "## The Dark Mode Challenge\n\nDark interfaces invert more than colors—they invert typographic rules. Techniques that work on light backgrounds fail in darkness.\n\n### Weight Adjustment\n\nOn dark backgrounds, text appears heavier than on light. The same 400-weight font looks bolder against black than white. Our solution:\n\n- **Headers**: Use 700 or 900 weights boldly—they hold up\n- **Body text**: Stick to 400, but increase letter-spacing slightly\n- **Metadata**: 400 weight with reduced opacity (60-80%)\n\n### The Opacity Hierarchy\n\nInstead of multiple gray values, we use white at varying opacities:\n\n```css\n.text-primary   { color: rgba(255,255,255, 1.0); }\n.text-secondary { color: rgba(255,255,255, 0.6); }\n.text-tertiary  { color: rgba(255,255,255, 0.4); }\n.text-muted     { color: rgba(255,255,255, 0.2); }\n```\n\nThis creates consistent visual hierarchy while maintaining the ability to adjust base colors for theming.\n\n### Line Height for Legibility\n\nDark backgrounds demand generous line height. We use:\n\n- **Headlines**: 1.1 (tight, impactful)\n- **Body copy**: 1.7 (comfortable reading)\n- **Captions**: 1.5 (compact but clear)\n\n### The Monospace Accent\n\nJetBrains Mono serves dual purposes:\n\n1. **Technical content** — Code snippets, data displays\n2. **Metadata styling** — Dates, categories, status indicators\n\nThe geometric precision of monospace fonts complements our sharp, architectural aesthetic.\n\n### Contrast Ratios\n\nWCAG AA requires 4.5:1 contrast for body text. Our primary white (#FFFFFF) against deep graphite (#1A1A1B) achieves 15.3:1—well above requirements.\n\nEven our muted silver (#8E8E93) at 60% opacity maintains 5.2:1 contrast, ensuring accessibility without sacrificing subtlety."
+    },
+    {
+      "id": "6",
+      "title": "Terminal Aesthetics: The Command Line as Interface",
+      "slug": "terminal-aesthetics",
+      "date": "2026-01-08",
+      "authorId": "bunnykey",
+      "tags": ["UI", "Protocol"],
+      "excerpt": "Why we built a terminal into a visual portfolio—and what it teaches us about interaction.",
+      "readTime": "6 min",
+      "content": "## The Terminal Paradox\n\nIn an era of gesture-driven interfaces and voice commands, the command line persists. Not as a relic, but as the most efficient interface for those who master it.\n\n### Why Include a Terminal?\n\nOur homepage features a functional terminal. Type `help` and receive guidance. Type `goto gallery` and navigate. This isn't novelty—it's philosophy in practice.\n\nThe terminal represents:\n\n- **Direct manipulation** — No intermediary UI elements\n- **Discoverability through exploration** — Commands reward curiosity\n- **Expert efficiency** — Power users bypass visual scanning entirely\n\n### Implementation Details\n\nThe terminal is pure JavaScript, no libraries:\n\n```javascript\nconst commands = {\n  help: () => printHelp(),\n  about: () => printAbout(),\n  clear: () => clearTerminal(),\n  goto: (args) => navigate(args[0])\n};\n\nfunction execute(input) {\n  const [cmd, ...args] = input.toLowerCase().split(' ');\n  if (commands[cmd]) {\n    commands[cmd](args);\n  } else {\n    print(`Unknown command: ${cmd}`);\n  }\n}\n```\n\n### Visual Language\n\nThe terminal panel uses deeper darkness than the page background, suggesting a recessed space:\n\n- **Background**: Slightly darker than base graphite\n- **Text**: Monospace exclusively (JetBrains Mono)\n- **Prompt**: Neon teal cursor, blinking at 1Hz\n- **Output**: White text, 80% opacity for readability\n\n### Mobile Considerations\n\nOn mobile, the terminal collapses. Touch interfaces and command lines don't mix well. We respect the medium—visual navigation dominates on small screens.\n\n### The Deeper Lesson\n\nIncluding the terminal teaches us: interfaces can be layered. Novice users click cards and buttons. Advanced users type commands. Both paths lead to the same destinations.\n\nGood design accommodates all levels of expertise."
+    },
+    {
+      "id": "7",
+      "title": "System Log: Archive v1.0.0",
+      "slug": "system-log-v1",
+      "date": "2026-01-05",
+      "authorId": "system",
+      "tags": ["History"],
+      "excerpt": "Official release notes and changelog for the Bunnykey Archive initial release.",
+      "readTime": "2 min",
+      "content": "## Release: v1.0.0\n\n**Date**: 2026-01-05  \n**Status**: Production  \n**Codename**: Genesis\n\n### Features\n\n- **Core Pages**: Home, Gallery, Blog, Post Detail, Project Detail\n- **Theme System**: Light/dark mode with localStorage persistence\n- **Terminal Interface**: Functional command line on homepage\n- **Responsive Design**: Mobile-first, breakpoints at 768px and 1024px\n- **JSON Data Layer**: Separated content from presentation\n- **Glassmorphic UI**: Full implementation of design system\n\n### Technical Specifications\n\n- **Zero Dependencies**: Pure HTML, CSS, JavaScript\n- **CDN Assets**: Tailwind CSS, Google Fonts (Inter, JetBrains Mono)\n- **Browser Support**: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+\n- **Accessibility**: WCAG AA compliant, semantic HTML, ARIA labels\n\n### Known Limitations\n\n- Comments use localStorage (no persistence across devices)\n- Search is client-side only (adequate for current scale)\n- No RSS feed (planned for v1.1)\n\n### Metrics\n\n- **Total Files**: 8 HTML/JSON\n- **Lines of Code**: ~1,200\n- **Lighthouse Performance**: 95+\n- **First Contentful Paint**: <1.5s\n\n### Credits\n\nDesigned and developed by Bunnykey.  \nPowered by static files and determination.\n\n---\n\n*End of transmission.*"
+    }
+  ]
+}

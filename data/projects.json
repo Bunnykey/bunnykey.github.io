@@ -1,0 +1,88 @@
+{
+  "projects": [
+    {
+      "id": "stitch-protocol",
+      "title": "Stitch Protocol",
+      "year": "2025",
+      "category": "Automation",
+      "status": "Active",
+      "description": "An autonomous design-to-code execution framework utilizing iterative loops and semantic design systems. Stitch allows for rapid prototyping by bridging the gap between natural language intent and architectural code output.",
+      "longDescription": "Stitch Protocol represents a fundamental shift in how we approach the design-to-development pipeline. Rather than treating design and code as separate phases, Stitch creates a continuous feedback loop where intent flows seamlessly into implementation.\n\nThe protocol operates on three core principles:\n\n1. **Semantic Design Tokens** — Colors, spacing, and typography aren't just values; they carry meaning that informs code generation.\n\n2. **Autonomous Iteration** — Each cycle refines output based on delta analysis between intent and result.\n\n3. **Baton Passing** — Complex projects split across multiple iterations, each building on documented context from the previous.\n\nStitch has been used to generate this archive itself, demonstrating its capability for production-ready output.",
+      "tech": ["TypeScript", "Tailwind CSS", "MCP Protocol", "JSON Schema", "Node.js"],
+      "features": [
+        "Natural language to code generation",
+        "Semantic design system parsing",
+        "Iterative refinement loops",
+        "Context preservation across sessions",
+        "Multiple output format support"
+      ],
+      "image": "images/project-stitch.svg",
+      "links": {
+        "demo": null,
+        "source": null,
+        "docs": null
+      },
+      "metrics": {
+        "iterations": "150+",
+        "accuracy": "94%",
+        "avgCycleTime": "45s"
+      }
+    },
+    {
+      "id": "glass-ui",
+      "title": "Glassmorphism UI",
+      "year": "2026",
+      "category": "Design System",
+      "status": "Complete",
+      "description": "An exploration of depth, translucency, and light-refraction in digital interface design. This system focuses on user-centric spatial cues and high-end editorial aesthetics.",
+      "longDescription": "The Glassmorphism UI system emerged from studying how physical materials create visual hierarchy. Glass—real glass—uses blur, reflection, and refraction to indicate depth and layering. This design system translates those properties to digital interfaces.\n\nKey innovations include:\n\n- **Depth Tiers** — Three distinct blur levels (10px, 20px, 40px) create consistent spatial relationships.\n\n- **Refraction Borders** — Gradient borders simulate light catching panel edges.\n\n- **Adaptive Opacity** — Panel backgrounds adjust based on content beneath them.\n\n- **Theme Duality** — Full light/dark mode support without losing the glass effect.\n\nThe system prioritizes restraint over excess. Not everything should be translucent—only elements that benefit from showing their relationship to content behind them.",
+      "tech": ["CSS Custom Properties", "HTML5", "Figma", "Tailwind CSS", "Backdrop Filter"],
+      "features": [
+        "Three-tier depth system",
+        "Light/dark theme support",
+        "Gradient refraction borders",
+        "Performance-optimized blur",
+        "Accessibility compliant"
+      ],
+      "image": "images/project-glass-ui.svg",
+      "links": {
+        "demo": "https://bunnykey.github.io",
+        "source": "https://github.com/Bunnykey/bunnykey.github.io",
+        "docs": null
+      },
+      "metrics": {
+        "components": "12",
+        "contrastRatio": "15.3:1",
+        "lighthouseScore": "95+"
+      }
+    },
+    {
+      "id": "neural-archive",
+      "title": "Neural Archive",
+      "year": "2026",
+      "category": "Data Science",
+      "status": "Conceptual",
+      "description": "A conceptual database mapping personal history through decentralized memory nodes. The project investigates the long-term preservation of digital consciousness.",
+      "longDescription": "Neural Archive is an experimental project exploring how personal digital history might be preserved, organized, and retrieved across decades.\n\nTraditional archives are passive—files in folders, entries in databases. Neural Archive proposes an active system where memories (digital artifacts, documents, media) form an interconnected graph. Connections aren't just metadata; they're weighted relationships that strengthen or fade based on recall patterns.\n\nCore concepts:\n\n- **Memory Nodes** — Individual artifacts wrapped with context, emotion tags, and temporal metadata.\n\n- **Association Graphs** — Weighted edges between nodes representing relationships (causal, temporal, thematic).\n\n- **Decay Simulation** — Less-accessed memories gradually reduce in retrieval priority, mimicking biological memory.\n\n- **Encryption Layers** — Personal data secured with multi-key encryption for long-term storage.\n\nThe project remains conceptual, serving as a design exploration for what personal data preservation might become.",
+      "tech": ["Node.js", "Graph Databases", "AES-256 Encryption", "WebCrypto API", "IndexedDB"],
+      "features": [
+        "Graph-based memory structure",
+        "Weighted relationship mapping",
+        "Temporal decay simulation",
+        "End-to-end encryption",
+        "Offline-first architecture"
+      ],
+      "image": "images/project-neural.svg",
+      "links": {
+        "demo": null,
+        "source": null,
+        "docs": null
+      },
+      "metrics": {
+        "nodeCapacity": "Unlimited",
+        "encryptionStandard": "AES-256",
+        "status": "Research Phase"
+      }
+    }
+  ]
+}

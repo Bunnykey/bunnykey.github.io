@@ -1,0 +1,318 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === Design Tokens === */
+:root {
+  /* Core Colors - Light Theme */
+  --color-background: #FAF9F6;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+
+  --color-text-primary: #2D2D2D;
+  --color-text-secondary: #6B6B6B;
+  --color-text-tertiary: #9A9A9A;
+
+  --color-border: #E8E4DE;
+  --color-border-light: #F0EDE8;
+
+  /* Accent Colors */
+  --color-accent-primary: #E6A23C;
+  --color-accent-secondary: #5B8DEF;
+  --color-accent-tertiary: #6BCB77;
+
+  /* Semantic Colors */
+  --color-success: #6BCB77;
+  --color-warning: #F0B254;
+  --color-error: #E85D5D;
+  --color-info: #5B8DEF;
+
+  /* Special Effects */
+  --color-highlight: rgba(255, 230, 0, 0.35);
+  --color-glow: rgba(230, 162, 60, 0.15);
+  --color-shadow: rgba(45, 45, 45, 0.08);
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Font Families */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-handwritten: 'Caveat', 'Nanum Pen Script', cursive;
+
+  /* Fluid Typography */
+  --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
+  --text-fluid-base: clamp(1rem, 0.9rem + 0.35vw, 1.125rem);
+  --text-fluid-lg: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  --text-fluid-xl: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+  --text-fluid-2xl: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  --text-fluid-3xl: clamp(2rem, 1.5rem + 2vw, 3rem);
+  --text-fluid-4xl: clamp(2.5rem, 1.8rem + 3vw, 4rem);
+  --text-fluid-5xl: clamp(3rem, 2rem + 4vw, 5rem);
+
+  /* Animation Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+
+  /* Easings */
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px var(--color-shadow);
+  --shadow-md: 0 4px 6px var(--color-shadow);
+  --shadow-lg: 0 10px 15px var(--color-shadow);
+  --shadow-xl: 0 20px 25px var(--color-shadow);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-background: #1A1A1A;
+  --color-surface: #242424;
+  --color-surface-raised: #2D2D2D;
+
+  --color-text-primary: #F5F5F5;
+  --color-text-secondary: #A0A0A0;
+  --color-text-tertiary: #707070;
+
+  --color-border: #333333;
+  --color-border-light: #2A2A2A;
+
+  --color-accent-primary: #F0B254;
+  --color-accent-secondary: #7BA3F0;
+  --color-accent-tertiary: #7DD886;
+
+  --color-highlight: rgba(255, 200, 0, 0.25);
+  --color-glow: rgba(240, 178, 84, 0.1);
+  --color-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* === Base Styles === */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--color-text-primary);
+  }
+
+  h1 { font-size: var(--text-fluid-4xl); }
+  h2 { font-size: var(--text-fluid-3xl); }
+  h3 { font-size: var(--text-fluid-2xl); }
+  h4 { font-size: var(--text-fluid-xl); }
+  h5 { font-size: var(--text-fluid-lg); }
+  h6 { font-size: var(--text-fluid-base); }
+
+  p {
+    color: var(--color-text-secondary);
+  }
+
+  a {
+    color: var(--color-accent-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-default);
+  }
+
+  a:hover {
+    color: var(--color-accent-secondary);
+  }
+}
+
+/* === Components === */
+@layer components {
+  /* Paper Texture Background */
+  .paper-texture {
+    background-color: var(--color-background);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Highlighter Effect */
+  .highlight {
+    background: linear-gradient(
+      180deg,
+      transparent 60%,
+      var(--color-highlight) 60%
+    );
+    padding: 0 4px;
+    margin: 0 -4px;
+  }
+
+  /* Handwritten Style */
+  .handwritten {
+    font-family: var(--font-handwritten);
+    font-size: 1.2em;
+  }
+
+  .tilted {
+    transform: rotate(-0.5deg);
+  }
+
+  .tilted:hover {
+    transform: rotate(0deg) translateY(-2px);
+  }
+
+  /* Warm Gradient Background */
+  .warm-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--color-background) 0%,
+      color-mix(in srgb, var(--color-accent-primary) 5%, var(--color-background)) 100%
+    );
+  }
+}
+
+/* === Utilities === */
+@layer utilities {
+  /* Focus States */
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  /* Line Clamp */
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* === Selection === */
+::selection {
+  background-color: var(--color-accent-primary);
+  color: white;
+}
+
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* === Code Blocks === */
+pre {
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: var(--space-md);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--color-surface-raised);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* === Blockquotes === */
+blockquote {
+  border-left: 3px solid var(--color-accent-primary);
+  padding-left: var(--space-lg);
+  margin-left: 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+}
+
+blockquote p {
+  font-family: var(--font-handwritten);
+  font-size: 1.1em;
+  font-style: normal;
+}
+
+/* === Lists === */
+ul, ol {
+  padding-left: 1.5em;
+  color: var(--color-text-secondary);
+}
+
+li {
+  margin-bottom: 0.5em;
+}
+
+/* === Tables === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+th {
+  background: var(--color-surface-raised);
+  font-weight: 600;
+}
