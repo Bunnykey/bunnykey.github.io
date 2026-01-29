@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Glassmorphism Manifesto | Log | Bunnykey Archive</title>
     <meta name="description" content="A deep dive into the functional utility of translucency and depth in modern UI design.">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <meta name="theme-color" content="#1A1A1B">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,16 +49,45 @@
             margin-bottom: 1rem;
             color: var(--text-color);
         }
+        .article-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--neon-teal);
+        }
         .article-content p {
             margin-bottom: 1.5rem;
             opacity: 0.8;
+        }
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            opacity: 0.8;
+        }
+        .article-content li {
+            margin-bottom: 0.5rem;
         }
         .article-content code {
             font-family: 'JetBrains Mono', monospace;
             background: rgba(255, 255, 255, 0.1);
             padding: 0.2rem 0.4rem;
-            border-radius: 4px;
             font-size: 0.9em;
+        }
+        .article-content pre {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow-x: auto;
+        }
+        .article-content pre code {
+            background: none;
+            padding: 0;
+        }
+        .article-content strong {
+            color: var(--neon-teal);
+            font-weight: 700;
         }
 
         .comment-thread {
@@ -104,11 +135,59 @@
 
                 document.title = `${post.title} | Log | Bunnykey Archive`;
 
+                // Add JSON-LD structured data
+                const jsonLd = {
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": post.title,
+                    "description": post.excerpt,
+                    "datePublished": post.date,
+                    "author": {
+                        "@type": "Person",
+                        "name": author.name
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "Bunnykey Archive",
+                        "url": "https://bunnykey.github.io/"
+                    },
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": `https://bunnykey.github.io/post.html?id=${post.id}`
+                    },
+                    "keywords": post.tags.join(", ")
+                };
+                const script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.textContent = JSON.stringify(jsonLd);
+                document.head.appendChild(script);
+
+                // Simple markdown-like parsing
+                function parseContent(content) {
+                    return content
+                        .replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>')
+                        .replace(/`([^`]+)`/g, '<code>$1</code>')
+                        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+                        .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+                        .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+                        .replace(/^- (.+)$/gm, '<li>$1</li>')
+                        .replace(/(<li>.*<\/li>\n?)+/g, '<ul>$&</ul>')
+                        .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+                        .split('\n\n')
+                        .map(p => {
+                            p = p.trim();
+                            if (!p || p.startsWith('<h') || p.startsWith('<ul') || p.startsWith('<pre') || p.startsWith('<li')) return p;
+                            return `<p>${p}</p>`;
+                        })
+                        .join('\n');
+                }
+
                 container.innerHTML = `
                     <header class="mb-12">
-                        <div class="flex items-center space-x-4 mb-4">
+                        <div class="flex items-center space-x-4 mb-4 flex-wrap gap-2">
                             <span class="text-neon mono text-xs uppercase tracking-tighter">${post.tags.join(' // ')}</span>
                             <span class="mono text-xs opacity-40">${post.date.replace(/-/g, '.')}</span>
+                            ${post.readTime ? `<span class="mono text-xs opacity-40">// ${post.readTime} read</span>` : ''}
                         </div>
                         <h1 class="text-4xl md:text-6xl font-black leading-tight uppercase">
                             ${post.title}
@@ -116,14 +195,17 @@
                     </header>
 
                     <section class="article-content text-lg mb-20">
-                        ${post.content.split('\n').map(p => p.trim() ? `<p>${p}</p>` : '').join('')}
+                        ${parseContent(post.content)}
                     </section>
 
                     <!-- Author Card -->
                     <section class="glass-panel p-8 mb-20 flex items-center space-x-8">
-                        <div class="w-20 h-20 rounded-none border border-neon flex-shrink-0 flex items-center justify-center bg-white/5">
-                            <span class="mono text-neon text-xl font-bold">${author.name.substring(0, 2).toUpperCase()}</span>
-                        </div>
+                        ${author.avatar
+                            ? `<img src="${author.avatar}" alt="${author.name}" class="w-20 h-20 flex-shrink-0 border border-neon">`
+                            : `<div class="w-20 h-20 rounded-none border border-neon flex-shrink-0 flex items-center justify-center bg-white/5">
+                                <span class="mono text-neon text-xl font-bold">${author.name.substring(0, 2).toUpperCase()}</span>
+                               </div>`
+                        }
                         <div>
                             <span class="mono text-[10px] opacity-30 uppercase block">Author</span>
                             <h3 class="text-xl font-bold">${author.name.toUpperCase()}</h3>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="avatar-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1B"/>
+      <stop offset="100%" style="stop-color:#2A2A2B"/>
+    </linearGradient>
+    <linearGradient id="avatar-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F2FF"/>
+      <stop offset="100%" style="stop-color:#00F2FF;stop-opacity:0.5"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#avatar-bg)"/>
+  <!-- Neon ring -->
+  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#avatar-ring)" stroke-width="2"/>
+  <!-- Inner decorative ring -->
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#00F2FF" stroke-width="0.5" opacity="0.3"/>
+  <!-- Initials -->
+  <text x="100" y="115" fill="#00F2FF" font-family="monospace" font-size="48" font-weight="bold" text-anchor="middle">BK</text>
+  <!-- Decorative elements -->
+  <line x1="40" y1="100" x2="55" y2="100" stroke="#00F2FF" stroke-width="1" opacity="0.4"/>
+  <line x1="145" y1="100" x2="160" y2="100" stroke="#00F2FF" stroke-width="1" opacity="0.4"/>
+</svg>

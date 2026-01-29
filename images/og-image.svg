@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="og-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1B"/>
+      <stop offset="100%" style="stop-color:#252526"/>
+    </linearGradient>
+    <filter id="og-blur">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="60"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og-bg)"/>
+  <!-- Background accent -->
+  <ellipse cx="900" cy="400" rx="300" ry="200" fill="#00F2FF" opacity="0.08" filter="url(#og-blur)"/>
+  <ellipse cx="200" cy="200" rx="200" ry="150" fill="#00F2FF" opacity="0.05" filter="url(#og-blur)"/>
+  <!-- Grid lines -->
+  <g stroke="#00F2FF" stroke-width="0.5" opacity="0.1">
+    <line x1="0" y1="157" x2="1200" y2="157"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="472" x2="1200" y2="472"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+  </g>
+  <!-- Main title -->
+  <text x="100" y="280" fill="#00F2FF" font-family="sans-serif" font-size="96" font-weight="900">BUNNYKEY</text>
+  <text x="100" y="380" fill="#FFFFFF" font-family="sans-serif" font-size="72" font-weight="300" opacity="0.9">ARCHIVE</text>
+  <!-- Tagline -->
+  <text x="100" y="460" fill="#8E8E93" font-family="monospace" font-size="24">Digital Artifacts // Design Protocols // Autonomous Systems</text>
+  <!-- Border accent -->
+  <rect x="100" y="500" width="120" height="4" fill="#00F2FF"/>
+  <!-- Corner marks -->
+  <path d="M40,40 L40,80 M40,40 L80,40" stroke="#00F2FF" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M1160,40 L1160,80 M1160,40 L1120,40" stroke="#00F2FF" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M40,590 L40,550 M40,590 L80,590" stroke="#00F2FF" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M1160,590 L1160,550 M1160,590 L1120,590" stroke="#00F2FF" stroke-width="2" fill="none" opacity="0.5"/>
+</svg>

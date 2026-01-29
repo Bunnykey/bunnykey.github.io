@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Details | Bunnykey Archive</title>
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <meta name="theme-color" content="#1A1A1B">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,20 +84,48 @@
                 document.title = `${project.title} | Projects | Bunnykey Archive`;
                 catDisplay.innerText = `CATEGORY: ${project.category.toUpperCase()}`;
 
+                // Add JSON-LD structured data
+                const jsonLd = {
+                    "@context": "https://schema.org",
+                    "@type": "CreativeWork",
+                    "name": project.title,
+                    "description": project.description,
+                    "dateCreated": project.year,
+                    "creator": {
+                        "@type": "Person",
+                        "name": "Bunnykey"
+                    },
+                    "keywords": project.tech.join(", "),
+                    "genre": project.category,
+                    "url": `https://bunnykey.github.io/project.html?id=${project.id}`
+                };
+                const script = document.createElement('script');
+                script.type = 'application/ld+json';
+                script.textContent = JSON.stringify(jsonLd);
+                document.head.appendChild(script);
+
+                const statusColors = {
+                    'Active': 'text-green-400',
+                    'Complete': 'text-neon',
+                    'Conceptual': 'text-yellow-400'
+                };
+
                 container.innerHTML = `
                     <header class="mb-12">
-                        <span class="mono text-xs text-neon uppercase tracking-widest">${project.year} // ${project.category}</span>
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="mono text-xs text-neon uppercase tracking-widest">${project.year} // ${project.category}</span>
+                            <span class="mono text-xs uppercase tracking-widest ${statusColors[project.status] || 'opacity-50'}">[${project.status}]</span>
+                        </div>
                         <h1 class="text-5xl md:text-7xl font-black mt-4 uppercase leading-none">${project.title}</h1>
                     </header>
 
-                    <div class="aspect-video glass-panel mb-12 relative overflow-hidden flex items-center justify-center">
-                        <div class="placeholder-gradient absolute inset-0"></div>
-                        <span class="mono text-4xl opacity-20">${project.image}</span>
+                    <div class="aspect-video glass-panel mb-12 relative overflow-hidden">
+                        <img src="${project.image}" alt="${project.title} visualization" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
                         <div class="md:col-span-2">
-                            <h2 class="mono text-xs uppercase opacity-30 mb-4 tracking-widest">Description</h2>
+                            <h2 class="mono text-xs uppercase opacity-30 mb-4 tracking-widest">Overview</h2>
                             <p class="text-xl leading-relaxed opacity-80">${project.description}</p>
                         </div>
                         <div>
@@ -105,6 +135,46 @@
                             </ul>
                         </div>
                     </div>
+
+                    ${project.longDescription ? `
+                    <div class="glass-panel p-8 mb-12">
+                        <h2 class="mono text-xs uppercase opacity-30 mb-6 tracking-widest">Deep Dive</h2>
+                        <div class="prose prose-invert max-w-none opacity-80 leading-relaxed whitespace-pre-line">${project.longDescription}</div>
+                    </div>
+                    ` : ''}
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        ${project.features ? `
+                        <div class="glass-panel p-8">
+                            <h2 class="mono text-xs uppercase opacity-30 mb-4 tracking-widest">Key Features</h2>
+                            <ul class="space-y-3">
+                                ${project.features.map(f => `<li class="flex items-start gap-3"><span class="text-neon">+</span><span class="opacity-80">${f}</span></li>`).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+
+                        ${project.metrics ? `
+                        <div class="glass-panel p-8">
+                            <h2 class="mono text-xs uppercase opacity-30 mb-4 tracking-widest">Metrics</h2>
+                            <dl class="space-y-4">
+                                ${Object.entries(project.metrics).map(([key, val]) => `
+                                    <div class="flex justify-between items-center">
+                                        <dt class="mono text-xs uppercase opacity-50">${key.replace(/([A-Z])/g, ' $1').trim()}</dt>
+                                        <dd class="mono text-sm text-neon">${val}</dd>
+                                    </div>
+                                `).join('')}
+                            </dl>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    ${project.links && Object.values(project.links).some(v => v) ? `
+                    <div class="mt-12 flex gap-4">
+                        ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" class="mono text-xs uppercase tracking-widest px-6 py-3 bg-neon text-black hover:bg-white transition-colors">Live Demo</a>` : ''}
+                        ${project.links.source ? `<a href="${project.links.source}" target="_blank" class="mono text-xs uppercase tracking-widest px-6 py-3 border border-neon text-neon hover:bg-neon hover:text-black transition-colors">Source Code</a>` : ''}
+                        ${project.links.docs ? `<a href="${project.links.docs}" target="_blank" class="mono text-xs uppercase tracking-widest px-6 py-3 border border-white/20 opacity-60 hover:opacity-100 transition-opacity">Documentation</a>` : ''}
+                    </div>
+                    ` : ''}
                 `;
             } catch (error) {
                 container.innerHTML = '<div class="mono text-xs opacity-30 text-center py-20">ERROR: DATABASE_OFFLINE</div>';

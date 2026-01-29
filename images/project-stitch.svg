@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg-stitch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1B"/>
+      <stop offset="100%" style="stop-color:#2A2A2B"/>
+    </linearGradient>
+    <linearGradient id="accent-stitch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F2FF;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#00F2FF;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg-stitch)"/>
+  <!-- Grid pattern -->
+  <g opacity="0.1" stroke="#00F2FF" stroke-width="0.5">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="133" y1="0" x2="133" y2="450"/>
+    <line x1="266" y1="0" x2="266" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="533" y1="0" x2="533" y2="450"/>
+    <line x1="666" y1="0" x2="666" y2="450"/>
+  </g>
+  <!-- Loop visualization -->
+  <g transform="translate(400, 225)">
+    <circle cx="0" cy="0" r="100" fill="none" stroke="url(#accent-stitch)" stroke-width="2" stroke-dasharray="10 5"/>
+    <circle cx="0" cy="0" r="70" fill="none" stroke="#00F2FF" stroke-width="1" opacity="0.5"/>
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#00F2FF" stroke-width="1" opacity="0.3"/>
+    <!-- Nodes -->
+    <circle cx="0" cy="-100" r="8" fill="#00F2FF"/>
+    <circle cx="87" cy="50" r="8" fill="#00F2FF" opacity="0.7"/>
+    <circle cx="-87" cy="50" r="8" fill="#00F2FF" opacity="0.7"/>
+    <!-- Connecting lines -->
+    <line x1="0" y1="-92" x2="80" y2="45" stroke="#00F2FF" stroke-width="1" opacity="0.4"/>
+    <line x1="80" y1="45" x2="-80" y2="45" stroke="#00F2FF" stroke-width="1" opacity="0.4"/>
+    <line x1="-80" y1="45" x2="0" y2="-92" stroke="#00F2FF" stroke-width="1" opacity="0.4"/>
+  </g>
+  <!-- Label -->
+  <text x="400" y="400" fill="#FFFFFF" font-family="monospace" font-size="12" text-anchor="middle" opacity="0.4">STITCH_PROTOCOL // AUTONOMOUS_LOOP</text>
+</svg>

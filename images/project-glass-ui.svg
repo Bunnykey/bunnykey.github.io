@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1B"/>
+      <stop offset="100%" style="stop-color:#252526"/>
+    </linearGradient>
+    <linearGradient id="glass-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.02"/>
+    </linearGradient>
+    <linearGradient id="glass-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#00F2FF;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.1"/>
+    </linearGradient>
+    <filter id="blur-effect">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="20"/>
+    </filter>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg-glass)"/>
+  <!-- Background blur shapes -->
+  <ellipse cx="200" cy="150" rx="150" ry="100" fill="#00F2FF" opacity="0.1" filter="url(#blur-effect)"/>
+  <ellipse cx="600" cy="300" rx="120" ry="80" fill="#00F2FF" opacity="0.08" filter="url(#blur-effect)"/>
+  <!-- Glassmorphic panels -->
+  <g transform="translate(100, 80)">
+    <rect x="0" y="0" width="250" height="150" rx="0" fill="url(#glass-fill)" stroke="url(#glass-border)" stroke-width="1"/>
+    <line x1="20" y1="30" x2="180" y2="30" stroke="#FFFFFF" stroke-width="8" opacity="0.3"/>
+    <line x1="20" y1="50" x2="120" y2="50" stroke="#FFFFFF" stroke-width="4" opacity="0.2"/>
+    <line x1="20" y1="70" x2="200" y2="70" stroke="#FFFFFF" stroke-width="4" opacity="0.15"/>
+    <line x1="20" y1="90" x2="160" y2="90" stroke="#FFFFFF" stroke-width="4" opacity="0.1"/>
+    <rect x="20" y="110" width="60" height="24" fill="#00F2FF" opacity="0.8"/>
+  </g>
+  <g transform="translate(450, 180)">
+    <rect x="0" y="0" width="220" height="180" rx="0" fill="url(#glass-fill)" stroke="url(#glass-border)" stroke-width="1"/>
+    <circle cx="110" cy="60" r="30" fill="none" stroke="#00F2FF" stroke-width="2" opacity="0.5"/>
+    <line x1="30" y1="110" x2="190" y2="110" stroke="#FFFFFF" stroke-width="6" opacity="0.2"/>
+    <line x1="30" y1="130" x2="150" y2="130" stroke="#FFFFFF" stroke-width="4" opacity="0.15"/>
+    <line x1="30" y1="150" x2="170" y2="150" stroke="#FFFFFF" stroke-width="4" opacity="0.1"/>
+  </g>
+  <g transform="translate(200, 260)">
+    <rect x="0" y="0" width="180" height="120" rx="0" fill="url(#glass-fill)" stroke="url(#glass-border)" stroke-width="1"/>
+    <rect x="15" y="15" width="50" height="50" fill="#00F2FF" opacity="0.2"/>
+    <line x1="80" y1="25" x2="160" y2="25" stroke="#FFFFFF" stroke-width="6" opacity="0.25"/>
+    <line x1="80" y1="45" x2="140" y2="45" stroke="#FFFFFF" stroke-width="4" opacity="0.15"/>
+    <line x1="15" y1="85" x2="165" y2="85" stroke="#FFFFFF" stroke-width="4" opacity="0.1"/>
+    <line x1="15" y1="100" x2="100" y2="100" stroke="#FFFFFF" stroke-width="4" opacity="0.08"/>
+  </g>
+  <!-- Label -->
+  <text x="400" y="420" fill="#FFFFFF" font-family="monospace" font-size="12" text-anchor="middle" opacity="0.4">GLASSMORPHISM_UI // DEPTH_LAYERS</text>
+</svg>

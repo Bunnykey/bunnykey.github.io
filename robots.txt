@@ -1,0 +1,11 @@
+# Bunnykey Archive - robots.txt
+# https://bunnykey.github.io
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://bunnykey.github.io/sitemap.xml
+
+# Crawl-delay (optional, be nice to servers)
+Crawl-delay: 1

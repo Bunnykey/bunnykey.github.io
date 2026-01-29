@@ -5,7 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Showcase | Digital Portfolio | Bunnykey Archive</title>
     <meta name="description" content="A curated gallery of advanced glassmorphic UI designs, autonomous protocols, and digital experiments by Bunnykey.">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <meta name="theme-color" content="#1A1A1B">
+    <link rel="canonical" href="https://bunnykey.github.io/gallery.html">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Project Showcase",
+        "description": "A curated gallery of advanced glassmorphic UI designs, autonomous protocols, and digital experiments by Bunnykey.",
+        "url": "https://bunnykey.github.io/gallery.html",
+        "author": {
+            "@type": "Person",
+            "name": "Bunnykey"
+        },
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Bunnykey Archive",
+            "url": "https://bunnykey.github.io/"
+        }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
@@ -123,10 +144,7 @@
         <!-- Project Card 1: Elevated Depth -->
         <div class="gallery-card glass-panel depth-2 flex flex-col overflow-hidden group shadow-2xl" role="article" aria-label="Project: Stitch Protocol">
             <div class="aspect-video relative overflow-hidden">
-                <div class="placeholder-gradient absolute inset-0"></div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
-                    <span class="mono text-4xl">ARTIFACT_01</span>
-                </div>
+                <img src="images/project-stitch.svg" alt="Stitch Protocol visualization" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy">
             </div>
             <div class="p-8 flex flex-col flex-grow">
                 <div class="flex justify-between items-start mb-4">
@@ -143,10 +161,7 @@
         <!-- Project Card 2: Standard Depth -->
         <div class="gallery-card glass-panel flex flex-col overflow-hidden group" role="article" aria-label="Project: Glassmorphism UI">
             <div class="aspect-video relative overflow-hidden">
-                <div class="placeholder-gradient absolute inset-0" style="background: linear-gradient(135deg, #1A1A1B 0%, #FFFFFF 100%);"></div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
-                    <span class="mono text-4xl">ARTIFACT_02</span>
-                </div>
+                <img src="images/project-glass-ui.svg" alt="Glassmorphism UI visualization" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy">
             </div>
             <div class="p-8 flex flex-col flex-grow">
                 <div class="flex justify-between items-start mb-4">
@@ -163,10 +178,7 @@
         <!-- Project Card 3: Shallow Depth -->
         <div class="gallery-card glass-panel depth-0 flex flex-col overflow-hidden group opacity-80" role="article" aria-label="Project: Neural Archive">
             <div class="aspect-video relative overflow-hidden">
-                <div class="placeholder-gradient absolute inset-0"></div>
-                <div class="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
-                    <span class="mono text-4xl">ARTIFACT_03</span>
-                </div>
+                <img src="images/project-neural.svg" alt="Neural Archive visualization" class="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy">
             </div>
             <div class="p-8 flex flex-col flex-grow">
                 <div class="flex justify-between items-start mb-4">

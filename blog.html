@@ -5,7 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Archive Log | Design Theory & Digital Protocols | Bunnykey</title>
     <meta name="description" content="Technical logs and design manifestos documenting the evolution of autonomous design-to-code execution and glassmorphic aesthetics.">
+    <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+    <meta name="theme-color" content="#1A1A1B">
+    <link rel="canonical" href="https://bunnykey.github.io/blog.html">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Archive Log",
+        "description": "Technical logs and design manifestos documenting the evolution of autonomous design-to-code execution and glassmorphic aesthetics.",
+        "url": "https://bunnykey.github.io/blog.html",
+        "author": {
+            "@type": "Person",
+            "name": "Bunnykey"
+        },
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Bunnykey Archive",
+            "url": "https://bunnykey.github.io/"
+        }
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono&display=swap" rel="stylesheet">
@@ -166,14 +187,15 @@
             postList.innerHTML = filteredPosts.map(post => `
                 <article class="post-card glass-panel p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer" onclick="window.location.href='post.html?id=${post.id}'">
                     <div class="flex-grow">
-                        <div class="flex items-center space-x-4 mb-2">
+                        <div class="flex items-center space-x-4 mb-2 flex-wrap gap-2">
                             <span class="mono text-[10px] opacity-40">${post.date.replace(/-/g, '.')}</span>
                             <span class="text-neon mono text-[10px] uppercase">${post.tags.join(' // ')}</span>
+                            ${post.readTime ? `<span class="mono text-[10px] opacity-40">// ${post.readTime}</span>` : ''}
                         </div>
                         <h2 class="text-2xl md:text-3xl font-bold group-hover:text-neon transition-colors">${post.title}</h2>
                         <p class="text-sm opacity-50 mt-2 max-w-2xl">${post.excerpt}</p>
                     </div>
-                    <div class="mt-6 md:mt-0 md:ml-12 text-right">
+                    <div class="mt-6 md:mt-0 md:ml-12 text-right flex-shrink-0">
                         <span class="mono text-[10px] opacity-30 block">AUTHOR</span>
                         <span class="mono text-xs">${post.authorId.toUpperCase()}</span>
                     </div>
