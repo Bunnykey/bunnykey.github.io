@@ -30,7 +30,7 @@ export function PostList({ posts, getAuthor }: PostListProps) {
         <motion.div key={post.id} variants={staggerItem}>
           <PostCard
             post={post}
-            author={getAuthor ? getAuthor(post.authorId) : undefined}
+            author={getAuthor && post.authorId ? getAuthor(post.authorId) : undefined}
           />
         </motion.div>
       ))}
