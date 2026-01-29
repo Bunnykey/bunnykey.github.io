@@ -8,17 +8,19 @@ import { TechStack } from "@/components/projects/TechStack";
 import { MetricsDisplay } from "@/components/projects/MetricsDisplay";
 import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
 import { HandwrittenText } from "@/components/effects/Highlighter";
-import { getProjectById, getAllProjects } from "@/lib/projects";
+import { getProjectById, getAllProjectsSync } from "@/lib/projects";
 import type { Metadata } from "next";
 
 export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamicParams = true; // Allow dynamic params beyond static ones
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export async function generateStaticParams() {
-  const projects = await getAllProjects();
+export function generateStaticParams() {
+  // Use sync version with static data for build-time generation
+  const projects = getAllProjectsSync();
   return projects.map((project) => ({
     id: project.id,
   }));

@@ -1,6 +1,10 @@
-import { Post, Author, NotionPost } from "@/types";
+import { Post, Author, NotionPost, PostsData } from "@/types";
+import postsJson from "@/../../data/posts.json";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://blog-api.sapphire7558.workers.dev";
+
+// Static fallback data
+const staticData = postsJson as unknown as PostsData;
 
 // Default author for posts from Notion (since Notion doesn't track author)
 const defaultAuthor: Author = {
@@ -132,4 +136,15 @@ export async function getPostsWithAuthor(): Promise<(Post & { author: Author | u
     ...post,
     author: getAuthorById(post.authorId || "bunnykey"),
   }));
+}
+
+// Synchronous versions for static generation (uses fallback data)
+export function getAllPostsSync(): Post[] {
+  return staticData.posts.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+}
+
+export function getPostBySlugSync(slug: string): Post | undefined {
+  return staticData.posts.find((post) => post.slug === slug);
 }

@@ -6,18 +6,20 @@ import { LinkButton } from "@/components/ui/Button";
 import { MarkdownRenderer } from "@/components/blog/MarkdownRenderer";
 import { AuthorCard } from "@/components/blog/AuthorCard";
 import { HandwrittenText } from "@/components/effects/Highlighter";
-import { getPostBySlug, getAllPosts, getAuthorById } from "@/lib/posts";
+import { getPostBySlug, getAllPostsSync, getAuthorById } from "@/lib/posts";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 
 export const revalidate = 60; // Revalidate every 60 seconds
+export const dynamicParams = true; // Allow dynamic params beyond static ones
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const posts = await getAllPosts();
+export function generateStaticParams() {
+  // Use sync version with static data for build-time generation
+  const posts = getAllPostsSync();
   return posts.map((post) => ({
     slug: post.slug,
   }));
