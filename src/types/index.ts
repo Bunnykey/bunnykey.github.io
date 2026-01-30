@@ -85,3 +85,28 @@ export interface NotionProject {
   docsLink: string | null;
   lastEditedTime: string;
 }
+
+// Book type from Aladin API
+export interface Book {
+  isbn: string;
+  title: string;
+  author: string;
+  publisher: string;
+  pubDate: string;
+  cover: string;
+  description: string;
+  link: string;
+  priceStandard?: number;
+}
+
+// Saved book from Notion database
+export interface SavedBook {
+  id: string;
+  title: string;
+  author: string;
+  isbn: string;
+  publisher: string;
+  cover: string | null;
+  status: string | null;
+  addedAt: string;
+}
