@@ -313,19 +313,22 @@ export default {
         }
 
         const data = await response.json();
-        const books = data.results.map((page: any) => {
-          const props = page.properties;
-          return {
-            id: page.id,
-            title: extractText(props.Title?.title),
-            author: extractText(props.Author?.rich_text),
-            isbn: extractText(props.ISBN?.rich_text),
-            publisher: extractText(props.Publisher?.rich_text),
-            cover: extractFileUrl(props.Cover?.files),
-            status: props.Status?.select?.name || null,
-            addedAt: props.AddedAt?.date?.start || page.created_time,
-          };
-        });
+        const books = data.results
+          .map((page: any) => {
+            const props = page.properties;
+            return {
+              id: page.id,
+              title: extractText(props.Title?.title),
+              author: extractText(props.Author?.rich_text),
+              isbn: extractText(props.ISBN?.rich_text),
+              publisher: extractText(props.Publisher?.rich_text),
+              cover: extractFileUrl(props.Cover?.files),
+              status: props.Status?.select?.name || null,
+              link: props.AladinLink?.url || null,
+              addedAt: props.AddedAt?.date?.start || page.created_time,
+            };
+          })
+          .filter((book: any) => book.title); // Filter out empty books
 
         return Response.json({ books }, { headers: corsHeaders });
       }

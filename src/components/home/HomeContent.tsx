@@ -270,58 +270,64 @@ export function HomeContent({ recentPosts, featuredProjects, recentBooks }: Home
             >
               {recentBooks.map((book) => (
                 <motion.div key={book.id} variants={staggerItem}>
-                  <Card interactive className="h-full">
-                    <div className="aspect-[3/4] relative bg-surface-raised overflow-hidden flex items-center justify-center">
-                      {book.cover ? (
-                        <img
-                          src={book.cover}
-                          alt={book.title}
-                          className="max-w-full max-h-full object-contain"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-text-tertiary">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-8 h-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={1.5}
-                              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                            />
-                          </svg>
-                        </div>
-                      )}
-                      {book.status && (
-                        <div className="absolute top-1 right-1">
-                          <Tag
-                            size="sm"
-                            variant={
-                              book.status === "완료"
-                                ? "success"
-                                : book.status === "읽는 중"
-                                ? "warning"
-                                : "default"
-                            }
-                          >
-                            {book.status}
-                          </Tag>
-                        </div>
-                      )}
-                    </div>
-                    <CardContent className="p-3">
-                      <h3 className="text-xs font-medium text-text-primary line-clamp-2 mb-0.5">
-                        {book.title}
-                      </h3>
-                      <p className="text-xs text-text-tertiary line-clamp-1">
-                        {book.author}
-                      </p>
-                    </CardContent>
-                  </Card>
+                  <a
+                    href={book.link || "/books"}
+                    target={book.link ? "_blank" : undefined}
+                    rel={book.link ? "noopener noreferrer" : undefined}
+                  >
+                    <Card interactive className="h-full">
+                      <div className="aspect-[3/4] relative bg-surface-raised overflow-hidden flex items-center justify-center">
+                        {book.cover ? (
+                          <img
+                            src={book.cover}
+                            alt={book.title}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-text-tertiary">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="w-8 h-8"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              stroke="currentColor"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={1.5}
+                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                              />
+                            </svg>
+                          </div>
+                        )}
+                        {book.status && (
+                          <div className="absolute top-1 right-1">
+                            <Tag
+                              size="sm"
+                              variant={
+                                book.status === "완료"
+                                  ? "success"
+                                  : book.status === "읽는 중"
+                                  ? "warning"
+                                  : "default"
+                              }
+                            >
+                              {book.status}
+                            </Tag>
+                          </div>
+                        )}
+                      </div>
+                      <CardContent className="p-3">
+                        <h3 className="text-xs font-medium text-text-primary line-clamp-2 mb-0.5">
+                          {book.title}
+                        </h3>
+                        <p className="text-xs text-text-tertiary line-clamp-1">
+                          {book.author}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </a>
                 </motion.div>
               ))}
             </motion.div>

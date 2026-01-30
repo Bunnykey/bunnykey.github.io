@@ -108,5 +108,6 @@ export interface SavedBook {
   publisher: string;
   cover: string | null;
   status: string | null;
+  link: string | null;
   addedAt: string;
 }
