@@ -127,14 +127,15 @@
                 const data = await response.json();
                 const postIndex = data.posts.findIndex(p => p.id === id);
                 const post = data.posts[postIndex];
-                const author = data.authors.find(a => a.id === post.authorId);
-                const prevPost = postIndex < data.posts.length - 1 ? data.posts[postIndex + 1] : null;
-                const nextPost = postIndex > 0 ? data.posts[postIndex - 1] : null;
 
                 if (!post) {
                     container.innerHTML = '<div class="mono text-xs opacity-30 text-center py-20">ERROR: ARTICLE_NOT_FOUND</div>';
                     return;
                 }
+
+                const author = data.authors.find(a => a.id === post.authorId);
+                const prevPost = postIndex < data.posts.length - 1 ? data.posts[postIndex + 1] : null;
+                const nextPost = postIndex > 0 ? data.posts[postIndex - 1] : null;
 
                 document.title = `${post.title} | Log | Bunnykey Archive`;
 
