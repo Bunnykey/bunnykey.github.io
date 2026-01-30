@@ -270,11 +270,7 @@ export function HomeContent({ recentPosts, featuredProjects, recentBooks }: Home
             >
               {recentBooks.map((book) => (
                 <motion.div key={book.id} variants={staggerItem}>
-                  <a
-                    href={book.link || "/books"}
-                    target={book.link ? "_blank" : undefined}
-                    rel={book.link ? "noopener noreferrer" : undefined}
-                  >
+                  <Link href={`/books/${book.id}`}>
                     <Card interactive className="h-full">
                       <div className="aspect-[3/4] relative bg-surface-raised overflow-hidden flex items-center justify-center">
                         {book.cover ? (
@@ -327,7 +323,7 @@ export function HomeContent({ recentPosts, featuredProjects, recentBooks }: Home
                         </p>
                       </CardContent>
                     </Card>
-                  </a>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>

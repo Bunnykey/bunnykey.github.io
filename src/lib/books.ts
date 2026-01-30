@@ -1,4 +1,4 @@
-import type { Book, SavedBook } from "@/types";
+import type { Book, SavedBook, SavedBookDetail } from "@/types";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
@@ -37,6 +37,24 @@ export async function searchBooks(query: string): Promise<Book[]> {
   } catch (error) {
     console.error("Failed to search books:", error);
     return [];
+  }
+}
+
+export async function getBookById(id: string): Promise<SavedBookDetail | null> {
+  try {
+    const response = await fetch(`${API_URL}/books/${id}`, {
+      next: { revalidate: 60 },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    const data = await response.json();
+    return data.book || null;
+  } catch (error) {
+    console.error("Failed to fetch book:", error);
+    return null;
   }
 }
 

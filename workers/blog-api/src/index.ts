@@ -333,6 +333,46 @@ export default {
         return Response.json({ books }, { headers: corsHeaders });
       }
 
+      // GET /books/:id - Get single book by ID
+      const bookMatch = path.match(/^\/books\/([^/]+)$/);
+      if (bookMatch && request.method === "GET") {
+        const id = bookMatch[1];
+        try {
+          const response = await notionFetch(`/pages/${id}`, env.NOTION_TOKEN);
+          if (!response.ok) {
+            return Response.json(
+              { error: "Book not found" },
+              { status: 404, headers: corsHeaders }
+            );
+          }
+          const page = await response.json();
+          const props = page.properties;
+
+          const book = {
+            id: page.id,
+            title: extractText(props.Title?.title),
+            author: extractText(props.Author?.rich_text),
+            isbn: extractText(props.ISBN?.rich_text),
+            publisher: extractText(props.Publisher?.rich_text),
+            pubDate: props.PubDate?.date?.start || null,
+            cover: extractFileUrl(props.Cover?.files),
+            description: extractText(props.Description?.rich_text),
+            status: props.Status?.select?.name || null,
+            rating: props.Rating?.number || null,
+            review: extractText(props.Review?.rich_text),
+            link: props.AladinLink?.url || null,
+            addedAt: props.AddedAt?.date?.start || page.created_time,
+          };
+
+          return Response.json({ book }, { headers: corsHeaders });
+        } catch {
+          return Response.json(
+            { error: "Book not found" },
+            { status: 404, headers: corsHeaders }
+          );
+        }
+      }
+
       // POST /books - Save book to Notion
       if (path === "/books" && request.method === "POST") {
         const book = await request.json();

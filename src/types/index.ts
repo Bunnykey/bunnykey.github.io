@@ -99,7 +99,7 @@ export interface Book {
   priceStandard?: number;
 }
 
-// Saved book from Notion database
+// Saved book from Notion database (list view)
 export interface SavedBook {
   id: string;
   title: string;
@@ -110,4 +110,12 @@ export interface SavedBook {
   status: string | null;
   link: string | null;
   addedAt: string;
+}
+
+// Saved book with full details (detail view)
+export interface SavedBookDetail extends SavedBook {
+  pubDate: string | null;
+  description: string | null;
+  rating: number | null;
+  review: string | null;
 }
