@@ -16,7 +16,7 @@
       "name": "System",
       "role": "Autonomous Agent",
       "bio": "Automated documentation and protocol logging system. Generates technical reports, changelogs, and system status updates.",
-      "avatar": null,
+      "avatar": "images/avatar-system.svg",
       "links": {}
     }
   ],

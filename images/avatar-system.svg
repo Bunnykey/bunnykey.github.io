@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="system-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1A1B"/>
+      <stop offset="100%" style="stop-color:#2A2A2B"/>
+    </linearGradient>
+    <linearGradient id="system-ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F2FF"/>
+      <stop offset="100%" style="stop-color:#00F2FF;stop-opacity:0.5"/>
+    </linearGradient>
+  </defs>
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="95" fill="url(#system-bg)"/>
+  <!-- Neon ring -->
+  <circle cx="100" cy="100" r="92" fill="none" stroke="url(#system-ring)" stroke-width="2"/>
+  <!-- Inner decorative ring -->
+  <circle cx="100" cy="100" r="80" fill="none" stroke="#00F2FF" stroke-width="0.5" opacity="0.3"/>
+  <!-- System icon: gear/cog representation -->
+  <g transform="translate(100, 100)" fill="none" stroke="#00F2FF" stroke-width="2">
+    <!-- Outer gear teeth -->
+    <circle r="35" opacity="0.6"/>
+    <circle r="25" opacity="0.4"/>
+    <circle r="12" fill="#00F2FF" opacity="0.3"/>
+    <!-- Crosshairs -->
+    <line x1="0" y1="-45" x2="0" y2="-28" opacity="0.8"/>
+    <line x1="0" y1="28" x2="0" y2="45" opacity="0.8"/>
+    <line x1="-45" y1="0" x2="-28" y2="0" opacity="0.8"/>
+    <line x1="28" y1="0" x2="45" y2="0" opacity="0.8"/>
+    <!-- Diagonal lines -->
+    <line x1="-32" y1="-32" x2="-20" y2="-20" opacity="0.5"/>
+    <line x1="32" y1="-32" x2="20" y2="-20" opacity="0.5"/>
+    <line x1="-32" y1="32" x2="-20" y2="20" opacity="0.5"/>
+    <line x1="32" y1="32" x2="20" y2="20" opacity="0.5"/>
+  </g>
+  <!-- SYS text -->
+  <text x="100" y="108" fill="#00F2FF" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle" opacity="0.9">SYS</text>
+</svg>
