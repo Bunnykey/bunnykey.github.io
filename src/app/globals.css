@@ -42,11 +42,9 @@
   --space-3xl: 64px;
   --space-4xl: 96px;
 
-  /* Font Families */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Font Families - these are set by Next.js font optimization in layout.tsx */
+  /* --font-sans, --font-mono, --font-handwritten are defined via CSS variable classes */
   --font-serif: 'Georgia', serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-  --font-handwritten: 'Caveat', 'Nanum Pen Script', cursive;
 
   /* Fluid Typography */
   --text-fluid-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);
