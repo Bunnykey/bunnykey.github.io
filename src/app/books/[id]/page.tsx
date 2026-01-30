@@ -5,7 +5,7 @@ import { Tag } from "@/components/ui/Tag";
 import { LinkButton } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import { HandwrittenText } from "@/components/effects/Highlighter";
-import { getBookById } from "@/lib/books";
+import { getBookById, getSavedBooks } from "@/lib/books";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
 
@@ -14,6 +14,13 @@ export const dynamicParams = true;
 
 interface PageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateStaticParams() {
+  const books = await getSavedBooks(100);
+  return books.map((book) => ({
+    id: book.id,
+  }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
