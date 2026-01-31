@@ -11,9 +11,10 @@ interface BookCardProps {
   book: Book;
   isSaved: boolean;
   onSave: (book: Book) => Promise<void>;
+  compact?: boolean;
 }
 
-export function BookCard({ book, isSaved, onSave }: BookCardProps) {
+export function BookCard({ book, isSaved, onSave, compact }: BookCardProps) {
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
@@ -27,7 +28,7 @@ export function BookCard({ book, isSaved, onSave }: BookCardProps) {
   };
 
   return (
-    <Card interactive className="h-full flex flex-col">
+    <Card interactive className={cn("h-full flex flex-col", compact && "card-compact")}>
       <div className="aspect-[3/4] relative bg-surface-raised overflow-hidden flex items-center justify-center">
         {book.cover ? (
           <img
@@ -39,7 +40,7 @@ export function BookCard({ book, isSaved, onSave }: BookCardProps) {
           <div className="w-full h-full flex items-center justify-center text-text-tertiary">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-12 h-12"
+              className={cn(compact ? "w-8 h-8" : "w-12 h-12")}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -57,20 +58,34 @@ export function BookCard({ book, isSaved, onSave }: BookCardProps) {
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="absolute top-2 right-2 bg-accent-primary text-white px-2 py-1 rounded text-xs font-medium"
+            className={cn(
+              "absolute bg-accent-primary text-white rounded font-medium",
+              compact ? "top-1.5 right-1.5 px-1.5 py-0.5 text-[10px]" : "top-2 right-2 px-2 py-1 text-xs"
+            )}
           >
             저장됨
           </motion.div>
         )}
       </div>
-      <CardContent className="flex-1 flex flex-col p-4">
-        <h3 className="text-sm font-semibold text-text-primary line-clamp-2 mb-1">
+      <CardContent className={cn("flex-1 flex flex-col", compact ? "p-3" : "p-4")}>
+        <h3 className={cn(
+          "font-semibold text-text-primary line-clamp-2 mb-1",
+          compact ? "text-xs" : "text-sm"
+        )}>
           {book.title}
         </h3>
-        <p className="text-xs text-text-secondary line-clamp-1 mb-0.5">
+        <p className={cn(
+          "text-text-secondary line-clamp-1 mb-0.5",
+          compact ? "text-[11px]" : "text-xs"
+        )}>
           {book.author}
         </p>
-        <p className="text-xs text-text-tertiary mb-3">{book.publisher}</p>
+        <p className={cn(
+          "text-text-tertiary",
+          compact ? "text-[11px] mb-2" : "text-xs mb-3"
+        )}>
+          {book.publisher}
+        </p>
         <div className="mt-auto">
           <Button
             onClick={handleSave}
@@ -78,7 +93,7 @@ export function BookCard({ book, isSaved, onSave }: BookCardProps) {
             isLoading={saving}
             variant={isSaved ? "ghost" : "primary"}
             size="sm"
-            className="w-full"
+            className={cn("w-full", compact && "h-7 text-xs")}
           >
             {isSaved ? "저장 완료" : "노션에 저장"}
           </Button>

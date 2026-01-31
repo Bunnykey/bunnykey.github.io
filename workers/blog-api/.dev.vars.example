@@ -2,3 +2,4 @@
 # DO NOT commit .dev.vars to version control
 
 NOTION_TOKEN=secret_your_notion_integration_token_here
+ALADIN_TTB_KEY=your_aladin_ttbkey_here

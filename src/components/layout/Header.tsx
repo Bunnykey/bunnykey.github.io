@@ -45,10 +45,10 @@ export function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-normal",
+          "sticky top-0 z-50 h-16 transition-all duration-normal",
           isScrolled
             ? "bg-background/80 backdrop-blur-md border-b border-border-light shadow-sm"
-            : "bg-transparent"
+            : "bg-background"
         )}
       >
         <Container className="h-full flex items-center justify-between">
@@ -134,9 +134,6 @@ export function Header() {
           </>
         )}
       </AnimatePresence>
-
-      {/* Spacer for fixed header */}
-      <div className="h-16" />
     </>
   );
 }

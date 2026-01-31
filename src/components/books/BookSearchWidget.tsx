@@ -50,33 +50,39 @@ export function BookSearchWidget({ embedded = false }: BookSearchWidgetProps) {
   };
 
   return (
-    <div className={cn(embedded ? "p-4" : "")}>
-      <div className="flex gap-3 mb-6">
+    <div className={cn(embedded ? "p-3" : "p-4")}>
+      <div className={cn("flex gap-2", embedded ? "mb-4" : "mb-6")}>
         <div className="flex-1">
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="책 제목, 저자로 검색..."
+            className={cn(embedded && "h-9 text-sm")}
           />
         </div>
-        <Button onClick={handleSearch} disabled={loading || !query.trim()}>
+        <Button
+          onClick={handleSearch}
+          disabled={loading || !query.trim()}
+          size={embedded ? "sm" : "md"}
+          className={cn(embedded && "h-9 px-3")}
+        >
           {loading ? "검색 중..." : "검색"}
         </Button>
       </div>
 
-      {loading && <BookGrid books={[]} savedBooks={savedBooks} onSave={handleSave} loading />}
+      {loading && <BookGrid books={[]} savedBooks={savedBooks} onSave={handleSave} loading compact={embedded} />}
 
       {!loading && results.length > 0 && (
-        <BookGrid books={results} savedBooks={savedBooks} onSave={handleSave} />
+        <BookGrid books={results} savedBooks={savedBooks} onSave={handleSave} compact={embedded} />
       )}
 
       {!loading && searched && results.length === 0 && (
-        <div className="text-center py-12">
+        <div className={cn("text-center", embedded ? "py-8" : "py-12")}>
           <div className="text-text-tertiary mb-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-12 h-12 mx-auto mb-4"
+              className={cn("mx-auto mb-3", embedded ? "w-8 h-8" : "w-12 h-12")}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -89,21 +95,21 @@ export function BookSearchWidget({ embedded = false }: BookSearchWidgetProps) {
               />
             </svg>
           </div>
-          <p className="text-text-secondary">
+          <p className={cn("text-text-secondary", embedded && "text-sm")}>
             &quot;{query}&quot;에 대한 검색 결과가 없습니다.
           </p>
-          <p className="text-sm text-text-tertiary mt-1">
+          <p className={cn("text-text-tertiary mt-1", embedded ? "text-xs" : "text-sm")}>
             다른 검색어로 시도해 보세요.
           </p>
         </div>
       )}
 
       {!loading && !searched && (
-        <div className="text-center py-12">
-          <div className="text-text-tertiary mb-4">
+        <div className={cn("text-center", embedded ? "py-8" : "py-12")}>
+          <div className="text-text-tertiary mb-3">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="w-16 h-16 mx-auto"
+              className={cn("mx-auto", embedded ? "w-10 h-10" : "w-16 h-16")}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -116,7 +122,7 @@ export function BookSearchWidget({ embedded = false }: BookSearchWidgetProps) {
               />
             </svg>
           </div>
-          <p className="text-text-secondary">
+          <p className={cn("text-text-secondary", embedded && "text-sm")}>
             알라딘에서 도서를 검색하고 노션에 저장하세요.
           </p>
         </div>
