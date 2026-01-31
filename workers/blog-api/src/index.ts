@@ -217,6 +217,13 @@ async function saveBookToNotion(book: any, env: Env) {
     };
   }
 
+  // Add tags if provided
+  if (book.tags && Array.isArray(book.tags) && book.tags.length > 0) {
+    properties.Tags = {
+      multi_select: book.tags.map((tag: string) => ({ name: tag })),
+    };
+  }
+
   const response = await notionFetch("/pages", env.NOTION_TOKEN, {
     method: "POST",
     body: {
@@ -324,6 +331,7 @@ export default {
               publisher: extractText(props.Publisher?.rich_text),
               cover: extractFileUrl(props.Cover?.files),
               status: props.Status?.select?.name || null,
+              tags: props.Tags?.multi_select?.map((t: any) => t.name) || [],
               link: props.AladinLink?.url || null,
               addedAt: props.AddedAt?.date?.start || page.created_time,
             };
@@ -358,6 +366,7 @@ export default {
             cover: extractFileUrl(props.Cover?.files),
             description: extractText(props.Description?.rich_text),
             status: props.Status?.select?.name || null,
+            tags: props.Tags?.multi_select?.map((t: any) => t.name) || [],
             rating: props.Rating?.number || null,
             review: extractText(props.Review?.rich_text),
             link: props.AladinLink?.url || null,

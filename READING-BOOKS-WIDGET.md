@@ -38,20 +38,25 @@ A widget for searching and tracking books using the Aladin API (Korean book sear
 
 Create a new database in Notion with the following properties:
 
-| Property    | Type   | Description                        |
-|-------------|--------|------------------------------------|
-| Title       | Title  | Book title (default title column)  |
-| Author      | Text   | Book author(s)                     |
-| ISBN        | Text   | ISBN identifier                    |
-| Publisher   | Text   | Publisher name                     |
-| Description | Text   | Book description/summary           |
-| Cover       | URL    | Cover image URL                    |
-| Status      | Select | Reading status (e.g., To Read, Reading, Completed) |
-| AddedAt     | Date   | Date book was added                |
-| PubDate     | Text   | Publication date                   |
-| AladinLink  | URL    | Link to Aladin book page           |
-| Rating      | Number | Your rating (1-5)                  |
-| Review      | Text   | Your review/notes                  |
+| Property    | Type         | Description                        |
+|-------------|--------------|-----------------------------------|
+| Title       | Title        | Book title (default title column)  |
+| Author      | Text         | Book author(s)                     |
+| ISBN        | Text         | ISBN identifier                    |
+| Publisher   | Text         | Publisher name                     |
+| Description | Text         | Book description/summary           |
+| Cover       | URL          | Cover image URL                    |
+| Status      | Select       | Reading status (e.g., 읽고 싶음, 읽는 중, 완독) |
+| Tags        | Multi-select | Book categories/tags               |
+| AddedAt     | Date         | Date book was added                |
+| PubDate     | Text         | Publication date                   |
+| AladinLink  | URL          | Link to Aladin book page           |
+| Rating      | Number       | Your rating (1-5)                  |
+| Review      | Text         | Your review/notes                  |
+
+**Preset Tags (add these to your Tags property):**
+- 소설, 에세이, 자기계발, 인문학, 과학
+- 경제/경영, IT/프로그래밍, 시/문학, 역사, 추천
 
 After creating the database:
 1. Click "..." menu → "Connections" → Add your integration

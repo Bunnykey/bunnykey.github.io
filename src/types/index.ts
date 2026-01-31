@@ -108,6 +108,7 @@ export interface SavedBook {
   publisher: string;
   cover: string | null;
   status: string | null;
+  tags: string[];
   link: string | null;
   addedAt: string;
 }
@@ -119,3 +120,19 @@ export interface SavedBookDetail extends SavedBook {
   rating: number | null;
   review: string | null;
 }
+
+// Preset book tags
+export const BOOK_PRESET_TAGS = [
+  "소설",
+  "에세이",
+  "자기계발",
+  "인문학",
+  "과학",
+  "경제/경영",
+  "IT/프로그래밍",
+  "시/문학",
+  "역사",
+  "추천",
+] as const;
+
+export type BookTag = (typeof BOOK_PRESET_TAGS)[number] | string;
