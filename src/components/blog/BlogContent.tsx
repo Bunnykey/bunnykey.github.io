@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Container } from "@/components/layout/Container";
 import { PostList } from "@/components/blog/PostList";
@@ -9,18 +9,58 @@ import { TagFilter } from "@/components/blog/TagFilter";
 import { HandwrittenText } from "@/components/effects/Highlighter";
 import { fadeInUp } from "@/lib/motion";
 import { Post, Author } from "@/types";
+import { getLocalPosts, draftToPost } from "@/lib/admin";
 
 interface BlogContentProps {
   initialPosts: (Post & { author: Author | undefined })[];
   allTags: string[];
 }
 
+const defaultAuthor: Author = {
+  id: "bunnykey",
+  name: "Bunnykey",
+  role: "Developer",
+  bio: "Building cool things on the web.",
+  avatar: "/images/avatar-bunnykey.svg",
+  links: {
+    github: "https://github.com/bunnykey",
+  },
+};
+
 export function BlogContent({ initialPosts, allTags }: BlogContentProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [localPosts, setLocalPosts] = useState<(Post & { author: Author | undefined })[]>([]);
+
+  // Load local posts from localStorage
+  useEffect(() => {
+    const drafts = getLocalPosts();
+    const publishedLocalPosts = drafts
+      .filter((draft) => draft.published)
+      .map((draft) => ({
+        ...draftToPost(draft),
+        author: defaultAuthor,
+      }));
+    setLocalPosts(publishedLocalPosts);
+  }, []);
+
+  // Combine initial posts with local posts, avoiding duplicates by slug
+  const combinedPosts = useMemo(() => {
+    const slugs = new Set(initialPosts.map((p) => p.slug));
+    const uniqueLocalPosts = localPosts.filter((p) => !slugs.has(p.slug));
+    return [...initialPosts, ...uniqueLocalPosts].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+  }, [initialPosts, localPosts]);
+
+  // Combine all tags
+  const combinedTags = useMemo(() => {
+    const tagSet = new Set([...allTags, ...localPosts.flatMap((p) => p.tags)]);
+    return Array.from(tagSet).sort();
+  }, [allTags, localPosts]);
 
   const filteredPosts = useMemo(() => {
-    let posts = initialPosts;
+    let posts = combinedPosts;
 
     // Filter by search query
     if (searchQuery) {
@@ -39,7 +79,7 @@ export function BlogContent({ initialPosts, allTags }: BlogContentProps) {
     }
 
     return posts;
-  }, [initialPosts, searchQuery, selectedTag]);
+  }, [combinedPosts, searchQuery, selectedTag]);
 
   const handleSearch = useCallback((query: string) => {
     setSearchQuery(query);
@@ -51,10 +91,10 @@ export function BlogContent({ initialPosts, allTags }: BlogContentProps) {
 
   const getAuthor = useCallback(
     (authorId: string) => {
-      const post = initialPosts.find((p) => p.authorId === authorId);
+      const post = combinedPosts.find((p) => p.authorId === authorId);
       return post?.author;
     },
-    [initialPosts]
+    [combinedPosts]
   );
 
   return (
@@ -93,7 +133,7 @@ export function BlogContent({ initialPosts, allTags }: BlogContentProps) {
             />
           </div>
           <TagFilter
-            tags={allTags}
+            tags={combinedTags}
             selectedTag={selectedTag}
             onTagSelect={handleTagSelect}
           />
