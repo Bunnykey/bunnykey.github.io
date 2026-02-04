@@ -1,24 +1,5 @@
 import "../globals.css";
 import "./embed.css";
-import { Inter, Caveat, JetBrains_Mono } from "next/font/google";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  variable: "--font-handwritten",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export default function WidgetLayout({
   children,
@@ -26,7 +7,7 @@ export default function WidgetLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={`${inter.variable} ${caveat.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+    <html lang="ko" className="font-sans" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{

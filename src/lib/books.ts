@@ -1,6 +1,6 @@
 import type { Book, SavedBook, SavedBookDetail } from "@/types";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://blog-api.sapphire7558.workers.dev";
 
 export async function getSavedBooks(limit: number = 10): Promise<SavedBook[]> {
   try {
