@@ -270,6 +270,7 @@ export default function AdminPage() {
                           </Link>
                           <Link
                             href={`/admin/edit?slug=${post.slug}`}
+                            href={`/admin/edit/${post.slug}`}
                             className="p-2 text-text-secondary hover:text-accent-primary transition-colors"
                             title="Edit"
                           >
