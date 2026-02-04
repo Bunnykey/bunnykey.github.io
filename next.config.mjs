@@ -11,8 +11,8 @@ const nextConfig = {
       },
     ],
   },
-  // Disable trailing slashes for cleaner URLs
-  trailingSlash: false,
+  // Enable trailing slashes for GitHub Pages compatibility
+  trailingSlash: true,
 };
 
 export default nextConfig;
