@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Blog", href: "/blog" },
   { label: "Projects", href: "/projects" },
+  { label: "Books", href: "/books" },
 ];
 
 interface NavigationProps {

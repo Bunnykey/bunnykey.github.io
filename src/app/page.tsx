@@ -4,17 +4,23 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { HomeContent } from "@/components/home/HomeContent";
 import { getRecentPosts } from "@/lib/posts";
 import { getFeaturedProjects } from "@/lib/projects";
+import { getSavedBooks } from "@/lib/books";
 
 export const revalidate = 60; // Revalidate every 60 seconds
 
 async function HomeData() {
-  const [recentPosts, featuredProjects] = await Promise.all([
+  const [recentPosts, featuredProjects, recentBooks] = await Promise.all([
     getRecentPosts(3),
     Promise.resolve(getFeaturedProjects(3)),
+    getSavedBooks(6),
   ]);
 
   return (
-    <HomeContent recentPosts={recentPosts} featuredProjects={featuredProjects} />
+    <HomeContent
+      recentPosts={recentPosts}
+      featuredProjects={featuredProjects}
+      recentBooks={recentBooks}
+    />
   );
 }
 

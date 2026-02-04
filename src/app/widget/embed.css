@@ -1,0 +1,107 @@
+/* Notion-like embed styles */
+
+/* Override root colors to match Notion more closely */
+:root {
+  --color-background: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-raised: #f7f6f3;
+
+  --color-text-primary: #37352f;
+  --color-text-secondary: #6b6b6b;
+  --color-text-tertiary: #9b9a97;
+
+  --color-border: #e9e9e7;
+  --color-border-light: #f1f1ef;
+
+  --color-accent-primary: #2eaadc;
+  --color-accent-secondary: #0077b5;
+}
+
+[data-theme="dark"] {
+  --color-background: #191919;
+  --color-surface: #202020;
+  --color-surface-raised: #2f2f2f;
+
+  --color-text-primary: #e6e6e4;
+  --color-text-secondary: #9b9a97;
+  --color-text-tertiary: #6b6b6b;
+
+  --color-border: #373737;
+  --color-border-light: #2f2f2f;
+
+  --color-accent-primary: #529cca;
+  --color-accent-secondary: #6cb8e6;
+}
+
+/* Embed-specific base styles */
+.widget-embed {
+  background: var(--color-background);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-size: 14px;
+}
+
+/* Compact input styling for Notion-like feel */
+.widget-embed input {
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.widget-embed input:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 0 2px rgba(46, 170, 220, 0.15);
+  outline: none;
+}
+
+.widget-embed input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* Compact button styling */
+.widget-embed button {
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: background-color 0.15s;
+}
+
+/* Card adjustments for compact view */
+.widget-embed .card-compact {
+  border-radius: 6px;
+  border: 1px solid var(--color-border-light);
+  box-shadow: none;
+  transition: background-color 0.15s;
+}
+
+.widget-embed .card-compact:hover {
+  background-color: var(--color-surface-raised);
+}
+
+/* Scrollbar styling matching Notion */
+.widget-embed::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.widget-embed::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.widget-embed::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 3px;
+}
+
+.widget-embed::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* Remove min-height for iframe compatibility */
+.widget-embed .min-h-screen {
+  min-height: auto;
+}
