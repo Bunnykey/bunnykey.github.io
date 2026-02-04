@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,8 +44,10 @@
   --space-3xl: 64px;
   --space-4xl: 96px;
 
-  /* Font Families - these are set by Next.js font optimization in layout.tsx */
-  /* --font-sans, --font-mono, --font-handwritten are defined via CSS variable classes */
+  /* Font Families */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-handwritten: 'Caveat', cursive;
   --font-serif: 'Georgia', serif;
 
   /* Fluid Typography */

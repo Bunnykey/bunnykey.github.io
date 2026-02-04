@@ -1,26 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Caveat, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  variable: "--font-handwritten",
-  display: "swap",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Bunnykey Archive",
@@ -57,7 +38,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${caveat.variable} ${jetbrainsMono.variable}`}
+      className="font-sans"
     >
       <head>
         <script

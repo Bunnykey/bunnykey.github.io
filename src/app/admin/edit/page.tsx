@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, useParams } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Container } from "@/components/layout/Container";
 import { MarkdownEditor } from "@/components/admin/MarkdownEditor";
@@ -16,10 +16,10 @@ import {
   DraftPost,
 } from "@/lib/admin";
 
-export default function EditPostPage() {
+function EditPostContent() {
   const router = useRouter();
-  const params = useParams();
-  const slug = params.slug as string;
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("slug") || "";
 
   const [authenticated, setAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -42,6 +42,12 @@ export default function EditPostPage() {
 
     if (!auth) {
       router.push("/admin");
+      return;
+    }
+
+    if (!slug) {
+      setNotFound(true);
+      setLoading(false);
       return;
     }
 
@@ -99,7 +105,7 @@ export default function EditPostPage() {
 
       // If slug changed, redirect to new edit URL
       if (postSlug !== slug) {
-        router.push(`/admin/edit/${postSlug}`);
+        router.push(`/admin/edit?slug=${postSlug}`);
       } else {
         router.push("/admin");
       }
@@ -401,5 +407,19 @@ export default function EditPostPage() {
         </motion.div>
       </Container>
     </div>
+  );
+}
+
+export default function EditPostPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-primary"></div>
+        </div>
+      }
+    >
+      <EditPostContent />
+    </Suspense>
   );
 }
