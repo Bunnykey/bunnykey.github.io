@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Greenhouse frame -->
+  <rect x="4" y="14" width="24" height="16" rx="1" stroke="#2d6a4f" stroke-width="1.5" fill="#d8f3dc"/>
+  <!-- Roof peak -->
+  <polygon points="16,2 30,14 2,14" fill="#52b788" stroke="#2d6a4f" stroke-width="1.5" stroke-linejoin="round"/>
+  <!-- Roof ridge cap -->
+  <rect x="14" y="1.5" width="4" height="2" rx="1" fill="#2d6a4f"/>
+  <!-- Door -->
+  <rect x="13" y="22" width="6" height="8" rx="1" fill="#95d5b2" stroke="#2d6a4f" stroke-width="1"/>
+  <!-- Window left -->
+  <rect x="6" y="17" width="5" height="4" rx="0.5" fill="#b7e4c7" stroke="#2d6a4f" stroke-width="1"/>
+  <!-- Window right -->
+  <rect x="21" y="17" width="5" height="4" rx="0.5" fill="#b7e4c7" stroke="#2d6a4f" stroke-width="1"/>
+  <!-- Plant stem inside -->
+  <line x1="16" y1="30" x2="16" y2="24" stroke="#40916c" stroke-width="1.5"/>
+  <!-- Leaves -->
+  <ellipse cx="13.5" cy="23" rx="2.5" ry="1.2" transform="rotate(-30 13.5 23)" fill="#52b788"/>
+  <ellipse cx="18.5" cy="23" rx="2.5" ry="1.2" transform="rotate(30 18.5 23)" fill="#52b788"/>
+</svg>
