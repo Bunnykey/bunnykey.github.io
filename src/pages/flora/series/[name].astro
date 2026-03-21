@@ -1,0 +1,63 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getSeriesPosts } from '../../../utils/series';
+import { getCollection } from 'astro:content';
+import { filterPublished } from '../../../consts/sections';
+
+export async function getStaticPaths() {
+  const entries = filterPublished(await getCollection('flora'));
+  const seriesMap = new Map<string, string>();
+
+  for (const entry of entries) {
+    const series = entry.data.series;
+    if (!series || seriesMap.has(series.name)) continue;
+    seriesMap.set(series.name, series.title);
+  }
+
+  const paths = await Promise.all(
+    Array.from(seriesMap.entries()).map(async ([name, title]) => ({
+      params: { name },
+      props: {
+        name,
+        title,
+        posts: await getSeriesPosts('flora', name),
+      },
+    })),
+  );
+
+  return paths;
+}
+
+const { name, title, posts } = Astro.props;
+const publishedCount = posts.length;
+const totalCount = Math.max(...posts.map((post) => post.data.series?.order ?? 0), 0);
+---
+
+<Layout
+  title={`${title} | The Greenhouse`}
+  description={`${title} series archive and reading order.`}
+  canonicalPath={`/flora/series/${name}/`}
+  ogTitle={title}
+  ogDescription={`${publishedCount} published posts in the ${title} series.`}
+>
+  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
+    <header class="mb-10">
+      <p class="text-xs uppercase tracking-widest text-on-surface-variant mb-2">Flora Series</p>
+      <h1 class="text-3xl tracking-tight mb-3">{title}</h1>
+      <p class="text-sm text-on-surface-variant">
+        Progress: {publishedCount}/{totalCount || publishedCount}
+      </p>
+    </header>
+
+    <ol class="space-y-3">
+      {posts.map((post) => (
+        <li>
+          <a href={`/flora/${post.slug}/`} class="flex gap-3 items-baseline text-on-surface-variant/70 hover:text-on-surface transition-colors">
+            <span class="tabular-nums w-6 shrink-0 text-sm">{post.data.series?.order}.</span>
+            <span class="text-base">{post.data.title}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Layout>
