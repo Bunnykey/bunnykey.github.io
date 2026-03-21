@@ -1,0 +1,109 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* Surface hierarchy */
+  --color-surface: #faf9f6;
+  --color-surface-dim: #d6dbd5;
+  --color-surface-container: #edeeea;
+  --color-surface-container-low: #f4f4f0;
+  --color-surface-container-high: #e6e9e4;
+  --color-surface-container-highest: #e0e4de;
+  --color-surface-container-lowest: #ffffff;
+
+  /* Primary (neutral gray) */
+  --color-primary: #5a5f62;
+  --color-primary-dim: #4e5356;
+  --color-primary-container: #dfe3e7;
+  --color-on-primary: #f4f8fc;
+
+  /* Secondary (sage) */
+  --color-secondary: #546353;
+  --color-secondary-container: #d7e7d3;
+  --color-on-secondary-container: #475546;
+
+  /* Tertiary (earth) */
+  --color-tertiary: #7e572e;
+  --color-tertiary-container: #d9a777;
+
+  /* Text */
+  --color-on-surface: #2f3430;
+  --color-on-surface-variant: #5c605c;
+
+  /* Borders */
+  --color-outline: #777c77;
+  --color-outline-variant: #afb3ae;
+
+  /* Error */
+  --color-error: #9e422c;
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Spacing scale */
+  --spacing-micro: 0.5rem;
+  --spacing-base: 1rem;
+  --spacing-md: 1.4rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3.5rem;
+  --spacing-2xl: 5.5rem;
+  --spacing-3xl: 7rem;
+}
+
+@layer base {
+  html {
+    @apply antialiased;
+    font-family: var(--font-sans);
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  h1 {
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+
+  h3, h4, h5, h6 {
+    font-weight: 500;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    color: var(--color-on-surface);
+  }
+}
+
+@layer utilities {
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    transform: translateY(-200%);
+    background: var(--color-surface);
+    color: var(--color-on-surface);
+    border: 1px solid var(--color-outline-variant);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    z-index: 100;
+    text-decoration: none;
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+}
