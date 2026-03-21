@@ -1,10 +1,59 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import SectionCard from '../components/SectionCard.astro';
+import { getCollection } from 'astro:content';
+import { SECTION_FALLBACKS } from '../consts/site';
+import { filterPublished, sortByDateDesc, formatArchiveDate } from '../consts/sections';
+
+const allFlora = filterPublished(await getCollection('flora'));
+const allNursery = filterPublished(await getCollection('nursery'));
+const allSeeds = filterPublished(await getCollection('seeds'));
+
+const allPosts = sortByDateDesc([
+  ...allFlora.map(p => ({ ...p, section: 'flora' as const, url: `/flora/${p.slug}/` })),
+  ...allNursery.map(p => ({ ...p, section: 'nursery' as const, url: `/nursery/${p.slug}/` })),
+  ...allSeeds.map(p => ({ ...p, section: 'seeds' as const, url: `/seeds/${p.slug}/` })),
+]);
+
+const sectionColors: Record<string, string> = {
+  flora: 'text-secondary',
+  nursery: 'text-secondary',
+  seeds: 'text-tertiary',
+};
 ---
 
-<Layout title="The Greenhouse">
+<Layout title="The Greenhouse" description={SECTION_FALLBACKS.home} canonicalPath="/">
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
-    <h1 class="text-4xl tracking-tight">The Greenhouse.</h1>
-    <p class="text-lg text-on-surface-variant mt-4">Coming soon.</p>
+    <section class="mb-12">
+      <h1 class="text-4xl tracking-tight mb-3">The Greenhouse.</h1>
+      <p class="text-lg text-on-surface-variant max-w-xl">
+        디지털 정원. AI, 크립토, 그리고 진화하는 아이디어를 정성스럽게 가꿉니다.
+      </p>
+    </section>
+
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
+      <SectionCard icon="❀" name="Flora" description="AI 분석과 에이전트 생태계" count={allFlora.length} href="/flora/" />
+      <SectionCard icon="🌱" name="Nursery" description="자라는 아이디어, 에버그린 노트" count={allNursery.length} href="/nursery/" />
+      <SectionCard icon="🫘" name="Seeds" description="짧은 메모, 순간 포착" count={allSeeds.length} href="/seeds/" variant="earth" />
+    </section>
+
+    <section>
+      <h2 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-8">Latest</h2>
+      <div class="flex flex-col gap-4">
+        {allPosts.slice(0, 10).map((post) => (
+          <a href={post.url} class="flex items-baseline justify-between gap-4 group">
+            <div class="flex items-baseline gap-3 min-w-0">
+              <span class:list={["text-xs shrink-0", sectionColors[post.section]]}>{post.section}</span>
+              <span class="text-base font-medium text-on-surface group-hover:text-secondary transition-colors truncate">
+                {post.data.title}
+              </span>
+            </div>
+            <span class="text-xs text-on-surface-variant font-mono shrink-0">
+              {formatArchiveDate(post.data.date)}
+            </span>
+          </a>
+        ))}
+      </div>
+    </section>
   </div>
 </Layout>

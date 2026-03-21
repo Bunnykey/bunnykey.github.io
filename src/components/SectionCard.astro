@@ -1,0 +1,22 @@
+---
+interface Props {
+  icon: string;
+  name: string;
+  description: string;
+  count: number;
+  href: string;
+  variant?: 'sage' | 'earth';
+}
+
+const { icon, name, description, count, href, variant = 'sage' } = Astro.props;
+const bgClass = variant === 'earth' ? 'bg-tertiary-container/30' : 'bg-secondary-container/30';
+---
+
+<a href={href} class:list={["block rounded-lg p-6 transition-all hover:shadow-sm", bgClass]}>
+  <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant text-lg mb-4">
+    {icon}
+  </div>
+  <h3 class="text-base font-medium text-on-surface mb-1">{name}</h3>
+  <p class="text-sm text-on-surface-variant leading-relaxed mb-3">{description}</p>
+  <span class="text-sm text-secondary">{count} posts &rarr;</span>
+</a>
