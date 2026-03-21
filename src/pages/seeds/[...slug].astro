@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { SECTION_FALLBACKS } from '../../consts/site';
+import { filterPublished, formatArchiveDate } from '../../consts/sections';
+
+export async function getStaticPaths() {
+  const entries = filterPublished(await getCollection('seeds'));
+  return entries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const description = entry.data.summary || SECTION_FALLBACKS.seeds;
+---
+
+<Layout
+  title={entry.data.title}
+  description={description}
+  canonicalPath={`/seeds/${entry.slug}/`}
+  ogTitle={entry.data.title}
+  ogDescription={description}
+  ogType="article"
+>
+  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
+    <article class="max-w-prose">
+      <header class="mb-8">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-xs bg-tertiary-container text-on-surface px-2 py-0.5 rounded">seeds</span>
+          <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(entry.data.date)}</span>
+        </div>
+        <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
+        {entry.data.summary && (
+          <p class="text-base text-on-surface-variant leading-relaxed">{entry.data.summary}</p>
+        )}
+      </header>
+
+      <div class="border-t border-outline-variant/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-secondary hover:prose-a:text-secondary/80 prose-pre:bg-surface-container-low prose-code:text-on-surface">
+        <Content />
+      </div>
+
+      {entry.data.tags && entry.data.tags.length > 0 && (
+        <div class="mt-8 pt-6 border-t border-outline-variant/20 flex flex-wrap gap-1.5">
+          {entry.data.tags.map((tag) => (
+            <span class="text-xs bg-tertiary-container/50 text-on-surface px-2 py-0.5 rounded">{tag}</span>
+          ))}
+        </div>
+      )}
+    </article>
+  </div>
+</Layout>

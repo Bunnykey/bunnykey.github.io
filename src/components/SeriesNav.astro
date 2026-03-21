@@ -1,0 +1,59 @@
+---
+import type { SeriesEntry } from '../utils/series';
+
+interface Props {
+  collection: 'flora' | 'nursery' | 'seeds';
+  currentOrder: number;
+  seriesName: string;
+  seriesTitle: string;
+  posts: SeriesEntry[];
+  seriesPath?: string;
+}
+
+const { collection, currentOrder, seriesName, seriesTitle, posts, seriesPath } = Astro.props;
+const totalPosts = posts.length;
+---
+
+<aside
+  class="border-l-4 border-secondary rounded-r-xl p-4 mb-8 bg-gradient-to-r from-secondary-container/10 to-transparent"
+  aria-labelledby={`series-${seriesName}`}
+>
+  <div class="mb-3">
+    <p class="text-xs uppercase tracking-widest text-on-surface-variant mb-1">Series</p>
+    <h2 id={`series-${seriesName}`} class="text-base font-semibold">
+      {seriesPath ? (
+        <a href={seriesPath} class="text-on-surface hover:text-secondary transition-colors">{seriesTitle}</a>
+      ) : seriesTitle}
+      <span class="ml-2 text-secondary font-normal">({currentOrder}/{totalPosts})</span>
+    </h2>
+  </div>
+
+  <details>
+    <summary class="text-sm font-semibold cursor-pointer hover:text-secondary transition-colors">
+      Show series outline
+    </summary>
+    <ol class="mt-3 space-y-2 list-none pl-0">
+      {posts.map((post) => {
+        const isCurrent = post.data.series?.order === currentOrder;
+        const postHref = `/${collection}/${post.slug}/`;
+        return (
+          <li>
+            <a
+              href={postHref}
+              class:list={[
+                'text-sm flex gap-2 transition-colors',
+                isCurrent
+                  ? 'text-secondary font-semibold'
+                  : 'text-on-surface-variant/70 hover:text-on-surface hover:opacity-100',
+              ]}
+              aria-current={isCurrent ? 'page' : undefined}
+            >
+              <span class="tabular-nums w-6 shrink-0">{post.data.series?.order}.</span>
+              <span>{post.data.title}</span>
+            </a>
+          </li>
+        );
+      })}
+    </ol>
+  </details>
+</aside>
