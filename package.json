@@ -23,7 +23,10 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@tailwindcss/typography": "^0.5.19",
-    "pagefind": "^1.4.0"
+    "eslint": "^10.1.0",
+    "pagefind": "^1.4.0",
+    "typescript-eslint": "^8.57.1"
   }
 }
