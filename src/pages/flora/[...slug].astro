@@ -2,9 +2,11 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostSidebar from '../../components/PostSidebar.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import { sectionDescription } from '../../consts/site';
 import { getSeriesPostsFromEntries, getSeriesNavigationFromEntries } from '../../utils/series';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
+import { readingTime } from '../../utils/reading-time';
 
 export async function getStaticPaths() {
   const entries = filterPublished(await getCollection('flora'));
@@ -14,7 +16,7 @@ export async function getStaticPaths() {
 }
 
 const { entry, allEntries } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const description = entry.data.summary || sectionDescription('flora');
 const series = entry.data.series;
 const seriesPosts = series ? getSeriesPostsFromEntries(allEntries, series.name) : [];
@@ -30,6 +32,7 @@ const seriesNav = series
   ogTitle={entry.data.title}
   ogDescription={description}
   ogType="article"
+  articleDate={entry.data.date.toISOString()}
 >
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <div class="flex flex-col lg:flex-row gap-10">
@@ -38,6 +41,7 @@ const seriesNav = series
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xs bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded">flora</span>
             <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(entry.data.date)}</span>
+            <span class="text-xs text-on-surface-variant">· {readingTime(entry.body)} min</span>
             {entry.data.highlight && <span class="text-xs text-tertiary">★ highlight</span>}
           </div>
           <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
@@ -46,7 +50,11 @@ const seriesNav = series
           )}
         </header>
 
-        <div class="greenhouse-prose">
+        <div class="lg:hidden">
+          <TableOfContents headings={headings} mobile />
+        </div>
+
+        <div class="greenhouse-prose" data-pagefind-body>
           <Content />
         </div>
 
@@ -77,6 +85,7 @@ const seriesNav = series
         currentOrder={series?.order}
         collection="flora"
         tags={entry.data.tags}
+        headings={headings}
       />
     </div>
   </div>

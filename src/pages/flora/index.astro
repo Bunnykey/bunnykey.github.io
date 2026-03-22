@@ -3,9 +3,11 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostCard from '../../components/PostCard.astro';
 import { SECTION_INDEX_CONFIG, sortByDateDesc, filterPublished } from '../../consts/sections';
+import { readingTime } from '../../utils/reading-time';
 
 const config = SECTION_INDEX_CONFIG.flora;
 const posts = sortByDateDesc(filterPublished(await getCollection('flora')));
+const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
 ---
 
 <Layout title={config.pageTitle} description={config.description} canonicalPath="/flora/">
@@ -14,14 +16,65 @@ const posts = sortByDateDesc(filterPublished(await getCollection('flora')));
       <h1 class="text-3xl tracking-tight mb-3">{config.heading}</h1>
       <p class="text-base text-on-surface-variant leading-relaxed max-w-xl">{config.description}</p>
     </header>
-    {posts.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {posts.map((post) => (
-          <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/flora/${post.slug}/`} highlight={post.data.highlight} seriesName={post.data.series?.name} variant="flora" />
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-6" id="tag-filter">
+        {allTags.map(tag => (
+          <button
+            data-tag={tag}
+            class="tag-btn text-xs px-3 py-1 rounded border border-outline-variant/30 text-on-surface-variant hover:border-secondary transition-colors"
+          >
+            {tag}
+          </button>
         ))}
       </div>
-    ) : (
-      <p class="text-sm text-on-surface-variant">{config.emptyMessage}</p>
     )}
+    <div id="post-list">
+      {posts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {posts.map((post) => (
+            <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/flora/${post.slug}/`} highlight={post.data.highlight} seriesName={post.data.series?.name} variant="flora" readingMin={readingTime(post.body)} />
+          ))}
+        </div>
+      ) : (
+        <p class="text-sm text-on-surface-variant">{config.emptyMessage}</p>
+      )}
+    </div>
   </div>
 </Layout>
+<script>
+  const buttons = document.querySelectorAll('.tag-btn');
+  const cards = document.querySelectorAll('#post-list [data-tags]');
+  const active = new Set<string>();
+
+  function update() {
+    const hash = active.size > 0 ? '#' + [...active].join(',') : window.location.pathname;
+    history.replaceState(null, '', hash);
+    buttons.forEach(btn => {
+      const tag = (btn as HTMLElement).dataset.tag!;
+      if (active.has(tag)) {
+        btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
+        btn.classList.remove('text-on-surface-variant', 'border-outline-variant/30');
+      } else {
+        btn.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
+        btn.classList.add('text-on-surface-variant', 'border-outline-variant/30');
+      }
+    });
+    cards.forEach(card => {
+      const el = card as HTMLElement;
+      if (active.size === 0) { el.style.display = ''; return; }
+      const cardTags = (el.dataset.tags || '').split(',');
+      el.style.display = cardTags.some(t => active.has(t)) ? '' : 'none';
+    });
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = (btn as HTMLElement).dataset.tag!;
+      active.has(tag) ? active.delete(tag) : active.add(tag);
+      update();
+    });
+  });
+
+  const hash = window.location.hash.slice(1);
+  if (hash) { hash.split(',').forEach(t => active.add(t)); update(); }
+</script>

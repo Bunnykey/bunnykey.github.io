@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "build": "astro build",
+    "postbuild": "pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test",
@@ -22,6 +23,7 @@
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.19"
+    "@tailwindcss/typography": "^0.5.19",
+    "pagefind": "^1.4.0"
   }
 }

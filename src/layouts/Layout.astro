@@ -12,6 +12,7 @@ interface Props {
   ogDescription?: string;
   ogImage?: string;
   ogType?: 'website' | 'article';
+  articleDate?: string;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   ogDescription = description,
   ogImage,
   ogType = 'website',
+  articleDate,
 } = Astro.props;
 const canonicalUrl = toCanonicalUrl(canonicalPath);
 const currentPath = Astro.url.pathname;
@@ -80,6 +82,24 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="theme-color" id="meta-theme-color" content="#faf9f6" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {ogType === 'article' && articleDate ? (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": ogTitle,
+        "datePublished": articleDate,
+        "author": { "@type": "Person", "name": "Bunnykey", "url": `${SITE.siteUrl}/gardener/` },
+        "description": ogDescription,
+        "image": ogImageUrl,
+      })} />
+    ) : (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": SITE.name,
+        "url": SITE.siteUrl,
+      })} />
+    )}
   </head>
   <body class="min-h-screen flex flex-col">
     <a href="#main-content" class="skip-link">Skip to content</a>

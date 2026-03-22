@@ -43,6 +43,14 @@ const navLinks = [
       {/* Theme toggle */}
       <ThemeToggle />
 
+      {/* Search */}
+      <a href="/search/" class="p-1.5 text-on-surface-variant hover:text-on-surface transition-colors" aria-label="검색" title="검색">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </a>
+
       {/* Hamburger button */}
       <button
         id="menu-toggle"
@@ -81,6 +89,9 @@ const navLinks = [
           </a>
         );
       })}
+      <a href="/search/" class="py-3 text-sm text-on-surface-variant hover:text-on-surface transition-colors">
+        Search
+      </a>
     </div>
   </div>
 </nav>

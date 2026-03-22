@@ -1,5 +1,12 @@
 ---
 import type { SeriesEntry } from '../utils/series';
+import TableOfContents from './TableOfContents.astro';
+
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
 
 interface Props {
   seriesTitle?: string;
@@ -8,12 +15,14 @@ interface Props {
   currentOrder?: number;
   collection?: string;
   tags?: string[];
+  headings?: Heading[];
 }
 
-const { seriesTitle, seriesName, seriesPosts = [], currentOrder, collection, tags = [] } = Astro.props;
+const { seriesTitle, seriesName, seriesPosts = [], currentOrder, collection, tags = [], headings = [] } = Astro.props;
 ---
 
-<aside class="w-full lg:w-64 shrink-0 space-y-4">
+<aside class="w-full lg:w-64 shrink-0 space-y-4 lg:sticky lg:top-24 lg:self-start">
+  <TableOfContents headings={headings} />
   {seriesTitle && seriesPosts.length > 0 && (
     <div class="bg-surface-container-low rounded-lg p-5">
       <h3 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-3">Series</h3>

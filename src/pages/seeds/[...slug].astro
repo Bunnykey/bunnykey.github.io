@@ -1,8 +1,10 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import TableOfContents from '../../components/TableOfContents.astro';
 import { sectionDescription } from '../../consts/site';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
+import { readingTime } from '../../utils/reading-time';
 
 export async function getStaticPaths() {
   const entries = filterPublished(await getCollection('seeds'));
@@ -12,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 const description = entry.data.summary || sectionDescription('seeds');
 ---
 
@@ -23,6 +25,7 @@ const description = entry.data.summary || sectionDescription('seeds');
   ogTitle={entry.data.title}
   ogDescription={description}
   ogType="article"
+  articleDate={entry.data.date.toISOString()}
 >
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <article class="max-w-prose">
@@ -30,6 +33,7 @@ const description = entry.data.summary || sectionDescription('seeds');
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs bg-tertiary-container text-on-surface px-2 py-0.5 rounded">seeds</span>
           <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(entry.data.date)}</span>
+          <span class="text-xs text-on-surface-variant">· {readingTime(entry.body)} min</span>
         </div>
         <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
         {entry.data.summary && (
@@ -37,7 +41,9 @@ const description = entry.data.summary || sectionDescription('seeds');
         )}
       </header>
 
-      <div class="greenhouse-prose">
+      <TableOfContents headings={headings} mobile />
+
+      <div class="greenhouse-prose" data-pagefind-body>
         <Content />
       </div>
 
