@@ -17,7 +17,7 @@ interface Props {
 const { title, date, summary, tags, href, highlight, seriesName, stage, variant = 'flora', readingMin } = Astro.props;
 ---
 
-<a href={href} class="block bg-surface-container-low rounded-lg p-5 hover:bg-surface-container-high transition-colors group" data-tags={tags?.join(',') || undefined}>
+<a href={href} class="block bg-surface-container-low rounded-lg p-5 hover:bg-surface-container-high hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group" data-tags={tags?.join(',') || undefined}>
   <div class="flex items-center gap-2 mb-3">
     <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(date)}</span>
     {readingMin && <span class="text-xs text-on-surface-variant">· {readingMin} min</span>}

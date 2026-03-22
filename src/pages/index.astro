@@ -25,9 +25,9 @@ const allPosts = await getAllPosts();
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-      <SectionCard icon="❀" name="Flora" description="AI 분석과 에이전트 생태계" count={allFlora.length} href="/flora/" />
-      <SectionCard icon="🌱" name="Nursery" description="자라는 아이디어, 에버그린 노트" count={allNursery.length} href="/nursery/" />
-      <SectionCard icon="🫘" name="Seeds" description="짧은 메모, 순간 포착" count={allSeeds.length} href="/seeds/" variant="earth" />
+      <div class="animate-entrance" style="--delay: 0ms"><SectionCard icon="❀" name="Flora" description="AI 분석과 에이전트 생태계" count={allFlora.length} href="/flora/" /></div>
+      <div class="animate-entrance" style="--delay: 100ms"><SectionCard icon="🌱" name="Nursery" description="자라는 아이디어, 에버그린 노트" count={allNursery.length} href="/nursery/" /></div>
+      <div class="animate-entrance" style="--delay: 200ms"><SectionCard icon="🫘" name="Seeds" description="짧은 메모, 순간 포착" count={allSeeds.length} href="/seeds/" variant="earth" /></div>
     </section>
 
     <section>
@@ -50,3 +50,11 @@ const allPosts = await getAllPosts();
     </section>
   </div>
 </Layout>
+<style>
+  .animate-entrance {
+    opacity: 0;
+    transform: translateY(1rem);
+    animation: fade-slide-in 0.5s ease-out forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+</style>

@@ -59,9 +59,9 @@ const navLinks = [
         aria-controls="mobile-drawer"
         aria-label="메뉴"
       >
-        <span class="block w-full h-0.5 bg-on-surface transition-transform origin-center"></span>
-        <span class="block w-full h-0.5 bg-on-surface transition-opacity"></span>
-        <span class="block w-full h-0.5 bg-on-surface transition-transform origin-center"></span>
+        <span id="burger-top" class="block w-full h-0.5 bg-on-surface transition-all duration-300 origin-center"></span>
+        <span id="burger-mid" class="block w-full h-0.5 bg-on-surface transition-all duration-300"></span>
+        <span id="burger-bot" class="block w-full h-0.5 bg-on-surface transition-all duration-300 origin-center"></span>
       </button>
     </div>
   </div>
@@ -104,11 +104,17 @@ const navLinks = [
       drawer.classList.remove('max-h-0', 'opacity-0');
       drawer.classList.add('max-h-64', 'opacity-100');
       toggle.setAttribute('aria-expanded', 'true');
+      document.getElementById('burger-top')?.classList.add('rotate-45', 'translate-y-[7px]');
+      document.getElementById('burger-mid')?.classList.add('opacity-0');
+      document.getElementById('burger-bot')?.classList.add('-rotate-45', '-translate-y-[7px]');
     }
     function close() {
       drawer.classList.add('max-h-0', 'opacity-0');
       drawer.classList.remove('max-h-64', 'opacity-100');
       toggle.setAttribute('aria-expanded', 'false');
+      document.getElementById('burger-top')?.classList.remove('rotate-45', 'translate-y-[7px]');
+      document.getElementById('burger-mid')?.classList.remove('opacity-0');
+      document.getElementById('burger-bot')?.classList.remove('-rotate-45', '-translate-y-[7px]');
     }
     function isOpen() {
       return toggle.getAttribute('aria-expanded') === 'true';

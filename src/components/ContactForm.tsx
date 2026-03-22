@@ -49,17 +49,17 @@ export default function ContactForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
           <label htmlFor="name" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Name</label>
-          <input id="name" type="text" name="name" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors" />
+          <input id="name" type="text" name="name" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300" />
         </div>
         <div>
           <label htmlFor="email" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Email</label>
-          <input id="email" type="email" name="email" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors" />
+          <input id="email" type="email" name="email" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300" />
         </div>
       </div>
 
       <div className="mb-5">
         <label htmlFor="message" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Message</label>
-        <textarea id="message" name="message" required aria-required="true" rows={4} placeholder="Start your message..." className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors resize-none" />
+        <textarea id="message" name="message" required aria-required="true" rows={4} placeholder="Start your message..." className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300 resize-none" />
       </div>
 
       {state === 'error' && (

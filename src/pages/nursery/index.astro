@@ -31,8 +31,10 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
     <div id="post-list">
       {posts.length > 0 ? (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {posts.map((post) => (
-            <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/nursery/${post.slug}/`} stage={post.data.stage} seriesName={post.data.series?.name} variant="nursery" readingMin={readingTime(post.body)} />
+          {posts.map((post, i) => (
+            <div class="animate-entrance" style={`--delay: ${i * 50}ms`}>
+              <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/nursery/${post.slug}/`} stage={post.data.stage} seriesName={post.data.series?.name} variant="nursery" readingMin={readingTime(post.body)} />
+            </div>
           ))}
         </div>
       ) : (
@@ -61,9 +63,19 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
     });
     cards.forEach(card => {
       const el = card as HTMLElement;
-      if (active.size === 0) { el.style.display = ''; return; }
+      if (active.size === 0) {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        el.style.transition = 'opacity 300ms ease, transform 300ms ease';
+        el.style.pointerEvents = '';
+        return;
+      }
       const cardTags = (el.dataset.tags || '').split(',');
-      el.style.display = cardTags.some(t => active.has(t)) ? '' : 'none';
+      const match = cardTags.some(t => active.has(t));
+      el.style.opacity = match ? '1' : '0';
+      el.style.transform = match ? 'translateY(0)' : 'translateY(0.5rem)';
+      el.style.transition = 'opacity 300ms ease, transform 300ms ease';
+      el.style.pointerEvents = match ? '' : 'none';
     });
   }
 
@@ -78,3 +90,11 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
   const hash = window.location.hash.slice(1);
   if (hash) { hash.split(',').forEach(t => active.add(t)); update(); }
 </script>
+<style>
+  .animate-entrance {
+    opacity: 0;
+    transform: translateY(1rem);
+    animation: fade-slide-in 0.5s ease-out forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+</style>
