@@ -2,25 +2,6 @@ import React, { useState, type FormEvent } from 'react';
 
 type FormState = 'idle' | 'submitting' | 'success' | 'error';
 
-const labelStyle: React.CSSProperties = {
-  display: 'block', fontSize: '0.7rem', fontWeight: 500,
-  textTransform: 'uppercase', letterSpacing: '0.1em',
-  color: 'var(--color-on-surface-variant)', marginBottom: '0.5rem',
-};
-
-const inputStyle: React.CSSProperties = {
-  width: '100%', background: 'transparent',
-  borderBottom: '1px solid color-mix(in srgb, var(--color-outline-variant) 30%, transparent)',
-  paddingBottom: '0.5rem', fontSize: '0.875rem',
-  color: 'var(--color-on-surface)', outline: 'none',
-};
-
-const formStyle: React.CSSProperties = {
-  background: 'var(--color-surface-container-lowest)',
-  borderRadius: '0.75rem',
-  padding: '1.5rem',
-};
-
 function SubmitButton({ state }: { state: FormState }) {
   const label = state === 'success' ? 'Message sent!'
     : state === 'submitting' ? 'Sending...'
@@ -30,15 +11,7 @@ function SubmitButton({ state }: { state: FormState }) {
     <button
       type="submit"
       disabled={state === 'submitting'}
-      style={{
-        width: '100%', padding: '0.75rem',
-        background: 'linear-gradient(90deg, var(--color-primary), var(--color-primary-dim))',
-        color: 'var(--color-on-primary)', fontSize: '0.875rem', fontWeight: 500,
-        borderRadius: '0.375rem', border: 'none',
-        cursor: state === 'submitting' ? 'not-allowed' : 'pointer',
-        opacity: state === 'submitting' ? 0.7 : 1,
-        transition: 'opacity 0.2s',
-      }}
+      className="w-full py-3 bg-primary text-on-primary text-sm font-medium rounded-md transition-opacity disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-90"
     >
       {label}
     </button>
@@ -70,27 +43,27 @@ export default function ContactForm() {
   }
 
   return (
-    <form action="https://formspree.io/f/FORM_ID" method="POST" onSubmit={handleSubmit} style={formStyle}>
-      <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+    <form action="https://formspree.io/f/mbdzepdo" method="POST" onSubmit={handleSubmit} className="bg-surface-container-lowest rounded-xl p-6">
+      <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label htmlFor="name" style={labelStyle}>Name</label>
-          <input id="name" type="text" name="name" required style={inputStyle} />
+          <label htmlFor="name" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Name</label>
+          <input id="name" type="text" name="name" required className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors" />
         </div>
         <div>
-          <label htmlFor="email" style={labelStyle}>Email</label>
-          <input id="email" type="email" name="email" required style={inputStyle} />
+          <label htmlFor="email" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Email</label>
+          <input id="email" type="email" name="email" required className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors" />
         </div>
       </div>
 
-      <div style={{ marginBottom: '1.25rem' }}>
-        <label htmlFor="message" style={labelStyle}>Message</label>
-        <textarea id="message" name="message" required rows={4} placeholder="Start your message..." style={{ ...inputStyle, resize: 'none' }} />
+      <div className="mb-5">
+        <label htmlFor="message" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Message</label>
+        <textarea id="message" name="message" required rows={4} placeholder="Start your message..." className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-colors resize-none" />
       </div>
 
       {state === 'error' && (
-        <p style={{ fontSize: '0.8rem', color: 'var(--color-error)', marginBottom: '0.75rem' }}>
+        <p className="text-xs text-error mb-3">
           메시지 전송에 실패했습니다. 이메일로 직접 연락해주세요.
         </p>
       )}

@@ -1,5 +1,6 @@
 ---
 import { SITE } from '../consts/site';
+import ThemeToggle from './ThemeToggle.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -11,27 +12,102 @@ const navLinks = [
 ];
 ---
 
-<nav class="flex items-center justify-between px-6 md:px-10 py-6 bg-surface-container-low" aria-label="Main navigation">
-  <a href="/" class="text-lg font-semibold tracking-tight text-on-surface hover:opacity-80 transition-opacity">
-    {SITE.name}
-  </a>
-  <div class="flex items-center gap-6 md:gap-8 overflow-x-auto">
-    {navLinks.map((link) => {
-      const isActive = currentPath.startsWith(link.href);
-      return (
-        <a
-          href={link.href}
-          class:list={[
-            'text-sm whitespace-nowrap transition-colors',
-            isActive
-              ? 'text-on-surface font-medium'
-              : 'text-on-surface-variant hover:text-on-surface',
-          ]}
-          aria-current={isActive ? 'page' : undefined}
-        >
-          {link.label}
-        </a>
-      );
-    })}
+<nav class="relative px-6 md:px-10 py-6 bg-surface-container-low" aria-label="Main navigation">
+  <div class="flex items-center justify-between">
+    <a href="/" class="text-lg font-semibold tracking-tight text-on-surface hover:opacity-80 transition-opacity">
+      {SITE.name}
+    </a>
+
+    <div class="flex items-center gap-4">
+      {/* Desktop nav */}
+      <div class="hidden md:flex items-center gap-8">
+        {navLinks.map((link) => {
+          const isActive = currentPath.startsWith(link.href);
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                'text-sm whitespace-nowrap transition-colors',
+                isActive
+                  ? 'text-on-surface font-medium'
+                  : 'text-on-surface-variant hover:text-on-surface',
+              ]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          );
+        })}
+      </div>
+
+      {/* Theme toggle */}
+      <ThemeToggle />
+
+      {/* Hamburger button */}
+      <button
+        id="menu-toggle"
+        class="md:hidden flex flex-col justify-center gap-1.5 w-6 h-6"
+        aria-expanded="false"
+        aria-controls="mobile-drawer"
+        aria-label="메뉴"
+      >
+        <span class="block w-full h-0.5 bg-on-surface transition-transform origin-center"></span>
+        <span class="block w-full h-0.5 bg-on-surface transition-opacity"></span>
+        <span class="block w-full h-0.5 bg-on-surface transition-transform origin-center"></span>
+      </button>
+    </div>
+  </div>
+
+  {/* Mobile drawer */}
+  <div
+    id="mobile-drawer"
+    class="nav-drawer md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out"
+  >
+    <div class="pt-4 pb-2 flex flex-col">
+      {navLinks.map((link) => {
+        const isActive = currentPath.startsWith(link.href);
+        return (
+          <a
+            href={link.href}
+            class:list={[
+              'py-3 text-sm transition-colors border-b border-outline-variant/10',
+              isActive
+                ? 'text-on-surface font-medium'
+                : 'text-on-surface-variant hover:text-on-surface',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {link.label}
+          </a>
+        );
+      })}
+    </div>
   </div>
 </nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  if (toggle && drawer) {
+    function open() {
+      drawer.classList.remove('max-h-0', 'opacity-0');
+      drawer.classList.add('max-h-64', 'opacity-100');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    function close() {
+      drawer.classList.add('max-h-0', 'opacity-0');
+      drawer.classList.remove('max-h-64', 'opacity-100');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function isOpen() {
+      return toggle.getAttribute('aria-expanded') === 'true';
+    }
+    toggle.addEventListener('click', () => isOpen() ? close() : open());
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen()) close();
+    });
+    document.addEventListener('click', (e) => {
+      if (isOpen() && !toggle.contains(e.target) && !drawer.contains(e.target)) close();
+    });
+  }
+</script>

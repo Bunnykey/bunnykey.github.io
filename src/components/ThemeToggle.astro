@@ -1,0 +1,81 @@
+---
+---
+<button
+  id="theme-toggle"
+  class="p-1.5 text-on-surface-variant hover:text-on-surface transition-colors"
+  aria-label="테마 변경"
+  title="테마 변경"
+>
+  {/* Sun icon — shown when current theme is light (click → dark) */}
+  <svg id="icon-sun" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+  {/* Moon icon — shown when current theme is dark (click → system) */}
+  <svg id="icon-moon" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+  {/* Monitor icon — shown when current theme is system (click → light) */}
+  <svg id="icon-monitor" class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+    <line x1="8" y1="21" x2="16" y2="21"/>
+    <line x1="12" y1="17" x2="12" y2="21"/>
+  </svg>
+</button>
+
+<script>
+  const btn = document.getElementById('theme-toggle');
+  const icons = {
+    light: document.getElementById('icon-sun'),
+    dark: document.getElementById('icon-moon'),
+    system: document.getElementById('icon-monitor'),
+  };
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function getStored(): string {
+    return localStorage.getItem('theme') || 'system';
+  }
+
+  function resolve(pref: string): string {
+    if (pref === 'light') return 'light';
+    if (pref === 'dark') return 'dark';
+    return prefersDark.matches ? 'dark' : 'light';
+  }
+
+  function apply(pref: string) {
+    const resolved = resolve(pref);
+    document.documentElement.dataset.theme = resolved;
+    document.documentElement.style.colorScheme = resolved;
+    const meta = document.getElementById('meta-theme-color');
+    if (meta) meta.setAttribute('content', resolved === 'dark' ? '#111411' : '#faf9f6');
+    // Update icon visibility
+    Object.values(icons).forEach(el => el?.classList.add('hidden'));
+    icons[pref as keyof typeof icons]?.classList.remove('hidden');
+  }
+
+  function cycle() {
+    const order = ['light', 'dark', 'system'];
+    const current = getStored();
+    const next = order[(order.indexOf(current) + 1) % order.length];
+    localStorage.setItem('theme', next);
+    apply(next);
+  }
+
+  btn?.addEventListener('click', cycle);
+
+  // Sync when OS theme changes (only applies in system mode)
+  prefersDark.addEventListener('change', () => {
+    const stored = getStored();
+    if (stored === 'system') apply('system');
+  });
+
+  // Initialize icon on load
+  apply(getStored());
+</script>

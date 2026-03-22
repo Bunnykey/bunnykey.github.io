@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { SECTION_INDEX_CONFIG, SECTION_KEYS } from '../consts/sections';
+---
+
+<Layout title="404 - The Greenhouse">
+  <div class="max-w-md mx-auto px-6 py-32 md:py-40 text-center">
+    <h1 class="text-6xl md:text-7xl font-medium tracking-tight text-on-surface">
+      404
+    </h1>
+    <p class="mt-4 text-base text-on-surface-variant">
+      이 페이지는 아직 싹이 트지 않았습니다.
+    </p>
+
+    <div class="mt-12 text-left">
+      <p class="text-xs uppercase tracking-widest text-on-surface-variant mb-4">
+        둘러보기
+      </p>
+      <div class="flex flex-col">
+        {SECTION_KEYS.map((key) => {
+          const section = SECTION_INDEX_CONFIG[key];
+          return (
+            <a
+              href={`/${key}/`}
+              class="py-3 border-b border-outline-variant/20 group transition-colors"
+            >
+              <span class="text-sm font-medium text-secondary group-hover:text-secondary/80">
+                {section.heading}
+              </span>
+              <span class="block text-xs text-on-surface-variant mt-0.5">
+                {section.description}
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <div class="mt-8">
+      <a href="/" class="text-sm text-on-surface-variant hover:text-on-surface transition-colors">
+        ← 홈으로 돌아가기
+      </a>
+    </div>
+  </div>
+</Layout>

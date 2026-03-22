@@ -39,6 +39,28 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <script is:inline>
+      (function() {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        function resolve(pref) {
+          if (pref === 'light') return 'light';
+          if (pref === 'dark') return 'dark';
+          return prefersDark.matches ? 'dark' : 'light';
+        }
+        function apply(resolved) {
+          document.documentElement.dataset.theme = resolved;
+          document.documentElement.style.colorScheme = resolved;
+          var meta = document.getElementById('meta-theme-color');
+          if (meta) meta.setAttribute('content', resolved === 'dark' ? '#111411' : '#faf9f6');
+        }
+        apply(resolve(saved));
+        prefersDark.addEventListener('change', function() {
+          var current = localStorage.getItem('theme');
+          if (!current || current === 'system') apply(resolve('system'));
+        });
+      })();
+    </script>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -55,7 +77,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="theme-color" content="#faf9f6" />
+    <meta name="theme-color" id="meta-theme-color" content="#faf9f6" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
