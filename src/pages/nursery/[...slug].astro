@@ -3,22 +3,22 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostSidebar from '../../components/PostSidebar.astro';
 import SeriesNav from '../../components/SeriesNav.astro';
-import { SECTION_FALLBACKS } from '../../consts/site';
-import { getSeriesNavigationFromEntries, getSeriesPosts } from '../../utils/series';
+import { sectionDescription } from '../../consts/site';
+import { getSeriesPostsFromEntries, getSeriesNavigationFromEntries } from '../../utils/series';
 import { filterPublished, formatArchiveDate, NURSERY_STAGE_EMOJI } from '../../consts/sections';
 
 export async function getStaticPaths() {
   const entries = filterPublished(await getCollection('nursery'));
   return entries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
+    params: { slug: entry.slug }, props: { entry, allEntries: entries },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, allEntries } = Astro.props;
 const { Content } = await entry.render();
-const description = entry.data.summary || SECTION_FALLBACKS.nursery;
+const description = entry.data.summary || sectionDescription('nursery');
 const series = entry.data.series;
-const seriesPosts = series ? await getSeriesPosts('nursery', series.name) : [];
+const seriesPosts = series ? getSeriesPostsFromEntries(allEntries, series.name) : [];
 const seriesNav = series
   ? getSeriesNavigationFromEntries(seriesPosts, series.order)
   : { previous: undefined, next: undefined };
@@ -59,7 +59,7 @@ const stageEmoji = NURSERY_STAGE_EMOJI[entry.data.stage || 'seed'];
           />
         )}
 
-        <div class="border-t border-outline-variant/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-secondary hover:prose-a:text-secondary/80 prose-pre:bg-surface-container-low prose-code:text-on-surface">
+        <div class="greenhouse-prose">
           <Content />
         </div>
 

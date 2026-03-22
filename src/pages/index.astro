@@ -2,27 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import SectionCard from '../components/SectionCard.astro';
 import { getCollection } from 'astro:content';
-import { SECTION_FALLBACKS } from '../consts/site';
-import { filterPublished, sortByDateDesc, formatArchiveDate } from '../consts/sections';
+import { PAGE_DESCRIPTIONS } from '../consts/site';
+import { SECTION_INDEX_CONFIG, filterPublished, sortByDateDesc } from '../consts/sections';
+import { getAllPosts } from '../utils/posts';
 
-const allFlora = filterPublished(await getCollection('flora'));
-const allNursery = filterPublished(await getCollection('nursery'));
-const allSeeds = filterPublished(await getCollection('seeds'));
-
-const allPosts = sortByDateDesc([
-  ...allFlora.map(p => ({ ...p, section: 'flora' as const, url: `/flora/${p.slug}/` })),
-  ...allNursery.map(p => ({ ...p, section: 'nursery' as const, url: `/nursery/${p.slug}/` })),
-  ...allSeeds.map(p => ({ ...p, section: 'seeds' as const, url: `/seeds/${p.slug}/` })),
+const [allFlora, allNursery, allSeeds] = await Promise.all([
+  getCollection('flora').then(filterPublished),
+  getCollection('nursery').then(filterPublished),
+  getCollection('seeds').then(filterPublished),
 ]);
 
-const sectionColors: Record<string, string> = {
-  flora: 'text-secondary',
-  nursery: 'text-secondary',
-  seeds: 'text-tertiary',
-};
+const allPosts = await getAllPosts();
 ---
 
-<Layout title="The Greenhouse" description={SECTION_FALLBACKS.home} canonicalPath="/">
+<Layout title="The Greenhouse" description={PAGE_DESCRIPTIONS.home} canonicalPath="/">
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <section class="mb-12">
       <h1 class="text-4xl tracking-tight mb-3">The Greenhouse.</h1>
@@ -43,13 +36,13 @@ const sectionColors: Record<string, string> = {
         {allPosts.slice(0, 10).map((post) => (
           <a href={post.url} class="flex items-baseline justify-between gap-4 group">
             <div class="flex items-baseline gap-3 min-w-0">
-              <span class:list={["text-xs shrink-0", sectionColors[post.section]]}>{post.section}</span>
+              <span class:list={["text-xs shrink-0", SECTION_INDEX_CONFIG[post.section].accentClass]}>{post.section}</span>
               <span class="text-base font-medium text-on-surface group-hover:text-secondary transition-colors truncate">
                 {post.data.title}
               </span>
             </div>
             <span class="text-xs text-on-surface-variant font-mono shrink-0">
-              {formatArchiveDate(post.data.date)}
+              {post.data.date.toISOString().split("T")[0]}
             </span>
           </a>
         ))}

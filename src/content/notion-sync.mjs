@@ -7,24 +7,27 @@ function normalizeSectionConfig(config) {
     .map(([section, dataSourceId]) => ({ section, dataSourceId }));
 }
 
-export async function fetchNotionEntries(config) {
-  const sectionConfigs = normalizeSectionConfig(config.dataSources);
-  const allEntries = [];
-
-  for (const { section, dataSourceId } of sectionConfigs) {
-    const pages = await queryDataSource(dataSourceId, config.token);
-    for (const page of pages) {
+async function fetchSectionEntries({ section, dataSourceId }, config) {
+  const pages = await queryDataSource(dataSourceId, config.token);
+  const entries = await Promise.all(
+    pages.map(async (page) => {
       const blocks = await fetchBlockTree(page.id, config.token);
       const body = blocksToMarkdown(blocks);
-      const normalized = normalizeNotionPage(page, section, {
+      return normalizeNotionPage(page, section, {
         gitOwnedSlugs: config.gitOwnedSlugs,
         body,
       });
-      allEntries.push(normalized);
-    }
-  }
+    }),
+  );
+  return entries;
+}
 
-  return allEntries;
+export async function fetchNotionEntries(config) {
+  const sectionConfigs = normalizeSectionConfig(config.dataSources);
+  const results = await Promise.all(
+    sectionConfigs.map((sc) => fetchSectionEntries(sc, config)),
+  );
+  return results.flat();
 }
 
 export function entryToMarkdown(entry) {

@@ -1,9 +1,9 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 import { demoContainer } from './styles';
 
 interface Props {
   title: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function DemoWrapper({ title, children }: Props) {

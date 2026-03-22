@@ -3,17 +3,15 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 import { getSeriesPostsFromEntries } from '../../utils/series.ts';
+import { SECTION_KEYS, type SectionKey } from '../../consts/sections';
 
-const COLLECTIONS = ['flora', 'nursery', 'seeds'] as const;
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
 const TITLE_LINE_LIMIT = 2;
 const TITLE_LINE_LENGTH = 26;
 
-type CollectionName = (typeof COLLECTIONS)[number];
-
 type OgContentEntry = {
-  collection: CollectionName;
+  collection: SectionKey;
   slug: string;
   data: {
     title: string;
@@ -28,7 +26,7 @@ type OgContentEntry = {
 };
 
 export function getOgStaticPathsFromEntries(
-  entries: Array<{ collection: CollectionName; slug: string }>,
+  entries: Array<{ collection: SectionKey; slug: string }>,
 ) {
   return entries.map((entry) => ({
     params: { slug: `${entry.collection}/${entry.slug}` },
@@ -39,12 +37,12 @@ export function parseOgSlug(value: string | string[] | undefined) {
   const normalized = Array.isArray(value) ? value.join('/') : value ?? '';
   const [collection, ...slugParts] = normalized.split('/').filter(Boolean);
 
-  if (!COLLECTIONS.includes(collection as CollectionName) || slugParts.length === 0) {
+  if (!SECTION_KEYS.includes(collection as SectionKey) || slugParts.length === 0) {
     throw new Error(`Invalid OG slug: ${normalized}`);
   }
 
   return {
-    collection: collection as CollectionName,
+    collection: collection as SectionKey,
     slug: slugParts.join('/'),
   };
 }
@@ -128,7 +126,7 @@ async function loadOgEntries(): Promise<OgContentEntry[]> {
 
   const { getCollection } = await import('astro:content');
   const collections = await Promise.all(
-    COLLECTIONS.map(async (collection) => {
+    SECTION_KEYS.map(async (collection) => {
       const entries = await getCollection(collection);
       return entries.map((entry) => ({
         ...entry,

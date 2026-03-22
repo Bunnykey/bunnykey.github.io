@@ -114,18 +114,11 @@ export async function fetchBlockChildren(blockId, token) {
 
 export async function fetchBlockTree(blockId, token) {
   const blocks = await fetchBlockChildren(blockId, token);
-  const withChildren = [];
-
-  for (const block of blocks) {
-    if (block.has_children) {
-      withChildren.push({
-        ...block,
-        children: await fetchBlockTree(block.id, token),
-      });
-    } else {
-      withChildren.push(block);
-    }
-  }
-
-  return withChildren;
+  return Promise.all(
+    blocks.map(async (block) =>
+      block.has_children
+        ? { ...block, children: await fetchBlockTree(block.id, token) }
+        : block,
+    ),
+  );
 }

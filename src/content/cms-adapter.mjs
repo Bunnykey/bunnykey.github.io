@@ -62,7 +62,7 @@ export function normalizeCmsEntry(input, options = {}) {
       canonicalPath,
       tags: normalizeTags(input.tags),
       highlight: Boolean(input.highlight),
-      draft: Boolean(input.draft),
+      draft: false,
     },
   };
 }

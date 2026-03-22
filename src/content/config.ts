@@ -6,47 +6,31 @@ const seriesSchema = z.object({
   order: z.number().int().positive(),
 }).optional();
 
-const floraCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    highlight: z.boolean().optional(),
-    summary: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    series: seriesSchema,
-    demo: z.enum(['TokenFlowDemo']).optional(),
-    draft: z.boolean().optional(),
-  }),
-});
-
-const nurseryCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    stage: z.enum(['seed', 'growing', 'evergreen']).optional(),
-    summary: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    series: seriesSchema,
-    draft: z.boolean().optional(),
-  }),
-});
-
-const seedsCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    date: z.date(),
-    summary: z.string().optional(),
-    tags: z.array(z.string()).optional(),
-    series: seriesSchema, // Schema retained for extensibility, no UI support in v1
-    draft: z.boolean().optional(),
-  }),
+const baseSchema = z.object({
+  title: z.string(),
+  date: z.date(),
+  summary: z.string().optional(),
+  tags: z.array(z.string()).optional(),
+  series: seriesSchema,
+  draft: z.boolean().optional(),
 });
 
 export const collections = {
-  flora: floraCollection,
-  nursery: nurseryCollection,
-  seeds: seedsCollection,
+  flora: defineCollection({
+    type: 'content',
+    schema: baseSchema.extend({
+      highlight: z.boolean().optional(),
+      demo: z.enum(['TokenFlowDemo']).optional(),
+    }),
+  }),
+  nursery: defineCollection({
+    type: 'content',
+    schema: baseSchema.extend({
+      stage: z.enum(['seed', 'growing', 'evergreen']).optional(),
+    }),
+  }),
+  seeds: defineCollection({
+    type: 'content',
+    schema: baseSchema,
+  }),
 };

@@ -1,3 +1,5 @@
+import { SECTION_INDEX_CONFIG, type SectionKey } from './sections';
+
 export const SITE = {
   name: "The Greenhouse",
   siteUrl: "https://bunnykey.github.io",
@@ -13,13 +15,14 @@ export const SITE = {
   ],
 } as const;
 
-export const SECTION_FALLBACKS = {
+export const PAGE_DESCRIPTIONS = {
   home: "디지털 정원. AI, 크립토, 그리고 진화하는 아이디어를 정성스럽게 가꿉니다.",
   gardener: "The Gardener — 프로필, 소셜 링크, 연락처.",
-  flora: "AI 런칭, 모델 변화, 에이전트 제품에 대한 큐레이션 노트.",
-  nursery: "자라는 아이디어, 미완의 생각, 에버그린 노트.",
-  seeds: "짧은 메모, 순간 포착, 씨앗 단계의 글.",
 } as const;
+
+export function sectionDescription(key: SectionKey): string {
+  return SECTION_INDEX_CONFIG[key].description;
+}
 
 export function toCanonicalUrl(pathname: string): string {
   const normalized =

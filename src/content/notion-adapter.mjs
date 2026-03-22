@@ -1,4 +1,4 @@
-import { normalizeCmsEntry, slugify as cmsSlugify } from './cms-adapter.mjs';
+import { normalizeCmsEntry, slugify } from './cms-adapter.mjs';
 
 const TITLE_KEYS = ['Title', 'Name'];
 const DATE_KEYS = ['Date', 'Published At', 'Publish Date'];
@@ -45,10 +45,6 @@ function getFirstProperty(properties, keys) {
     if (properties[key]) return properties[key];
   }
   return undefined;
-}
-
-export function slugify(input) {
-  return cmsSlugify(input);
 }
 
 export function normalizeNotionPage(page, section, options = {}) {

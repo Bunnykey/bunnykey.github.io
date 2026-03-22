@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { SECTION_FALLBACKS } from '../../consts/site';
+import { sectionDescription } from '../../consts/site';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
 
 export async function getStaticPaths() {
@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const description = entry.data.summary || SECTION_FALLBACKS.seeds;
+const description = entry.data.summary || sectionDescription('seeds');
 ---
 
 <Layout
@@ -37,7 +37,7 @@ const description = entry.data.summary || SECTION_FALLBACKS.seeds;
         )}
       </header>
 
-      <div class="border-t border-outline-variant/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-secondary hover:prose-a:text-secondary/80 prose-pre:bg-surface-container-low prose-code:text-on-surface">
+      <div class="greenhouse-prose">
         <Content />
       </div>
 

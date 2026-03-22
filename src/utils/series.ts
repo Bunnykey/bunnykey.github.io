@@ -1,4 +1,4 @@
-type SupportedCollection = 'flora' | 'nursery' | 'seeds';
+import type { SectionKey } from '../consts/sections';
 
 type SeriesMetadata = {
   name: string;
@@ -52,7 +52,7 @@ export function getSeriesNavigationFromEntries<T extends SeriesEntry>(
 }
 
 export async function getSeriesPosts(
-  collection: SupportedCollection,
+  collection: SectionKey,
   seriesName: string,
 ) {
   const { getCollection } = await import('astro:content');
@@ -61,7 +61,7 @@ export async function getSeriesPosts(
 }
 
 export async function getSeriesNavigation(
-  collection: SupportedCollection,
+  collection: SectionKey,
   seriesName: string,
   currentOrder: number,
 ) {

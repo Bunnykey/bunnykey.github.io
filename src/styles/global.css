@@ -89,6 +89,10 @@
 }
 
 @layer utilities {
+  .greenhouse-prose {
+    @apply border-t border-outline-variant/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-secondary hover:prose-a:text-secondary/80 prose-pre:bg-surface-container-low prose-code:text-on-surface;
+  }
+
   .skip-link {
     position: absolute;
     left: 1rem;
