@@ -40,14 +40,14 @@ const seriesNav = series
       <article class="flex-1 min-w-0">
         <header class="mb-8">
           <div class="flex items-center gap-3 mb-4">
-            <span class="text-xs bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded">flora</span>
-            <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(entry.data.date)}</span>
-            <span class="text-xs text-on-surface-variant">· {readingTime(entry.body)} min</span>
-            {entry.data.highlight && <span class="text-xs text-tertiary">★ highlight</span>}
+            <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">flora</span>
+            <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>
+            <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
+            {entry.data.highlight && <span class="text-xs text-earth">★ highlight</span>}
           </div>
           <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
           {entry.data.summary && (
-            <p class="text-base text-on-surface-variant leading-relaxed">{entry.data.summary}</p>
+            <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>
           )}
         </header>
 
@@ -60,17 +60,17 @@ const seriesNav = series
         </div>
 
         {series && (seriesNav.previous || seriesNav.next) && (
-          <nav class="flex flex-col md:flex-row justify-between gap-4 mt-12 pt-6 border-t border-outline-variant/20" aria-label="Series navigation">
+          <nav class="flex flex-col md:flex-row justify-between gap-4 mt-12 pt-6 border-t border-outline-subtle/20" aria-label="Series navigation">
             <div>
               {seriesNav.previous && (
-                <a href={`/flora/${seriesNav.previous.slug}/`} class="text-sm text-secondary hover:text-secondary/80 transition-colors">
+                <a href={`/flora/${seriesNav.previous.slug}/`} class="text-sm text-accent hover:text-accent/80 transition-colors">
                   ← {seriesNav.previous.data.title}
                 </a>
               )}
             </div>
             <div class="text-right">
               {seriesNav.next && (
-                <a href={`/flora/${seriesNav.next.slug}/`} class="text-sm text-secondary hover:text-secondary/80 transition-colors">
+                <a href={`/flora/${seriesNav.next.slug}/`} class="text-sm text-accent hover:text-accent/80 transition-colors">
                   {seriesNav.next.data.title} →
                 </a>
               )}

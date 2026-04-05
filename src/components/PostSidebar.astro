@@ -24,9 +24,9 @@ const { seriesTitle, seriesName, seriesPosts = [], currentOrder, collection, tag
 <aside class="w-full lg:w-64 shrink-0 space-y-4 lg:sticky lg:top-24 lg:self-start">
   <TableOfContents headings={headings} />
   {seriesTitle && seriesPosts.length > 0 && (
-    <div class="bg-surface-container-low rounded-lg p-5">
-      <h3 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-3">Series</h3>
-      <a href={`/${collection}/series/${seriesName}/`} class="text-sm font-semibold text-on-surface hover:text-secondary transition-colors">
+    <div class="bg-surface-raised rounded-lg p-5">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-foreground-muted mb-3">Series</h3>
+      <a href={`/${collection}/series/${seriesName}/`} class="text-sm font-semibold text-foreground hover:text-accent transition-colors">
         {seriesTitle}
       </a>
       <ol class="mt-3 space-y-2">
@@ -38,7 +38,7 @@ const { seriesTitle, seriesName, seriesPosts = [], currentOrder, collection, tag
                 href={`/${collection}/${post.slug}/`}
                 class:list={[
                   'text-xs flex gap-2 transition-colors',
-                  isCurrent ? 'text-secondary font-medium' : 'text-on-surface-variant hover:text-on-surface opacity-60 hover:opacity-100',
+                  isCurrent ? 'text-accent font-medium' : 'text-foreground-muted hover:text-foreground opacity-60 hover:opacity-100',
                 ]}
                 aria-current={isCurrent ? 'page' : undefined}
               >
@@ -53,11 +53,11 @@ const { seriesTitle, seriesName, seriesPosts = [], currentOrder, collection, tag
   )}
 
   {tags.length > 0 && (
-    <div class="bg-surface-container-low rounded-lg p-5">
-      <h3 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-3">Tags</h3>
+    <div class="bg-surface-raised rounded-lg p-5">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-foreground-muted mb-3">Tags</h3>
       <div class="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
-          <span class="text-xs bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded">
+          <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">
             {tag}
           </span>
         ))}

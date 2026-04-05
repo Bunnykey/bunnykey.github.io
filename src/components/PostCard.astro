@@ -1,5 +1,5 @@
 ---
-import { formatArchiveDate, NURSERY_STAGE_EMOJI } from '../consts/sections';
+import { formatArchiveDate, NURSERY_STAGE_DOTS } from '../consts/sections';
 
 interface Props {
   title: string;
@@ -17,33 +17,42 @@ interface Props {
 const { title, date, summary, tags, href, highlight, seriesName, stage, variant = 'flora', readingMin } = Astro.props;
 ---
 
-<a href={href} class="block bg-surface-container-low rounded-lg p-5 hover:bg-surface-container-high hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group" data-tags={tags?.join(',') || undefined}>
+<a href={href} class="block bg-surface-raised rounded-lg p-5 hover:bg-surface-overlay hover:-translate-y-1 hover:shadow-lg transition-all duration-200 group" data-tags={tags?.join(',') || undefined}>
   <div class="flex items-center gap-2 mb-3">
-    <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(date)}</span>
-    {readingMin && <span class="text-xs text-on-surface-variant">· {readingMin} min</span>}
+    <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(date)}</span>
+    {readingMin && <span class="text-xs text-foreground-muted">· {readingMin} min</span>}
     <div class="flex items-center gap-2 ml-auto">
-      {highlight && <span class="text-xs text-tertiary-container">★</span>}
-      {stage && <span title={`Stage: ${stage}`}>{NURSERY_STAGE_EMOJI[stage] || '🌱'}</span>}
+      {highlight && <span class="text-xs text-earth-muted">★</span>}
+      {stage && NURSERY_STAGE_DOTS[stage] && (
+        <span class="flex items-center gap-0.5" title={`Stage: ${NURSERY_STAGE_DOTS[stage].label}`}>
+          {Array.from({ length: NURSERY_STAGE_DOTS[stage].total }, (_, i) => (
+            <span class:list={[
+              "w-1.5 h-1.5 rounded-full",
+              i < NURSERY_STAGE_DOTS[stage].filled ? "bg-accent" : "bg-surface-overlay"
+            ]} />
+          ))}
+        </span>
+      )}
     </div>
   </div>
-  <h3 class="text-sm font-medium text-on-surface group-hover:text-secondary transition-colors mb-2">
+  <h3 class="text-sm font-medium text-foreground group-hover:text-accent transition-colors mb-2">
     {title}
   </h3>
   {summary && variant !== 'seeds' && (
-    <p class="text-xs text-on-surface-variant leading-relaxed line-clamp-2 mb-3">{summary}</p>
+    <p class="text-xs text-foreground-muted leading-relaxed line-clamp-2 mb-3">{summary}</p>
   )}
   {variant === 'seeds' && summary && (
-    <p class="text-xs text-on-surface-variant leading-relaxed line-clamp-1 mb-3">{summary}</p>
+    <p class="text-xs text-foreground-muted leading-relaxed line-clamp-1 mb-3">{summary}</p>
   )}
   {tags && tags.length > 0 && variant !== 'seeds' && (
     <div class="flex flex-wrap gap-1">
       {tags.map((tag) => (
-        <span class="text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded">
+        <span class="text-[10px] bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">
           {tag}
         </span>
       ))}
       {seriesName && (
-        <span class="text-[10px] bg-tertiary-container text-on-surface px-2 py-0.5 rounded">
+        <span class="text-[10px] bg-earth-muted text-foreground px-2 py-0.5 rounded">
           series
         </span>
       )}

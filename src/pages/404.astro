@@ -5,15 +5,15 @@ import { SECTION_INDEX_CONFIG, SECTION_KEYS } from '../consts/sections';
 
 <Layout title="404 - The Greenhouse">
   <div class="max-w-md mx-auto px-6 py-32 md:py-40 text-center">
-    <h1 class="text-6xl md:text-7xl font-medium tracking-tight text-on-surface" style="animation: sprout 0.6s ease-out both">
+    <h1 class="text-6xl md:text-7xl font-medium tracking-tight text-foreground" style="animation: fade-slide-in 0.5s ease-out both">
       404
     </h1>
-    <p class="mt-4 text-base text-on-surface-variant" style="animation: sprout 0.6s ease-out 0.1s both">
+    <p class="mt-4 text-base text-foreground-muted" style="animation: fade-slide-in 0.5s ease-out 0.1s both">
       이 페이지는 아직 싹이 트지 않았습니다.
     </p>
 
-    <div class="mt-12 text-left" style="animation: sprout 0.6s ease-out 0.2s both">
-      <p class="text-xs uppercase tracking-widest text-on-surface-variant mb-4">
+    <div class="mt-12 text-left" style="animation: fade-slide-in 0.5s ease-out 0.2s both">
+      <p class="text-xs uppercase tracking-widest text-foreground-muted mb-4">
         둘러보기
       </p>
       <div class="flex flex-col">
@@ -22,12 +22,12 @@ import { SECTION_INDEX_CONFIG, SECTION_KEYS } from '../consts/sections';
           return (
             <a
               href={`/${key}/`}
-              class="py-3 border-b border-outline-variant/20 group transition-colors"
+              class="py-3 border-b border-outline-subtle/20 group transition-colors"
             >
-              <span class="text-sm font-medium text-secondary group-hover:text-secondary/80">
+              <span class="text-sm font-medium text-accent group-hover:text-accent/80">
                 {section.heading}
               </span>
-              <span class="block text-xs text-on-surface-variant mt-0.5">
+              <span class="block text-xs text-foreground-muted mt-0.5">
                 {section.description}
               </span>
             </a>
@@ -36,8 +36,8 @@ import { SECTION_INDEX_CONFIG, SECTION_KEYS } from '../consts/sections';
       </div>
     </div>
 
-    <div class="mt-8" style="animation: sprout 0.6s ease-out 0.3s both">
-      <a href="/" class="text-sm text-on-surface-variant hover:text-on-surface transition-colors">
+    <div class="mt-8" style="animation: fade-slide-in 0.5s ease-out 0.3s both">
+      <a href="/" class="text-sm text-foreground-muted hover:text-foreground transition-colors">
         ← 홈으로 돌아가기
       </a>
     </div>

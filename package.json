@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test",
+    "test:e2e": "playwright test",
     "sync:notion": "node scripts/sync_notion_content.mjs"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/typography": "^0.5.19",
     "eslint": "^10.1.0",
     "pagefind": "^1.4.0",

@@ -6,7 +6,7 @@ import Layout from '../layouts/Layout.astro';
   <div class="max-w-3xl mx-auto px-6 md:px-10 py-16">
     <header class="mb-10">
       <h1 class="text-3xl tracking-tight mb-3">Search</h1>
-      <p class="text-base text-on-surface-variant">키워드로 글을 검색합니다.</p>
+      <p class="text-base text-foreground-muted">키워드로 글을 검색합니다.</p>
     </header>
     <div id="search"></div>
   </div>
@@ -17,10 +17,10 @@ import Layout from '../layouts/Layout.astro';
 <style>
   :root {
     --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: var(--color-secondary);
-    --pagefind-ui-text: var(--color-on-surface);
+    --pagefind-ui-primary: var(--color-accent);
+    --pagefind-ui-text: var(--color-foreground);
     --pagefind-ui-background: var(--color-surface);
-    --pagefind-ui-border: var(--color-outline-variant);
+    --pagefind-ui-border: var(--color-outline-subtle);
     --pagefind-ui-border-width: 1px;
     --pagefind-ui-border-radius: 0.5rem;
     --pagefind-ui-font: var(--font-sans);

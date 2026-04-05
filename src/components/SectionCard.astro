@@ -1,6 +1,5 @@
 ---
 interface Props {
-  icon: string;
   name: string;
   description: string;
   count: number;
@@ -8,15 +7,15 @@ interface Props {
   variant?: 'sage' | 'earth';
 }
 
-const { icon, name, description, count, href, variant = 'sage' } = Astro.props;
-const bgClass = variant === 'earth' ? 'bg-tertiary-container/30' : 'bg-secondary-container/30';
+const { name, description, count, href, variant = 'sage' } = Astro.props;
+const bgClass = variant === 'earth' ? 'bg-earth-muted/30' : 'bg-accent-muted/30';
 ---
 
 <a href={href} class:list={["block rounded-lg p-6 transition-all hover:shadow-sm", bgClass]}>
-  <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container text-on-surface-variant text-lg mb-4">
-    {icon}
+  <div class="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-overlay text-foreground-muted mb-4">
+    <slot name="icon" />
   </div>
-  <h3 class="text-base font-medium text-on-surface mb-1">{name}</h3>
-  <p class="text-sm text-on-surface-variant leading-relaxed mb-3">{description}</p>
-  <span class="text-sm text-secondary">{count} posts &rarr;</span>
+  <h3 class="text-base font-medium text-foreground mb-1">{name}</h3>
+  <p class="text-sm text-foreground-muted leading-relaxed mb-3">{description}</p>
+  <span class="text-sm text-accent">{count} posts &rarr;</span>
 </a>

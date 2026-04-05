@@ -11,7 +11,7 @@ function SubmitButton({ state }: { state: FormState }) {
     <button
       type="submit"
       disabled={state === 'submitting'}
-      className="w-full py-3 bg-primary text-on-primary text-sm font-medium rounded-md transition-opacity disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-90"
+      className="w-full py-3 bg-accent text-surface text-sm font-medium rounded-md transition-opacity disabled:opacity-70 disabled:cursor-not-allowed hover:opacity-90"
     >
       {label}
     </button>
@@ -43,23 +43,23 @@ export default function ContactForm() {
   }
 
   return (
-    <form action="https://formspree.io/f/mbdzepdo" method="POST" onSubmit={handleSubmit} className="bg-surface-container-lowest rounded-xl p-6">
+    <form action="https://formspree.io/f/mbdzepdo" method="POST" onSubmit={handleSubmit} className="bg-surface rounded-xl p-6">
       <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
-          <label htmlFor="name" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Name</label>
-          <input id="name" type="text" name="name" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300" />
+          <label htmlFor="name" className="block text-[0.7rem] font-medium uppercase tracking-widest text-foreground-muted mb-2">Name</label>
+          <input id="name" type="text" name="name" required aria-required="true" className="w-full bg-transparent border-b border-outline-subtle/30 pb-2 text-sm text-foreground outline-none focus:border-accent transition-all duration-300" />
         </div>
         <div>
-          <label htmlFor="email" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Email</label>
-          <input id="email" type="email" name="email" required aria-required="true" className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300" />
+          <label htmlFor="email" className="block text-[0.7rem] font-medium uppercase tracking-widest text-foreground-muted mb-2">Email</label>
+          <input id="email" type="email" name="email" required aria-required="true" className="w-full bg-transparent border-b border-outline-subtle/30 pb-2 text-sm text-foreground outline-none focus:border-accent transition-all duration-300" />
         </div>
       </div>
 
       <div className="mb-5">
-        <label htmlFor="message" className="block text-[0.7rem] font-medium uppercase tracking-widest text-on-surface-variant mb-2">Message</label>
-        <textarea id="message" name="message" required aria-required="true" rows={4} placeholder="Start your message..." className="w-full bg-transparent border-b border-outline-variant/30 pb-2 text-sm text-on-surface outline-none focus:border-secondary transition-all duration-300 resize-none" />
+        <label htmlFor="message" className="block text-[0.7rem] font-medium uppercase tracking-widest text-foreground-muted mb-2">Message</label>
+        <textarea id="message" name="message" required aria-required="true" rows={4} placeholder="Start your message..." className="w-full bg-transparent border-b border-outline-subtle/30 pb-2 text-sm text-foreground outline-none focus:border-accent transition-all duration-300 resize-none" />
       </div>
 
       {state === 'error' && (
@@ -69,7 +69,7 @@ export default function ContactForm() {
       )}
 
       {state === 'success' && (
-        <p className="text-xs text-secondary mb-3" role="status">
+        <p className="text-xs text-accent mb-3" role="status">
           메시지가 전송되었습니다. 감사합니다!
         </p>
       )}

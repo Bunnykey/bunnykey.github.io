@@ -4,6 +4,12 @@ import assert from 'node:assert/strict';
 // Inline from src/consts/sections.ts
 const SECTION_KEYS = ['flora', 'nursery', 'seeds'];
 
+const NURSERY_STAGE_DOTS = {
+  seed: { filled: 1, total: 3, label: 'seed' },
+  growing: { filled: 2, total: 3, label: 'growing' },
+  evergreen: { filled: 3, total: 3, label: 'evergreen' },
+};
+
 const SECTION_INDEX_CONFIG = {
   flora: {
     pageTitle: 'Flora - The Greenhouse',
@@ -59,6 +65,27 @@ describe('SECTION_INDEX_CONFIG', () => {
 describe('formatArchiveDate', () => {
   it('formats date as YYYY-MM-DD', () => {
     assert.equal(formatArchiveDate(new Date('2026-03-22T12:00:00Z')), '2026-03-22');
+  });
+});
+
+describe('NURSERY_STAGE_DOTS', () => {
+  it('has entries for seed, growing, evergreen', () => {
+    assert.deepEqual(Object.keys(NURSERY_STAGE_DOTS), ['seed', 'growing', 'evergreen']);
+  });
+
+  it('seed has filled=1, total=3', () => {
+    assert.equal(NURSERY_STAGE_DOTS.seed.filled, 1);
+    assert.equal(NURSERY_STAGE_DOTS.seed.total, 3);
+  });
+
+  it('growing has filled=2, total=3', () => {
+    assert.equal(NURSERY_STAGE_DOTS.growing.filled, 2);
+    assert.equal(NURSERY_STAGE_DOTS.growing.total, 3);
+  });
+
+  it('evergreen has filled=3, total=3', () => {
+    assert.equal(NURSERY_STAGE_DOTS.evergreen.filled, 3);
+    assert.equal(NURSERY_STAGE_DOTS.evergreen.total, 3);
   });
 });
 

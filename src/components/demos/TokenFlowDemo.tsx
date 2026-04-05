@@ -46,7 +46,7 @@ function ContextSlider({ value, onChange }: { value: number; onChange: (v: numbe
 
 function TokenBar({ steps, contextSize }: { steps: ProcessedStep[]; contextSize: number }) {
   return (
-    <div style={{ display: 'flex', height: '2.5rem', borderRadius: '0.375rem', overflow: 'hidden', border: '1px solid var(--color-outline-variant)', marginBottom: '1rem' }}>
+    <div style={{ display: 'flex', height: '2.5rem', borderRadius: '0.375rem', overflow: 'hidden', border: '1px solid var(--color-outline-subtle)', marginBottom: '1rem' }}>
       {steps.map((step) => {
         const widthPct = (step.visibleTokens / contextSize) * 100;
         if (widthPct < 0.5) return null;
@@ -58,7 +58,7 @@ function TokenBar({ steps, contextSize }: { steps: ProcessedStep[]; contextSize:
           />
         );
       })}
-      <div style={{ flex: 1, background: 'repeating-linear-gradient(45deg, transparent, transparent 4px, var(--color-outline-variant) 4px, var(--color-outline-variant) 5px)', opacity: 0.3 }} />
+      <div style={{ flex: 1, background: 'repeating-linear-gradient(45deg, transparent, transparent 4px, var(--color-outline-subtle) 4px, var(--color-outline-subtle) 5px)', opacity: 0.3 }} />
     </div>
   );
 }

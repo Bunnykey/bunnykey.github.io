@@ -14,14 +14,14 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <header class="mb-10">
       <h1 class="text-3xl tracking-tight mb-3">{config.heading}</h1>
-      <p class="text-base text-on-surface-variant leading-relaxed max-w-xl">{config.description}</p>
+      <p class="text-base text-foreground-muted leading-relaxed max-w-xl">{config.description}</p>
     </header>
     {allTags.length > 0 && (
       <div class="flex flex-wrap gap-2 mb-6" id="tag-filter">
         {allTags.map(tag => (
           <button
             data-tag={tag}
-            class="tag-btn text-xs px-3 py-1 rounded border border-outline-variant/30 text-on-surface-variant hover:border-secondary transition-colors"
+            class="tag-btn text-xs px-3 py-1 rounded border border-outline-subtle/30 text-foreground-muted hover:border-accent transition-colors"
           >
             {tag}
           </button>
@@ -38,57 +38,70 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
           ))}
         </div>
       ) : (
-        <p class="text-sm text-on-surface-variant">{config.emptyMessage}</p>
+        <p class="text-sm text-foreground-muted">{config.emptyMessage}</p>
       )}
     </div>
   </div>
 </Layout>
-<script>
-  const buttons = document.querySelectorAll('.tag-btn');
-  const cards = document.querySelectorAll('#post-list [data-tags]');
-  const active = new Set<string>();
+<script is:inline>
+  (function() {
+    function init() {
+      var tagFilter = document.getElementById('tag-filter');
+      if (!tagFilter || tagFilter.dataset.initialized) return;
+      tagFilter.dataset.initialized = 'true';
 
-  function update() {
-    const hash = active.size > 0 ? '#' + [...active].join(',') : window.location.pathname;
-    history.replaceState(null, '', hash);
-    buttons.forEach(btn => {
-      const tag = (btn as HTMLElement).dataset.tag!;
-      if (active.has(tag)) {
-        btn.classList.add('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
-        btn.classList.remove('text-on-surface-variant', 'border-outline-variant/30');
-      } else {
-        btn.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'border-secondary-container');
-        btn.classList.add('text-on-surface-variant', 'border-outline-variant/30');
+      var buttons = document.querySelectorAll('.tag-btn');
+      var cards = document.querySelectorAll('#post-list [data-tags]');
+      var active = new Set();
+
+      function update() {
+        var hash = active.size > 0 ? '#' + Array.from(active).join(',') : window.location.pathname;
+        history.replaceState(null, '', hash);
+        buttons.forEach(function(btn) {
+          var tag = btn.dataset.tag;
+          if (active.has(tag)) {
+            btn.classList.add('bg-accent-muted', 'text-accent-on-muted', 'border-accent-muted');
+            btn.classList.remove('text-foreground-muted', 'border-outline-subtle/30');
+          } else {
+            btn.classList.remove('bg-accent-muted', 'text-accent-on-muted', 'border-accent-muted');
+            btn.classList.add('text-foreground-muted', 'border-outline-subtle/30');
+          }
+        });
+        cards.forEach(function(card) {
+          if (active.size === 0) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+            card.style.transition = 'opacity 300ms ease, transform 300ms ease';
+            card.style.pointerEvents = '';
+            return;
+          }
+          var cardTags = (card.dataset.tags || '').split(',');
+          var match = cardTags.some(function(t) { return active.has(t); });
+          card.style.opacity = match ? '1' : '0';
+          card.style.transform = match ? 'translateY(0)' : 'translateY(0.5rem)';
+          card.style.transition = 'opacity 300ms ease, transform 300ms ease';
+          card.style.pointerEvents = match ? '' : 'none';
+        });
       }
-    });
-    cards.forEach(card => {
-      const el = card as HTMLElement;
-      if (active.size === 0) {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        el.style.transition = 'opacity 300ms ease, transform 300ms ease';
-        el.style.pointerEvents = '';
-        return;
-      }
-      const cardTags = (el.dataset.tags || '').split(',');
-      const match = cardTags.some(t => active.has(t));
-      el.style.opacity = match ? '1' : '0';
-      el.style.transform = match ? 'translateY(0)' : 'translateY(0.5rem)';
-      el.style.transition = 'opacity 300ms ease, transform 300ms ease';
-      el.style.pointerEvents = match ? '' : 'none';
-    });
-  }
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tag = (btn as HTMLElement).dataset.tag!;
-      active.has(tag) ? active.delete(tag) : active.add(tag);
-      update();
-    });
-  });
+      buttons.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var tag = btn.dataset.tag;
+          active.has(tag) ? active.delete(tag) : active.add(tag);
+          update();
+        });
+      });
 
-  const hash = window.location.hash.slice(1);
-  if (hash) { hash.split(',').forEach(t => active.add(t)); update(); }
+      var hash = window.location.hash.slice(1);
+      if (hash) { hash.split(',').forEach(function(t) { active.add(t); }); update(); }
+    }
+    document.addEventListener('astro:page-load', init);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
 </script>
 <style>
   .animate-entrance {

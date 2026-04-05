@@ -36,9 +36,9 @@ const { name, title, posts } = Astro.props;
 >
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <header class="mb-10">
-      <p class="text-xs uppercase tracking-widest text-on-surface-variant mb-2">Flora Series</p>
+      <p class="text-xs uppercase tracking-widest text-foreground-muted mb-2">Flora Series</p>
       <h1 class="text-3xl tracking-tight mb-3">{title}</h1>
-      <p class="text-sm text-on-surface-variant">
+      <p class="text-sm text-foreground-muted">
         {posts.length} posts
       </p>
     </header>
@@ -46,7 +46,7 @@ const { name, title, posts } = Astro.props;
     <ol class="space-y-3">
       {posts.map((post) => (
         <li>
-          <a href={`/flora/${post.slug}/`} class="flex gap-3 items-baseline text-on-surface-variant/70 hover:text-on-surface transition-colors">
+          <a href={`/flora/${post.slug}/`} class="flex gap-3 items-baseline text-foreground-muted/70 hover:text-foreground transition-colors">
             <span class="tabular-nums w-6 shrink-0 text-sm">{post.data.series?.order}.</span>
             <span class="text-base">{post.data.title}</span>
           </a>

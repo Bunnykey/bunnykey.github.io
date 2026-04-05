@@ -32,13 +32,13 @@ const description = entry.data.summary || sectionDescription('seeds');
     <article class="max-w-prose">
       <header class="mb-8">
         <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs bg-tertiary-container text-on-surface px-2 py-0.5 rounded">seeds</span>
-          <span class="text-xs font-mono text-on-surface-variant">{formatArchiveDate(entry.data.date)}</span>
-          <span class="text-xs text-on-surface-variant">· {readingTime(entry.body)} min</span>
+          <span class="text-xs bg-earth-muted text-foreground px-2 py-0.5 rounded">seeds</span>
+          <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>
+          <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
         </div>
         <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
         {entry.data.summary && (
-          <p class="text-base text-on-surface-variant leading-relaxed">{entry.data.summary}</p>
+          <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>
         )}
       </header>
 
@@ -49,9 +49,9 @@ const description = entry.data.summary || sectionDescription('seeds');
       </div>
 
       {entry.data.tags && entry.data.tags.length > 0 && (
-        <div class="mt-8 pt-6 border-t border-outline-variant/20 flex flex-wrap gap-1.5">
+        <div class="mt-8 pt-6 border-t border-outline-subtle/20 flex flex-wrap gap-1.5">
           {entry.data.tags.map((tag) => (
-            <span class="text-xs bg-tertiary-container/50 text-on-surface px-2 py-0.5 rounded">{tag}</span>
+            <span class="text-xs bg-earth-muted/50 text-foreground px-2 py-0.5 rounded">{tag}</span>
           ))}
         </div>
       )}

@@ -19,29 +19,41 @@ const allPosts = await getAllPosts();
   <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
     <section class="mb-12">
       <h1 class="text-4xl tracking-tight mb-3">The Greenhouse.</h1>
-      <p class="text-lg text-on-surface-variant max-w-xl">
+      <p class="text-lg text-foreground-muted max-w-xl">
         디지털 정원. AI, 크립토, 그리고 진화하는 아이디어를 정성스럽게 가꿉니다.
       </p>
     </section>
 
     <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-      <div class="animate-entrance" style="--delay: 0ms"><SectionCard icon="❀" name="Flora" description="AI 분석과 에이전트 생태계" count={allFlora.length} href="/flora/" /></div>
-      <div class="animate-entrance" style="--delay: 100ms"><SectionCard icon="🌱" name="Nursery" description="자라는 아이디어, 에버그린 노트" count={allNursery.length} href="/nursery/" /></div>
-      <div class="animate-entrance" style="--delay: 200ms"><SectionCard icon="🫘" name="Seeds" description="짧은 메모, 순간 포착" count={allSeeds.length} href="/seeds/" variant="earth" /></div>
+      <div class="animate-entrance" style="--delay: 0ms">
+        <SectionCard name="Flora" description="AI 분석과 에이전트 생태계" count={allFlora.length} href="/flora/">
+          <svg slot="icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><path d="M12 8v8m-4-4h8"/></svg>
+        </SectionCard>
+      </div>
+      <div class="animate-entrance" style="--delay: 100ms">
+        <SectionCard name="Nursery" description="자라는 아이디어, 에버그린 노트" count={allNursery.length} href="/nursery/">
+          <svg slot="icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20h10M12 20V10m0 0c-2-4-6-4-8-2m8 2c2-4 6-4 8-2"/></svg>
+        </SectionCard>
+      </div>
+      <div class="animate-entrance" style="--delay: 200ms">
+        <SectionCard name="Seeds" description="짧은 메모, 순간 포착" count={allSeeds.length} href="/seeds/" variant="earth">
+          <svg slot="icon" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/></svg>
+        </SectionCard>
+      </div>
     </section>
 
     <section>
-      <h2 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-8">Latest</h2>
+      <h2 class="text-xs font-medium uppercase tracking-widest text-foreground-muted mb-8">Latest</h2>
       <div class="flex flex-col gap-4">
         {allPosts.slice(0, 10).map((post) => (
           <a href={post.url} class="flex items-baseline justify-between gap-4 group">
             <div class="flex items-baseline gap-3 min-w-0">
               <span class:list={["text-xs shrink-0", SECTION_INDEX_CONFIG[post.section].accentClass]}>{post.section}</span>
-              <span class="text-base font-medium text-on-surface group-hover:text-secondary transition-colors truncate">
+              <span class="text-base font-medium text-foreground group-hover:text-accent transition-colors truncate">
                 {post.data.title}
               </span>
             </div>
-            <span class="text-xs text-on-surface-variant font-mono shrink-0">
+            <span class="text-xs text-foreground-muted font-mono shrink-0">
               {post.data.date.toISOString().split("T")[0]}
             </span>
           </a>

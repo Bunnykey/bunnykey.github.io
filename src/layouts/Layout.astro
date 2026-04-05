@@ -45,6 +45,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <script is:inline>
       (function() {
         var saved = localStorage.getItem('theme');
+        var savedAtmo = localStorage.getItem('atmosphere') || 'none';
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         function resolve(pref) {
           if (pref === 'light') return 'light';
@@ -55,8 +56,9 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
           document.documentElement.dataset.theme = resolved;
           document.documentElement.style.colorScheme = resolved;
           var meta = document.getElementById('meta-theme-color');
-          if (meta) meta.setAttribute('content', resolved === 'dark' ? '#111411' : '#faf9f6');
+          if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0c120c' : '#faf9f6');
         }
+        document.documentElement.dataset.atmosphere = savedAtmo;
         apply(resolve(saved));
         prefersDark.addEventListener('change', function() {
           var current = localStorage.getItem('theme');
@@ -68,9 +70,6 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content={ogType} />
@@ -104,6 +103,14 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     )}
   </head>
   <body class="min-h-screen flex flex-col">
+    <video
+      id="atmosphere-video"
+      class="atmosphere-video"
+      muted
+      playsinline
+      loop
+      aria-hidden="true"
+    ></video>
     <a href="#main-content" class="skip-link">Skip to content</a>
     <Navbar transition:persist />
     <main id="main-content" class="flex-grow">

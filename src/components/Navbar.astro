@@ -12,9 +12,9 @@ const navLinks = [
 ];
 ---
 
-<nav class="relative px-6 md:px-10 py-6 bg-surface-container-low" aria-label="Main navigation">
+<nav class="relative px-6 md:px-10 py-6 bg-surface-raised" aria-label="Main navigation">
   <div class="flex items-center justify-between">
-    <a href="/" class="text-lg font-semibold tracking-tight text-on-surface hover:opacity-80 transition-opacity">
+    <a href="/" class="text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">
       {SITE.name}
     </a>
 
@@ -29,8 +29,8 @@ const navLinks = [
               class:list={[
                 'text-sm whitespace-nowrap transition-colors',
                 isActive
-                  ? 'text-on-surface font-medium'
-                  : 'text-on-surface-variant hover:text-on-surface',
+                  ? 'text-foreground font-medium'
+                  : 'text-foreground-muted hover:text-foreground',
               ]}
               aria-current={isActive ? 'page' : undefined}
             >
@@ -44,7 +44,7 @@ const navLinks = [
       <ThemeToggle />
 
       {/* Search */}
-      <a href="/search/" class="p-1.5 text-on-surface-variant hover:text-on-surface transition-colors" aria-label="검색" title="검색">
+      <a href="/search/" class="p-1.5 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/>
           <line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -59,9 +59,9 @@ const navLinks = [
         aria-controls="mobile-drawer"
         aria-label="메뉴"
       >
-        <span id="burger-top" class="block w-full h-0.5 bg-on-surface transition-all duration-300 origin-center"></span>
-        <span id="burger-mid" class="block w-full h-0.5 bg-on-surface transition-all duration-300"></span>
-        <span id="burger-bot" class="block w-full h-0.5 bg-on-surface transition-all duration-300 origin-center"></span>
+        <span id="burger-top" class="block w-full h-0.5 bg-foreground transition-all duration-300 origin-center"></span>
+        <span id="burger-mid" class="block w-full h-0.5 bg-foreground transition-all duration-300"></span>
+        <span id="burger-bot" class="block w-full h-0.5 bg-foreground transition-all duration-300 origin-center"></span>
       </button>
     </div>
   </div>
@@ -78,10 +78,10 @@ const navLinks = [
           <a
             href={link.href}
             class:list={[
-              'py-3 text-sm transition-colors border-b border-outline-variant/10',
+              'py-3 text-sm transition-colors border-b border-outline-subtle/10',
               isActive
-                ? 'text-on-surface font-medium'
-                : 'text-on-surface-variant hover:text-on-surface',
+                ? 'text-foreground font-medium'
+                : 'text-foreground-muted hover:text-foreground',
             ]}
             aria-current={isActive ? 'page' : undefined}
           >
@@ -89,42 +89,59 @@ const navLinks = [
           </a>
         );
       })}
-      <a href="/search/" class="py-3 text-sm text-on-surface-variant hover:text-on-surface transition-colors">
+      <a href="/search/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">
         Search
       </a>
     </div>
   </div>
 </nav>
 
-<script>
-  const toggle = document.getElementById('menu-toggle');
-  const drawer = document.getElementById('mobile-drawer');
-  if (toggle && drawer) {
-    function open() {
-      drawer.classList.remove('max-h-0', 'opacity-0');
-      drawer.classList.add('max-h-64', 'opacity-100');
-      toggle.setAttribute('aria-expanded', 'true');
-      document.getElementById('burger-top')?.classList.add('rotate-45', 'translate-y-[7px]');
-      document.getElementById('burger-mid')?.classList.add('opacity-0');
-      document.getElementById('burger-bot')?.classList.add('-rotate-45', '-translate-y-[7px]');
+<script is:inline>
+  (function() {
+    function init() {
+      var toggle = document.getElementById('menu-toggle');
+      var drawer = document.getElementById('mobile-drawer');
+      if (!toggle || !drawer || toggle.dataset.initialized) return;
+      toggle.dataset.initialized = 'true';
+
+      function open() {
+        drawer.classList.remove('max-h-0', 'opacity-0');
+        drawer.classList.add('max-h-64', 'opacity-100');
+        toggle.setAttribute('aria-expanded', 'true');
+        var bt = document.getElementById('burger-top');
+        var bm = document.getElementById('burger-mid');
+        var bb = document.getElementById('burger-bot');
+        if (bt) bt.classList.add('rotate-45', 'translate-y-[7px]');
+        if (bm) bm.classList.add('opacity-0');
+        if (bb) bb.classList.add('-rotate-45', '-translate-y-[7px]');
+      }
+      function close() {
+        drawer.classList.add('max-h-0', 'opacity-0');
+        drawer.classList.remove('max-h-64', 'opacity-100');
+        toggle.setAttribute('aria-expanded', 'false');
+        var bt = document.getElementById('burger-top');
+        var bm = document.getElementById('burger-mid');
+        var bb = document.getElementById('burger-bot');
+        if (bt) bt.classList.remove('rotate-45', 'translate-y-[7px]');
+        if (bm) bm.classList.remove('opacity-0');
+        if (bb) bb.classList.remove('-rotate-45', '-translate-y-[7px]');
+      }
+      function isOpen() {
+        return toggle.getAttribute('aria-expanded') === 'true';
+      }
+      toggle.addEventListener('click', function() { isOpen() ? close() : open(); });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && isOpen()) close();
+      });
+      document.addEventListener('click', function(e) {
+        if (isOpen() && !toggle.contains(e.target) && !drawer.contains(e.target)) close();
+      });
     }
-    function close() {
-      drawer.classList.add('max-h-0', 'opacity-0');
-      drawer.classList.remove('max-h-64', 'opacity-100');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.getElementById('burger-top')?.classList.remove('rotate-45', 'translate-y-[7px]');
-      document.getElementById('burger-mid')?.classList.remove('opacity-0');
-      document.getElementById('burger-bot')?.classList.remove('-rotate-45', '-translate-y-[7px]');
+    document.addEventListener('astro:page-load', init);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
     }
-    function isOpen() {
-      return toggle.getAttribute('aria-expanded') === 'true';
-    }
-    toggle.addEventListener('click', () => isOpen() ? close() : open());
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isOpen()) close();
-    });
-    document.addEventListener('click', (e) => {
-      if (isOpen() && !toggle.contains(e.target) && !drawer.contains(e.target)) close();
-    });
-  }
+  })();
 </script>

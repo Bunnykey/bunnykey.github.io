@@ -17,13 +17,13 @@ const show = filtered.length >= 3;
 
 {show && (
   mobile ? (
-    <details class="mb-8 bg-surface-container-low rounded-lg p-4">
-      <summary class="text-xs font-medium uppercase tracking-widest text-on-surface-variant cursor-pointer">목차</summary>
+    <details class="mb-8 bg-surface-raised rounded-lg p-4">
+      <summary class="text-xs font-medium uppercase tracking-widest text-foreground-muted cursor-pointer">목차</summary>
       <nav class="mt-3" aria-label="Table of contents">
         <ul class="space-y-1.5">
           {filtered.map(h => (
             <li class:list={[h.depth === 3 && 'pl-4']}>
-              <a href={`#${h.slug}`} class="toc-link text-xs text-on-surface-variant hover:text-on-surface transition-colors">
+              <a href={`#${h.slug}`} class="toc-link text-xs text-foreground-muted hover:text-foreground transition-colors">
                 {h.text}
               </a>
             </li>
@@ -32,14 +32,14 @@ const show = filtered.length >= 3;
       </nav>
     </details>
   ) : (
-    <div class="bg-surface-container-low rounded-lg p-5">
-      <h3 class="text-xs font-medium uppercase tracking-widest text-on-surface-variant mb-3">목차</h3>
+    <div class="bg-surface-raised rounded-lg p-5">
+      <h3 class="text-xs font-medium uppercase tracking-widest text-foreground-muted mb-3">목차</h3>
       <nav aria-label="Table of contents" class="relative">
-        <div id="toc-indicator" class="absolute left-0 w-0.5 bg-secondary rounded transition-all duration-200" style="top: 0; height: 0;"></div>
+        <div id="toc-indicator" class="absolute left-0 w-0.5 bg-accent rounded transition-all duration-200" style="top: 0; height: 0;"></div>
         <ul class="space-y-1.5 pl-3">
           {filtered.map(h => (
             <li class:list={[h.depth === 3 && 'pl-4']}>
-              <a href={`#${h.slug}`} class="toc-link text-xs text-on-surface-variant hover:text-on-surface transition-colors" data-slug={h.slug}>
+              <a href={`#${h.slug}`} class="toc-link text-xs text-foreground-muted hover:text-foreground transition-colors" data-slug={h.slug}>
                 {h.text}
               </a>
             </li>
@@ -50,33 +50,50 @@ const show = filtered.length >= 3;
   )
 )}
 
-<script>
-  const tocLinks = document.querySelectorAll('.toc-link[data-slug]');
-  if (tocLinks.length > 0) {
-    const slugs = Array.from(tocLinks).map(a => (a as HTMLAnchorElement).dataset.slug!);
-    const headingEls = slugs.map(s => document.getElementById(s)).filter(Boolean) as HTMLElement[];
-    const activeClass = ['text-on-surface', 'font-medium'];
-    const inactiveClass = ['text-on-surface-variant'];
-    let current: Element | null = null;
+<script is:inline>
+  (function() {
+    function init() {
+      var currentPath = window.location.pathname;
+      if (window.__tocInitialized === currentPath) return;
+      window.__tocInitialized = currentPath;
 
-    const observer = new IntersectionObserver((entries) => {
-      const visible = entries.filter(e => e.isIntersecting).map(e => e.target);
-      if (visible.length === 0) return;
-      const topmost = visible.reduce((a, b) => a.getBoundingClientRect().top < b.getBoundingClientRect().top ? a : b);
-      const link = document.querySelector(`.toc-link[data-slug="${topmost.id}"]`);
-      if (link && link !== current) {
-        if (current) { current.classList.remove(...activeClass); current.classList.add(...inactiveClass); }
-        link.classList.add(...activeClass);
-        link.classList.remove(...inactiveClass);
-        current = link;
-        const indicator = document.getElementById('toc-indicator');
-        if (indicator && link instanceof HTMLElement) {
-          indicator.style.top = `${link.offsetTop}px`;
-          indicator.style.height = `${link.offsetHeight}px`;
-        }
+      var tocLinks = document.querySelectorAll('.toc-link[data-slug]');
+      if (tocLinks.length > 0) {
+        var slugs = Array.from(tocLinks).map(function(a) { return a.dataset.slug; });
+        var headingEls = slugs.map(function(s) { return document.getElementById(s); }).filter(Boolean);
+        var activeClass = ['text-foreground', 'font-medium'];
+        var inactiveClass = ['text-foreground-muted'];
+        var current = null;
+
+        var observer = new IntersectionObserver(function(entries) {
+          var visible = entries.filter(function(e) { return e.isIntersecting; }).map(function(e) { return e.target; });
+          if (visible.length === 0) return;
+          var topmost = visible.reduce(function(a, b) { return a.getBoundingClientRect().top < b.getBoundingClientRect().top ? a : b; });
+          var link = document.querySelector('.toc-link[data-slug="' + topmost.id + '"]');
+          if (link && link !== current) {
+            if (current) {
+              activeClass.forEach(function(c) { current.classList.remove(c); });
+              inactiveClass.forEach(function(c) { current.classList.add(c); });
+            }
+            activeClass.forEach(function(c) { link.classList.add(c); });
+            inactiveClass.forEach(function(c) { link.classList.remove(c); });
+            current = link;
+            var indicator = document.getElementById('toc-indicator');
+            if (indicator && link instanceof HTMLElement) {
+              indicator.style.top = link.offsetTop + 'px';
+              indicator.style.height = link.offsetHeight + 'px';
+            }
+          }
+        }, { rootMargin: '-80px 0px -70% 0px' });
+
+        headingEls.forEach(function(el) { observer.observe(el); });
       }
-    }, { rootMargin: '-80px 0px -70% 0px' });
-
-    headingEls.forEach(el => observer.observe(el));
-  }
+    }
+    document.addEventListener('astro:page-load', init);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
 </script>
