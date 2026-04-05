@@ -92,28 +92,28 @@
 
 <script is:inline>
   (function() {
-    var VIDEO_MAP = {
-      sunny: '/videos/leaves.mp4',
-      moonlight: '/videos/moon.mp4',
-      rain: '/videos/rain.mp4',
-    };
+    const VIDEO_MAP = {
+    sunny: '/videos/leaves.mp4',
+    moonlight: '/videos/moon.mp4',
+    rain: '/videos/rain.mp4',
+  };
 
-    var docListenersAttached = false;
+    let docListenersAttached = false;
 
     function init() {
-      var btn = document.getElementById('theme-toggle');
-      var popover = document.getElementById('theme-popover');
-      var wrapper = document.getElementById('theme-popover-wrapper');
+      const btn = document.getElementById('theme-toggle');
+      const popover = document.getElementById('theme-popover');
+      const wrapper = document.getElementById('theme-popover-wrapper');
       if (!btn || !popover || !wrapper || btn.dataset.initialized) return;
       btn.dataset.initialized = 'true';
 
-      var icons = {
-        light: document.getElementById('icon-sun'),
-        dark: document.getElementById('icon-moon'),
-        system: document.getElementById('icon-monitor'),
-      };
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-      var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const icons = {
+      light: document.getElementById('icon-sun'),
+      dark: document.getElementById('icon-moon'),
+      system: document.getElementById('icon-monitor'),
+    };
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
       // --- Theme logic ---
       function getStoredTheme() {
@@ -127,10 +127,10 @@
       }
 
       function applyTheme(pref) {
-        var resolved = resolveTheme(pref);
+        const resolved = resolveTheme(pref);
         document.documentElement.dataset.theme = resolved;
         document.documentElement.style.colorScheme = resolved;
-        var meta = document.getElementById('meta-theme-color');
+        const meta = document.getElementById('meta-theme-color');
         if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0c120c' : '#faf9f6');
         updateTriggerIcon(pref);
         updateActiveStates(pref, getStoredAtmo());
@@ -171,14 +171,14 @@
       }
 
       function loadVideo(atmo) {
-        var video = document.getElementById('atmosphere-video');
+        const video = document.getElementById('atmosphere-video');
         if (!video) return;
         if (atmo === 'none' || !VIDEO_MAP[atmo] || !shouldLoadVideo()) {
           video.removeAttribute('src');
           video.load();
           return;
         }
-        var src = VIDEO_MAP[atmo];
+        const src = VIDEO_MAP[atmo];
         if (video.getAttribute('src') !== src) {
           video.src = src;
           video.load();
@@ -189,19 +189,19 @@
       // --- Active state highlighting ---
       function updateActiveStates(theme, atmo) {
         document.querySelectorAll('[data-set-theme]').forEach(function(el) {
-          var isActive = el.getAttribute('data-set-theme') === theme;
+          const isActive = el.getAttribute('data-set-theme') === theme;
           el.classList.toggle('bg-surface-overlay', isActive);
           el.classList.toggle('text-foreground', isActive);
         });
         document.querySelectorAll('[data-set-atmo]').forEach(function(el) {
-          var isActive = el.getAttribute('data-set-atmo') === atmo;
+          const isActive = el.getAttribute('data-set-atmo') === atmo;
           el.classList.toggle('bg-surface-overlay', isActive);
           el.classList.toggle('text-foreground', isActive);
         });
       }
 
       // --- Popover logic ---
-      var isOpen = false;
+      let isOpen = false;
 
       function openPopover() {
         popover.classList.remove('opacity-0', 'invisible');
@@ -218,7 +218,7 @@
       }
 
       function togglePopover() {
-        isOpen ? closePopover() : openPopover();
+        if (isOpen) { closePopover(); } else { openPopover(); }
       }
 
       btn.addEventListener('click', function(e) {
@@ -247,7 +247,7 @@
 
         // Close on outside click (re-query DOM to survive View Transitions)
         document.addEventListener('click', function(e) {
-          var currentWrapper = document.getElementById('theme-popover-wrapper');
+          const currentWrapper = document.getElementById('theme-popover-wrapper');
           if (isOpen && currentWrapper && !currentWrapper.contains(e.target)) closePopover();
         });
 
@@ -255,16 +255,17 @@
         document.addEventListener('keydown', function(e) {
           if (e.key === 'Escape' && isOpen) { closePopover(); return; }
 
-          var tag = document.activeElement ? document.activeElement.tagName : '';
+          const tag = document.activeElement ? document.activeElement.tagName : '';
           if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
           if (document.activeElement && document.activeElement.getAttribute('contenteditable')) return;
           if (e.metaKey || e.ctrlKey || e.altKey) return;
 
           switch (e.key.toLowerCase()) {
-            case 'd':
-              var current = resolveTheme(getStoredTheme());
+            case 'd': {
+              const current = resolveTheme(getStoredTheme());
               setTheme(current === 'dark' ? 'light' : 'dark');
               break;
+            }
             case 's': setAtmo('sunny'); break;
             case 'n': setAtmo('none'); break;
             case 'm': setAtmo('moonlight'); break;
@@ -274,7 +275,7 @@
 
         // Tab visibility — pause/resume video
         document.addEventListener('visibilitychange', function() {
-          var video = document.getElementById('atmosphere-video');
+          const video = document.getElementById('atmosphere-video');
           if (!video || !video.src) return;
           if (document.hidden) { video.pause(); }
           else { video.play().catch(function() {}); }
@@ -282,7 +283,7 @@
 
         // OS theme change sync
         prefersDark.addEventListener('change', function() {
-          var stored = getStoredTheme();
+          const stored = getStoredTheme();
           if (stored === 'system') applyTheme('system');
         });
       }

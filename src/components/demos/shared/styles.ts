@@ -12,6 +12,6 @@ export const demoContainer: React.CSSProperties = {
   border: '1px solid var(--color-outline-subtle)',
   borderRadius: '0.75rem',
   padding: '1.5rem',
-  fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, monospace',
+  fontFamily: 'Inter, Pretendard, system-ui, sans-serif',
   fontSize: '0.875rem',
 };

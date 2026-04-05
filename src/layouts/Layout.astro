@@ -44,9 +44,9 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta charset="UTF-8" />
     <script is:inline>
       (function() {
-        var saved = localStorage.getItem('theme');
-        var savedAtmo = localStorage.getItem('atmosphere') || 'none';
-        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        const saved = localStorage.getItem('theme');
+        const savedAtmo = localStorage.getItem('atmosphere') || 'none';
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         function resolve(pref) {
           if (pref === 'light') return 'light';
           if (pref === 'dark') return 'dark';
@@ -55,13 +55,13 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
         function apply(resolved) {
           document.documentElement.dataset.theme = resolved;
           document.documentElement.style.colorScheme = resolved;
-          var meta = document.getElementById('meta-theme-color');
+          const meta = document.getElementById('meta-theme-color');
           if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0c120c' : '#faf9f6');
         }
         document.documentElement.dataset.atmosphere = savedAtmo;
         apply(resolve(saved));
         prefersDark.addEventListener('change', function() {
-          var current = localStorage.getItem('theme');
+          const current = localStorage.getItem('theme');
           if (!current || current === 'system') apply(resolve('system'));
         });
       })();

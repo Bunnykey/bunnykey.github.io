@@ -1,333 +1,341 @@
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url("../assets/fonts/inter-400.woff2") format("woff2");
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("../assets/fonts/inter-400.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url("../assets/fonts/inter-500.woff2") format("woff2");
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("../assets/fonts/inter-500.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: url("../assets/fonts/inter-600.woff2") format("woff2");
+    font-family: "Inter";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("../assets/fonts/inter-600.woff2") format("woff2");
 }
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
 @theme {
-  /* Surface hierarchy (4 levels) */
-  --color-surface: #faf9f6;
-  --color-surface-raised: #f0ede7;
-  --color-surface-overlay: #e5e2db;
-  --color-surface-sunken: #ece9e2;
+    /* Surface hierarchy (4 levels) */
+    --color-surface: #faf9f6;
+    --color-surface-raised: #f0ede7;
+    --color-surface-overlay: #e5e2db;
+    --color-surface-sunken: #ece9e2;
 
-  /* Accent (sage — promoted from secondary) */
-  --color-accent: #4a6741;
-  --color-accent-muted: #d7e7d3;
-  --color-accent-on-muted: #3a5234;
+    /* Accent (sage — promoted from secondary) */
+    --color-accent: #4a6741;
+    --color-accent-muted: #d7e7d3;
+    --color-accent-on-muted: #3a5234;
 
-  /* Earth (tertiary) */
-  --color-earth: #7e572e;
-  --color-earth-muted: #e8d4be;
+    /* Earth (tertiary) */
+    --color-earth: #7e572e;
+    --color-earth-muted: #e8d4be;
 
-  /* Foreground (text) */
-  --color-foreground: #1a1f1a;
-  --color-foreground-muted: #6b7168;
-  --color-foreground-faint: #9a9e96;
+    /* Foreground (text) */
+    --color-foreground: #1a1f1a;
+    --color-foreground-muted: #6b7168;
+    --color-foreground-faint: #9a9e96;
 
-  /* Outline (borders) */
-  --color-outline: #777c77;
-  --color-outline-subtle: #d8d5cf;
+    /* Outline (borders) */
+    --color-outline: #777c77;
+    --color-outline-subtle: #d8d5cf;
 
-  /* Error */
-  --color-error: #9e422c;
+    /* Error */
+    --color-error: #9e422c;
 
-  /* Typography */
-  --font-sans: "Inter", system-ui, sans-serif;
+    /* Typography */
+    --font-sans: "Inter", system-ui, sans-serif;
 }
 
 @layer base {
-  html {
-    @apply antialiased;
-    font-family: var(--font-sans);
-  }
+    html {
+        @apply antialiased;
+        font-family: var(--font-sans);
+    }
 
-  body {
-    background-color: var(--color-surface);
-    color: var(--color-foreground);
-    line-height: 1.7;
-    margin: 0;
-  }
+    body {
+        background-color: var(--color-surface);
+        color: var(--color-foreground);
+        line-height: 1.7;
+        margin: 0;
+    }
 
-  h1 {
-    font-size: clamp(2rem, 5vw, 3.75rem);
-    font-weight: 500;
-    letter-spacing: -0.02em;
-  }
+    h1 {
+        font-size: clamp(2rem, 5vw, 3.75rem);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+    }
 
-  h2 {
-    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
-    font-weight: 600;
-    letter-spacing: -0.02em;
-  }
+    h2 {
+        font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
 
-  h3, h4, h5, h6 {
-    font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-    font-weight: 500;
-  }
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+        font-weight: 500;
+    }
 
-  h2, h3 {
-    scroll-margin-top: 6rem;
-  }
+    h2,
+    h3 {
+        scroll-margin-top: 6rem;
+    }
 
-  :focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 3px;
-  }
+    :focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 3px;
+    }
 
-  ::selection {
-    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
-    color: var(--color-foreground);
-  }
+    ::selection {
+        background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+        color: var(--color-foreground);
+    }
 }
 
 @layer utilities {
-  .greenhouse-prose {
-    @apply border-t border-outline-subtle/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-a:text-accent hover:prose-a:text-accent/80 prose-pre:bg-surface-sunken prose-code:text-foreground;
-  }
+    .greenhouse-prose {
+        @apply border-t border-outline-subtle/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-pre:bg-surface-sunken prose-code:text-foreground;
+    }
 
-  .skip-link {
-    position: absolute;
-    left: 1rem;
-    top: 1rem;
-    transform: translateY(-200%);
-    background: var(--color-surface);
-    color: var(--color-foreground);
-    border: 1px solid var(--color-outline-subtle);
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    z-index: 100;
-    text-decoration: none;
-  }
+    .skip-link {
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        transform: translateY(-200%);
+        background: var(--color-surface);
+        color: var(--color-foreground);
+        border: 1px solid var(--color-outline-subtle);
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.5rem;
+        z-index: 100;
+        text-decoration: none;
+    }
 
-  .skip-link:focus {
-    transform: translateY(0);
-  }
+    .skip-link:focus {
+        transform: translateY(0);
+    }
 
-  .scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--color-accent);
-    transform-origin: left;
-    scale: 0 1;
-    animation: scroll-progress linear;
-    animation-timeline: scroll();
-    z-index: 52;
-  }
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: var(--color-accent);
+        transform-origin: left;
+        scale: 0 1;
+        animation: scroll-progress linear;
+        animation-timeline: scroll();
+        z-index: 52;
+    }
 }
 
 @keyframes scroll-progress {
-  to { scale: 1 1; }
+    to {
+        scale: 1 1;
+    }
 }
 
 @keyframes fade-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 [data-theme="dark"] {
-  /* Surface — deep forest green tint */
-  --color-surface: #0c120c;
-  --color-surface-raised: #141e14;
-  --color-surface-overlay: #1e2a1e;
-  --color-surface-sunken: #0a0f0a;
+    /* Surface — deep forest green tint */
+    --color-surface: #0c120c;
+    --color-surface-raised: #141e14;
+    --color-surface-overlay: #1e2a1e;
+    --color-surface-sunken: #0a0f0a;
 
-  /* Accent (sage, brightened for dark bg) */
-  --color-accent: #7aad74;
-  --color-accent-muted: #1e3018;
-  --color-accent-on-muted: #7aad74;
+    /* Accent (sage, brightened for dark bg) */
+    --color-accent: #7aad74;
+    --color-accent-muted: #1e3018;
+    --color-accent-on-muted: #7aad74;
 
-  /* Earth (warm, brightened) */
-  --color-earth: #c49a6c;
-  --color-earth-muted: #2a1e10;
+    /* Earth (warm, brightened) */
+    --color-earth: #c49a6c;
+    --color-earth-muted: #2a1e10;
 
-  /* Foreground — brightness raised for readability */
-  --color-foreground: #d0daca;
-  --color-foreground-muted: #7a8a74;
-  --color-foreground-faint: #4a5a44;
+    /* Foreground — brightness raised for readability */
+    --color-foreground: #e4ede0;
+    --color-foreground-muted: #7a8a74;
+    --color-foreground-faint: #4a5a44;
 
-  /* Outline */
-  --color-outline: #3a4a3a;
-  --color-outline-subtle: #1e2a1e;
+    /* Outline */
+    --color-outline: #3a4a3a;
+    --color-outline-subtle: #1e2a1e;
 
-  /* Error */
-  --color-error: #e07a62;
+    /* Error */
+    --color-error: #e07a62;
 
-  /* Tailwind Typography overrides */
-  --tw-prose-body: #d0daca;
-  --tw-prose-headings: #d0daca;
-  --tw-prose-links: #7aad74;
-  --tw-prose-bold: #d0daca;
-  --tw-prose-code: #d0daca;
-  --tw-prose-pre-bg: #0a0f0a;
-  --tw-prose-pre-code: #d0daca;
-  --tw-prose-quotes: #7a8a74;
-  --tw-prose-counters: #7a8a74;
-  --tw-prose-bullets: #3a4a3a;
-  --tw-prose-hr: #1e2a1e;
-  --tw-prose-th-borders: #1e2a1e;
-  --tw-prose-td-borders: #1e2a1e;
+    /* Tailwind Typography overrides */
+    --tw-prose-body: #e4ede0;
+    --tw-prose-headings: #e4ede0;
+    --tw-prose-links: #7aad74;
+    --tw-prose-bold: #e4ede0;
+    --tw-prose-code: #e4ede0;
+    --tw-prose-pre-bg: #0a0f0a;
+    --tw-prose-pre-code: #e4ede0;
+    --tw-prose-quotes: #7a8a74;
+    --tw-prose-counters: #7a8a74;
+    --tw-prose-bullets: #3a4a3a;
+    --tw-prose-hr: #1e2a1e;
+    --tw-prose-th-borders: #1e2a1e;
+    --tw-prose-td-borders: #1e2a1e;
 }
 
 /* ===== Atmosphere color shifts ===== */
 
 /* Sunny — warm cream/olive shift */
 :root[data-atmosphere="sunny"] {
-  --color-surface: #fdf8f0;
-  --color-surface-raised: #f5efe4;
-  --color-accent: #5a7a3a;
-  --color-foreground-muted: #7a7060;
+    --color-surface: #fdf8f0;
+    --color-surface-raised: #f5efe4;
+    --color-accent: #5a7a3a;
+    --color-foreground-muted: #7a7060;
 }
 
 [data-theme="dark"][data-atmosphere="sunny"] {
-  --color-surface: #141208;
-  --color-surface-raised: #1e1a10;
-  --color-accent: #a0c060;
-  --color-foreground-muted: #8a8060;
+    --color-surface: #141208;
+    --color-surface-raised: #1e1a10;
+    --color-accent: #a0c060;
+    --color-foreground-muted: #8a8060;
 }
 
 /* Moonlight — cool blue shift */
 :root[data-atmosphere="moonlight"] {
-  --color-surface: #f4f6fa;
-  --color-surface-raised: #e8ecf4;
-  --color-accent: #4a6a8a;
-  --color-foreground: #1a1e2a;
-  --color-foreground-muted: #606878;
+    --color-surface: #f4f6fa;
+    --color-surface-raised: #e8ecf4;
+    --color-accent: #4a6a8a;
+    --color-foreground: #1a1e2a;
+    --color-foreground-muted: #606878;
 }
 
 [data-theme="dark"][data-atmosphere="moonlight"] {
-  --color-surface: #0a0e14;
-  --color-surface-raised: #10161e;
-  --color-accent: #6a9ac4;
-  --color-foreground: #c0cade;
-  --color-foreground-muted: #6a7a8e;
+    --color-surface: #0a0e14;
+    --color-surface-raised: #10161e;
+    --color-accent: #6a9ac4;
+    --color-foreground: #e0e6f0;
+    --color-foreground-muted: #8a94a8;
 }
 
 /* Rain — desaturated cool gray shift */
 :root[data-atmosphere="rain"] {
-  --color-surface: #f2f4f5;
-  --color-surface-raised: #e6e9ec;
-  --color-accent: #5a7068;
-  --color-foreground-muted: #6a7278;
-  --color-outline-subtle: #d0d4d8;
+    --color-surface: #f2f4f5;
+    --color-surface-raised: #e6e9ec;
+    --color-accent: #5a7068;
+    --color-foreground-muted: #6a7278;
+    --color-outline-subtle: #d0d4d8;
 }
 
 [data-theme="dark"][data-atmosphere="rain"] {
-  --color-surface: #0c0e10;
-  --color-surface-raised: #141618;
-  --color-accent: #6a8a80;
-  --color-foreground-muted: #6a7278;
-  --color-outline-subtle: #1e2224;
+    --color-surface: #0c0e10;
+    --color-surface-raised: #141618;
+    --color-accent: #6a8a80;
+    --color-foreground-muted: #6a7278;
+    --color-outline-subtle: #1e2224;
 }
 
 /* ===== Atmosphere overlays (CSS fallback) ===== */
 
 /* Outside @layer intentionally — transition must override base body */
 body {
-  transition: background-color 300ms ease, color 200ms ease;
+    transition:
+        background-color 300ms ease,
+        color 200ms ease;
 }
 
 [data-atmosphere]:not([data-atmosphere="none"]) body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 50;
-  transition: opacity 500ms;
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 500ms;
 }
 
 [data-atmosphere="sunny"] body::after {
-  background: linear-gradient(135deg, rgba(255, 220, 100, 0.06), transparent 60%);
+    background: linear-gradient(
+        135deg,
+        rgba(255, 220, 100, 0.06),
+        transparent 60%
+    );
 }
 
 [data-atmosphere="moonlight"] body::after {
-  background: linear-gradient(180deg, rgba(100, 140, 200, 0.05), transparent 70%);
+    background: linear-gradient(
+        180deg,
+        rgba(100, 140, 200, 0.05),
+        transparent 70%
+    );
 }
 
 [data-atmosphere="rain"] body::after {
-  background: linear-gradient(180deg, rgba(120, 140, 160, 0.06), transparent);
+    background: linear-gradient(180deg, rgba(120, 140, 160, 0.06), transparent);
 }
 
 /* ===== Video overlay ===== */
 
 .atmosphere-video {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  pointer-events: none;
-  z-index: 50;
-  opacity: 0;
-  transition: opacity 800ms;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 50;
+    opacity: 0;
+    transition: opacity 800ms;
 }
 
 [data-atmosphere="sunny"] .atmosphere-video {
-  mix-blend-mode: multiply;
-  opacity: 0.2;
+    mix-blend-mode: multiply;
+    opacity: 0.2;
 }
 
 [data-atmosphere="moonlight"] .atmosphere-video {
-  mix-blend-mode: screen;
-  opacity: 0.15;
+    mix-blend-mode: screen;
+    opacity: 0.15;
 }
 
 [data-atmosphere="rain"] .atmosphere-video {
-  mix-blend-mode: multiply;
-  opacity: 0.25;
+    mix-blend-mode: multiply;
+    opacity: 0.25;
 }
 
 /* ===== Prose damping ===== */
 
 [data-atmosphere]:not([data-atmosphere="none"]) .greenhouse-prose {
-  position: relative;
-  z-index: 51;
-}
-
-[data-atmosphere]:not([data-atmosphere="none"]) .greenhouse-prose::before {
-  content: '';
-  position: absolute;
-  inset: -1rem -2rem;
-  background: var(--color-surface);
-  opacity: 0.85;
-  border-radius: 8px;
-  z-index: -1;
+    position: relative;
+    z-index: 51;
 }

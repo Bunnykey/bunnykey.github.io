@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostSidebar from '../../components/PostSidebar.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import TokenFlowDemo from '../../components/demos/TokenFlowDemo';
 import { sectionDescription } from '../../consts/site';
 import { getSeriesPostsFromEntries, getSeriesNavigationFromEntries } from '../../utils/series';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
@@ -35,12 +36,12 @@ const seriesNav = series
   articleDate={entry.data.date.toISOString()}
 >
   <div class="scroll-progress"></div>
-  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
+  <div class="max-w-6xl mx-auto px-6 md:px-10 py-16">
     <div class="flex flex-col lg:flex-row gap-10">
       <article class="flex-1 min-w-0">
         <header class="mb-8">
           <div class="flex items-center gap-3 mb-4">
-            <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">flora</span>
+            <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">Flora</span>
             <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>
             <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
             {entry.data.highlight && <span class="text-xs text-earth">★ highlight</span>}
@@ -58,6 +59,12 @@ const seriesNav = series
         <div class="greenhouse-prose" data-pagefind-body>
           <Content />
         </div>
+
+        {entry.data.demo === 'TokenFlowDemo' && (
+          <div class="mt-10">
+            <TokenFlowDemo client:visible />
+          </div>
+        )}
 
         {series && (seriesNav.previous || seriesNav.next) && (
           <nav class="flex flex-col md:flex-row justify-between gap-4 mt-12 pt-6 border-t border-outline-subtle/20" aria-label="Series navigation">

@@ -99,8 +99,8 @@ const navLinks = [
 <script is:inline>
   (function() {
     function init() {
-      var toggle = document.getElementById('menu-toggle');
-      var drawer = document.getElementById('mobile-drawer');
+      const toggle = document.getElementById('menu-toggle');
+      const drawer = document.getElementById('mobile-drawer');
       if (!toggle || !drawer || toggle.dataset.initialized) return;
       toggle.dataset.initialized = 'true';
 
@@ -108,9 +108,9 @@ const navLinks = [
         drawer.classList.remove('max-h-0', 'opacity-0');
         drawer.classList.add('max-h-64', 'opacity-100');
         toggle.setAttribute('aria-expanded', 'true');
-        var bt = document.getElementById('burger-top');
-        var bm = document.getElementById('burger-mid');
-        var bb = document.getElementById('burger-bot');
+        const bt = document.getElementById('burger-top');
+        const bm = document.getElementById('burger-mid');
+        const bb = document.getElementById('burger-bot');
         if (bt) bt.classList.add('rotate-45', 'translate-y-[7px]');
         if (bm) bm.classList.add('opacity-0');
         if (bb) bb.classList.add('-rotate-45', '-translate-y-[7px]');
@@ -119,9 +119,9 @@ const navLinks = [
         drawer.classList.add('max-h-0', 'opacity-0');
         drawer.classList.remove('max-h-64', 'opacity-100');
         toggle.setAttribute('aria-expanded', 'false');
-        var bt = document.getElementById('burger-top');
-        var bm = document.getElementById('burger-mid');
-        var bb = document.getElementById('burger-bot');
+        const bt = document.getElementById('burger-top');
+        const bm = document.getElementById('burger-mid');
+        const bb = document.getElementById('burger-bot');
         if (bt) bt.classList.remove('rotate-45', 'translate-y-[7px]');
         if (bm) bm.classList.remove('opacity-0');
         if (bb) bb.classList.remove('-rotate-45', '-translate-y-[7px]');
@@ -129,7 +129,7 @@ const navLinks = [
       function isOpen() {
         return toggle.getAttribute('aria-expanded') === 'true';
       }
-      toggle.addEventListener('click', function() { isOpen() ? close() : open(); });
+      toggle.addEventListener('click', function() { if (isOpen()) { close(); } else { open(); } });
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && isOpen()) close();
       });

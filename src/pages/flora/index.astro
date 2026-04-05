@@ -46,19 +46,19 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
 <script is:inline>
   (function() {
     function init() {
-      var tagFilter = document.getElementById('tag-filter');
+      const tagFilter = document.getElementById('tag-filter');
       if (!tagFilter || tagFilter.dataset.initialized) return;
       tagFilter.dataset.initialized = 'true';
 
-      var buttons = document.querySelectorAll('.tag-btn');
-      var cards = document.querySelectorAll('#post-list [data-tags]');
-      var active = new Set();
+      const buttons = document.querySelectorAll('.tag-btn');
+      const cards = document.querySelectorAll('#post-list [data-tags]');
+      const active = new Set();
 
       function update() {
-        var hash = active.size > 0 ? '#' + Array.from(active).join(',') : window.location.pathname;
+        const hash = active.size > 0 ? '#' + Array.from(active).join(',') : window.location.pathname;
         history.replaceState(null, '', hash);
         buttons.forEach(function(btn) {
-          var tag = btn.dataset.tag;
+          const tag = btn.dataset.tag;
           if (active.has(tag)) {
             btn.classList.add('bg-accent-muted', 'text-accent-on-muted', 'border-accent-muted');
             btn.classList.remove('text-foreground-muted', 'border-outline-subtle/30');
@@ -75,8 +75,8 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
             card.style.pointerEvents = '';
             return;
           }
-          var cardTags = (card.dataset.tags || '').split(',');
-          var match = cardTags.some(function(t) { return active.has(t); });
+          const cardTags = (card.dataset.tags || '').split(',');
+          const match = cardTags.some(function(t) { return active.has(t); });
           card.style.opacity = match ? '1' : '0';
           card.style.transform = match ? 'translateY(0)' : 'translateY(0.5rem)';
           card.style.transition = 'opacity 300ms ease, transform 300ms ease';
@@ -86,13 +86,13 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
 
       buttons.forEach(function(btn) {
         btn.addEventListener('click', function() {
-          var tag = btn.dataset.tag;
-          active.has(tag) ? active.delete(tag) : active.add(tag);
+          const tag = btn.dataset.tag;
+          if (active.has(tag)) { active.delete(tag); } else { active.add(tag); }
           update();
         });
       });
 
-      var hash = window.location.hash.slice(1);
+      const hash = window.location.hash.slice(1);
       if (hash) { hash.split(',').forEach(function(t) { active.add(t); }); update(); }
     }
     document.addEventListener('astro:page-load', init);

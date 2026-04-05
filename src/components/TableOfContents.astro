@@ -53,38 +53,38 @@ const show = filtered.length >= 3;
 <script is:inline>
   (function() {
     function init() {
-      var currentPath = window.location.pathname;
+      const currentPath = window.location.pathname;
       if (window.__tocInitialized === currentPath) return;
       window.__tocInitialized = currentPath;
 
-      var tocLinks = document.querySelectorAll('.toc-link[data-slug]');
+      const tocLinks = document.querySelectorAll('.toc-link[data-slug]');
       if (tocLinks.length > 0) {
-        var slugs = Array.from(tocLinks).map(function(a) { return a.dataset.slug; });
-        var headingEls = slugs.map(function(s) { return document.getElementById(s); }).filter(Boolean);
-        var activeClass = ['text-foreground', 'font-medium'];
-        var inactiveClass = ['text-foreground-muted'];
-        var current = null;
+        const slugs = Array.from(tocLinks).map(function(a) { return a.dataset.slug; });
+        const headingEls = slugs.map(function(s) { return document.getElementById(s); }).filter(Boolean);
+        const activeClass = ['text-foreground', 'font-medium'];
+        const inactiveClass = ['text-foreground-muted'];
+        let current = null;
 
-        var observer = new IntersectionObserver(function(entries) {
-          var visible = entries.filter(function(e) { return e.isIntersecting; }).map(function(e) { return e.target; });
-          if (visible.length === 0) return;
-          var topmost = visible.reduce(function(a, b) { return a.getBoundingClientRect().top < b.getBoundingClientRect().top ? a : b; });
-          var link = document.querySelector('.toc-link[data-slug="' + topmost.id + '"]');
-          if (link && link !== current) {
-            if (current) {
-              activeClass.forEach(function(c) { current.classList.remove(c); });
-              inactiveClass.forEach(function(c) { current.classList.add(c); });
-            }
-            activeClass.forEach(function(c) { link.classList.add(c); });
-            inactiveClass.forEach(function(c) { link.classList.remove(c); });
-            current = link;
-            var indicator = document.getElementById('toc-indicator');
-            if (indicator && link instanceof HTMLElement) {
-              indicator.style.top = link.offsetTop + 'px';
-              indicator.style.height = link.offsetHeight + 'px';
-            }
+        const observer = new IntersectionObserver(function(entries) {
+        const visible = entries.filter(function(e) { return e.isIntersecting; }).map(function(e) { return e.target; });
+        if (visible.length === 0) return;
+        const topmost = visible.reduce(function(a, b) { return a.getBoundingClientRect().top < b.getBoundingClientRect().top ? a : b; });
+        const link = document.querySelector('.toc-link[data-slug="' + topmost.id + '"]');
+        if (link && link !== current) {
+          if (current) {
+            activeClass.forEach(function(c) { current.classList.remove(c); });
+            inactiveClass.forEach(function(c) { current.classList.add(c); });
           }
-        }, { rootMargin: '-80px 0px -70% 0px' });
+          activeClass.forEach(function(c) { link.classList.add(c); });
+          inactiveClass.forEach(function(c) { link.classList.remove(c); });
+          current = link;
+          const indicator = document.getElementById('toc-indicator');
+          if (indicator && link instanceof HTMLElement) {
+            indicator.style.top = link.offsetTop + 'px';
+            indicator.style.height = link.offsetHeight + 'px';
+          }
+        }
+      }, { rootMargin: '-80px 0px -70% 0px' });
 
         headingEls.forEach(function(el) { observer.observe(el); });
       }
