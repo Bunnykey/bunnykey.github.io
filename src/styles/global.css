@@ -108,7 +108,7 @@
 
 @layer utilities {
     .greenhouse-prose {
-        @apply border-t border-outline-subtle/20 pt-8 prose prose-neutral max-w-none prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-strong:text-foreground prose-a:text-accent hover:prose-a:text-accent/80 prose-pre:bg-surface-sunken prose-code:text-foreground;
+        @apply border-t border-outline-subtle/20 pt-8 prose max-w-none text-foreground prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground prose-blockquote:text-foreground-muted prose-a:text-accent hover:prose-a:text-accent/80 prose-pre:bg-surface-sunken prose-code:text-foreground;
     }
 
     .skip-link {
