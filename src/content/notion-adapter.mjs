@@ -8,6 +8,12 @@ const SLUG_KEYS = ['Slug'];
 const TAG_KEYS = ['Tags'];
 const HIGHLIGHT_KEYS = ['Highlight'];
 const PUBLISHED_KEYS = ['Published'];
+const SECTION_KEYS = ['Section'];
+const DEMO_KEYS = ['Demo'];
+const STAGE_KEYS = ['Stage'];
+const SERIES_NAME_KEYS = ['Series Name'];
+const SERIES_TITLE_KEYS = ['Series Title'];
+const SERIES_ORDER_KEYS = ['Series Order'];
 
 function readPlainText(property) {
   if (!property) return '';
@@ -41,6 +47,20 @@ function readCheckbox(property, fallback = false) {
   return fallback;
 }
 
+function readSelect(property) {
+  if (property?.type === 'select') {
+    return property.select?.name || '';
+  }
+  return '';
+}
+
+function readNumber(property) {
+  if (property?.type === 'number') {
+    return property.number;
+  }
+  return undefined;
+}
+
 function getFirstProperty(properties, keys) {
   for (const key of keys) {
     if (properties[key]) return properties[key];
@@ -48,8 +68,12 @@ function getFirstProperty(properties, keys) {
   return undefined;
 }
 
-export function normalizeNotionPage(page, section, options = {}) {
+export function normalizeNotionPage(page, options = {}) {
   const properties = page.properties || {};
+  const section = readSelect(getFirstProperty(properties, SECTION_KEYS)).toLowerCase();
+  if (!section) {
+    return { status: 'skipped', reason: 'no_section' };
+  }
   const title = readPlainText(getFirstProperty(properties, TITLE_KEYS));
   const slugProperty = readPlainText(getFirstProperty(properties, SLUG_KEYS));
   const date = readDate(getFirstProperty(properties, DATE_KEYS));
@@ -58,10 +82,19 @@ export function normalizeNotionPage(page, section, options = {}) {
   const highlight = readCheckbox(getFirstProperty(properties, HIGHLIGHT_KEYS), false);
   const publishedProp = getFirstProperty(properties, PUBLISHED_KEYS);
   const published = publishedProp ? readCheckbox(publishedProp, true) : true;
+  const demo = readSelect(getFirstProperty(properties, DEMO_KEYS));
+  const stage = readSelect(getFirstProperty(properties, STAGE_KEYS));
+  const seriesName = readPlainText(getFirstProperty(properties, SERIES_NAME_KEYS));
+  const seriesTitle = readPlainText(getFirstProperty(properties, SERIES_TITLE_KEYS));
+  const seriesOrder = readNumber(getFirstProperty(properties, SERIES_ORDER_KEYS));
 
   if (!published) {
     return { status: 'skipped', reason: 'unpublished' };
   }
+
+  const series = seriesName
+    ? { name: seriesName, title: seriesTitle || seriesName, order: seriesOrder || 1 }
+    : undefined;
 
   return normalizeCmsEntry(
     {
@@ -75,6 +108,9 @@ export function normalizeNotionPage(page, section, options = {}) {
       tags,
       highlight,
       draft: false,
+      ...(demo ? { demo } : {}),
+      ...(stage ? { stage } : {}),
+      ...(series ? { series } : {}),
     },
     options,
   );

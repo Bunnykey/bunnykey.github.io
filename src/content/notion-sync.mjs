@@ -1,33 +1,18 @@
 import { blocksToMarkdown, normalizeNotionPage } from './notion-adapter.mjs';
 import { queryDataSource, fetchBlockTree } from './notion-client.mjs';
 
-function normalizeSectionConfig(config) {
-  return Object.entries(config)
-    .filter(([, value]) => value)
-    .map(([section, dataSourceId]) => ({ section, dataSourceId }));
-}
-
-async function fetchSectionEntries({ section, dataSourceId }, config) {
-  const pages = await queryDataSource(dataSourceId, config.token);
-  const entries = await Promise.all(
+export async function fetchNotionEntries(config) {
+  const pages = await queryDataSource(config.dataSourceId, config.token);
+  return Promise.all(
     pages.map(async (page) => {
       const blocks = await fetchBlockTree(page.id, config.token);
       const body = blocksToMarkdown(blocks);
-      return normalizeNotionPage(page, section, {
+      return normalizeNotionPage(page, {
         gitOwnedSlugs: config.gitOwnedSlugs,
         body,
       });
     }),
   );
-  return entries;
-}
-
-export async function fetchNotionEntries(config) {
-  const sectionConfigs = normalizeSectionConfig(config.dataSources);
-  const results = await Promise.all(
-    sectionConfigs.map((sc) => fetchSectionEntries(sc, config)),
-  );
-  return results.flat();
 }
 
 export function entryToMarkdown(entry) {
@@ -40,11 +25,24 @@ export function entryToMarkdown(entry) {
     lines.push(`highlight: ${entry.highlight ? 'true' : 'false'}`);
   }
 
-  if (entry.section === 'seeds' || entry.section === 'flora') {
-    const tags = entry.tags?.length
-      ? entry.tags.map((tag) => `"${tag}"`).join(', ')
-      : `"${entry.section}"`;
-    lines.push(`tags: [${tags}]`);
+  if (entry.demo) {
+    lines.push(`demo: "${entry.demo}"`);
+  }
+
+  if (entry.stage) {
+    lines.push(`stage: "${entry.stage}"`);
+  }
+
+  const tags = entry.tags?.length
+    ? entry.tags.map((tag) => `"${tag}"`).join(', ')
+    : `"${entry.section}"`;
+  lines.push(`tags: [${tags}]`);
+
+  if (entry.series) {
+    lines.push(`series:`);
+    lines.push(`  name: "${entry.series.name}"`);
+    lines.push(`  title: "${entry.series.title}"`);
+    lines.push(`  order: ${entry.series.order}`);
   }
 
   lines.push('---', '', entry.body.trim(), '');

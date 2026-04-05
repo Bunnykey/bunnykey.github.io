@@ -8,6 +8,7 @@ const ENV_LOCAL_PATH = path.join(PROJECT_ROOT, '.env.local');
 const CONTENT_DIRS = {
   flora: path.join(PROJECT_ROOT, 'src/content/flora'),
   seeds: path.join(PROJECT_ROOT, 'src/content/seeds'),
+  nursery: path.join(PROJECT_ROOT, 'src/content/nursery'),
 };
 
 async function loadEnvFileIfPresent(filePath) {
@@ -34,20 +35,6 @@ function requiredEnv(name) {
   return value;
 }
 
-function buildConfig() {
-  return {
-    token: requiredEnv('NOTION_TOKEN'),
-    dataSources: {
-      flora: process.env.NOTION_AI_DATA_SOURCE_ID,
-      seeds: process.env.NOTION_NOTES_DATA_SOURCE_ID,
-    },
-    gitOwnedSlugs: {
-      flora: new Set(),
-      seeds: new Set(),
-    },
-  };
-}
-
 async function loadGitOwnedSlugs(section) {
   const dir = CONTENT_DIRS[section];
   const files = await fs.readdir(dir);
@@ -56,9 +43,16 @@ async function loadGitOwnedSlugs(section) {
 
 async function main() {
   await loadEnvFileIfPresent(ENV_LOCAL_PATH);
-  const config = buildConfig();
-  config.gitOwnedSlugs.flora = await loadGitOwnedSlugs('flora');
-  config.gitOwnedSlugs.seeds = await loadGitOwnedSlugs('seeds');
+
+  const config = {
+    token: requiredEnv('NOTION_TOKEN'),
+    dataSourceId: requiredEnv('NOTION_BLOG_DATA_SOURCE_ID'),
+    gitOwnedSlugs: {
+      flora: await loadGitOwnedSlugs('flora'),
+      seeds: await loadGitOwnedSlugs('seeds'),
+      nursery: await loadGitOwnedSlugs('nursery'),
+    },
+  };
 
   const results = await fetchNotionEntries(config);
   let written = 0;

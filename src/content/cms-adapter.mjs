@@ -1,4 +1,4 @@
-const SUPPORTED_SECTIONS = new Set(['flora', 'seeds']);
+const SUPPORTED_SECTIONS = new Set(['flora', 'seeds', 'nursery']);
 const SINGLE_SEGMENT_SLUG = /^[a-z0-9-]+$/;
 
 function normalizeSection(section) {
@@ -63,6 +63,9 @@ export function normalizeCmsEntry(input, options = {}) {
       tags: normalizeTags(input.tags),
       highlight: Boolean(input.highlight),
       draft: false,
+      ...(input.demo ? { demo: input.demo } : {}),
+      ...(input.stage ? { stage: input.stage } : {}),
+      ...(input.series?.name ? { series: input.series } : {}),
     },
   };
 }
