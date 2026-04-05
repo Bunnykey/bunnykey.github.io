@@ -19,6 +19,10 @@ test('normalizeNotionPage maps common property names into cms entry shape', () =
         type: 'title',
         title: [{ plain_text: 'A Notion Entry' }],
       },
+      Section: {
+        type: 'select',
+        select: { name: 'Flora' },
+      },
       Date: {
         type: 'date',
         date: { start: '2026-03-16' },
@@ -36,7 +40,7 @@ test('normalizeNotionPage maps common property names into cms entry shape', () =
         checkbox: true,
       },
     },
-  }, 'flora');
+  });
 
   assert.equal(result.status, 'ready');
   assert.equal(result.entry.title, 'A Notion Entry');
@@ -55,6 +59,10 @@ test('normalizeNotionPage prefers explicit Slug property when present', () => {
         type: 'title',
         title: [{ plain_text: 'Ignored Title Slug' }],
       },
+      Section: {
+        type: 'select',
+        select: { name: 'Seeds' },
+      },
       Slug: {
         type: 'rich_text',
         rich_text: [{ plain_text: 'custom-slug' }],
@@ -68,7 +76,7 @@ test('normalizeNotionPage prefers explicit Slug property when present', () => {
         rich_text: [{ plain_text: 'A short summary' }],
       },
     },
-  }, 'seeds');
+  });
 
   assert.equal(result.entry.slug, 'custom-slug');
   assert.equal(result.entry.canonicalPath, '/seeds/custom-slug/');
@@ -81,6 +89,10 @@ test('normalizeNotionPage skips unpublished entries', () => {
       Title: {
         type: 'title',
         title: [{ plain_text: 'Draft' }],
+      },
+      Section: {
+        type: 'select',
+        select: { name: 'Flora' },
       },
       Date: {
         type: 'date',
@@ -95,7 +107,7 @@ test('normalizeNotionPage skips unpublished entries', () => {
         checkbox: false,
       },
     },
-  }, 'flora');
+  });
 
   assert.deepEqual(result, {
     status: 'skipped',
