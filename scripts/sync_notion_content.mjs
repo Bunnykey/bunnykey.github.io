@@ -3,7 +3,7 @@ import path from 'node:path';
 
 import { fetchNotionEntries, entryToMarkdown } from '../src/content/notion-sync.mjs';
 
-const PROJECT_ROOT = '/Users/ralph/projects/the-greenhouse';
+const PROJECT_ROOT = path.resolve(new URL('.', import.meta.url).pathname, '..');
 const ENV_LOCAL_PATH = path.join(PROJECT_ROOT, '.env.local');
 const CONTENT_DIRS = {
   flora: path.join(PROJECT_ROOT, 'src/content/flora'),
@@ -38,8 +38,8 @@ function buildConfig() {
   return {
     token: requiredEnv('NOTION_TOKEN'),
     dataSources: {
-      flora: process.env.NOTION_FLORA_DATA_SOURCE_ID,
-      seeds: process.env.NOTION_SEEDS_DATA_SOURCE_ID,
+      flora: process.env.NOTION_AI_DATA_SOURCE_ID,
+      seeds: process.env.NOTION_NOTES_DATA_SOURCE_ID,
     },
     gitOwnedSlugs: {
       flora: new Set(),
