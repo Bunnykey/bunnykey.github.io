@@ -1,3 +1,4 @@
+export { slugify } from './cms-adapter.mjs';
 import { normalizeCmsEntry, slugify } from './cms-adapter.mjs';
 
 const TITLE_KEYS = ['Title', 'Name'];
