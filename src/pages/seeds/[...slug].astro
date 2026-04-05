@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
+import ApiFlowDemo from '../../components/demos/ApiFlowDemo';
 import { sectionDescription } from '../../consts/site';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
 import { readingTime } from '../../utils/reading-time';
@@ -47,6 +48,12 @@ const description = entry.data.summary || sectionDescription('seeds');
       <div class="greenhouse-prose" data-pagefind-body>
         <Content />
       </div>
+
+      {entry.data.demo === 'ApiFlowDemo' && (
+        <div class="mt-10">
+          <ApiFlowDemo client:visible />
+        </div>
+      )}
 
       {entry.data.tags && entry.data.tags.length > 0 && (
         <div class="mt-8 pt-6 border-t border-outline-subtle/20 flex flex-wrap gap-1.5">

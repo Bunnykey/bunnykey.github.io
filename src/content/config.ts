@@ -20,7 +20,7 @@ export const collections = {
     type: 'content',
     schema: baseSchema.extend({
       highlight: z.boolean().optional(),
-      demo: z.enum(['TokenFlowDemo']).optional(),
+      demo: z.enum(['TokenFlowDemo', 'ApiFlowDemo']).optional(),
     }),
   }),
   nursery: defineCollection({
@@ -31,6 +31,8 @@ export const collections = {
   }),
   seeds: defineCollection({
     type: 'content',
-    schema: baseSchema,
+    schema: baseSchema.extend({
+      demo: z.enum(['ApiFlowDemo']).optional(),
+    }),
   }),
 };
