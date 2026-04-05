@@ -1,9 +1,0 @@
-gate: test-gate
-project: /Users/ralph/projects/the-greenhouse
-framework: npm-test
-test_command: "npm test"
-e2e_applicable: true
-e2e_type: "web"
-e2e_framework: "playwright"
-iteration: 1
-status: pending
