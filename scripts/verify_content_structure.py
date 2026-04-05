@@ -18,7 +18,7 @@ RULES = {
     },
     "seeds": {
         "required": {"title", "date", "summary"},
-        "allowed": {"title", "date", "summary", "tags", "series"},
+        "allowed": {"title", "date", "summary", "tags", "series", "demo"},
     },
 }
 
