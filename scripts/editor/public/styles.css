@@ -275,18 +275,80 @@ input:focus, select:focus, textarea:focus {
   height: 100%;
 }
 
-#editor {
+#editor-stack {
+  position: relative;
   width: 100%;
   height: 100%;
-  border: none;
+}
+#editor, #ghost {
+  width: 100%;
+  height: 100%;
   padding: 24px;
-  resize: none;
   font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   font-size: 13px;
   line-height: 1.7;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+#ghost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: transparent;
+  background: transparent;
+  overflow: hidden;
+  z-index: 0;
+}
+#ghost .suggestion {
+  color: var(--fg-muted);
+  opacity: 0.55;
+}
+#editor {
+  position: absolute;
+  inset: 0;
+  resize: none;
   background: white;
+  color: var(--fg);
+  z-index: 1;
 }
 [data-theme="dark"] #editor { background: var(--bg); }
+#editor.has-ghost { background: transparent; }
+#editor.has-ghost::selection { background: rgba(122, 173, 116, 0.3); }
+
+#ai-status {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 10px;
+  color: var(--fg-muted);
+  background: var(--bg-raised);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-family: ui-monospace, monospace;
+  z-index: 2;
+  pointer-events: none;
+}
+#editor-pane { position: relative; }
+
+.toolbar-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--fg);
+  cursor: pointer;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  background: white;
+}
+[data-theme="dark"] .toolbar-toggle { background: var(--bg-raised); }
+.toolbar-toggle input { margin: 0; }
 
 #preview-pane {
   background: var(--bg);

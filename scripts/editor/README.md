@@ -47,6 +47,14 @@ Opens at <http://localhost:4322> (loopback) and, when Tailscale is installed and
 - Auto-save snapshot to `localStorage` every 1.5s; offers restore on next load
 - Delete button (removes file; does not commit)
 
+### AI autocomplete (optional)
+- Toggle "AI" in the toolbar to turn on Copilot-style ghost-text completion
+- After a 700ms idle pause, the editor calls Ollama via `/api/complete` and streams the suggestion as grey text
+- `Tab` accepts, `Esc` dismisses, any other keystroke restarts the request
+- Default model: `qwen3.5:2b` (fast, ~1-2s, decent Korean). Override with `EDITOR_COMPLETION_MODEL=llama3.2:3b-instruct-q4_K_M npm run editor`
+- Suggestions overlapping with the existing prefix are auto-trimmed
+- Requires a running Ollama with the chosen model pulled
+
 ### Git workflow
 - Sidebar shows current branch, uncommitted-change count, commits ahead of origin
 - "발행" button — writes with `draft: false`, `git add`, `git commit`, `git push origin HEAD`

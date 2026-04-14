@@ -283,6 +283,91 @@ app.get('/api/tags', async (_req, res) => {
   res.json([...all].sort());
 });
 
+// Autocomplete via Ollama
+const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
+const DEFAULT_COMPLETION_MODEL = process.env.EDITOR_COMPLETION_MODEL || 'qwen3.5:2b';
+
+app.post('/api/complete', async (req, res) => {
+  const { prefix = '', suffix = '', model = DEFAULT_COMPLETION_MODEL } = req.body || {};
+  // Trim context (last 1200 chars before cursor, first 200 after)
+  const pre = prefix.slice(-1200);
+  const suf = suffix.slice(0, 200);
+  const prompt = [
+    'You are a Korean tech-blog writing assistant. The user is mid-draft.',
+    'Continue from the cursor naturally in Korean, matching the surrounding tone.',
+    'Output ONLY the continuation text. No commentary, no code fences, no labels.',
+    'Stop after one or two sentences, or at a natural pause. Max ~120 characters.',
+    'If the user already finished a sentence, suggest the next short sentence.',
+    'Never repeat what is already there.',
+    '',
+    '=== DRAFT BEFORE CURSOR ===',
+    pre,
+    '=== DRAFT AFTER CURSOR ===',
+    suf,
+    '=== CONTINUATION ===',
+  ].join('\n');
+
+  const controller = new AbortController();
+  let clientGone = false;
+  res.on('close', () => { clientGone = true; controller.abort(); });
+
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('X-Accel-Buffering', 'no');
+
+  try {
+    const upstream = await fetch(`${OLLAMA_URL}/api/generate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model,
+        prompt,
+        stream: true,
+        think: false,
+        options: {
+          temperature: 0.4,
+          top_p: 0.9,
+          num_predict: 80,
+          stop: ['\n\n', '===', 'CONTINUATION'],
+        },
+      }),
+      signal: controller.signal,
+    });
+    if (!upstream.ok || !upstream.body) {
+      res.status(502).end(`upstream ${upstream.status}`);
+      return;
+    }
+    const reader = upstream.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    let totalChars = 0;
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      let nl;
+      while ((nl = buf.indexOf('\n')) !== -1) {
+        const line = buf.slice(0, nl).trim();
+        buf = buf.slice(nl + 1);
+        if (!line) continue;
+        try {
+          const j = JSON.parse(line);
+          if (j.response) {
+            res.write(j.response);
+            totalChars += j.response.length;
+            if (totalChars > 200) { controller.abort(); break; }
+          }
+          if (j.done) { res.end(); return; }
+        } catch {}
+      }
+    }
+    res.end();
+  } catch (e) {
+    if (!res.headersSent) res.status(500).json({ error: e.message });
+    else res.end();
+  }
+});
+
 // Check slug uniqueness
 app.get('/api/check-slug', (req, res) => {
   try {

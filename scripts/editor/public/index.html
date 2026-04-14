@@ -79,6 +79,9 @@
         <select id="insert-demo">
           <option value="">+ 데모 삽입</option>
         </select>
+        <label class="toolbar-toggle" title="AI 자동완성 (Tab 수락 / Esc 기각)">
+          <input id="ai-toggle" type="checkbox" /> AI
+        </label>
         <span class="spacer"></span>
         <span id="word-count"></span>
         <span id="ext-badge"></span>
@@ -89,7 +92,11 @@
 
       <div id="split">
         <div id="editor-pane">
-          <textarea id="editor" spellcheck="false" placeholder="여기에 마크다운을 작성하세요..."></textarea>
+          <div id="editor-stack">
+            <div id="ghost" aria-hidden="true"></div>
+            <textarea id="editor" spellcheck="false" placeholder="여기에 마크다운을 작성하세요..."></textarea>
+          </div>
+          <div id="ai-status" hidden></div>
         </div>
         <div id="divider" title="드래그해서 폭 조절"></div>
         <div id="preview-pane">

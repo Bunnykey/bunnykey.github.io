@@ -30,6 +30,9 @@ const els = {
   findInput: $('#find-input'),
   replaceInput: $('#replace-input'),
   findCount: $('#find-count'),
+  ghost: $('#ghost'),
+  aiStatus: $('#ai-status'),
+  aiToggle: $('#ai-toggle'),
 };
 
 let currentSlug = null;
@@ -43,6 +46,8 @@ let findIdx = 0;
 const AUTOSAVE_KEY = 'bunnykey.editor.autosave.v1';
 const THEME_KEY = 'bunnykey.editor.theme';
 const SPLIT_KEY = 'bunnykey.editor.split';
+const AI_KEY = 'bunnykey.editor.ai';
+const AI_DEBOUNCE_MS = 700;
 
 // --- Status ---
 function setStatus(msg, type = '') {
@@ -272,10 +277,12 @@ function restoreAutosave() {
 els.editor.addEventListener('input', () => {
   updateExtBadge();
   updateWordCount();
+  clearGhost();
   clearTimeout(renderTimer);
   renderTimer = setTimeout(render, 250);
   clearTimeout(autoSaveTimer);
   autoSaveTimer = setTimeout(saveAutosave, 1500);
+  if (aiEnabled) scheduleCompletion();
 });
 
 // --- Title → slug auto-fill ---
@@ -591,8 +598,176 @@ function syncScroll(from, to) {
   to.scrollTop = ratio * (to.scrollHeight - to.clientHeight);
   requestAnimationFrame(() => { syncing = false; });
 }
-els.editor.addEventListener('scroll', () => syncScroll(els.editor, els.previewPane));
+els.editor.addEventListener('scroll', () => {
+  els.ghost.scrollTop = els.editor.scrollTop;
+  syncScroll(els.editor, els.previewPane);
+});
 els.previewPane.addEventListener('scroll', () => syncScroll(els.previewPane, els.editor));
+
+// --- AI Autocomplete (Ollama via /api/complete) ---
+let aiEnabled = false;
+let aiTimer = null;
+let aiAbort = null;
+let currentSuggestion = '';
+let suggestionAtPos = -1;
+
+function setAiStatus(text) {
+  if (!text) { els.aiStatus.hidden = true; els.aiStatus.textContent = ''; }
+  else { els.aiStatus.hidden = false; els.aiStatus.textContent = text; }
+}
+
+function clearGhost() {
+  currentSuggestion = '';
+  suggestionAtPos = -1;
+  els.ghost.innerHTML = '';
+  els.editor.classList.remove('has-ghost');
+}
+
+function renderGhost() {
+  if (!currentSuggestion || suggestionAtPos < 0) { clearGhost(); return; }
+  const text = els.editor.value;
+  const before = text.slice(0, suggestionAtPos);
+  const after = text.slice(suggestionAtPos);
+  els.ghost.innerHTML =
+    escapeHtml(before) +
+    `<span class="suggestion">${escapeHtml(currentSuggestion)}</span>` +
+    escapeHtml(after);
+  els.ghost.scrollTop = els.editor.scrollTop;
+  els.editor.classList.add('has-ghost');
+}
+
+// Strip the longest overlap where prefix ends with start of suggestion
+function stripPrefixOverlap(prefix, suggestion) {
+  if (!suggestion) return suggestion;
+  const max = Math.min(prefix.length, suggestion.length, 60);
+  for (let k = max; k > 1; k--) {
+    if (prefix.endsWith(suggestion.slice(0, k))) {
+      return suggestion.slice(k);
+    }
+  }
+  return suggestion;
+}
+
+function shouldSuggest() {
+  if (!aiEnabled) return false;
+  const pos = els.editor.selectionStart;
+  if (pos !== els.editor.selectionEnd) return false; // selection active
+  const text = els.editor.value;
+  // Don't suggest mid-word
+  const ch = text[pos];
+  if (ch && /\S/.test(ch) && !/[\s.,!?;:)\]>]/.test(ch)) return false;
+  // Need some context before cursor
+  if (pos < 8) return false;
+  return true;
+}
+
+function scheduleCompletion() {
+  clearTimeout(aiTimer);
+  if (aiAbort) { try { aiAbort.abort(); } catch {} }
+  aiAbort = null;
+  setAiStatus('');
+  aiTimer = setTimeout(runCompletion, AI_DEBOUNCE_MS);
+}
+
+async function runCompletion() {
+  if (!shouldSuggest()) return;
+  const pos = els.editor.selectionStart;
+  const text = els.editor.value;
+  const prefix = text.slice(0, pos);
+  const suffix = text.slice(pos);
+  aiAbort = new AbortController();
+  setAiStatus('AI ●●●');
+  try {
+    const res = await fetch('/api/complete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prefix, suffix }),
+      signal: aiAbort.signal,
+    });
+    if (!res.ok || !res.body) { setAiStatus(''); return; }
+    suggestionAtPos = pos;
+    currentSuggestion = '';
+    const reader = res.body.getReader();
+    const dec = new TextDecoder();
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      const chunk = dec.decode(value, { stream: true });
+      // If user moved or typed, abort
+      if (els.editor.selectionStart !== suggestionAtPos || els.editor.value !== text) {
+        try { aiAbort.abort(); } catch {}
+        clearGhost();
+        setAiStatus('');
+        return;
+      }
+      currentSuggestion += chunk;
+      // Trim on newline-newline (paragraph end)
+      const dn = currentSuggestion.indexOf('\n\n');
+      if (dn !== -1) {
+        currentSuggestion = currentSuggestion.slice(0, dn);
+        renderGhost();
+        try { aiAbort.abort(); } catch {}
+        break;
+      }
+      renderGhost();
+    }
+    // Final trim: strip leading whitespace; strip overlap with prefix tail
+    currentSuggestion = currentSuggestion.replace(/^[ \t]+/, '').trimEnd();
+    currentSuggestion = stripPrefixOverlap(prefix, currentSuggestion);
+    renderGhost();
+    setAiStatus(currentSuggestion ? 'Tab 수락' : '');
+  } catch (e) {
+    if (e.name !== 'AbortError') console.warn('AI error', e);
+    setAiStatus('');
+  }
+}
+
+function acceptSuggestion() {
+  if (!currentSuggestion || suggestionAtPos < 0) return false;
+  const text = els.editor.value;
+  els.editor.value = text.slice(0, suggestionAtPos) + currentSuggestion + text.slice(suggestionAtPos);
+  const newPos = suggestionAtPos + currentSuggestion.length;
+  clearGhost();
+  setAiStatus('');
+  els.editor.focus();
+  els.editor.selectionStart = els.editor.selectionEnd = newPos;
+  els.editor.dispatchEvent(new Event('input'));
+  return true;
+}
+
+els.editor.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab' && currentSuggestion) {
+    e.preventDefault();
+    acceptSuggestion();
+    return;
+  }
+  if (e.key === 'Escape' && currentSuggestion) {
+    e.preventDefault();
+    clearGhost();
+    setAiStatus('');
+    return;
+  }
+  // Any other key: clear current suggestion (input handler will reschedule)
+  if (currentSuggestion && e.key.length === 1) {
+    clearGhost();
+  }
+});
+
+// Caret/scroll movements should clear ghost
+els.editor.addEventListener('click', clearGhost);
+els.editor.addEventListener('selectionchange', () => {
+  if (suggestionAtPos >= 0 && els.editor.selectionStart !== suggestionAtPos) clearGhost();
+});
+
+els.aiToggle.addEventListener('change', () => {
+  aiEnabled = els.aiToggle.checked;
+  localStorage.setItem(AI_KEY, aiEnabled ? '1' : '0');
+  if (!aiEnabled) {
+    if (aiAbort) try { aiAbort.abort(); } catch {}
+    clearGhost();
+    setAiStatus('');
+  }
+});
 
 // --- Find & Replace ---
 function openFind() {
@@ -695,6 +870,10 @@ async function init() {
       els.tagSuggestions.appendChild(opt);
     }
   } catch {}
+
+  // AI toggle restore
+  aiEnabled = localStorage.getItem(AI_KEY) === '1';
+  els.aiToggle.checked = aiEnabled;
 
   updateExtBadge();
   updateWordCount();
