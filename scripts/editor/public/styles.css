@@ -152,6 +152,24 @@ input:focus, select:focus, textarea:focus {
 }
 #toolbar button:hover { background: var(--bg-raised); }
 #toolbar .spacer { flex: 1; }
+#toolbar select {
+  font-size: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+#ext-badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  color: var(--fg-muted);
+  font-family: ui-monospace, monospace;
+}
+#ext-badge.mdx { background: var(--accent); color: white; border-color: var(--accent); }
 
 .btn-primary {
   background: var(--accent) !important;
@@ -259,6 +277,17 @@ input:focus, select:focus, textarea:focus {
   font-size: 13px;
 }
 .prose th { background: var(--bg-sunken); }
+.prose .demo-placeholder {
+  margin: 20px 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #e8f0e5, #dce6d8);
+  border: 1px dashed var(--accent);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 13px;
+}
 
 #status {
   padding: 6px 16px;

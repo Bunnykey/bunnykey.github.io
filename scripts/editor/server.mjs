@@ -61,19 +61,29 @@ function safeCollection(c) {
   return c;
 }
 
+function findPostFile(collection, slug) {
+  for (const ext of ['.mdx', '.md']) {
+    const p = join(CONTENT, collection, `${slug}${ext}`);
+    if (existsSync(p)) return { path: p, ext };
+  }
+  return null;
+}
+
 // List all posts grouped by collection
 app.get('/api/list', async (_req, res) => {
   const result = {};
   for (const c of COLLECTIONS) {
     const dir = join(CONTENT, c);
     if (!existsSync(dir)) { result[c] = []; continue; }
-    const files = (await readdir(dir)).filter(f => f.endsWith('.md'));
+    const files = (await readdir(dir)).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
     result[c] = await Promise.all(files.map(async f => {
       const raw = await readFile(join(dir, f), 'utf8');
       const { data } = matter(raw);
+      const ext = extname(f);
       return {
-        slug: basename(f, '.md'),
-        title: data.title || basename(f, '.md'),
+        slug: basename(f, ext),
+        ext,
+        title: data.title || basename(f, ext),
         date: data.date || null,
         draft: !!data.draft,
       };
@@ -88,20 +98,34 @@ app.get('/api/get', async (req, res) => {
   try {
     const c = safeCollection(req.query.collection);
     const slug = safeSlug(req.query.slug);
-    const path = join(CONTENT, c, `${slug}.md`);
-    if (!existsSync(path)) return res.status(404).json({ error: 'not found' });
-    const raw = await readFile(path, 'utf8');
+    const hit = findPostFile(c, slug);
+    if (!hit) return res.status(404).json({ error: 'not found' });
+    const raw = await readFile(hit.path, 'utf8');
     const { data, content } = matter(raw);
-    res.json({ frontmatter: data, body: content });
+    res.json({ frontmatter: data, body: content, ext: hit.ext });
   } catch (e) {
     res.status(400).json({ error: e.message });
   }
 });
 
+const DEMO_COMPONENTS = ['TokenFlowDemo', 'ApiFlowDemo'];
+
+function preprocessDemos(md) {
+  // Replace <DemoName /> or <DemoName client:visible /> with a placeholder div
+  const pattern = new RegExp(
+    `<(${DEMO_COMPONENTS.join('|')})\\b[^>]*/?>(\\s*</\\1>)?`,
+    'g',
+  );
+  return md.replace(pattern, (_m, name) =>
+    `<div class="demo-placeholder" data-demo="${name}">📊 ${name} (배포 시 렌더)</div>`,
+  );
+}
+
 // Render markdown to HTML (uses Shiki for code)
 app.post('/api/render', async (req, res) => {
   try {
-    const html = await marked.parse(req.body.markdown || '');
+    const preprocessed = preprocessDemos(req.body.markdown || '');
+    const html = await marked.parse(preprocessed);
     res.json({ html });
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -124,10 +148,21 @@ app.post('/api/save', async (req, res) => {
     if (cleanFm.draft === false) delete cleanFm.draft;
     if (Array.isArray(cleanFm.tags) && cleanFm.tags.length === 0) delete cleanFm.tags;
 
-    const file = matter.stringify(req.body.body || '', cleanFm);
-    const path = join(CONTENT, c, `${slug}.md`);
+    const body = req.body.body || '';
+    // Auto-detect MDX: inline JSX tags for demo components
+    const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
+    const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
+
+    // If existing file has different extension, remove the old one
+    const existing = findPostFile(c, slug);
+    if (existing && existing.ext !== preferredExt) {
+      await (await import('node:fs/promises')).unlink(existing.path);
+    }
+
+    const file = matter.stringify(body, cleanFm);
+    const path = join(CONTENT, c, `${slug}${preferredExt}`);
     await writeFile(path, file, 'utf8');
-    res.json({ ok: true, path: path.replace(ROOT + '/', '') });
+    res.json({ ok: true, path: path.replace(ROOT + '/', ''), ext: preferredExt });
   } catch (e) {
     res.status(400).json({ error: e.message });
   }

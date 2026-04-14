@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   site: 'https://bunnykey.github.io',
@@ -17,5 +18,5 @@ export default defineConfig({
       },
     },
   },
-  integrations: [sitemap(), react()]
+  integrations: [mdx(), sitemap(), react()]
 });

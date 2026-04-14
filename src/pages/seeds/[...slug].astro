@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import ApiFlowDemo from '../../components/demos/ApiFlowDemo';
+import TokenFlowDemo from '../../components/demos/TokenFlowDemo';
 import { sectionDescription } from '../../consts/site';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
 import { readingTime } from '../../utils/reading-time';
@@ -46,10 +47,10 @@ const description = entry.data.summary || sectionDescription('seeds');
       <TableOfContents headings={headings} mobile />
 
       <div class="greenhouse-prose" data-pagefind-body>
-        <Content />
+        <Content components={{ ApiFlowDemo, TokenFlowDemo }} />
       </div>
 
-      {entry.data.demo === 'ApiFlowDemo' && (
+      {entry.data.demo === 'ApiFlowDemo' && !/<ApiFlowDemo\b/.test(entry.body) && (
         <div class="mt-10">
           <ApiFlowDemo client:visible />
         </div>

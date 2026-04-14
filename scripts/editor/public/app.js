@@ -14,11 +14,21 @@ const els = {
   postList: $('#post-list'),
   status: $('#status'),
   fileInput: $('#file-input'),
+  insertDemo: $('#insert-demo'),
+  extBadge: $('#ext-badge'),
 };
 
 let currentSlug = null;
+let currentExt = '.md';
 let renderTimer = null;
 let listCache = {};
+
+function updateExtBadge() {
+  const hasInlineDemo = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(els.editor.value);
+  currentExt = hasInlineDemo ? '.mdx' : (currentExt === '.mdx' ? '.mdx' : '.md');
+  els.extBadge.textContent = currentExt;
+  els.extBadge.className = currentExt === '.mdx' ? 'mdx' : '';
+}
 
 // --- Status ---
 function setStatus(msg, type = '') {
@@ -83,9 +93,11 @@ async function loadPost(collection, slug) {
     els.demo.value = frontmatter.demo || '';
     els.editor.value = body;
     currentSlug = slug;
+    currentExt = (await (await fetch(`/api/get?collection=${collection}&slug=${slug}`)).json()).ext || '.md';
+    updateExtBadge();
     highlightActive();
     render();
-    setStatus(`불러옴: ${collection}/${slug}`);
+    setStatus(`불러옴: ${collection}/${slug} (${currentExt})`);
   } catch (e) {
     setStatus(`로드 실패: ${e.message}`, 'error');
   }
@@ -102,6 +114,8 @@ $('#new-post').addEventListener('click', () => {
   els.date.value = new Date().toISOString().slice(0, 10);
   els.editor.value = '';
   currentSlug = null;
+  currentExt = '.md';
+  updateExtBadge();
   highlightActive();
   render();
   els.title.focus();
@@ -149,8 +163,39 @@ function escapeHtml(s) {
 
 // --- Live preview (debounced) ---
 els.editor.addEventListener('input', () => {
+  updateExtBadge();
   clearTimeout(renderTimer);
   renderTimer = setTimeout(render, 250);
+});
+
+// --- Insert demo ---
+const DEMO_IMPORT_PATH = '../../components/demos';
+
+function ensureImport(componentName) {
+  const importLine = `import ${componentName} from '${DEMO_IMPORT_PATH}/${componentName}';`;
+  if (els.editor.value.includes(importLine)) return;
+  const value = els.editor.value;
+  // Insert after any existing imports, else at top
+  const lines = value.split('\n');
+  let lastImport = -1;
+  for (let i = 0; i < lines.length; i++) {
+    if (/^import\s/.test(lines[i])) lastImport = i;
+  }
+  if (lastImport >= 0) {
+    lines.splice(lastImport + 1, 0, importLine);
+  } else {
+    lines.unshift(importLine, '');
+  }
+  els.editor.value = lines.join('\n');
+}
+
+els.insertDemo.addEventListener('change', (e) => {
+  const name = e.target.value;
+  if (!name) return;
+  ensureImport(name);
+  insertAtCursor(`\n\n<${name} client:visible />\n\n`);
+  e.target.value = '';
+  updateExtBadge();
 });
 
 // --- Auto-fill slug from title ---
@@ -182,10 +227,13 @@ async function save() {
         slug: els.slug.value,
         frontmatter: fm,
         body: els.editor.value,
+        ext: currentExt,
       }),
     });
     setStatus(`저장됨: ${result.path}`, 'success');
     currentSlug = els.slug.value;
+    currentExt = result.ext;
+    updateExtBadge();
     await loadList();
   } catch (e) {
     setStatus(`저장 실패: ${e.message}`, 'error');
@@ -253,8 +301,12 @@ async function init() {
       const opt = document.createElement('option');
       opt.value = d; opt.textContent = d;
       els.demo.appendChild(opt);
+      const opt2 = document.createElement('option');
+      opt2.value = d; opt2.textContent = `<${d} />`;
+      els.insertDemo.appendChild(opt2);
     }
   } catch {}
+  updateExtBadge();
   await loadList();
   render();
   setStatus('준비됨');

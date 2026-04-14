@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import PostSidebar from '../../components/PostSidebar.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import TokenFlowDemo from '../../components/demos/TokenFlowDemo';
+import ApiFlowDemo from '../../components/demos/ApiFlowDemo';
 import { sectionDescription } from '../../consts/site';
 import { getSeriesPostsFromEntries, getSeriesNavigationFromEntries } from '../../utils/series';
 import { filterPublished, formatArchiveDate } from '../../consts/sections';
@@ -57,12 +58,17 @@ const seriesNav = series
         </div>
 
         <div class="greenhouse-prose" data-pagefind-body>
-          <Content />
+          <Content components={{ TokenFlowDemo, ApiFlowDemo }} />
         </div>
 
-        {entry.data.demo === 'TokenFlowDemo' && (
+        {entry.data.demo === 'TokenFlowDemo' && !/<TokenFlowDemo\b/.test(entry.body) && (
           <div class="mt-10">
             <TokenFlowDemo client:visible />
+          </div>
+        )}
+        {entry.data.demo === 'ApiFlowDemo' && !/<ApiFlowDemo\b/.test(entry.body) && (
+          <div class="mt-10">
+            <ApiFlowDemo client:visible />
           </div>
         )}
 
