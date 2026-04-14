@@ -166,6 +166,17 @@ app.get('/api/demos', async (_req, res) => {
   res.json([...all]);
 });
 
-app.listen(PORT, '127.0.0.1', () => {
-  console.log(`Editor running at http://localhost:${PORT}`);
+import { execSync } from 'node:child_process';
+
+let tailnet = null;
+try {
+  const raw = execSync('tailscale status --json', { stdio: ['ignore', 'pipe', 'ignore'] }).toString();
+  const self = JSON.parse(raw).Self || {};
+  tailnet = (self.DNSName || '').replace(/\.$/, '') || (self.TailscaleIPs || [])[0] || null;
+} catch {}
+
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Editor running:`);
+  console.log(`  local:    http://localhost:${PORT}`);
+  if (tailnet) console.log(`  tailnet:  http://${tailnet}:${PORT}`);
 });
