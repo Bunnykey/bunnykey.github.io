@@ -533,12 +533,21 @@ input:focus, select:focus, textarea:focus {
     grid-template-rows: auto auto;
   }
   #divider { display: none; }
+  #editor-stack {
+    position: relative;
+    height: auto;
+    min-height: 60vh;
+  }
   #editor {
-    min-height: 50vh;
+    position: relative;
+    inset: auto;
+    min-height: 60vh;
     padding: 16px;
-    font-size: 14px;
+    font-size: 16px;
     border-bottom: 1px solid var(--border);
   }
+  #ghost { display: none; }
+  #ai-status, .toolbar-toggle { display: none !important; }
   #preview-pane {
     padding: 16px;
     min-height: 50vh;
