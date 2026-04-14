@@ -11,7 +11,14 @@
     <aside id="sidebar">
       <div class="sidebar-header">
         <h1>광야 에디터</h1>
-        <button id="new-post" class="btn-primary">+ 새 글</button>
+        <div class="header-actions">
+          <button id="theme-toggle" class="icon-btn" title="다크모드">◐</button>
+          <button id="new-post" class="btn-primary">+ 새 글</button>
+        </div>
+      </div>
+      <div class="sidebar-git">
+        <span id="git-branch"></span>
+        <span id="git-changes"></span>
       </div>
       <div id="post-list"></div>
     </aside>
@@ -28,6 +35,7 @@
           </label>
           <label>슬러그
             <input id="fm-slug" type="text" placeholder="my-post-slug" />
+            <span id="slug-warn" class="warn"></span>
           </label>
           <label>날짜
             <input id="fm-date" type="date" />
@@ -45,7 +53,8 @@
         </div>
         <div class="fm-row">
           <label>태그 (쉼표)
-            <input id="fm-tags" type="text" placeholder="note, AI" />
+            <input id="fm-tags" type="text" list="tag-suggestions" placeholder="note, AI" />
+            <datalist id="tag-suggestions"></datalist>
           </label>
           <label>데모
             <select id="fm-demo">
@@ -59,32 +68,60 @@
       </header>
 
       <div id="toolbar">
-        <button data-action="code">코드블럭</button>
-        <button data-action="image">이미지</button>
-        <button data-action="link">링크</button>
+        <button data-action="bold" title="볼드 (Cmd+B)"><b>B</b></button>
+        <button data-action="italic" title="이탤릭 (Cmd+I)"><i>I</i></button>
+        <button data-action="link" title="링크 (Cmd+K)">🔗</button>
+        <button data-action="code" title="코드블럭 (Cmd+Shift+C)">{ }</button>
+        <button data-action="image" title="이미지">🖼</button>
         <button data-action="table">표</button>
-        <button data-action="h2">## H2</button>
-        <button data-action="h3">### H3</button>
+        <button data-action="h2">H2</button>
+        <button data-action="h3">H3</button>
         <select id="insert-demo">
           <option value="">+ 데모 삽입</option>
         </select>
         <span class="spacer"></span>
+        <span id="word-count"></span>
         <span id="ext-badge"></span>
-        <button id="save" class="btn-primary">저장</button>
+        <button id="delete-post" class="btn-danger" title="글 삭제">🗑</button>
+        <button id="save" title="저장 (Cmd+S)">저장</button>
+        <button id="publish" class="btn-primary" title="draft 해제 + commit + push">발행</button>
       </div>
 
       <div id="split">
         <div id="editor-pane">
           <textarea id="editor" spellcheck="false" placeholder="여기에 마크다운을 작성하세요..."></textarea>
         </div>
+        <div id="divider" title="드래그해서 폭 조절"></div>
         <div id="preview-pane">
           <div id="toc"></div>
           <article id="preview" class="prose"></article>
         </div>
       </div>
 
-      <div id="status"></div>
+      <div id="status">
+        <span id="status-msg">준비됨</span>
+        <span class="spacer"></span>
+        <span id="reading-time"></span>
+      </div>
     </main>
+  </div>
+
+  <!-- Find & Replace overlay -->
+  <div id="find-overlay" class="overlay" hidden>
+    <div class="overlay-box">
+      <div class="overlay-row">
+        <input id="find-input" type="text" placeholder="찾기..." />
+        <span id="find-count">0/0</span>
+        <button id="find-prev">↑</button>
+        <button id="find-next">↓</button>
+      </div>
+      <div class="overlay-row">
+        <input id="replace-input" type="text" placeholder="바꾸기..." />
+        <button id="replace-one">바꾸기</button>
+        <button id="replace-all">전체</button>
+        <button id="find-close">✕</button>
+      </div>
+    </div>
   </div>
 
   <input type="file" id="file-input" accept="image/*" hidden />

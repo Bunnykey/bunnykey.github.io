@@ -8,29 +8,71 @@ Dev-only markdown editor for blog posts. Renders with the same Shiki dual theme 
 npm run editor
 ```
 
-Opens at <http://localhost:4322>. Bound to `127.0.0.1` only — never reachable from the network.
+Opens at <http://localhost:4322> (loopback) and, when Tailscale is installed and running, at the MagicDNS hostname of the machine too. The server binds `0.0.0.0`, so anyone on the same LAN / tailnet can reach it — treat it accordingly.
 
-## What it does
+## Features
 
-- Lists posts across `flora`, `nursery`, `seeds` collections in the sidebar
-- Frontmatter form (title/date/summary/tags/draft/demo)
-- Markdown editor with live preview (250ms debounce)
-- Auto TOC from `h2`/`h3`
-- Toolbar inserts: code block, link, table, headings, image upload
-- Image upload writes to `public/img/<timestamp>-<name>.<ext>` and inserts the markdown
-- Cmd/Ctrl+S to save
-- Save writes directly to `src/content/<collection>/<slug>.md`
+### Authoring
+- Split-pane markdown editor with live preview (250ms debounce)
+- Shiki dual theme (`github-light` / `github-dark`) so code blocks match deployed post
+- Auto-generated TOC from `h2`/`h3` with smooth scroll on click
+- Word count + reading time in the status bar
+- Scroll sync between editor and preview
+- Drag the center divider to resize panes (persisted to localStorage)
+- Dark/light theme toggle (persisted)
 
-## Not in v1
+### Shortcuts
+- `Cmd/Ctrl+S` — save
+- `Cmd/Ctrl+B` — bold, `Cmd/Ctrl+I` — italic, `Cmd/Ctrl+K` — link
+- `Cmd/Ctrl+Shift+C` — code block
+- `Cmd/Ctrl+F` — find & replace
+- `Enter` on a list item — continues list (numbered lists auto-increment); Enter on empty list item removes the marker
 
-- Mobile layout (desktop only)
-- Git commit button (run `git` yourself after saving)
-- Authentication (loopback only)
-- Live render of React demo components in preview (frontmatter `demo:` field is set; the actual component renders on the deployed page)
+### Images
+- Toolbar button → file picker
+- Paste image from clipboard
+- Drag-drop onto the editor pane
+- All uploads land in `public/img/<timestamp>-<name>.<ext>` and the markdown is inserted at the cursor
+
+### Demos (React components, MDX)
+- "+ 데모 삽입" dropdown inserts `<DemoName client:visible />` at cursor
+- Auto-adds the `import` line at top of file when needed
+- Saves as `.mdx` automatically when inline demo tags are present
+- Preview shows a placeholder card (actual component renders on deployed page)
+
+### Post management
+- Sidebar lists `flora` / `nursery` / `seeds` posts with draft badges and extension
+- Slug uniqueness warning on input
+- Tag autocomplete from the union of all existing post tags
+- Auto-save snapshot to `localStorage` every 1.5s; offers restore on next load
+- Delete button (removes file; does not commit)
+
+### Git workflow
+- Sidebar shows current branch, uncommitted-change count, commits ahead of origin
+- "발행" button — writes with `draft: false`, `git add`, `git commit`, `git push origin HEAD`
+  - Safe to re-click; if no diff, the push is a no-op
+
+## Endpoints
+
+- `GET  /api/list` — all posts grouped by collection
+- `GET  /api/get?collection=&slug=` — single post frontmatter + body + ext
+- `GET  /api/demos` — available demo component names from `content/config.ts`
+- `GET  /api/tags` — union of tags across all posts
+- `GET  /api/check-slug?collection=&slug=` — slug existence check
+- `GET  /api/git-status` — branch, dirty files, commits ahead
+- `POST /api/render` — markdown → HTML with Shiki (demo tags become placeholders)
+- `POST /api/save` — write to `src/content/<c>/<slug>.{md,mdx}`; `.mdx` chosen when inline demo tag detected
+- `POST /api/publish` — save with `draft` stripped, then `git add/commit/push`
+- `POST /api/delete` — unlink the file
+- `POST /api/upload` — multipart image upload into `public/img/`
 
 ## Files
 
-- `server.mjs` — Express server with `/api/{list,get,render,save,upload,demos}` endpoints
-- `public/index.html` — single-page UI shell
-- `public/app.js` — vanilla JS, no build step
-- `public/styles.css` — editor + preview prose styles
+- `server.mjs` — Express server
+- `public/index.html` — UI shell
+- `public/app.js` — vanilla JS client (no build step)
+- `public/styles.css` — editor UI + preview prose styles
+
+## Security
+
+No authentication. Only run on trusted networks (home wifi / tailnet). Don't expose the port publicly.

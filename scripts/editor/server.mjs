@@ -3,10 +3,11 @@ import multer from 'multer';
 import { marked } from 'marked';
 import matter from 'gray-matter';
 import { codeToHtml } from 'shiki';
-import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
+import { readFile, writeFile, readdir, mkdir, unlink } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve, basename, extname } from 'node:path';
+import { execSync, spawnSync } from 'node:child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -190,6 +191,110 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.json({ url: `/img/${req.file.filename}`, name: req.file.originalname });
 });
 
+// Delete a post
+app.post('/api/delete', async (req, res) => {
+  try {
+    const c = safeCollection(req.body.collection);
+    const slug = safeSlug(req.body.slug);
+    const hit = findPostFile(c, slug);
+    if (!hit) return res.status(404).json({ error: 'not found' });
+    await unlink(hit.path);
+    res.json({ ok: true, path: hit.path.replace(ROOT + '/', '') });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+});
+
+// Git helpers
+function git(args, opts = {}) {
+  return spawnSync('git', args, { cwd: ROOT, encoding: 'utf8', ...opts });
+}
+
+app.get('/api/git-status', (_req, res) => {
+  const st = git(['status', '--porcelain']);
+  if (st.status !== 0) return res.json({ dirty: false, files: [], ahead: 0, branch: null });
+  const files = st.stdout.split('\n').filter(Boolean).map(l => ({ status: l.slice(0, 2), file: l.slice(3) }));
+  const branch = git(['rev-parse', '--abbrev-ref', 'HEAD']).stdout.trim();
+  // count commits ahead of origin/branch
+  let ahead = 0;
+  const rev = git(['rev-list', '--count', `origin/${branch}..HEAD`]);
+  if (rev.status === 0) ahead = parseInt(rev.stdout.trim(), 10) || 0;
+  res.json({ dirty: files.length > 0, files, ahead, branch });
+});
+
+// Publish: save (draft off) + commit + push
+app.post('/api/publish', async (req, res) => {
+  try {
+    const c = safeCollection(req.body.collection);
+    const slug = safeSlug(req.body.slug);
+    if (!slug) throw new Error('slug required');
+    const fm = req.body.frontmatter || {};
+    if (!fm.title) throw new Error('title required');
+    if (!fm.date) throw new Error('date required');
+
+    const dateStr = typeof fm.date === 'string' ? fm.date : new Date(fm.date).toISOString().slice(0, 10);
+    const cleanFm = { ...fm, date: dateStr };
+    delete cleanFm.draft;
+    if (Array.isArray(cleanFm.tags) && cleanFm.tags.length === 0) delete cleanFm.tags;
+
+    const body = req.body.body || '';
+    const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
+    const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
+    const existing = findPostFile(c, slug);
+    if (existing && existing.ext !== preferredExt) await unlink(existing.path);
+    const file = matter.stringify(body, cleanFm);
+    const relPath = `src/content/${c}/${slug}${preferredExt}`;
+    await writeFile(join(ROOT, relPath), file, 'utf8');
+
+    const add = git(['add', relPath, 'public/img']);
+    if (add.status !== 0) throw new Error(`git add failed: ${add.stderr}`);
+
+    const msg = req.body.message || `content: publish "${fm.title}"`;
+    const commit = git(['commit', '-m', msg]);
+    if (commit.status !== 0) {
+      // commit might fail if nothing to commit — that's OK for re-publish with no changes
+      if (!/nothing to commit/.test(commit.stdout + commit.stderr)) {
+        throw new Error(`git commit failed: ${commit.stderr || commit.stdout}`);
+      }
+    }
+
+    const push = git(['push', 'origin', 'HEAD']);
+    if (push.status !== 0) throw new Error(`git push failed: ${push.stderr}`);
+
+    res.json({ ok: true, path: relPath, committed: commit.status === 0 });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+});
+
+// All tags (union across posts)
+app.get('/api/tags', async (_req, res) => {
+  const all = new Set();
+  for (const c of COLLECTIONS) {
+    const dir = join(CONTENT, c);
+    if (!existsSync(dir)) continue;
+    const files = (await readdir(dir)).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+    for (const f of files) {
+      const raw = await readFile(join(dir, f), 'utf8');
+      const { data } = matter(raw);
+      for (const t of data.tags || []) all.add(t);
+    }
+  }
+  res.json([...all].sort());
+});
+
+// Check slug uniqueness
+app.get('/api/check-slug', (req, res) => {
+  try {
+    const c = safeCollection(req.query.collection);
+    const slug = safeSlug(req.query.slug);
+    const hit = findPostFile(c, slug);
+    res.json({ exists: !!hit, ext: hit?.ext || null });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
+});
+
 // Demo enum from config.ts (parsed simply)
 app.get('/api/demos', async (_req, res) => {
   const cfg = await readFile(join(CONTENT, 'config.ts'), 'utf8');
@@ -200,8 +305,6 @@ app.get('/api/demos', async (_req, res) => {
   }
   res.json([...all]);
 });
-
-import { execSync } from 'node:child_process';
 
 let tailnet = null;
 try {
