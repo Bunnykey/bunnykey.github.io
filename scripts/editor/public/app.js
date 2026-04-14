@@ -162,6 +162,13 @@ async function loadPost(collection, slug) {
     render();
     setStatus(`불러옴: ${collection}/${slug} (${currentExt})`);
     checkSlug();
+    // Mobile: collapse sidebar and scroll editor into view
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      sidebar.classList.add('collapsed');
+      requestAnimationFrame(() => {
+        document.getElementById('topbar')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
   } catch (e) {
     setStatus(`로드 실패: ${e.message}`, 'error');
   }
@@ -587,6 +594,12 @@ function applyTheme(t) {
 $('#theme-toggle').addEventListener('click', () => {
   const cur = document.documentElement.getAttribute('data-theme');
   applyTheme(cur === 'dark' ? 'light' : 'dark');
+});
+
+// --- Sidebar collapse (mobile) ---
+const sidebar = $('#sidebar');
+$('#sidebar-toggle').addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
 });
 
 // --- Scroll sync ---

@@ -489,8 +489,11 @@ input:focus, select:focus, textarea:focus {
   text-align: right;
 }
 
+.mobile-only { display: none; }
+
 /* Mobile */
 @media (max-width: 768px) {
+  .mobile-only { display: inline-flex; }
   #app {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
@@ -501,7 +504,13 @@ input:focus, select:focus, textarea:focus {
     max-height: 200px;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    transition: max-height 0.2s ease;
   }
+  #sidebar.collapsed { max-height: 60px; overflow: hidden; }
+  #sidebar.collapsed #post-list, #sidebar.collapsed .sidebar-git { display: none; }
+  #sidebar.collapsed #sidebar-toggle::before { content: "▼"; }
+  #sidebar.collapsed #sidebar-toggle { font-size: 0; }
+  #sidebar.collapsed #sidebar-toggle::before { font-size: 14px; }
   .sidebar-header {
     padding: 12px;
     display: flex;
