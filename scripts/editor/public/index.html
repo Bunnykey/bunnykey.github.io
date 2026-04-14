@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>광야 에디터</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <h1>광야 에디터</h1>
+        <button id="new-post" class="btn-primary">+ 새 글</button>
+      </div>
+      <div id="post-list"></div>
+    </aside>
+
+    <main id="main">
+      <header id="topbar">
+        <div class="fm-row">
+          <label>컬렉션
+            <select id="fm-collection">
+              <option value="seeds">seeds</option>
+              <option value="flora">flora</option>
+              <option value="nursery">nursery</option>
+            </select>
+          </label>
+          <label>슬러그
+            <input id="fm-slug" type="text" placeholder="my-post-slug" />
+          </label>
+          <label>날짜
+            <input id="fm-date" type="date" />
+          </label>
+        </div>
+        <div class="fm-row">
+          <label class="full">제목
+            <input id="fm-title" type="text" placeholder="글 제목" />
+          </label>
+        </div>
+        <div class="fm-row">
+          <label class="full">요약
+            <input id="fm-summary" type="text" placeholder="(optional) 한 문장 요약" />
+          </label>
+        </div>
+        <div class="fm-row">
+          <label>태그 (쉼표)
+            <input id="fm-tags" type="text" placeholder="note, AI" />
+          </label>
+          <label>데모
+            <select id="fm-demo">
+              <option value="">(없음)</option>
+            </select>
+          </label>
+          <label class="check">
+            <input id="fm-draft" type="checkbox" /> draft
+          </label>
+        </div>
+      </header>
+
+      <div id="toolbar">
+        <button data-action="code">코드블럭</button>
+        <button data-action="image">이미지</button>
+        <button data-action="link">링크</button>
+        <button data-action="table">표</button>
+        <button data-action="h2">## H2</button>
+        <button data-action="h3">### H3</button>
+        <span class="spacer"></span>
+        <button id="save" class="btn-primary">저장</button>
+      </div>
+
+      <div id="split">
+        <div id="editor-pane">
+          <textarea id="editor" spellcheck="false" placeholder="여기에 마크다운을 작성하세요..."></textarea>
+        </div>
+        <div id="preview-pane">
+          <div id="toc"></div>
+          <article id="preview" class="prose"></article>
+        </div>
+      </div>
+
+      <div id="status"></div>
+    </main>
+  </div>
+
+  <input type="file" id="file-input" accept="image/*" hidden />
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
