@@ -1,6 +1,6 @@
 ---
-title: 'Hello, Seeds!'
-date: '2026-04-15'
+title: "Hello, Seeds!"
+date: 2026-04-15
 summary: Seed부터 시작하는 씨앗과의 인사
 tags:
   - test

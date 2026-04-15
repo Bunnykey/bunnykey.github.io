@@ -133,6 +133,24 @@ app.post('/api/render', async (req, res) => {
   }
 });
 
+// Serialize frontmatter consistently — date as unquoted YAML date, strings quoted
+function buildFrontmatter(fm) {
+  if (!fm.title) throw new Error('title required');
+  if (!fm.date) throw new Error('date required');
+  const dateStr = typeof fm.date === 'string' ? fm.date : new Date(fm.date).toISOString().slice(0, 10);
+  const lines = [`title: ${JSON.stringify(fm.title)}`, `date: ${dateStr}`];
+  if (fm.summary) lines.push(`summary: ${JSON.stringify(fm.summary)}`);
+  if (Array.isArray(fm.tags) && fm.tags.length > 0) {
+    const tagList = fm.tags.map(t => JSON.stringify(t)).join(', ');
+    lines.push(`tags: [${tagList}]`);
+  }
+  if (fm.demo) lines.push(`demo: ${JSON.stringify(fm.demo)}`);
+  if (fm.highlight) lines.push(`highlight: true`);
+  if (fm.stage) lines.push(`stage: ${JSON.stringify(fm.stage)}`);
+  if (fm.draft) lines.push(`draft: true`);
+  return `---\n${lines.join('\n')}\n---\n`;
+}
+
 // Save markdown file
 app.post('/api/save', async (req, res) => {
   try {
@@ -140,29 +158,15 @@ app.post('/api/save', async (req, res) => {
     const slug = safeSlug(req.body.slug);
     if (!slug) throw new Error('slug required');
     const fm = req.body.frontmatter || {};
-    if (!fm.title) throw new Error('title required');
-    if (!fm.date) throw new Error('date required');
-
-    // Stringify date as ISO YYYY-MM-DD
-    const dateStr = typeof fm.date === 'string' ? fm.date : new Date(fm.date).toISOString().slice(0, 10);
-    const cleanFm = { ...fm, date: dateStr };
-    if (cleanFm.draft === false) delete cleanFm.draft;
-    if (Array.isArray(cleanFm.tags) && cleanFm.tags.length === 0) delete cleanFm.tags;
+    const fmBlock = buildFrontmatter(fm);
 
     const body = req.body.body || '';
-    // Auto-detect MDX: inline JSX tags for demo components
     const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
     const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
-
-    // If existing file has different extension, remove the old one
     const existing = findPostFile(c, slug);
-    if (existing && existing.ext !== preferredExt) {
-      await (await import('node:fs/promises')).unlink(existing.path);
-    }
-
-    const file = matter.stringify(body, cleanFm);
+    if (existing && existing.ext !== preferredExt) await unlink(existing.path);
     const path = join(CONTENT, c, `${slug}${preferredExt}`);
-    await writeFile(path, file, 'utf8');
+    await writeFile(path, fmBlock + '\n' + body, 'utf8');
     res.json({ ok: true, path: path.replace(ROOT + '/', ''), ext: preferredExt });
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -232,19 +236,17 @@ app.post('/api/publish', async (req, res) => {
     if (!fm.title) throw new Error('title required');
     if (!fm.date) throw new Error('date required');
 
-    const dateStr = typeof fm.date === 'string' ? fm.date : new Date(fm.date).toISOString().slice(0, 10);
-    const cleanFm = { ...fm, date: dateStr };
-    delete cleanFm.draft;
-    if (Array.isArray(cleanFm.tags) && cleanFm.tags.length === 0) delete cleanFm.tags;
+    const publishFm = { ...fm };
+    delete publishFm.draft;
+    const fmBlock = buildFrontmatter(publishFm);
 
     const body = req.body.body || '';
     const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
     const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
     const existing = findPostFile(c, slug);
     if (existing && existing.ext !== preferredExt) await unlink(existing.path);
-    const file = matter.stringify(body, cleanFm);
     const relPath = `src/content/${c}/${slug}${preferredExt}`;
-    await writeFile(join(ROOT, relPath), file, 'utf8');
+    await writeFile(join(ROOT, relPath), fmBlock + '\n' + body, 'utf8');
 
     const toAdd = [relPath];
     if (existsSync(join(ROOT, 'public', 'img'))) toAdd.push('public/img');
