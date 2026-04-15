@@ -405,11 +405,13 @@ $('#publish').addEventListener('click', async () => {
     });
     els.draft.checked = false;
     setStatus(`발행 완료: ${result.path}`, 'success');
+    alert(`발행 완료\n${result.path}`);
     clearAutosave();
     await loadList();
     refreshGitStatus();
   } catch (e) {
     setStatus(`발행 실패: ${e.message}`, 'error');
+    alert(`발행 실패: ${e.message}`);
   }
 });
 

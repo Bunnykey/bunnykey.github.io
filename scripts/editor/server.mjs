@@ -246,8 +246,10 @@ app.post('/api/publish', async (req, res) => {
     const relPath = `src/content/${c}/${slug}${preferredExt}`;
     await writeFile(join(ROOT, relPath), file, 'utf8');
 
-    const add = git(['add', relPath, 'public/img']);
-    if (add.status !== 0) throw new Error(`git add failed: ${add.stderr}`);
+    const toAdd = [relPath];
+    if (existsSync(join(ROOT, 'public', 'img'))) toAdd.push('public/img');
+    const add = git(['add', ...toAdd]);
+    if (add.status !== 0) throw new Error(`git add failed: ${add.stderr || add.stdout}`);
 
     const msg = req.body.message || `content: publish "${fm.title}"`;
     const commit = git(['commit', '-m', msg]);
