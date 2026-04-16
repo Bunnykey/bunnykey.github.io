@@ -15,6 +15,16 @@ export async function fetchNotionEntries(config) {
   );
 }
 
+// Notion users often type "##텍스트" (no space) in paragraph blocks.
+// CommonMark requires a space after the hashes to treat it as a heading,
+// so normalize each line before writing.
+function normalizeBody(body) {
+  return body
+    .split('\n')
+    .map((line) => line.replace(/^(\s*)(#{1,6})([^\s#])/, '$1$2 $3'))
+    .join('\n');
+}
+
 export function entryToMarkdown(entry) {
   const lines = ['---'];
   lines.push(`title: "${entry.title.replaceAll('"', '\\"')}"`);
@@ -45,6 +55,6 @@ export function entryToMarkdown(entry) {
     lines.push(`  order: ${entry.series.order}`);
   }
 
-  lines.push('---', '', entry.body.trim(), '');
+  lines.push('---', '', normalizeBody(entry.body).trim(), '');
   return lines.join('\n');
 }
