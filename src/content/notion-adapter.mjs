@@ -126,10 +126,29 @@ function renderRichText(richText = []) {
     .join('');
 }
 
-export function blocksToMarkdown(blocks = []) {
+export async function blocksToMarkdown(blocks = [], opts = {}) {
+  const { resolveImage } = opts;
   const lines = [];
 
   for (const block of blocks) {
+    if (block.type === 'image') {
+      const img = block.image || {};
+      const rawUrl = img.type === 'file' ? img.file?.url : img.external?.url;
+      if (!rawUrl) continue;
+      const alt = renderRichText(img.caption).trim() || 'image';
+      let url = rawUrl;
+      if (img.type === 'file' && resolveImage) {
+        try {
+          url = await resolveImage({ url: rawUrl, blockId: block.id, alt });
+        } catch {
+          url = rawUrl;
+        }
+      }
+      lines.push(`![${alt}](${url})`);
+      lines.push('');
+      continue;
+    }
+
     if (block.type === 'paragraph') {
       lines.push(renderRichText(block.paragraph?.rich_text));
       lines.push('');

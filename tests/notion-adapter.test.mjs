@@ -115,8 +115,8 @@ test('normalizeNotionPage skips unpublished entries', () => {
   });
 });
 
-test('blocksToMarkdown renders supported block types into markdown', () => {
-  const markdown = blocksToMarkdown([
+test('blocksToMarkdown renders supported block types into markdown', async () => {
+  const markdown = await blocksToMarkdown([
     {
       type: 'heading_2',
       heading_2: {

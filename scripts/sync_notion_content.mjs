@@ -52,6 +52,7 @@ async function main() {
       seeds: await loadGitOwnedSlugs('seeds'),
       nursery: await loadGitOwnedSlugs('nursery'),
     },
+    publicImgDir: path.join(PROJECT_ROOT, 'public/img'),
   };
 
   const results = await fetchNotionEntries(config);

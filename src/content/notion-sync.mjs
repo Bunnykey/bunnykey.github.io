@@ -1,12 +1,33 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import { blocksToMarkdown, normalizeNotionPage } from './notion-adapter.mjs';
 import { queryDataSource, fetchBlockTree } from './notion-client.mjs';
 
+// Download Notion-hosted images (signed URLs expire) to public/img/
+// Filename is deterministic so re-syncing doesn't duplicate.
+function makeImageResolver(publicImgDir) {
+  return async ({ url, blockId }) => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`image fetch ${res.status}`);
+    const pathname = new URL(url).pathname;
+    const ext = (path.extname(pathname) || '.png').toLowerCase();
+    const safeExt = /^\.[a-z0-9]{2,5}$/.test(ext) ? ext : '.png';
+    const filename = `notion-${blockId.replace(/-/g, '')}${safeExt}`;
+    await fs.mkdir(publicImgDir, { recursive: true });
+    const filePath = path.join(publicImgDir, filename);
+    const buf = Buffer.from(await res.arrayBuffer());
+    await fs.writeFile(filePath, buf);
+    return `/img/${filename}`;
+  };
+}
+
 export async function fetchNotionEntries(config) {
   const pages = await queryDataSource(config.dataSourceId, config.token);
+  const resolveImage = config.publicImgDir ? makeImageResolver(config.publicImgDir) : undefined;
   return Promise.all(
     pages.map(async (page) => {
       const blocks = await fetchBlockTree(page.id, config.token);
-      const body = blocksToMarkdown(blocks);
+      const body = await blocksToMarkdown(blocks, { resolveImage });
       return normalizeNotionPage(page, {
         gitOwnedSlugs: config.gitOwnedSlugs,
         body,
