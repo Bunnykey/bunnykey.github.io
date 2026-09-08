@@ -10,15 +10,15 @@ CONTENT_ROOT = Path("src/content")
 RULES = {
     "flora": {
         "required": {"title", "date", "summary"},
-        "allowed": {"title", "date", "summary", "highlight", "tags", "series", "demo"},
+        "allowed": {"title", "date", "summary", "highlight", "tags", "category", "series", "demo"},
     },
     "nursery": {
         "required": {"title", "date", "summary"},
-        "allowed": {"title", "date", "summary", "stage", "tags", "series"},
+        "allowed": {"title", "date", "summary", "stage", "tags", "category", "series"},
     },
     "seeds": {
         "required": {"title", "date", "summary"},
-        "allowed": {"title", "date", "summary", "tags", "series", "demo"},
+        "allowed": {"title", "date", "summary", "tags", "category", "series", "demo"},
     },
 }
 
