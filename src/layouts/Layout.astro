@@ -44,44 +44,25 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta charset="UTF-8" />
     <script is:inline>
       (function() {
-        const saved = localStorage.getItem('theme');
-        const savedStyle = localStorage.getItem('style') || 'garden';
-        let savedAtmo = localStorage.getItem('atmosphere') || 'none';
-        let savedAtmoMode = localStorage.getItem('atmosphereMode') || 'auto';
-        const defaults = { garden: 'sunny', paper: 'sunny', twilight: 'moonlight', terracotta: 'sunny' };
-        const compatible = {
-          garden: ['none', 'sunny', 'dawn', 'rain'],
-          paper: ['none', 'sunny', 'dawn'],
-          twilight: ['none', 'moonlight', 'rain', 'aurora'],
-          terracotta: ['none', 'sunny', 'dawn', 'moonlight'],
+        const themes = {
+          garden: { style: 'garden', atmosphere: 'sunny', brightness: 'light' },
+          rain: { style: 'garden', atmosphere: 'rain', brightness: 'light' },
+          moonlight: { style: 'twilight', atmosphere: 'moonlight', brightness: 'dark' },
+          dawn: { style: 'terracotta', atmosphere: 'dawn', brightness: 'light' },
+          aurora: { style: 'twilight', atmosphere: 'aurora', brightness: 'dark' },
         };
-        if (savedAtmoMode === 'auto') {
-          savedAtmo = defaults[savedStyle] || defaults.garden;
-        } else if (!(compatible[savedStyle] || compatible.garden).includes(savedAtmo)) {
-          savedAtmoMode = 'auto';
-          savedAtmo = defaults[savedStyle] || defaults.garden;
-          localStorage.setItem('atmosphereMode', savedAtmoMode);
-        }
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-        function resolve(pref) {
-          if (pref === 'light') return 'light';
-          if (pref === 'dark') return 'dark';
-          return prefersDark.matches ? 'dark' : 'light';
-        }
-        function apply(resolved) {
-          const colorScheme = savedStyle === 'twilight' || savedAtmo === 'aurora' ? 'dark' : resolved;
-          document.documentElement.dataset.theme = resolved;
-          document.documentElement.style.colorScheme = colorScheme;
-          const meta = document.getElementById('meta-theme-color');
-          if (meta) meta.setAttribute('content', colorScheme === 'dark' ? '#10141d' : '#faf9f6');
-        }
-        document.documentElement.dataset.style = savedStyle;
-        document.documentElement.dataset.atmosphere = savedAtmo;
-        apply(resolve(saved));
-        prefersDark.addEventListener('change', function() {
-          const current = localStorage.getItem('theme');
-          if (!current || current === 'system') apply(resolve('system'));
-        });
+        const legacyAtmo = localStorage.getItem('atmosphere');
+        const fallback = legacyAtmo === 'rain' || legacyAtmo === 'moonlight' || legacyAtmo === 'dawn' || legacyAtmo === 'aurora'
+          ? legacyAtmo
+          : localStorage.getItem('style') === 'twilight' ? 'moonlight' : 'garden';
+        const selected = themes[localStorage.getItem('visualTheme')] ? localStorage.getItem('visualTheme') : fallback;
+        const config = themes[selected];
+        document.documentElement.dataset.style = config.style;
+        document.documentElement.dataset.atmosphere = config.atmosphere;
+        document.documentElement.dataset.theme = config.brightness;
+        document.documentElement.style.colorScheme = config.brightness;
+        const meta = document.getElementById('meta-theme-color');
+        if (meta) meta.setAttribute('content', config.brightness === 'dark' ? '#10141d' : '#faf9f6');
       })();
     </script>
     <meta name="description" content={description} />
