@@ -1,4 +1,0 @@
-GITHUB_CLIENT_ID=replace-with-github-oauth-client-id
-GITHUB_CLIENT_SECRET=replace-with-github-oauth-client-secret
-ALLOWED_GITHUB_LOGIN=bunnykey
-ALLOWED_ORIGIN=https://bunnykey.github.io
