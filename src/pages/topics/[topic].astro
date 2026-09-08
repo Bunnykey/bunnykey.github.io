@@ -3,44 +3,26 @@ import Layout from '../../layouts/Layout.astro';
 import { TOPICS, topicFor, type TopicKey } from '../../consts/topics';
 import { getAllPosts } from '../../utils/posts';
 
-export function getStaticPaths() {
-  return Object.keys(TOPICS).map((topic) => ({ params: { topic } }));
-}
-
+export function getStaticPaths() { return Object.keys(TOPICS).map((topic) => ({ params: { topic } })); }
 const topicKey = Astro.params.topic as TopicKey;
 const topic = TOPICS[topicKey];
 const posts = (await getAllPosts()).filter((post) => topicFor(post.data.category) === topicKey);
 ---
 
 <Layout title={`${topic.label} | The Greenhouse`} description={topic.description} canonicalPath={`/topics/${topicKey}/`}>
-  <main class="topic-page">
-    <header class={`topic-hero topic-hero--${topicKey}`}>
-      <p>THE GREENHOUSE / CATEGORY</p>
-      <h1>{topic.label}</h1>
-      <span class="topic-line"></span>
-      <p class="topic-description">{topic.description}</p>
-    </header>
-
-    <section class="post-list" aria-label={`${topic.label} 글 목록`}>
-      <p class="post-count">{posts.length} POSTS</p>
-      {posts.length ? posts.map((post) => (
-        <a href={post.url} class="post-row">
-          <div><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time><h2>{post.data.title}</h2>{post.data.summary && <p>{post.data.summary}</p>}</div>
-          <span aria-hidden="true">↗</span>
-        </a>
-      )) : <div class="empty-state"><p>이 장르의 첫 이야기를 기다리고 있어요.</p><a href="/editor/">새 글 쓰기 →</a></div>}
+  <main class="journal-list-page">
+    <header class="list-masthead"><p>THE GREENHOUSE / {topicKey.toUpperCase()}</p><h1>{topic.label}</h1><p>{topic.description}</p></header>
+    <nav class="list-topic-nav" aria-label="글 주제">{Object.entries(TOPICS).map(([key, item]) => <a href={`/topics/${key}/`} aria-current={key === topicKey ? 'page' : undefined}>{item.label}</a>)}</nav>
+    <section class="editorial-list" aria-label={`${topic.label} 글 목록`}>
+      <div class="list-label"><span>{posts.length} POSTS</span><span>SELECTED WRITING</span></div>
+      {posts.length ? posts.map((post, index) => <article class="editorial-row"><span class="row-index">0{index + 1}</span><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time><div><h2><a href={post.url}>{post.data.title}</a></h2>{post.data.summary && <p>{post.data.summary}</p>}</div><a href={post.url} class="row-arrow" aria-label={`${post.data.title} 읽기`}>↗</a></article>) : <div class="list-empty"><p>아직 이 주제의 글이 없습니다.</p><a href="/editor/">첫 글 쓰기 →</a></div>}
     </section>
   </main>
 </Layout>
 
 <style>
-  .topic-page { max-width: 60rem; margin: 0 auto; padding: 2.25rem 1.5rem 6rem; }
-  .topic-hero { position: relative; min-height: 20rem; padding: clamp(2rem, 7vw, 5rem); display: flex; flex-direction: column; justify-content: end; overflow: hidden; border-radius: 1.75rem; color: #17231f; isolation: isolate; }
-  .topic-hero::before, .topic-hero::after { content: ''; position: absolute; z-index: -1; border-radius: 50%; opacity: .65; animation: topic-drift 11s ease-in-out infinite alternate; }
-  .topic-hero::before { width: 24rem; height: 24rem; right: -6rem; top: -13rem; background: rgba(255,255,255,.68); } .topic-hero::after { width: 12rem; height: 12rem; left: 32%; bottom: -9rem; background: rgba(255,255,255,.5); animation-delay: -6s; }
-  .topic-hero p { font-size: .72rem; font-weight: 700; letter-spacing: .15em; } .topic-hero h1 { margin: .65rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4rem, 12vw, 7rem); font-weight: 400; line-height: .9; letter-spacing: -.08em; } .topic-line { width: 2.5rem; height: 2px; background: currentColor; margin: .65rem 0 1rem; } .topic-description { opacity: .78; }
-  .topic-hero--life { background: #f2bd80; } .topic-hero--food { background: #ef947b; } .topic-hero--music { background: #c7addd; } .topic-hero--travel { background: #8dc8bf; } .topic-hero--tech { background: #a7c7ef; } .topic-hero--notes { background: #d7d29b; }
-  .post-list { margin-top: 4.5rem; border-top: 1px solid var(--color-outline-subtle); } .post-count { padding: 1rem 0; font-family: monospace; font-size: .72rem; color: var(--color-foreground-muted); } .post-row { display: flex; justify-content: space-between; gap: 1.5rem; padding: 1.75rem .2rem; border-top: 1px solid var(--color-outline-subtle); transition: padding .25s ease, background .25s ease; } .post-row:hover { padding-left: .8rem; background: var(--color-surface-raised); } .post-row time { font-family: monospace; font-size: .72rem; color: var(--color-foreground-muted); } .post-row h2 { margin: .45rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.45rem, 3vw, 2.15rem); line-height: 1.15; letter-spacing: -.04em; } .post-row p { max-width: 42rem; color: var(--color-foreground-muted); font-size: .9rem; line-height: 1.65; } .post-row > span { padding-top: .5rem; font-size: 1.25rem; } .empty-state { padding: 4rem 0; color: var(--color-foreground-muted); } .empty-state a { display: inline-block; margin-top: 1rem; color: var(--color-foreground); font-weight: 700; }
-  @keyframes topic-drift { to { transform: translate3d(-1.5rem, 1.4rem, 0) scale(1.13); } }
-  @media (max-width: 600px) { .topic-page { padding-top: 1.25rem; } .topic-hero { min-height: 17rem; border-radius: 1.35rem; } }
+  .journal-list-page { width: min(100% - 2.5rem, 64rem); margin: 0 auto; padding: 4.5rem 0 7rem; } .list-masthead { max-width: 44rem; padding: 1rem 0 3.5rem; } .list-masthead p { font-size: .68rem; font-weight: 700; letter-spacing: .14em; color: var(--color-foreground-muted); } .list-masthead h1 { margin: .8rem 0 1rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4rem, 11vw, 7.5rem); font-weight: 400; letter-spacing: -.09em; line-height: .88; } .list-masthead p:last-child { font-size: .95rem; font-weight: 400; letter-spacing: 0; line-height: 1.7; }
+  .list-topic-nav { display: flex; gap: 1.5rem; padding: .85rem 0; border-top: 1px solid var(--color-outline-subtle); border-bottom: 1px solid var(--color-outline-subtle); overflow-x: auto; } .list-topic-nav a { flex: none; font-size: .7rem; font-weight: 700; letter-spacing: .08em; color: var(--color-foreground-muted); } .list-topic-nav a[aria-current='page'] { color: var(--color-foreground); text-decoration: underline; text-underline-offset: .35rem; }
+  .editorial-list { margin-top: 3rem; } .list-label { display: flex; justify-content: space-between; padding-bottom: .9rem; color: var(--color-foreground-muted); font-size: .64rem; font-weight: 700; letter-spacing: .13em; } .editorial-row { display: grid; grid-template-columns: 2.5rem 6rem minmax(0, 1fr) 1.5rem; gap: 1rem; align-items: start; padding: 2rem 0; border-top: 1px solid var(--color-outline-subtle); transition: padding .25s ease; } .editorial-row:hover { padding-left: .65rem; } .row-index, .editorial-row time { padding-top: .4rem; font-family: monospace; font-size: .7rem; color: var(--color-foreground-muted); } .editorial-row h2 { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.65rem, 3vw, 2.55rem); font-weight: 400; letter-spacing: -.05em; line-height: 1.1; } .editorial-row p { margin-top: .6rem; color: var(--color-foreground-muted); font-size: .88rem; line-height: 1.7; } .row-arrow { font-size: 1.2rem; transition: transform .2s ease; } .editorial-row:hover .row-arrow { transform: translate(.2rem, -.2rem); } .list-empty { padding: 5rem 0; border-top: 1px solid var(--color-outline-subtle); color: var(--color-foreground-muted); } .list-empty a { display: inline-block; margin-top: 1rem; color: var(--color-foreground); font-size: .8rem; font-weight: 700; }
+  @media (max-width: 640px) { .journal-list-page { width: min(100% - 2rem, 64rem); padding-top: 2rem; } .editorial-row { grid-template-columns: 2rem 1fr 1.2rem; gap: .7rem; } .editorial-row time { display: none; } }
 </style>

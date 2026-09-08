@@ -1,79 +1,15 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import ContactForm from "../components/ContactForm";
-import { PAGE_DESCRIPTIONS } from "../consts/site";
+import Layout from '../layouts/Layout.astro';
+import ContactForm from '../components/ContactForm';
+import { PAGE_DESCRIPTIONS } from '../consts/site';
 ---
-
-<Layout
-    title="The Gardener - The Greenhouse"
-    description={PAGE_DESCRIPTIONS.gardener}
-    canonicalPath="/gardener/"
->
-    <script
-        type="application/ld+json"
-        set:html={JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Bunnykey",
-            url: "https://bunnykey.github.io/gardener/",
-            jobTitle: "Software PM",
-            sameAs: ["https://github.com/bunnykey"],
-        })}
-    />
-    <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
-        <!-- Profile -->
-        <section class="mb-16 max-w-xl">
-            <span
-                class="inline-block text-xs font-medium tracking-widest text-foreground-muted uppercase mb-6 px-3 py-1 bg-surface-raised rounded"
-            >
-                THE GARDENER
-            </span>
-            <h1 class="text-3xl tracking-tight mb-6">
-                Bunnykey (Hwanwoong Yong)
-            </h1>
-            <div
-                class="space-y-4 text-base text-foreground-muted leading-relaxed"
-            >
-                <p>Junior SW PM.</p>
-                <p>
-                    This archive is personal and does not reflect the views of
-                    my employer.
-                </p>
-            </div>
-            <div class="flex gap-6 mt-6">
-                <a
-                    href="https://github.com/bunnykey"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-sm text-accent hover:text-accent/80 transition-colors"
-                >
-                    GitHub ↗
-                </a>
-                <a
-                    href="mailto:sapphire7558@gmail.com"
-                    class="text-sm text-accent hover:text-accent/80 transition-colors"
-                >
-                    Email ↗
-                </a>
-            </div>
-        </section>
-
-        <!-- Contact -->
-        <section class="bg-surface-raised rounded-xl p-8 md:p-10">
-            <div
-                class="flex flex-col md:flex-row gap-10 max-w-xl md:max-w-none"
-            >
-                <div class="flex-1">
-                    <h2 class="text-2xl tracking-tight mb-3">Plant a seed.</h2>
-                    <p class="text-sm text-foreground-muted leading-relaxed">
-                        협업, 질문, 또는 인사 — 의미 있는 대화에 언제나 열려
-                        있습니다.
-                    </p>
-                </div>
-                <div class="flex-1">
-                    <ContactForm client:visible />
-                </div>
-            </div>
-        </section>
-    </div>
+<Layout title="About | The Greenhouse" description={PAGE_DESCRIPTIONS.gardener} canonicalPath="/gardener/">
+  <main class="journal-about">
+    <header><p>THE PERSON BEHIND THE JOURNAL</p><h1>안녕하세요,<br />Bunnykey입니다.</h1><div><p>Junior SW PM. 생활과 기술, 좋아하는 것을 천천히 기록합니다.</p><p>이곳의 글은 개인적인 생각이며, 소속 조직의 견해를 대변하지 않습니다.</p></div></header>
+    <section class="about-links"><a href="https://github.com/bunnykey" target="_blank" rel="noopener noreferrer"><span>GitHub</span><b>↗</b></a><a href="mailto:sapphire7558@gmail.com"><span>Email</span><b>↗</b></a></section>
+    <section class="contact-section"><div><p>WRITE TO ME</p><h2>이야기를<br />나눠요.</h2><p>작업, 질문, 혹은 가벼운 인사를 남겨 주세요.</p></div><div><ContactForm client:visible /></div></section>
+  </main>
 </Layout>
+<style>
+  .journal-about { width: min(100% - 2.5rem, 64rem); margin: 0 auto; padding: 5.5rem 0 8rem; } .journal-about header { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding-bottom: 5rem; border-bottom: 1px solid var(--color-outline-subtle); } .journal-about header > p, .contact-section > div > p:first-child { font-size: .66rem; font-weight: 700; letter-spacing: .14em; color: var(--color-foreground-muted); } .journal-about h1, .contact-section h2 { grid-column: 1; margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 400; line-height: .92; letter-spacing: -.08em; } .journal-about header > div { grid-column: 2; grid-row: 2; align-self: end; color: var(--color-foreground-muted); line-height: 1.8; } .journal-about header > div p + p { margin-top: 1rem; }.about-links { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--color-outline-subtle); }.about-links a { display: flex; justify-content: space-between; padding: 1.4rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.6rem; }.about-links a + a { padding-left: 2rem; border-left: 1px solid var(--color-outline-subtle); }.contact-section { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 6rem; }.contact-section h2 { margin: .8rem 0 1.5rem; font-size: clamp(2.8rem, 5vw, 4.5rem); }.contact-section > div > p:last-child { color: var(--color-foreground-muted); }.contact-section > div:last-child { padding-top: .5rem; } @media (max-width: 640px) { .journal-about { width: min(100% - 2rem, 64rem); padding-top: 3rem; }.journal-about header, .contact-section { grid-template-columns: 1fr; gap: 2rem; }.journal-about header > div { grid-column: 1; grid-row: auto; }.about-links { grid-template-columns: 1fr; }.about-links a + a { padding-left: 0; border-left: 0; border-top: 1px solid var(--color-outline-subtle); } }
+</style>

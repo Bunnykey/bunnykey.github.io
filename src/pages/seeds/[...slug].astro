@@ -30,9 +30,9 @@ const description = entry.data.summary || sectionDescription('seeds');
   articleDate={entry.data.date.toISOString()}
 >
   <div class="scroll-progress"></div>
-  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
-    <article class="max-w-prose">
-      <header class="mb-8">
+  <div class="journal-article-shell">
+    <article class="journal-article max-w-prose">
+      <header class="journal-article-header">
         <div class="flex items-center gap-3 mb-4">
           <span class="text-xs bg-earth-muted text-foreground px-2 py-0.5 rounded">Seeds</span>
           <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>

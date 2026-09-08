@@ -1,45 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { SECTION_INDEX_CONFIG, SECTION_KEYS } from '../consts/sections';
+import { TOPICS } from '../consts/topics';
 ---
-
-<Layout title="404 - The Greenhouse">
-  <div class="max-w-md mx-auto px-6 py-32 md:py-40 text-center">
-    <h1 class="text-6xl md:text-7xl font-medium tracking-tight text-foreground" style="animation: fade-slide-in 0.5s ease-out both">
-      404
-    </h1>
-    <p class="mt-4 text-base text-foreground-muted" style="animation: fade-slide-in 0.5s ease-out 0.1s both">
-      이 페이지는 아직 싹이 트지 않았습니다.
-    </p>
-
-    <div class="mt-12 text-left" style="animation: fade-slide-in 0.5s ease-out 0.2s both">
-      <p class="text-xs uppercase tracking-widest text-foreground-muted mb-4">
-        둘러보기
-      </p>
-      <div class="flex flex-col">
-        {SECTION_KEYS.map((key) => {
-          const section = SECTION_INDEX_CONFIG[key];
-          return (
-            <a
-              href={`/${key}/`}
-              class="py-3 border-b border-outline-subtle/20 group transition-colors"
-            >
-              <span class="text-sm font-medium text-accent group-hover:text-accent/80">
-                {section.heading}
-              </span>
-              <span class="block text-xs text-foreground-muted mt-0.5">
-                {section.description}
-              </span>
-            </a>
-          );
-        })}
-      </div>
-    </div>
-
-    <div class="mt-8" style="animation: fade-slide-in 0.5s ease-out 0.3s both">
-      <a href="/" class="text-sm text-foreground-muted hover:text-foreground transition-colors">
-        ← 홈으로 돌아가기
-      </a>
-    </div>
-  </div>
-</Layout>
+<Layout title="찾을 수 없음 | The Greenhouse"><main class="not-found"><p>THE GREENHOUSE / 404</p><h1>길을<br />잃었어요.</h1><p>찾으시는 페이지는 없거나 다른 곳으로 옮겨졌습니다.</p><a href="/">홈으로 돌아가기 →</a><nav>{Object.entries(TOPICS).map(([key, topic]) => <a href={`/topics/${key}/`}>{topic.label}</a>)}</nav></main></Layout>
+<style>.not-found { width: min(100% - 2.5rem, 48rem); margin: 0 auto; padding: 10rem 0; }.not-found > p:first-child { font-size: .66rem; font-weight: 700; letter-spacing: .14em; color: var(--color-foreground-muted); }.not-found h1 { margin: 1rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(5rem, 14vw, 9rem); font-weight: 400; line-height: .78; letter-spacing: -.1em; }.not-found > p:nth-of-type(2) { margin-top: 2rem; color: var(--color-foreground-muted); }.not-found > a { display: inline-block; margin-top: 1.5rem; padding-bottom: .2rem; border-bottom: 1px solid var(--color-foreground); font-size: .8rem; font-weight: 700; }.not-found nav { display: flex; flex-wrap: wrap; gap: 1.4rem; margin-top: 5rem; padding-top: 1rem; border-top: 1px solid var(--color-outline-subtle); }.not-found nav a { font-size: .72rem; color: var(--color-foreground-muted); }</style>

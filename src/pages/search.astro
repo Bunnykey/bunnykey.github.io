@@ -2,35 +2,16 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Search - The Greenhouse" description="Search posts by keyword." canonicalPath="/search/">
-  <div class="max-w-3xl mx-auto px-6 md:px-10 py-16">
-    <header class="mb-10">
-      <h1 class="text-3xl tracking-tight mb-3">Search</h1>
-      <p class="text-base text-foreground-muted">키워드로 글을 검색합니다.</p>
-    </header>
+<Layout title="검색 | The Greenhouse" description="블로그 글을 검색합니다." canonicalPath="/search/">
+  <main class="journal-utility-page">
+    <header class="utility-heading"><p>THE GREENHOUSE / ARCHIVE</p><h1>검색</h1><p>키워드로 모든 기록을 찾아보세요.</p></header>
     <div id="search"></div>
-  </div>
+  </main>
 </Layout>
 
 <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
-
 <style>
-  :root {
-    --pagefind-ui-scale: 0.9;
-    --pagefind-ui-primary: var(--color-accent);
-    --pagefind-ui-text: var(--color-foreground);
-    --pagefind-ui-background: var(--color-surface);
-    --pagefind-ui-border: var(--color-outline-subtle);
-    --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 0.5rem;
-    --pagefind-ui-font: var(--font-sans);
-  }
+  .journal-utility-page { width: min(100% - 2.5rem, 52rem); margin: 0 auto; padding: 5rem 0 8rem; } .utility-heading { padding-bottom: 2.5rem; border-bottom: 1px solid var(--color-outline-subtle); } .utility-heading p:first-child { font-size: .66rem; font-weight: 700; letter-spacing: .14em; color: var(--color-foreground-muted); } .utility-heading h1 { margin: .7rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 400; line-height: .9; letter-spacing: -.08em; } .utility-heading p:last-child { color: var(--color-foreground-muted); } #search { margin-top: 2.5rem; }
+  :root { --pagefind-ui-scale: .95; --pagefind-ui-primary: var(--color-foreground); --pagefind-ui-text: var(--color-foreground); --pagefind-ui-background: var(--color-surface); --pagefind-ui-border: var(--color-outline-subtle); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 0; --pagefind-ui-font: var(--font-sans); }
 </style>
-
-<script is:inline>
-  async function initPagefind() {
-    const { PagefindUI } = await import('/pagefind/pagefind-ui.js');
-    new PagefindUI({ element: '#search', showSubResults: true });
-  }
-  initPagefind();
-</script>
+<script is:inline>async function initPagefind() { const { PagefindUI } = await import('/pagefind/pagefind-ui.js'); new PagefindUI({ element: '#search', showSubResults: true }); } initPagefind();</script>

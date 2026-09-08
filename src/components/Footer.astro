@@ -1,18 +1,11 @@
 ---
 import { SITE } from '../consts/site';
 ---
-
-<footer class="px-6 md:px-10 py-8 bg-surface-raised" role="contentinfo">
-  <div class="flex flex-col md:flex-row items-center justify-between max-w-5xl mx-auto gap-4">
-    <div>
-      <span class="text-sm font-semibold text-foreground">{SITE.name}</span>
-      <p class="text-xs text-foreground-muted mt-1">
-        &copy; {new Date().getFullYear()} Cultivated with care.
-      </p>
-    </div>
-    <div class="flex items-center gap-6">
-      <a href="/privacy/" class="text-xs text-foreground-muted hover:text-foreground transition-colors">Privacy</a>
-      <a href="/rss.xml" class="text-xs text-foreground-muted hover:text-foreground transition-colors">RSS</a>
-    </div>
-  </div>
+<footer class="journal-footer" role="contentinfo">
+  <div><a href="/" class="footer-name">{SITE.name}</a><p>Personal notes on living, making, and noticing.</p></div>
+  <div class="footer-links"><a href="/gardener/">About</a><a href="/privacy/">Privacy</a><a href="/rss.xml">RSS</a></div>
+  <small>© {new Date().getFullYear()} Bunnykey</small>
 </footer>
+<style>
+  .journal-footer { width: min(100% - 2.5rem, 72rem); margin: 0 auto; padding: 2.2rem 0; display: grid; grid-template-columns: 1fr auto auto; gap: 2rem; border-top: 1px solid var(--color-outline-subtle); align-items: end; }.footer-name { font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; letter-spacing: -.04em; }.journal-footer p, .journal-footer small, .footer-links a { margin-top: .25rem; font-size: .68rem; color: var(--color-foreground-muted); }.footer-links { display: flex; gap: 1.25rem; } @media (max-width: 640px) { .journal-footer { width: min(100% - 2rem, 72rem); grid-template-columns: 1fr; gap: 1rem; }.journal-footer small { display: none; } }
+</style>
