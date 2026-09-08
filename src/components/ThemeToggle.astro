@@ -62,6 +62,7 @@
         document.documentElement.dataset.style = config.style;
         document.documentElement.dataset.atmosphere = config.atmosphere;
         document.documentElement.dataset.theme = config.brightness;
+        document.documentElement.dataset.visualMotion = 'on';
         document.documentElement.style.colorScheme = config.brightness;
         const meta = document.getElementById('meta-theme-color');
         if (meta) meta.setAttribute('content', config.brightness === 'dark' ? '#10141d' : '#faf9f6');

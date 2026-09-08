@@ -330,17 +330,17 @@ body {
 
 [data-atmosphere="sunny"] .atmosphere-video {
     mix-blend-mode: multiply;
-    opacity: 0.2;
+    opacity: 0.38;
 }
 
 [data-atmosphere="moonlight"] .atmosphere-video {
     mix-blend-mode: screen;
-    opacity: 0.15;
+    opacity: 0.32;
 }
 
 [data-atmosphere="rain"] .atmosphere-video {
     mix-blend-mode: multiply;
-    opacity: 0.25;
+    opacity: 0.42;
 }
 
 /* ===== Palette families ===== */
@@ -478,6 +478,13 @@ body {
 @keyframes atmosphere-drift {
     from { background-position: 0% 0%; }
     to { background-position: 100% 40%; }
+}
+
+/* Curated themes explicitly opt into their ambient motion, even on systems that reduce generic UI motion. */
+[data-visual-motion="on"][data-atmosphere="dawn"] body::after,
+[data-visual-motion="on"][data-atmosphere="aurora"] body::after {
+    background-size: 150% 150% !important;
+    animation: atmosphere-drift 18s ease-in-out infinite alternate !important;
 }
 
 /* ===== Style picker ===== */
