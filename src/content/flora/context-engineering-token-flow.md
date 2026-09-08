@@ -4,6 +4,7 @@ date: 2026-03-17
 highlight: true
 summary: "200K 컨텍스트 윈도우 안에서 시스템 프롬프트, 스킬, 메모리, 대화가 어떻게 배치되는지 시각화"
 tags: ["AI", "Context Engineering", "Interactive"]
+category: tech
 demo: "TokenFlowDemo"
 ---
 

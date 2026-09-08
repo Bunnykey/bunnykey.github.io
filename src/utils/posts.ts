@@ -5,7 +5,7 @@ export type PostWithSection = {
   slug: string;
   section: SectionKey;
   url: string;
-  data: { title: string; date: Date; summary?: string; tags?: string[]; draft?: boolean };
+  data: { title: string; date: Date; summary?: string; tags?: string[]; category?: string; draft?: boolean };
 };
 
 export async function getAllPosts(): Promise<PostWithSection[]> {

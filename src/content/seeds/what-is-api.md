@@ -3,6 +3,7 @@ title: "API가 뭔가요?"
 date: 2026-04-06
 summary: "카페 카운터에서 SOAP, REST, GraphQL까지 — API의 개념과 흐름을 한 번에 정리한다"
 tags: ["note"]
+category: tech
 demo: "ApiFlowDemo"
 ---
 

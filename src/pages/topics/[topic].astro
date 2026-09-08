@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { TOPICS, topicFor, type TopicKey } from '../../consts/topics';
+import { getAllPosts } from '../../utils/posts';
+
+export function getStaticPaths() {
+  return Object.keys(TOPICS).map((topic) => ({ params: { topic } }));
+}
+
+const topicKey = Astro.params.topic as TopicKey;
+const topic = TOPICS[topicKey];
+const posts = (await getAllPosts()).filter((post) => topicFor(post.data.category) === topicKey);
+---
+
+<Layout title={`${topic.label} | The Greenhouse`} description={topic.description} canonicalPath={`/topics/${topicKey}/`}>
+  <main class="topic-page">
+    <header class={`topic-hero topic-hero--${topicKey}`}>
+      <p>THE GREENHOUSE / CATEGORY</p>
+      <h1>{topic.label}</h1>
+      <span class="topic-line"></span>
+      <p class="topic-description">{topic.description}</p>
+    </header>
+
+    <section class="post-list" aria-label={`${topic.label} 글 목록`}>
+      <p class="post-count">{posts.length} POSTS</p>
+      {posts.length ? posts.map((post) => (
+        <a href={post.url} class="post-row">
+          <div><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time><h2>{post.data.title}</h2>{post.data.summary && <p>{post.data.summary}</p>}</div>
+          <span aria-hidden="true">↗</span>
+        </a>
+      )) : <div class="empty-state"><p>이 장르의 첫 이야기를 기다리고 있어요.</p><a href="/editor/">새 글 쓰기 →</a></div>}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .topic-page { max-width: 60rem; margin: 0 auto; padding: 2.25rem 1.5rem 6rem; }
+  .topic-hero { position: relative; min-height: 20rem; padding: clamp(2rem, 7vw, 5rem); display: flex; flex-direction: column; justify-content: end; overflow: hidden; border-radius: 1.75rem; color: #17231f; isolation: isolate; }
+  .topic-hero::before, .topic-hero::after { content: ''; position: absolute; z-index: -1; border-radius: 50%; opacity: .65; animation: topic-drift 11s ease-in-out infinite alternate; }
+  .topic-hero::before { width: 24rem; height: 24rem; right: -6rem; top: -13rem; background: rgba(255,255,255,.68); } .topic-hero::after { width: 12rem; height: 12rem; left: 32%; bottom: -9rem; background: rgba(255,255,255,.5); animation-delay: -6s; }
+  .topic-hero p { font-size: .72rem; font-weight: 700; letter-spacing: .15em; } .topic-hero h1 { margin: .65rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(4rem, 12vw, 7rem); font-weight: 400; line-height: .9; letter-spacing: -.08em; } .topic-line { width: 2.5rem; height: 2px; background: currentColor; margin: .65rem 0 1rem; } .topic-description { opacity: .78; }
+  .topic-hero--life { background: #f2bd80; } .topic-hero--food { background: #ef947b; } .topic-hero--music { background: #c7addd; } .topic-hero--travel { background: #8dc8bf; } .topic-hero--tech { background: #a7c7ef; } .topic-hero--notes { background: #d7d29b; }
+  .post-list { margin-top: 4.5rem; border-top: 1px solid var(--color-outline-subtle); } .post-count { padding: 1rem 0; font-family: monospace; font-size: .72rem; color: var(--color-foreground-muted); } .post-row { display: flex; justify-content: space-between; gap: 1.5rem; padding: 1.75rem .2rem; border-top: 1px solid var(--color-outline-subtle); transition: padding .25s ease, background .25s ease; } .post-row:hover { padding-left: .8rem; background: var(--color-surface-raised); } .post-row time { font-family: monospace; font-size: .72rem; color: var(--color-foreground-muted); } .post-row h2 { margin: .45rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.45rem, 3vw, 2.15rem); line-height: 1.15; letter-spacing: -.04em; } .post-row p { max-width: 42rem; color: var(--color-foreground-muted); font-size: .9rem; line-height: 1.65; } .post-row > span { padding-top: .5rem; font-size: 1.25rem; } .empty-state { padding: 4rem 0; color: var(--color-foreground-muted); } .empty-state a { display: inline-block; margin-top: 1rem; color: var(--color-foreground); font-weight: 700; }
+  @keyframes topic-drift { to { transform: translate3d(-1.5rem, 1.4rem, 0) scale(1.13); } }
+  @media (max-width: 600px) { .topic-page { padding-top: 1.25rem; } .topic-hero { min-height: 17rem; border-radius: 1.35rem; } }
+</style>

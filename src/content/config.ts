@@ -11,6 +11,7 @@ const baseSchema = z.object({
   date: z.date(),
   summary: z.string().optional(),
   tags: z.array(z.string()).optional(),
+  category: z.enum(['life', 'food', 'music', 'travel', 'tech', 'notes']).optional(),
   series: seriesSchema,
   draft: z.boolean().optional(),
 });

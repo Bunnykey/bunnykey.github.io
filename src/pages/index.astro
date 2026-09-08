@@ -1,137 +1,70 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import SectionCard from "../components/SectionCard.astro";
-import { getCollection } from "astro:content";
 import { PAGE_DESCRIPTIONS } from "../consts/site";
-import { SECTION_INDEX_CONFIG, filterPublished } from "../consts/sections";
+import { TOPICS, topicFor } from "../consts/topics";
 import { getAllPosts } from "../utils/posts";
 
-const [allFlora, allNursery, allSeeds] = await Promise.all([
-    getCollection("flora").then(filterPublished),
-    getCollection("nursery").then(filterPublished),
-    getCollection("seeds").then(filterPublished),
-]);
-
 const allPosts = await getAllPosts();
+const topics = Object.entries(TOPICS).map(([key, topic]) => ({
+  key,
+  ...topic,
+  count: allPosts.filter((post) => topicFor(post.data.category) === key).length,
+}));
+const featured = allPosts[0];
 ---
 
-<Layout
-    title="The Greenhouse"
-    description={PAGE_DESCRIPTIONS.home}
-    canonicalPath="/"
->
-    <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
-        <section class="mb-12">
-            <h1 class="text-4xl tracking-tight mb-3">The Greenhouse.</h1>
-            <p class="text-lg text-foreground-muted max-w-xl">
-                Digital Garden. Growing thoughts.
-            </p>
-        </section>
+<Layout title="The Greenhouse" description={PAGE_DESCRIPTIONS.home} canonicalPath="/">
+  <main class="magazine-shell">
+    <section class="magazine-hero">
+      <div class="hero-orb hero-orb--one"></div><div class="hero-orb hero-orb--two"></div>
+      <p class="eyebrow">PERSONAL MAGAZINE · SEOUL</p>
+      <h1>The Greenhouse</h1>
+      <p class="hero-copy">요리하고, 듣고, 떠나고, 만들며 남기는<br class="hidden sm:block" /> 다채로운 생활의 기록.</p>
+      <a class="hero-link" href="#latest">최근 글 보기 <span aria-hidden="true">↓</span></a>
+    </section>
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-16">
-            <div class="animate-entrance" style="--delay: 0ms">
-                <SectionCard
-                    name="Flora"
-                    description="Blooming thoughts, flowering essays"
-                    count={allFlora.length}
-                    href="/flora/"
-                >
-                    <svg
-                        slot="icon"
-                        class="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        ><circle cx="12" cy="8" r="2.5"/><circle cx="7.5" cy="11" r="2.5"/><circle cx="9.5" cy="16" r="2.5"/><circle cx="14.5" cy="16" r="2.5"/><circle cx="16.5" cy="11" r="2.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><line x1="12" y1="14" x2="12" y2="22"/></svg
-                    >
-                </SectionCard>
-            </div>
-            <div class="animate-entrance" style="--delay: 100ms">
-                <SectionCard
-                    name="Nursery"
-                    description="Growing ideas, evergreen notes"
-                    count={allNursery.length}
-                    href="/nursery/"
-                >
-                    <svg
-                        slot="icon"
-                        class="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M7 21h10M12 21V11"></path><path d="M12 11C9 11 6 8.5 6 5c2 0 4.5 1 6 6 1.5-5 4-6 6-6 0 3.5-3 6-6 6z"></path></svg
-                    >
-                </SectionCard>
-            </div>
-            <div class="animate-entrance" style="--delay: 200ms">
-                <SectionCard
-                    name="Seeds"
-                    description="Seeds of thought, one line at a time"
-                    count={allSeeds.length}
-                    href="/seeds/"
-                    variant="earth"
-                >
-                    <svg
-                        slot="icon"
-                        class="w-5 h-5"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        ><path d="M12 4C8 8 7 12 7 15a5 5 0 0 0 10 0c0-3-1-7-5-11z"/><path d="M12 12v6"/><path d="M10 15c1-1 2-2 2-3"/></svg
-                    >
-                </SectionCard>
-            </div>
-        </section>
+    <section class="topic-section" aria-labelledby="topics-heading">
+      <div class="section-heading"><p class="eyebrow">EXPLORE BY MOOD</p><h2 id="topics-heading">오늘은 어떤 이야기를 볼까요?</h2></div>
+      <div class="topic-grid">
+        {topics.map((topic, index) => (
+          <a href={`/topics/${topic.key}/`} class={`topic-card topic-card--${topic.key}`}>
+            <span class="topic-number">0{index + 1}</span><div><h3>{topic.label}</h3><p>{topic.description}</p></div><span class="topic-count">{topic.count} posts</span>
+          </a>
+        ))}
+      </div>
+    </section>
 
-        <section>
-            <h2
-                class="text-xs font-medium uppercase tracking-widest text-foreground-muted mb-8"
-            >
-                Latest
-            </h2>
-            <div class="flex flex-col gap-4">
-                {
-                    allPosts.slice(0, 10).map((post) => (
-                        <a
-                            href={post.url}
-                            class="flex items-baseline justify-between gap-4 group"
-                        >
-                            <div class="flex items-baseline gap-3 min-w-0">
-                                <span
-                                    class:list={[
-                                        "text-xs shrink-0",
-                                        SECTION_INDEX_CONFIG[post.section]
-                                            .accentClass,
-                                    ]}
-                                >
-                                    {post.section.charAt(0).toUpperCase() + post.section.slice(1)}
-                                </span>
-                                <span class="text-base font-medium text-foreground group-hover:text-accent transition-colors truncate">
-                                    {post.data.title}
-                                </span>
-                            </div>
-                            <span class="text-xs text-foreground-muted font-mono shrink-0">
-                                {post.data.date.toISOString().split("T")[0]}
-                            </span>
-                        </a>
-                    ))
-                }
-            </div>
-        </section>
-    </div>
+    {featured && <section class="featured-section" aria-labelledby="featured-heading">
+      <p class="eyebrow">FEATURED NOTE</p>
+      <a href={featured.url} class={`featured-card featured-card--${topicFor(featured.data.category)}`}>
+        <div><span class="featured-topic">{TOPICS[topicFor(featured.data.category)].label}</span><h2 id="featured-heading">{featured.data.title}</h2>{featured.data.summary && <p>{featured.data.summary}</p>}<span class="read-link">읽어보기 →</span></div>
+        <time datetime={featured.data.date.toISOString()}>{featured.data.date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+      </a>
+    </section>}
+
+    <section class="latest-section" id="latest" aria-labelledby="latest-heading">
+      <div class="section-heading section-heading--row"><div><p class="eyebrow">FRESH FROM THE DESK</p><h2 id="latest-heading">최근 기록</h2></div><a href="/topics/notes/" class="all-link">모든 기록 →</a></div>
+      <div class="latest-list">
+        {allPosts.slice(0, 10).map((post) => {
+          const topic = TOPICS[topicFor(post.data.category)];
+          return <a href={post.url} class="latest-row"><span class="latest-topic">{topic.label}</span><span class="latest-title">{post.data.title}</span><time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10)}</time></a>;
+        })}
+      </div>
+    </section>
+  </main>
 </Layout>
+
 <style>
-    .animate-entrance {
-        opacity: 0;
-        transform: translateY(1rem);
-        animation: fade-slide-in 0.5s ease-out forwards;
-        animation-delay: var(--delay, 0ms);
-    }
+  .magazine-shell { max-width: 72rem; margin: 0 auto; padding: 2.25rem 1.5rem 6rem; }
+  .magazine-hero { position: relative; overflow: hidden; min-height: 31rem; border-radius: 2rem; padding: clamp(2.5rem, 8vw, 6.5rem); display: flex; flex-direction: column; justify-content: flex-end; color: #fffaf2; background: linear-gradient(135deg, #182e28 0%, #2f6958 45%, #e77e59 130%); isolation: isolate; }
+  .magazine-hero::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .48; background: repeating-linear-gradient(115deg, transparent 0 5rem, rgba(255,255,255,.08) 5.1rem 5.2rem, transparent 5.3rem 9rem); animation: drift-lines 18s linear infinite; }
+  .hero-orb { position: absolute; border-radius: 999px; filter: blur(2px); opacity: .72; z-index: -1; animation: float-orb 10s ease-in-out infinite alternate; } .hero-orb--one { width: 22rem; height: 22rem; top: -7rem; right: -3rem; background: #fedb77; } .hero-orb--two { width: 16rem; height: 16rem; bottom: -8rem; left: 26%; background: #ff9075; animation-delay: -5s; }
+  .eyebrow { font-size: .68rem; font-weight: 700; letter-spacing: .18em; color: inherit; opacity: .72; } .magazine-hero h1 { margin: .75rem 0 1rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3.8rem, 10vw, 7.5rem); font-weight: 400; letter-spacing: -.075em; line-height: .85; } .hero-copy { max-width: 34rem; font-size: clamp(1rem, 2vw, 1.25rem); line-height: 1.65; } .hero-link, .all-link, .read-link { margin-top: 2rem; width: fit-content; font-size: .83rem; font-weight: 700; letter-spacing: .04em; } .hero-link span { display: inline-block; margin-left: .4rem; animation: bounce-arrow 1.6s ease-in-out infinite; }
+  .topic-section, .featured-section, .latest-section { margin-top: 7rem; } .section-heading { margin-bottom: 1.75rem; } .section-heading .eyebrow, .featured-section > .eyebrow { color: var(--color-foreground-muted); } .section-heading h2 { margin-top: .55rem; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.85rem, 3.5vw, 2.65rem); line-height: 1.1; letter-spacing: -.045em; } .section-heading--row { display: flex; align-items: end; justify-content: space-between; gap: 1rem; } .all-link { margin: 0; color: var(--color-foreground-muted); white-space: nowrap; }
+  .topic-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; } .topic-card { position: relative; min-height: 12.5rem; padding: 1.4rem; display: flex; flex-direction: column; justify-content: space-between; border-radius: 1.15rem; overflow: hidden; color: #18241e; transition: transform .3s ease, box-shadow .3s ease; } .topic-card::after { content: ''; position: absolute; width: 10rem; aspect-ratio: 1; border-radius: 50%; right: -3.5rem; bottom: -4rem; background: rgba(255,255,255,.38); transition: transform .45s ease; } .topic-card:hover { transform: translateY(-.35rem) rotate(-.4deg); box-shadow: 0 1rem 2.4rem rgba(0,0,0,.13); } .topic-card:hover::after { transform: scale(1.45); } .topic-card h3 { position: relative; z-index: 1; font-family: Georgia, 'Times New Roman', serif; font-size: 2rem; letter-spacing: -.06em; } .topic-card p, .topic-count, .topic-number { position: relative; z-index: 1; font-size: .75rem; line-height: 1.45; opacity: .76; } .topic-count { font-weight: 700; text-transform: uppercase; letter-spacing: .07em; } .topic-number { font-family: monospace; }
+  .topic-card--life { background: #f2bd80; } .topic-card--food { background: #ef947b; } .topic-card--music { background: #c7addd; } .topic-card--travel { background: #8dc8bf; } .topic-card--tech { background: #a7c7ef; } .topic-card--notes { background: #d7d29b; }
+  .featured-card { position: relative; min-height: 20rem; padding: clamp(2rem, 5vw, 4rem); display: flex; justify-content: space-between; gap: 2rem; overflow: hidden; border-radius: 1.75rem; background: var(--color-surface-raised); transition: transform .3s ease; } .featured-card:hover { transform: translateY(-.25rem); } .featured-card::after { content: ''; position: absolute; width: 24rem; height: 24rem; border-radius: 50%; right: -9rem; top: -10rem; opacity: .62; } .featured-card > div, .featured-card time { position: relative; z-index: 1; } .featured-card h2 { max-width: 45rem; margin: .85rem 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2rem, 5vw, 4.3rem); font-weight: 400; line-height: 1.04; letter-spacing: -.055em; } .featured-card p { max-width: 38rem; color: var(--color-foreground-muted); line-height: 1.7; } .featured-topic { font-size: .75rem; font-weight: 700; } .featured-card time { align-self: flex-end; font-family: monospace; font-size: .72rem; white-space: nowrap; color: var(--color-foreground-muted); } .featured-card--life::after { background: #f2bd80; } .featured-card--food::after { background: #ef947b; } .featured-card--music::after { background: #c7addd; } .featured-card--travel::after { background: #8dc8bf; } .featured-card--tech::after { background: #a7c7ef; } .featured-card--notes::after { background: #d7d29b; }
+  .latest-list { border-top: 1px solid var(--color-outline-subtle); } .latest-row { display: grid; grid-template-columns: 5rem 1fr auto; gap: 1rem; align-items: center; padding: 1.1rem .25rem; border-bottom: 1px solid var(--color-outline-subtle); transition: padding .25s ease, background .25s ease; } .latest-row:hover { padding-left: .7rem; background: var(--color-surface-raised); } .latest-topic { font-size: .72rem; color: var(--color-foreground-muted); } .latest-title { font-size: .98rem; font-weight: 600; } .latest-row time { font-family: monospace; font-size: .7rem; color: var(--color-foreground-muted); }
+  @keyframes drift-lines { to { transform: translateX(-9rem); } } @keyframes float-orb { to { transform: translate3d(-1.5rem, 2rem, 0) scale(1.12); } } @keyframes bounce-arrow { 50% { transform: translateY(.3rem); } }
+  @media (max-width: 700px) { .magazine-shell { padding-top: 1.25rem; } .magazine-hero { min-height: 27rem; border-radius: 1.4rem; } .topic-grid { grid-template-columns: repeat(2, 1fr); } .topic-card { min-height: 10rem; } .featured-card { min-height: 18rem; } .featured-card time { display: none; } .latest-row { grid-template-columns: 3.4rem 1fr; } .latest-row time { display: none; } }
 </style>
