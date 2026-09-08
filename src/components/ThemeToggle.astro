@@ -29,6 +29,7 @@
     <div class="picker-section picker-divider">
       <div class="flex items-center justify-between mb-2"><div class="picker-label !mb-0">Atmosphere</div><span id="atmo-hint" class="atmo-hint"></span></div>
       <div class="atmo-grid">
+        <button data-set-atmo-mode="auto" class="atmo-option" role="menuitem"><span class="atmo-dot auto"></span>Auto</button>
         <button data-set-atmo="none" class="atmo-option" role="menuitem"><span class="atmo-dot none"></span>None</button>
         <button data-set-atmo="sunny" class="atmo-option" role="menuitem"><span class="atmo-dot sunny"></span>Sunny</button>
         <button data-set-atmo="dawn" class="atmo-option" role="menuitem"><span class="atmo-dot dawn"></span>Dawn</button>
@@ -43,6 +44,7 @@
 <script is:inline>
   (function() {
     const VIDEO_MAP = { sunny: '/videos/leaves.mp4', moonlight: '/videos/moon.mp4', rain: '/videos/rain.mp4' };
+    const DEFAULT_ATMOSPHERES = { garden: 'sunny', paper: 'sunny', twilight: 'moonlight', terracotta: 'sunny' };
     const COMPATIBLE_ATMOSPHERES = {
       garden: ['none', 'sunny', 'dawn', 'rain'],
       paper: ['none', 'sunny', 'dawn'],
@@ -63,7 +65,10 @@
 
       const getTheme = () => localStorage.getItem('theme') || 'system';
       const getStyle = () => localStorage.getItem('style') || 'garden';
-      const getAtmo = () => localStorage.getItem('atmosphere') || 'none';
+      const getStoredAtmo = () => localStorage.getItem('atmosphere') || 'none';
+      // Existing visitors did not have a mode saved, so restore the animated default for them.
+      const getAtmoMode = () => localStorage.getItem('atmosphereMode') || 'auto';
+      const getAtmo = (style = getStyle()) => getAtmoMode() === 'auto' ? DEFAULT_ATMOSPHERES[style] : getStoredAtmo();
       const resolveTheme = (theme) => theme === 'system' ? (prefersDark.matches ? 'dark' : 'light') : theme;
       const resolveColorScheme = (style, atmo) => style === 'twilight' || atmo === 'aurora' ? 'dark' : resolveTheme(getTheme());
       const compatible = (style, atmo) => COMPATIBLE_ATMOSPHERES[style].includes(atmo);
@@ -78,9 +83,10 @@
       }
 
       function updateControls() {
-        const theme = getTheme(); const style = getStyle(); const atmo = getAtmo();
+        const theme = getTheme(); const style = getStyle(); const atmo = getAtmo(style); const auto = getAtmoMode() === 'auto';
         document.querySelectorAll('[data-set-theme]').forEach((el) => el.classList.toggle('is-active', el.dataset.setTheme === theme));
         document.querySelectorAll('[data-set-style]').forEach((el) => el.classList.toggle('is-active', el.dataset.setStyle === style));
+        document.querySelectorAll('[data-set-atmo-mode="auto"]').forEach((el) => el.classList.toggle('is-active', auto));
         document.querySelectorAll('[data-set-atmo]').forEach((el) => {
           const allowed = compatible(style, el.dataset.setAtmo);
           el.disabled = !allowed;
@@ -88,13 +94,16 @@
           el.classList.toggle('is-active', allowed && el.dataset.setAtmo === atmo);
         });
         const hint = document.getElementById('atmo-hint');
-        if (hint) hint.textContent = atmo === 'none' ? 'Palette matched' : `${style} × ${atmo}`;
+        if (hint) hint.textContent = auto ? `Auto · ${style} × ${atmo}` : (atmo === 'none' ? 'Background off' : `${style} × ${atmo}`);
       }
 
       function apply() {
         const style = getStyle();
-        let atmo = getAtmo();
-        if (!compatible(style, atmo)) { atmo = 'none'; localStorage.setItem('atmosphere', atmo); }
+        let atmo = getAtmo(style);
+        if (!compatible(style, atmo)) {
+          localStorage.setItem('atmosphereMode', 'auto');
+          atmo = DEFAULT_ATMOSPHERES[style];
+        }
         const colorScheme = resolveColorScheme(style, atmo);
         document.documentElement.dataset.theme = resolveTheme(getTheme());
         document.documentElement.dataset.style = style;
@@ -106,11 +115,14 @@
       }
       function close() { popover.classList.remove('is-open'); btn.setAttribute('aria-expanded', 'false'); isOpen = false; }
       function set(key, value) { localStorage.setItem(key, value); apply(); }
+      function setAtmo(atmo) { localStorage.setItem('atmosphereMode', 'manual'); localStorage.setItem('atmosphere', atmo); apply(); }
+      function setAutoAtmo() { localStorage.setItem('atmosphereMode', 'auto'); apply(); }
 
       btn.addEventListener('click', (event) => { event.stopPropagation(); isOpen ? close() : (popover.classList.add('is-open'), btn.setAttribute('aria-expanded', 'true'), isOpen = true); });
       document.querySelectorAll('[data-set-theme]').forEach((el) => el.addEventListener('click', () => set('theme', el.dataset.setTheme)));
       document.querySelectorAll('[data-set-style]').forEach((el) => el.addEventListener('click', () => set('style', el.dataset.setStyle)));
-      document.querySelectorAll('[data-set-atmo]').forEach((el) => el.addEventListener('click', () => { if (!el.disabled) set('atmosphere', el.dataset.setAtmo); }));
+      document.querySelectorAll('[data-set-atmo]').forEach((el) => el.addEventListener('click', () => { if (!el.disabled) setAtmo(el.dataset.setAtmo); }));
+      document.querySelectorAll('[data-set-atmo-mode="auto"]').forEach((el) => el.addEventListener('click', setAutoAtmo));
 
       if (!listenersAttached) {
         listenersAttached = true;

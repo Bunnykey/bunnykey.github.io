@@ -47,15 +47,20 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
         const saved = localStorage.getItem('theme');
         const savedStyle = localStorage.getItem('style') || 'garden';
         let savedAtmo = localStorage.getItem('atmosphere') || 'none';
+        let savedAtmoMode = localStorage.getItem('atmosphereMode') || 'auto';
+        const defaults = { garden: 'sunny', paper: 'sunny', twilight: 'moonlight', terracotta: 'sunny' };
         const compatible = {
           garden: ['none', 'sunny', 'dawn', 'rain'],
           paper: ['none', 'sunny', 'dawn'],
           twilight: ['none', 'moonlight', 'rain', 'aurora'],
           terracotta: ['none', 'sunny', 'dawn', 'moonlight'],
         };
-        if (!(compatible[savedStyle] || compatible.garden).includes(savedAtmo)) {
-          savedAtmo = 'none';
-          localStorage.setItem('atmosphere', savedAtmo);
+        if (savedAtmoMode === 'auto') {
+          savedAtmo = defaults[savedStyle] || defaults.garden;
+        } else if (!(compatible[savedStyle] || compatible.garden).includes(savedAtmo)) {
+          savedAtmoMode = 'auto';
+          savedAtmo = defaults[savedStyle] || defaults.garden;
+          localStorage.setItem('atmosphereMode', savedAtmoMode);
         }
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         function resolve(pref) {
