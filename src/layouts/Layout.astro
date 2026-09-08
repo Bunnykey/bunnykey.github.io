@@ -45,7 +45,18 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <script is:inline>
       (function() {
         const saved = localStorage.getItem('theme');
-        const savedAtmo = localStorage.getItem('atmosphere') || 'none';
+        const savedStyle = localStorage.getItem('style') || 'garden';
+        let savedAtmo = localStorage.getItem('atmosphere') || 'none';
+        const compatible = {
+          garden: ['none', 'sunny', 'dawn', 'rain'],
+          paper: ['none', 'sunny', 'dawn'],
+          twilight: ['none', 'moonlight', 'rain', 'aurora'],
+          terracotta: ['none', 'sunny', 'dawn', 'moonlight'],
+        };
+        if (!(compatible[savedStyle] || compatible.garden).includes(savedAtmo)) {
+          savedAtmo = 'none';
+          localStorage.setItem('atmosphere', savedAtmo);
+        }
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
         function resolve(pref) {
           if (pref === 'light') return 'light';
@@ -53,11 +64,13 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
           return prefersDark.matches ? 'dark' : 'light';
         }
         function apply(resolved) {
+          const colorScheme = savedStyle === 'twilight' || savedAtmo === 'aurora' ? 'dark' : resolved;
           document.documentElement.dataset.theme = resolved;
-          document.documentElement.style.colorScheme = resolved;
+          document.documentElement.style.colorScheme = colorScheme;
           const meta = document.getElementById('meta-theme-color');
-          if (meta) meta.setAttribute('content', resolved === 'dark' ? '#0c120c' : '#faf9f6');
+          if (meta) meta.setAttribute('content', colorScheme === 'dark' ? '#10141d' : '#faf9f6');
         }
+        document.documentElement.dataset.style = savedStyle;
         document.documentElement.dataset.atmosphere = savedAtmo;
         apply(resolve(saved));
         prefersDark.addEventListener('change', function() {
