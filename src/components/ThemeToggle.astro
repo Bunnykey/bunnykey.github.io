@@ -27,6 +27,15 @@
     </div>
 
     <div class="picker-section picker-divider">
+      <div class="picker-label">Motion</div>
+      <div class="mode-row">
+        <button data-set-motion="auto" class="mode-option" role="menuitem">Auto</button>
+        <button data-set-motion="on" class="mode-option" role="menuitem">On</button>
+        <button data-set-motion="off" class="mode-option" role="menuitem">Off</button>
+      </div>
+    </div>
+
+    <div class="picker-section picker-divider">
       <div class="flex items-center justify-between mb-2"><div class="picker-label !mb-0">Atmosphere</div><span id="atmo-hint" class="atmo-hint"></span></div>
       <div class="atmo-grid">
         <button data-set-atmo-mode="auto" class="atmo-option" role="menuitem"><span class="atmo-dot auto"></span>Auto</button>
@@ -65,6 +74,7 @@
 
       const getTheme = () => localStorage.getItem('theme') || 'system';
       const getStyle = () => localStorage.getItem('style') || 'garden';
+      const getMotion = () => localStorage.getItem('motion') || 'auto';
       const getStoredAtmo = () => localStorage.getItem('atmosphere') || 'none';
       // Existing visitors did not have a mode saved, so restore the animated default for them.
       const getAtmoMode = () => localStorage.getItem('atmosphereMode') || 'auto';
@@ -76,15 +86,17 @@
       function loadVideo(atmo) {
         const video = document.getElementById('atmosphere-video');
         if (!video) return;
-        const blocked = navigator.connection && navigator.connection.saveData || prefersReducedMotion.matches;
+        const motion = getMotion();
+        const blocked = motion === 'off' || (motion === 'auto' && ((navigator.connection && navigator.connection.saveData) || prefersReducedMotion.matches));
         const src = !blocked && VIDEO_MAP[atmo];
         if (!src) { video.removeAttribute('src'); video.load(); return; }
         if (video.getAttribute('src') !== src) { video.src = src; video.load(); video.play().catch(() => {}); }
       }
 
       function updateControls() {
-        const theme = getTheme(); const style = getStyle(); const atmo = getAtmo(style); const auto = getAtmoMode() === 'auto';
+        const theme = getTheme(); const style = getStyle(); const atmo = getAtmo(style); const auto = getAtmoMode() === 'auto'; const motion = getMotion();
         document.querySelectorAll('[data-set-theme]').forEach((el) => el.classList.toggle('is-active', el.dataset.setTheme === theme));
+        document.querySelectorAll('[data-set-motion]').forEach((el) => el.classList.toggle('is-active', el.dataset.setMotion === motion));
         document.querySelectorAll('[data-set-style]').forEach((el) => el.classList.toggle('is-active', el.dataset.setStyle === style));
         document.querySelectorAll('[data-set-atmo-mode="auto"]').forEach((el) => el.classList.toggle('is-active', auto));
         document.querySelectorAll('[data-set-atmo]').forEach((el) => {
@@ -120,6 +132,7 @@
 
       btn.addEventListener('click', (event) => { event.stopPropagation(); isOpen ? close() : (popover.classList.add('is-open'), btn.setAttribute('aria-expanded', 'true'), isOpen = true); });
       document.querySelectorAll('[data-set-theme]').forEach((el) => el.addEventListener('click', () => set('theme', el.dataset.setTheme)));
+      document.querySelectorAll('[data-set-motion]').forEach((el) => el.addEventListener('click', () => set('motion', el.dataset.setMotion)));
       document.querySelectorAll('[data-set-style]').forEach((el) => el.addEventListener('click', () => set('style', el.dataset.setStyle)));
       document.querySelectorAll('[data-set-atmo]').forEach((el) => el.addEventListener('click', () => { if (!el.disabled) setAtmo(el.dataset.setAtmo); }));
       document.querySelectorAll('[data-set-atmo-mode="auto"]').forEach((el) => el.addEventListener('click', setAutoAtmo));

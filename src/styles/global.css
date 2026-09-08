@@ -466,6 +466,20 @@ body {
     background: radial-gradient(ellipse at 20% -10%, rgba(81, 230, 183, 0.18), transparent 43%), radial-gradient(ellipse at 83% 0%, rgba(116, 133, 255, 0.17), transparent 40%);
 }
 
+/* Dawn and Aurora have their own lightweight motion when no video asset is used. */
+@media (prefers-reduced-motion: no-preference) {
+    [data-atmosphere="dawn"] body::after,
+    [data-atmosphere="aurora"] body::after {
+        background-size: 150% 150%;
+        animation: atmosphere-drift 18s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes atmosphere-drift {
+    from { background-position: 0% 0%; }
+    to { background-position: 100% 40%; }
+}
+
 /* ===== Style picker ===== */
 
 .theme-trigger {
