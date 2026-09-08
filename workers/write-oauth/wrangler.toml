@@ -1,0 +1,9 @@
+name = "greenhouse-write-oauth"
+main = "src/index.js"
+compatibility_date = "2026-09-08"
+
+# Secrets are intentionally not stored in this repository:
+#   wrangler secret put GITHUB_CLIENT_ID
+#   wrangler secret put GITHUB_CLIENT_SECRET
+#   wrangler secret put ALLOWED_GITHUB_LOGIN
+#   wrangler secret put ALLOWED_ORIGIN

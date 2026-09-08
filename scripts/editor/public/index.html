@@ -1,139 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>광야 에디터</title>
-  <link rel="stylesheet" href="/styles.css" />
-</head>
-<body>
-  <div id="app">
-    <aside id="sidebar">
-      <div class="sidebar-header">
-        <h1>광야 에디터</h1>
-        <div class="header-actions">
-          <button id="theme-toggle" class="icon-btn" title="다크모드">◐</button>
-          <button id="sidebar-toggle" class="icon-btn mobile-only" title="목록 접기">▲</button>
-          <button id="new-post" class="btn-primary">+ 새 글</button>
-        </div>
-      </div>
-      <div class="sidebar-git">
-        <span id="git-branch"></span>
-        <span id="git-changes"></span>
-      </div>
-      <div id="post-list"></div>
-    </aside>
-
-    <main id="main">
-      <header id="topbar">
-        <div class="fm-row">
-          <label>컬렉션
-            <select id="fm-collection">
-              <option value="seeds">seeds</option>
-              <option value="flora">flora</option>
-              <option value="nursery">nursery</option>
-            </select>
-          </label>
-          <label>슬러그
-            <input id="fm-slug" type="text" placeholder="my-post-slug" />
-            <span id="slug-warn" class="warn"></span>
-          </label>
-          <label>날짜
-            <input id="fm-date" type="date" />
-          </label>
-        </div>
-        <div class="fm-row">
-          <label class="full">제목
-            <input id="fm-title" type="text" placeholder="글 제목" />
-          </label>
-        </div>
-        <div class="fm-row">
-          <label class="full">요약
-            <input id="fm-summary" type="text" placeholder="(optional) 한 문장 요약" />
-          </label>
-        </div>
-        <div class="fm-row">
-          <label>태그 (쉼표)
-            <input id="fm-tags" type="text" list="tag-suggestions" placeholder="note, AI" />
-            <datalist id="tag-suggestions"></datalist>
-          </label>
-          <label>데모
-            <select id="fm-demo">
-              <option value="">(없음)</option>
-            </select>
-          </label>
-          <label class="check">
-            <input id="fm-draft" type="checkbox" /> draft
-          </label>
-        </div>
-      </header>
-
-      <div id="toolbar">
-        <button data-action="bold" title="볼드 (Cmd+B)"><b>B</b></button>
-        <button data-action="italic" title="이탤릭 (Cmd+I)"><i>I</i></button>
-        <button data-action="link" title="링크 (Cmd+K)">🔗</button>
-        <button data-action="code" title="코드블럭 (Cmd+Shift+C)">{ }</button>
-        <button data-action="image" title="이미지">🖼</button>
-        <button data-action="table">표</button>
-        <button data-action="h2">H2</button>
-        <button data-action="h3">H3</button>
-        <select id="insert-demo">
-          <option value="">+ 데모 삽입</option>
-        </select>
-        <label class="toolbar-toggle" title="AI 자동완성 (Tab 수락 / Esc 기각)">
-          <input id="ai-toggle" type="checkbox" /> AI
-        </label>
-        <span class="spacer"></span>
-        <span id="word-count"></span>
-        <span id="ext-badge"></span>
-        <button id="delete-post" class="btn-danger" title="글 삭제">🗑</button>
-        <button id="save" title="저장 (Cmd+S)">저장</button>
-        <button id="publish" class="btn-primary" title="draft 해제 + commit + push">발행</button>
-      </div>
-
-      <div id="split">
-        <div id="editor-pane">
-          <div id="editor-stack">
-            <div id="ghost" aria-hidden="true"></div>
-            <textarea id="editor" spellcheck="false" placeholder="여기에 마크다운을 작성하세요..."></textarea>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>그린하우스 글쓰기</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <div>
+            <p class="eyebrow">THE GREENHOUSE</p>
+            <h1>내 글</h1>
           </div>
-          <div id="ai-status" hidden></div>
+          <div class="header-actions">
+            <button id="theme-toggle" class="icon-btn" title="화면 테마 바꾸기">◐</button>
+            <button id="sidebar-toggle" class="icon-btn mobile-only" title="글 목록 접기">☰</button>
+          </div>
+          <button id="new-post" class="btn-primary">+ 새 글 쓰기</button>
         </div>
-        <div id="divider" title="드래그해서 폭 조절"></div>
-        <div id="preview-pane">
-          <div id="toc"></div>
-          <article id="preview" class="prose"></article>
+        <div class="sidebar-git" aria-label="저장소 상태">
+          <span id="git-branch"></span><span id="git-changes"></span>
         </div>
-      </div>
+        <div id="post-list"></div>
+      </aside>
 
-      <div id="status">
-        <span id="status-msg">준비됨</span>
-        <span class="spacer"></span>
-        <span id="reading-time"></span>
-      </div>
-    </main>
-  </div>
+      <main id="main">
+        <header id="topbar">
+          <div class="writing-header">
+            <div class="title-wrap">
+              <input id="fm-title" type="text" placeholder="제목을 입력하세요" aria-label="글 제목" />
+              <input id="fm-summary" type="text" placeholder="한 줄 소개를 적어보세요 (선택)" aria-label="글 요약" />
+            </div>
+            <div class="publish-actions">
+              <button id="save" class="btn-secondary" title="임시 저장 (Ctrl+S)">임시 저장</button>
+              <button id="publish" class="btn-primary" title="공개하고 GitHub에 발행">발행하기</button>
+            </div>
+          </div>
 
-  <!-- Find & Replace overlay -->
-  <div id="find-overlay" class="overlay" hidden>
-    <div class="overlay-box">
-      <div class="overlay-row">
-        <input id="find-input" type="text" placeholder="찾기..." />
-        <span id="find-count">0/0</span>
-        <button id="find-prev">↑</button>
-        <button id="find-next">↓</button>
-      </div>
-      <div class="overlay-row">
-        <input id="replace-input" type="text" placeholder="바꾸기..." />
-        <button id="replace-one">바꾸기</button>
-        <button id="replace-all">전체</button>
-        <button id="find-close">✕</button>
-      </div>
+          <details class="post-settings">
+            <summary>글 설정</summary>
+            <div class="fm-row">
+              <label>분류
+                <select id="fm-collection">
+                  <option value="seeds">짧은 기록 (seeds)</option>
+                  <option value="flora">긴 글 (flora)</option>
+                  <option value="nursery">프로젝트 (nursery)</option>
+                </select>
+              </label>
+              <label>주소
+                <input id="fm-slug" type="text" placeholder="자동으로 만들어집니다" />
+                <span id="slug-warn" class="warn"></span>
+              </label>
+              <label>날짜
+                <input id="fm-date" type="date" />
+              </label>
+              <label>태그
+                <input id="fm-tags" type="text" list="tag-suggestions" placeholder="예: 일상, 책, 사진" />
+                <datalist id="tag-suggestions"></datalist>
+              </label>
+              <label class="check"><input id="fm-draft" type="checkbox" /> 비공개 초안으로 저장</label>
+              <label class="advanced-setting">데모
+                <select id="fm-demo"><option value="">없음</option></select>
+              </label>
+            </div>
+          </details>
+        </header>
+
+        <nav id="toolbar" aria-label="글쓰기 도구">
+          <button data-action="bold" title="굵게 (Ctrl+B)"><b>B</b></button>
+          <button data-action="italic" title="기울임 (Ctrl+I)"><i>I</i></button>
+          <button data-action="link" title="링크">링크</button>
+          <button data-action="image" title="사진 넣기">사진</button>
+          <button data-action="h2">소제목</button>
+          <button data-action="table">표</button>
+          <button data-action="code" class="advanced-setting">코드</button>
+          <select id="insert-demo" class="advanced-setting"><option value="">+ 데모 삽입</option></select>
+          <label class="toolbar-toggle advanced-setting"><input id="ai-toggle" type="checkbox" /> AI</label>
+          <span class="spacer"></span>
+          <span id="word-count"></span><span id="ext-badge" class="advanced-setting"></span>
+          <button id="delete-post" class="btn-danger" title="이 글 삭제">삭제</button>
+        </nav>
+
+        <div id="split">
+          <section id="editor-pane" aria-label="글 작성">
+            <div id="editor-stack">
+              <div id="ghost" aria-hidden="true"></div>
+              <textarea id="editor" spellcheck="true" placeholder="편하게 이야기를 시작해 보세요.&#10;&#10;사진은 위의 ‘사진’ 버튼을 누르거나, 이곳에 끌어다 놓으면 됩니다."></textarea>
+            </div>
+            <div id="ai-status" hidden></div>
+          </section>
+          <div id="divider" title="끌어서 편집 영역 크기 조절"></div>
+          <section id="preview-pane" aria-label="미리보기">
+            <p class="pane-label">미리보기</p>
+            <div id="toc"></div><article id="preview" class="prose"></article>
+          </section>
+        </div>
+
+        <footer id="status"><span id="status-msg">준비됨</span><span class="spacer"></span><span id="reading-time"></span></footer>
+      </main>
     </div>
-  </div>
-
-  <input type="file" id="file-input" accept="image/*" hidden />
-
-  <script src="/app.js" type="module"></script>
-</body>
+    <div id="find-overlay" class="overlay" hidden><div class="overlay-box"><div class="overlay-row"><input id="find-input" type="text" placeholder="찾기" /><span id="find-count">0/0</span><button id="find-prev">이전</button><button id="find-next">다음</button></div><div class="overlay-row"><input id="replace-input" type="text" placeholder="바꾸기" /><button id="replace-one">바꾸기</button><button id="replace-all">모두 바꾸기</button><button id="find-close">닫기</button></div></div></div>
+    <input type="file" id="file-input" accept="image/*" hidden />
+    <script src="/app.js" type="module"></script>
+  </body>
 </html>
