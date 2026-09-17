@@ -1,0 +1,52 @@
+---
+import { TOPICS, topicFor, type TopicKey } from '../consts/topics';
+import type { PostWithSection } from '../utils/posts';
+interface Props { posts: PostWithSection[]; topic?: TopicKey; }
+const { posts, topic } = Astro.props;
+---
+<div class="journal-list">
+  <header class="list-heading">
+    <h1>{topic ? TOPICS[topic].label : '글'}</h1>
+    <p>{topic ? TOPICS[topic].description : '살면서 배우고, 듣고, 남겨두고 싶은 것들.'}</p>
+  </header>
+  <nav class="topic-nav" aria-label="글 주제">
+    <a href="/" aria-current={!topic ? 'page' : undefined}>전체</a>
+    {Object.entries(TOPICS).map(([key, item]) => <a href={`/topics/${key}/`} aria-current={key === topic ? 'page' : undefined}>{item.label}</a>)}
+  </nav>
+  <section aria-label="글 목록">
+    {posts.map(post => <article class="post-row">
+      <div class="post-copy">
+        <h2><a href={post.url}>{post.data.title}</a></h2>
+        {post.data.summary && <p>{post.data.summary}</p>}
+        <a class="post-topic" href={`/topics/${topicFor(post.data.category)}/`}>{TOPICS[topicFor(post.data.category)].label}</a>
+      </div>
+      <time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10).replaceAll('-', '. ')}</time>
+    </article>)}
+    {!posts.length && <div class="empty-state"><p>아직 이 주제의 글이 없습니다.</p><a href="/">전체 글 보기</a></div>}
+  </section>
+</div>
+<style>
+  .journal-list { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 3.5rem 0 4rem; }
+  .list-heading h1 { margin: 0; font-size: 1.85rem; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; }
+  .list-heading p { margin-top: .6rem; font-size: 1rem; color: var(--color-foreground-muted); word-break: keep-all; }
+  .topic-nav { display: flex; gap: 1.7rem; overflow-x: auto; margin-top: 2.4rem; padding-bottom: .4rem; }
+  .topic-nav a { display: flex; align-items: center; min-height: 44px; flex: none; font-size: .95rem; color: var(--color-foreground-muted); border-bottom: 2px solid transparent; }
+  .topic-nav a[aria-current='page'] { color: var(--color-foreground); border-color: currentColor; font-weight: 700; }
+  .post-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; padding: 1.85rem 0; }
+  .post-row + .post-row { border-top: 1px solid color-mix(in srgb, var(--color-outline-subtle) 70%, transparent); }
+  .post-row h2 { margin: 0; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -.015em; word-break: keep-all; overflow-wrap: anywhere; }
+  .post-row h2 a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  .post-copy p { margin-top: .4rem; font-size: .95rem; line-height: 1.7; color: var(--color-foreground-muted); word-break: keep-all; overflow-wrap: anywhere; }
+  .post-topic { display: inline-block; margin-top: .6rem; font-size: .8rem; color: var(--color-accent); }
+  .post-row time { padding-top: .4rem; font-size: .8rem; color: var(--color-foreground-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .empty-state { padding: 3rem 0; color: var(--color-foreground-muted); }
+  .empty-state a { display: inline-block; margin-top: 1rem; text-decoration: underline; text-underline-offset: .2em; }
+  @media (max-width: 640px) {
+    .journal-list { padding-top: 2.2rem; }
+    .topic-nav { gap: 1.2rem; margin-top: 1.6rem; }
+    .topic-nav a { font-size: .85rem; }
+    .post-row { grid-template-columns: 1fr; gap: .35rem; padding: 1.6rem 0; }
+    .post-row h2 { font-size: 1.3rem; }
+    .post-row time { padding: 0; }
+  }
+</style>

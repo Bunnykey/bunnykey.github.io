@@ -12,15 +12,13 @@ const navLinks = [
 ];
 ---
 
-<nav class="relative px-4 md:px-10 py-6 bg-surface-raised" aria-label="주요 메뉴">
+<nav class="site-nav relative" aria-label="주요 메뉴">
   <div class="flex items-center justify-between">
     <a href="/" class="text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">{SITE.name}</a>
     <div class="flex items-center gap-0 md:gap-4">
       <div class="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => {
-          const isActive = currentPath.startsWith(link.href);
-          return <a href={link.href} class:list={['text-sm whitespace-nowrap transition-colors', isActive ? 'text-foreground font-medium' : 'text-foreground-muted hover:text-foreground']} aria-current={isActive ? 'page' : undefined}>{link.label}</a>;
-        })}
+        <a href="/" class="text-sm">글</a>
+        <a href="/gardener/" class="text-sm">소개</a>
       </div>
       <ThemeToggle />
       <a href="/search/" class="flex items-center justify-center w-11 h-11 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
@@ -37,6 +35,7 @@ const navLinks = [
         const isActive = currentPath.startsWith(link.href);
         return <a href={link.href} class:list={['py-3 text-sm transition-colors border-b border-outline-subtle/10', isActive ? 'text-foreground font-medium' : 'text-foreground-muted hover:text-foreground']} aria-current={isActive ? 'page' : undefined}>{link.label}</a>;
       })}
+      <a href="/gardener/" class="py-3 text-sm">소개</a>
       <a href="/topics/notes/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">기록</a>
       <a href="/search/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
     </div>
@@ -71,6 +70,11 @@ const navLinks = [
 </script>
 
 <style>
+  .site-nav { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 1.4rem 0; border-bottom: 1px solid var(--color-outline-subtle); }
+  nav :global(.theme-trigger) { width: 44px; min-height: 44px; padding: 0; justify-content: center; border: 0; background: transparent; box-shadow: none; }
+  nav :global(.theme-trigger > span) { display: none; }
+  @media (max-width: 640px) { nav :global(.theme-popover) { right: -88px; width: min(17.5rem, calc(100vw - 2.75rem)); } }
+
   .nav-drawer { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .3s ease, opacity .3s ease; }
   .nav-drawer[aria-hidden="false"] { max-height: min(75dvh, 28rem); overflow-y: auto; opacity: 1; }
   @media (max-width: 767px) {

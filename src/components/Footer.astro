@@ -1,11 +1,11 @@
----
-import { SITE } from '../consts/site';
----
-<footer class="journal-footer" role="contentinfo">
-  <div><a href="/" class="footer-name">{SITE.name}</a><p>Personal notes on living, making, and noticing.</p></div>
-  <div class="footer-links"><a href="/gardener/">About</a><a href="/privacy/">Privacy</a><a href="/rss.xml">RSS</a></div>
+<footer class="journal-footer">
   <small>© {new Date().getFullYear()} Bunnykey</small>
+  <nav aria-label="하단 메뉴"><a href="/gardener/">소개</a><a href="/privacy/">개인정보</a><a href="/rss.xml">RSS</a></nav>
 </footer>
 <style>
-  .journal-footer { width: min(100% - 2.5rem, 72rem); margin: 0 auto; padding: 2.2rem 0; display: grid; grid-template-columns: 1fr auto auto; gap: 2rem; border-top: 1px solid var(--color-outline-subtle); align-items: end; }.footer-name { font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem; letter-spacing: -.04em; }.journal-footer p, .journal-footer small, .footer-links a { margin-top: .25rem; font-size: .68rem; color: var(--color-foreground-muted); }.footer-links { display: flex; gap: 1.25rem; } @media (max-width: 640px) { .journal-footer { width: min(100% - 2rem, 72rem); grid-template-columns: 1fr; gap: 1rem; }.journal-footer small { display: none; } }
+  .journal-footer { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 1.5rem 0 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--color-foreground-muted); }
+  small, a { font-size: .75rem; }
+  nav { display: flex; gap: 1rem; }
+  a { display: inline-flex; align-items: center; min-height: 44px; }
+  a:hover { color: var(--color-foreground); }
 </style>
