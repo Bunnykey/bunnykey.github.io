@@ -21,7 +21,7 @@ const navLinks = [
         <a href="/gardener/" class="text-sm">소개</a>
       </div>
       <ThemeToggle />
-      <a href="/search/" class="flex items-center justify-center w-11 h-11 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
+      <a href="/search/" data-astro-reload class="flex items-center justify-center w-11 h-11 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </a>
       <button id="menu-toggle" class="md:hidden flex flex-col justify-center gap-1.5 w-11 h-11 px-2.5" aria-expanded="false" aria-controls="mobile-drawer" aria-label="메뉴">
@@ -37,7 +37,7 @@ const navLinks = [
       })}
       <a href="/gardener/" class="py-3 text-sm">소개</a>
       <a href="/topics/notes/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">기록</a>
-      <a href="/search/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
+      <a href="/search/" data-astro-reload class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
     </div>
   </div>
 </nav>
