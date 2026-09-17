@@ -71,15 +71,8 @@ const navLinks = [
 
 <style>
   .site-nav { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 1.4rem 0; border-bottom: 1px solid var(--color-outline-subtle); }
-  nav :global(.theme-trigger) { width: 44px; min-height: 44px; padding: 0; justify-content: center; border: 0; background: transparent; box-shadow: none; }
-  nav :global(.theme-trigger > span) { display: none; }
-  @media (max-width: 640px) { nav :global(.theme-popover) { right: -88px; width: min(17.5rem, calc(100vw - 2.75rem)); } }
 
   .nav-drawer { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .3s ease, opacity .3s ease; }
   .nav-drawer[aria-hidden="false"] { max-height: min(75dvh, 28rem); overflow-y: auto; opacity: 1; }
-  @media (max-width: 767px) {
-    nav :global(.theme-trigger) { width: 44px; min-height: 44px; padding: 0; justify-content: center; }
-    nav :global(.theme-trigger > span) { display: none; }
-  }
   @media (prefers-reduced-motion: reduce) { .nav-drawer { transition: none; } }
 </style>

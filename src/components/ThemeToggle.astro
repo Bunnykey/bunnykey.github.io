@@ -1,87 +1,26 @@
----
----
-<div id="theme-popover-wrapper" class="relative">
-  <button id="theme-toggle" class="theme-trigger" aria-label="테마 변경" aria-haspopup="true" aria-expanded="false">
-    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
-    <span>Theme</span>
-  </button>
-
-  <div id="theme-popover" class="theme-popover curated-theme-popover" role="menu" aria-label="테마 선택">
-    <div class="picker-section">
-      <div class="picker-label">Theme</div>
-      <div class="curated-theme-grid">
-        <button data-set-visual-theme="garden" class="curated-theme-option" role="menuitem"><i class="theme-preview garden"></i><span><strong>Garden</strong><small>Sunlit leaves</small></span></button>
-        <button data-set-visual-theme="rain" class="curated-theme-option" role="menuitem"><i class="theme-preview rain"></i><span><strong>Rain</strong><small>Quiet rainfall</small></span></button>
-        <button data-set-visual-theme="moonlight" class="curated-theme-option" role="menuitem"><i class="theme-preview moonlight"></i><span><strong>Moonlight</strong><small>Night garden</small></span></button>
-        <button data-set-visual-theme="dawn" class="curated-theme-option" role="menuitem"><i class="theme-preview dawn"></i><span><strong>Dawn</strong><small>Warm moving light</small></span></button>
-        <button data-set-visual-theme="aurora" class="curated-theme-option" role="menuitem"><i class="theme-preview aurora"></i><span><strong>Aurora</strong><small>Slow northern glow</small></span></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script is:inline>
-  (function() {
-    const THEMES = {
-      garden: { style: 'garden', atmosphere: 'sunny', brightness: 'light' },
-      rain: { style: 'garden', atmosphere: 'rain', brightness: 'light', video: '/videos/rain.mp4' },
-      moonlight: { style: 'twilight', atmosphere: 'moonlight', brightness: 'dark', video: '/videos/moon.mp4' },
-      dawn: { style: 'terracotta', atmosphere: 'dawn', brightness: 'light' },
-      aurora: { style: 'twilight', atmosphere: 'aurora', brightness: 'dark' },
-    };
-    let listenersAttached = false;
-
-    function legacyTheme() {
-      const atmo = localStorage.getItem('atmosphere');
-      if (atmo === 'rain' || atmo === 'moonlight' || atmo === 'dawn' || atmo === 'aurora') return atmo;
-      return localStorage.getItem('style') === 'twilight' ? 'moonlight' : 'garden';
-    }
-
-    function init() {
-      const button = document.getElementById('theme-toggle');
-      const popover = document.getElementById('theme-popover');
-      const wrapper = document.getElementById('theme-popover-wrapper');
-      if (!button || !popover || !wrapper || button.dataset.initialized) return;
-      button.dataset.initialized = 'true';
-      let isOpen = false;
-      const getTheme = () => localStorage.getItem('visualTheme') || legacyTheme();
-
-      function loadVideo(theme) {
-        const video = document.getElementById('atmosphere-video');
-        if (!video) return;
-        const src = THEMES[theme].video;
-        if (!src) { video.removeAttribute('src'); video.load(); return; }
-        if (video.getAttribute('src') !== src) { video.src = src; video.load(); }
-        video.play().catch(() => {});
-      }
-
-      function apply() {
-        const theme = THEMES[getTheme()] ? getTheme() : 'garden';
-        const config = THEMES[theme];
-        localStorage.setItem('visualTheme', theme);
-        document.documentElement.dataset.style = config.style;
-        document.documentElement.dataset.atmosphere = config.atmosphere;
-        document.documentElement.dataset.theme = config.brightness;
-        document.documentElement.dataset.visualMotion = 'on';
-        document.documentElement.style.colorScheme = config.brightness;
-        const meta = document.getElementById('meta-theme-color');
-        if (meta) meta.setAttribute('content', config.brightness === 'dark' ? '#10141d' : '#faf9f6');
-        document.querySelectorAll('[data-set-visual-theme]').forEach((el) => el.classList.toggle('is-active', el.dataset.setVisualTheme === theme));
-        loadVideo(theme);
-      }
-
-      function close() { popover.classList.remove('is-open'); button.setAttribute('aria-expanded', 'false'); isOpen = false; }
-      button.addEventListener('click', (event) => { event.stopPropagation(); isOpen ? close() : (popover.classList.add('is-open'), button.setAttribute('aria-expanded', 'true'), isOpen = true); });
-      document.querySelectorAll('[data-set-visual-theme]').forEach((el) => el.addEventListener('click', () => { localStorage.setItem('visualTheme', el.dataset.setVisualTheme); apply(); close(); }));
-
-      if (!listenersAttached) {
-        listenersAttached = true;
-        document.addEventListener('click', (event) => { const current = document.getElementById('theme-popover-wrapper'); if (isOpen && current && !current.contains(event.target)) close(); });
-        document.addEventListener('visibilitychange', () => { const video = document.getElementById('atmosphere-video'); if (!video?.src) return; document.hidden ? video.pause() : video.play().catch(() => {}); });
-      }
-      apply();
-    }
-    document.addEventListener('astro:page-load', init);
-    document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
-  })();
-</script>
+<details id="theme-picker" class="theme-picker">
+  <summary aria-label="테마 변경" title="테마 변경">
+    <svg class="theme-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg>
+    <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 15.5A8.5 8.5 0 0 1 8.5 4 8.5 8.5 0 1 0 20 15.5Z"/></svg>
+  </summary>
+  <fieldset>
+    <legend class="sr-only">화면 테마</legend>
+    <label><input type="radio" name="reading-theme" value="light" />밝게</label>
+    <label><input type="radio" name="reading-theme" value="dark" />어둡게</label>
+    <label><input type="radio" name="reading-theme" value="system" checked />시스템 설정</label>
+  </fieldset>
+</details>
+<style>
+  .theme-picker { position: relative; }
+  summary { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; list-style: none; color: var(--color-foreground-muted); }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { color: var(--color-foreground); }
+  .theme-moon { display: none; }
+  :global([data-theme="dark"]) .theme-sun { display: none; }
+  :global([data-theme="dark"]) .theme-moon { display: block; }
+  fieldset { position: absolute; z-index: 100; top: calc(100% + .4rem); right: 0; width: 10.5rem; padding: .35rem; border: 1px solid var(--color-outline-subtle); border-radius: 6px; background: var(--color-surface); box-shadow: 0 4px 16px rgb(0 0 0 / .08); }
+  label { display: flex; align-items: center; gap: .7rem; min-height: 44px; padding: .4rem .65rem; font-size: .85rem; cursor: pointer; }
+  label:hover { background: var(--color-surface-raised); }
+  input { accent-color: var(--color-foreground); }
+  @media (max-width: 767px) { fieldset { right: -44px; } }
+</style>

@@ -43,30 +43,8 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="/design/reading.css" />
-    <script is:inline>
-      (function() {
-        const themes = {
-          garden: { style: 'garden', atmosphere: 'sunny', brightness: 'light' },
-          rain: { style: 'garden', atmosphere: 'rain', brightness: 'light' },
-          moonlight: { style: 'twilight', atmosphere: 'moonlight', brightness: 'dark' },
-          dawn: { style: 'terracotta', atmosphere: 'dawn', brightness: 'light' },
-          aurora: { style: 'twilight', atmosphere: 'aurora', brightness: 'dark' },
-        };
-        const legacyAtmo = localStorage.getItem('atmosphere');
-        const fallback = legacyAtmo === 'rain' || legacyAtmo === 'moonlight' || legacyAtmo === 'dawn' || legacyAtmo === 'aurora'
-          ? legacyAtmo
-          : localStorage.getItem('style') === 'twilight' ? 'moonlight' : 'garden';
-        const selected = themes[localStorage.getItem('visualTheme')] ? localStorage.getItem('visualTheme') : fallback;
-        const config = themes[selected];
-        document.documentElement.dataset.style = config.style;
-        document.documentElement.dataset.atmosphere = config.atmosphere;
-        document.documentElement.dataset.theme = config.brightness;
-        document.documentElement.dataset.visualMotion = 'on';
-        document.documentElement.style.colorScheme = config.brightness;
-        const meta = document.getElementById('meta-theme-color');
-        if (meta) meta.setAttribute('content', config.brightness === 'dark' ? '#10141d' : '#faf9f6');
-      })();
-    </script>
+    <meta name="theme-color" id="meta-theme-color" content="#fafafa" />
+    <script is:inline src="/theme.js"></script>
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -80,7 +58,6 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImageUrl} />
-    <meta name="theme-color" id="meta-theme-color" content="#faf9f6" />
     <meta name="generator" content={Astro.generator} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content={`default-src 'self'; script-src 'self' 'unsafe-inline'${currentPath === '/search/' || currentPath === '/search' ? " 'wasm-unsafe-eval'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;`} />
@@ -106,14 +83,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     )}
   </head>
   <body class="min-h-screen flex flex-col">
-    <video
-      id="atmosphere-video"
-      class="atmosphere-video"
-      muted
-      playsinline
-      loop
-      aria-hidden="true"
-    ></video>
+
     <a href="#main-content" class="skip-link">Skip to content</a>
     <Navbar transition:persist />
     <main id="main-content" class="flex-grow">
