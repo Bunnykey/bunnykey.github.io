@@ -1,0 +1,20 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { JSDOM } from 'jsdom';
+import { createRich } from '../scripts/editor/client/rich.js';
+test('rich editor preserves image, formatting, table and media through Markdown round trip', () => {
+ const dom=new JSDOM('<div id="editor"></div>',{url:'http://localhost'});
+ for(const name of ['window','document','navigator','HTMLElement','Element','Node','MutationObserver','getComputedStyle']) Object.defineProperty(globalThis,name,{value:dom.window[name],configurable:true});
+ const editor=createRich(document.querySelector('#editor'),()=>{},()=>{});
+ const markdown='## Hello\n\n**Bold text**\n\n![photo](/img/test.png)\n\n```embed\nhttps://youtu.be/dQw4w9WgXcQ\n```\n\n| A | B |\n|---|---|\n| 1 | 2 |';
+ editor.commands.setContent(markdown,{contentType:'markdown'});
+ const output=editor.getMarkdown();
+ assert.match(output,/\*\*Bold text\*\*/);
+ assert.match(output,/!\[photo\]\(\/img\/test.png\)/);
+ assert.match(output,/```embed\nhttps:\/\/youtu.be\/dQw4w9WgXcQ\n```/);
+ assert.equal(document.querySelectorAll('iframe').length,1);
+ assert.equal(document.querySelectorAll('table').length,1);
+ const before=editor.getJSON(); editor.commands.setContent(output,{contentType:'markdown'});
+ assert.deepEqual(editor.getJSON(),before);
+ editor.destroy(); dom.window.close();
+});

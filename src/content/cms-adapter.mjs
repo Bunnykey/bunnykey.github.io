@@ -1,31 +1,16 @@
-const SUPPORTED_SECTIONS = new Set(['flora', 'seeds', 'nursery']);
-const SINGLE_SEGMENT_SLUG = /^[a-z0-9-]+$/;
-
-function normalizeSection(section) {
-  return String(section || '').trim().toLowerCase();
-}
-
-export function slugify(input) {
-  return String(input || '')
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '');
-}
-
-function normalizeTags(tags = []) {
-  return tags.map((tag) => String(tag).trim().toLowerCase()).filter(Boolean);
-}
+import { COLLECTIONS, slugify, validateRoute, normalizeMetadata } from '../lib/publishing/contract.mjs';
+import { stableId } from '../lib/publishing/serialization.mjs';
+export { slugify };
+const normalizeSection = section => String(section || '').trim().toLowerCase();
 
 function buildCanonicalPath(section, slug) {
   return `/${section}/${slug}/`;
 }
 
 export function normalizeCmsEntry(input, options = {}) {
+  if(typeof input.sourceId!=='string' || !input.sourceId.trim())throw new Error('sourceId required');
   const section = normalizeSection(input.section);
-  if (!SUPPORTED_SECTIONS.has(section)) {
+  if (!COLLECTIONS.includes(section)) {
     throw new Error(`Unsupported section: ${section}`);
   }
 
@@ -34,9 +19,7 @@ export function normalizeCmsEntry(input, options = {}) {
   }
 
   const slug = slugify(input.slug);
-  if (!SINGLE_SEGMENT_SLUG.test(slug)) {
-    throw new Error('Slug must be a single path segment');
-  }
+  validateRoute(section,slug);
 
   if (input.draft) {
     return { status: 'skipped', reason: 'draft' };
@@ -49,23 +32,11 @@ export function normalizeCmsEntry(input, options = {}) {
 
   const canonicalPath = buildCanonicalPath(section, slug);
 
-  return {
-    status: 'ready',
-    entry: {
-      sourceId: String(input.sourceId),
-      section,
-      slug,
-      title: String(input.title).trim(),
-      date: new Date(input.date),
-      summary: String(input.summary).trim(),
-      body: String(input.body),
-      canonicalPath,
-      tags: normalizeTags(input.tags),
-      highlight: Boolean(input.highlight),
-      draft: false,
-      ...(input.demo ? { demo: input.demo } : {}),
-      ...(input.stage ? { stage: input.stage } : {}),
-      ...(input.series?.name ? { series: input.series } : {}),
-    },
-  };
+  const metadata = normalizeMetadata(section, {
+    title:input.title, date:input.date instanceof Date ? input.date : String(input.date || '').slice(0,10),
+    summary:input.summary ?? '', tags:input.tags, category:input.category,
+    highlight:Boolean(input.highlight), draft:false, demo:input.demo, stage:input.stage, series:input.series,
+    id:stableId('cms:'+String(input.sourceId)), contractVersion:1,
+  });
+  return { status:'ready', entry:{...metadata,sourceId:String(input.sourceId),section,slug,body:String(input.body ?? ''),canonicalPath,date:new Date(metadata.date)} };
 }

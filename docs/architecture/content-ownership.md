@@ -1,5 +1,7 @@
 # Content Ownership
 
+Current editing, draft storage, version and publication rules are defined in [Publishing contract v1](publishing-contract.md). The route matrix below is historical context; existing public routes are preserved.
+
 ## Phase 1 Rule
 
 Phase 1 production content is Git-owned. Astro is the only public presentation layer.

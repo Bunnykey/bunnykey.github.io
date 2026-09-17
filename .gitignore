@@ -11,3 +11,10 @@ playwright-report/
 
 # Workflow gate state
 .*-state.yaml
+scripts/editor/public/rich.bundle.js
+
+# Working drafts, publication receipts and cooperative writer lock
+.publishing/
+.publishing-lock/
+scripts/editor/public/radix.css
+scripts/editor/.shell-render.mjs

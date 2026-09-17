@@ -107,6 +107,7 @@ export function normalizeNotionPage(page, options = {}) {
       body: options.body || '',
       tags,
       highlight,
+      category: readSelect(properties.Category).toLowerCase() || undefined,
       draft: false,
       ...(demo ? { demo } : {}),
       ...(stage ? { stage } : {}),

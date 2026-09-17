@@ -1,4 +1,8 @@
 import express from 'express';
+import { COLLECTIONS, CATEGORIES, STAGES, DEMOS, slugify, validateRoute } from '../../src/lib/publishing/contract.mjs';
+import { createPostStore } from '../../src/lib/publishing/store.mjs';
+import { withPublishingLock } from '../../src/lib/publishing/lock.mjs';
+import { renderMedia } from '../../src/lib/media.mjs';
 import multer from 'multer';
 import { marked } from 'marked';
 import matter from 'gray-matter';
@@ -14,14 +18,22 @@ const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..', '..');
 const CONTENT = join(ROOT, 'src', 'content');
 const PUBLIC_IMG = join(ROOT, 'public', 'img');
-const COLLECTIONS = ['flora', 'nursery', 'seeds'];
+const posts = createPostStore(ROOT);
 
 const app = express();
 app.use(express.json({ limit: '5mb' }));
 app.use(express.static(join(__dirname, 'public')));
+app.use('/img', express.static(PUBLIC_IMG));
+app.use('/fonts', express.static(join(ROOT,'public','fonts')));
+app.use('/design', express.static(join(ROOT,'public','design')));
+// Prevent cross-origin forms from invoking local publishing APIs.
+app.use('/api', (req, res, next) => {
+  if (req.headers.origin && req.headers.origin !== `${req.protocol}://${req.headers.host}`) return res.status(403).json({error:'다른 사이트의 요청은 허용하지 않습니다.'});
+  next();
+});
 
-// Bind localhost only — never expose
-const PORT = 4322;
+// Local-only by default. Opt into a trusted LAN/tailnet with EDITOR_HOST.
+const PORT = Number(process.env.EDITOR_PORT || 4322);
 
 // Markdown renderer using same Shiki theme as Astro config
 marked.use({
@@ -44,18 +56,13 @@ marked.use({
   },
   renderer: {
     code(token) {
+      if (token.lang === 'embed') return renderMedia(token.text);
       return token.html || `<pre><code>${token.text}</code></pre>`;
     },
   },
 });
 
-function safeSlug(s) {
-  return s.toLowerCase()
-    .replace(/[^\p{L}\p{N}\s-]/gu, '')
-    .trim()
-    .replace(/\s+/g, '-')
-    .slice(0, 100);
-}
+const safeSlug = slugify;
 
 function safeCollection(c) {
   if (!COLLECTIONS.includes(c)) throw new Error(`invalid collection: ${c}`);
@@ -70,43 +77,30 @@ function findPostFile(collection, slug) {
   return null;
 }
 
-// List all posts grouped by collection
-app.get('/api/list', async (_req, res) => {
-  const result = {};
-  for (const c of COLLECTIONS) {
-    const dir = join(CONTENT, c);
-    if (!existsSync(dir)) { result[c] = []; continue; }
-    const files = (await readdir(dir)).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
-    result[c] = await Promise.all(files.map(async f => {
-      const raw = await readFile(join(dir, f), 'utf8');
-      const { data } = matter(raw);
-      const ext = extname(f);
-      return {
-        slug: basename(f, ext),
-        ext,
-        title: data.title || basename(f, ext),
-        date: data.date || null,
-        draft: !!data.draft,
-      };
-    }));
-    result[c].sort((a, b) => String(b.date).localeCompare(String(a.date)));
-  }
+// Metadata and the same document envelope are shared by every editing client.
+app.get('/api/contract', (_req,res)=>res.json({version:1,collections:COLLECTIONS,categories:CATEGORIES,stages:STAGES,demos:DEMOS}));
+app.get('/api/list', async (_req,res)=>{
+  const result=Object.fromEntries(COLLECTIONS.map(c=>[c,[]]));
+  for(const post of await posts.list())result[post.collection].push({slug:post.slug,ext:post.ext,title:post.frontmatter.title,date:post.frontmatter.date,draft:post.hasDraft || !!post.frontmatter.draft,id:post.id,publication:post.publication});
+  for(const rows of Object.values(result))rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));
   res.json(result);
 });
-
-// Get one post
-app.get('/api/get', async (req, res) => {
+app.get('/api/get', async(req,res)=>{
   try {
-    const c = safeCollection(req.query.collection);
-    const slug = safeSlug(req.query.slug);
-    const hit = findPostFile(c, slug);
-    if (!hit) return res.status(404).json({ error: 'not found' });
-    const raw = await readFile(hit.path, 'utf8');
-    const { data, content } = matter(raw);
-    res.json({ frontmatter: data, body: content, ext: hit.ext });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
+    const {collection,slug}=req.query;validateRoute(collection,slug);
+    const post=await posts.read(collection,slug);
+    if(!post)return res.status(404).json({error:'not found'});
+    res.json({...post,document:{id:post.id,revision:post.revision,collection,slug}});
+  }catch(e){res.status(e.status || 400).json({error:e.message});}
+});
+
+app.get('/api/source', async(req,res)=>{
+  try {const src=await posts.source(req.query.collection,req.query.slug);res.json(src?{frontmatter:src.frontmatter,body:src.body,revision:src.revision}:null);}
+  catch(e){res.status(e.status || 400).json({error:e.message});}
+});
+app.post('/api/reconcile', async(req,res)=>{
+  try {const draft=await withPublishingLock(ROOT,()=>posts.save(req.body,true));res.json({...draft,ok:true,document:{id:draft.id,revision:draft.revision,collection:draft.collection,slug:draft.slug}});}
+  catch(e){res.status(e.status || 400).json({error:e.message});}
 });
 
 const DEMO_COMPONENTS = ['TokenFlowDemo', 'ApiFlowDemo'];
@@ -133,44 +127,12 @@ app.post('/api/render', async (req, res) => {
   }
 });
 
-// Serialize frontmatter consistently — date as unquoted YAML date, strings quoted
-function buildFrontmatter(fm) {
-  if (!fm.title) throw new Error('title required');
-  if (!fm.date) throw new Error('date required');
-  const dateStr = typeof fm.date === 'string' ? fm.date : new Date(fm.date).toISOString().slice(0, 10);
-  const lines = [`title: ${JSON.stringify(fm.title)}`, `date: ${dateStr}`];
-  if (fm.summary) lines.push(`summary: ${JSON.stringify(fm.summary)}`);
-  if (Array.isArray(fm.tags) && fm.tags.length > 0) {
-    const tagList = fm.tags.map(t => JSON.stringify(t)).join(', ');
-    lines.push(`tags: [${tagList}]`);
-  }
-  if (fm.demo) lines.push(`demo: ${JSON.stringify(fm.demo)}`);
-  if (fm.highlight) lines.push(`highlight: true`);
-  if (fm.stage) lines.push(`stage: ${JSON.stringify(fm.stage)}`);
-  if (fm.draft) lines.push(`draft: true`);
-  return `---\n${lines.join('\n')}\n---\n`;
-}
-
-// Save markdown file
-app.post('/api/save', async (req, res) => {
+// Saved drafts never change the public source tree.
+app.post('/api/save', async(req,res)=>{
   try {
-    const c = safeCollection(req.body.collection);
-    const slug = safeSlug(req.body.slug);
-    if (!slug) throw new Error('slug required');
-    const fm = req.body.frontmatter || {};
-    const fmBlock = buildFrontmatter(fm);
-
-    const body = req.body.body || '';
-    const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
-    const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
-    const existing = findPostFile(c, slug);
-    if (existing && existing.ext !== preferredExt) await unlink(existing.path);
-    const path = join(CONTENT, c, `${slug}${preferredExt}`);
-    await writeFile(path, fmBlock + '\n' + body, 'utf8');
-    res.json({ ok: true, path: path.replace(ROOT + '/', ''), ext: preferredExt });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
+    const draft=await withPublishingLock(ROOT,()=>posts.save(req.body));
+    res.json({...draft,ok:true,document:{id:draft.id,revision:draft.revision,collection:draft.collection,slug:draft.slug}});
+  }catch(e){res.status(e.status || 400).json({error:e.message});}
 });
 
 // Image upload
@@ -187,6 +149,10 @@ const upload = multer({
       cb(null, `${ts}-${base}${ext}`);
     },
   }),
+  fileFilter: (_req, file, cb) => {
+    const valid = /^image\/(png|jpeg|gif|webp|avif)$/.test(file.mimetype) && /\.(png|jpe?g|gif|webp|avif)$/i.test(file.originalname);
+    cb(valid ? null : new Error('PNG, JPEG, GIF, WebP, AVIF 이미지를 선택하세요.'), valid);
+  },
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
@@ -195,18 +161,16 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
   res.json({ url: `/img/${req.file.filename}`, name: req.file.originalname });
 });
 
-// Delete a post
-app.post('/api/delete', async (req, res) => {
+// Discard only a working draft. Removing an already published URL needs a separate lifecycle.
+app.post('/api/delete', async(req,res)=>{
   try {
-    const c = safeCollection(req.body.collection);
-    const slug = safeSlug(req.body.slug);
-    const hit = findPostFile(c, slug);
-    if (!hit) return res.status(404).json({ error: 'not found' });
-    await unlink(hit.path);
-    res.json({ ok: true, path: hit.path.replace(ROOT + '/', '') });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
+    await withPublishingLock(ROOT, async()=>{
+      const post=await posts.check(req.body);
+      if(!post?.hasDraft)throw Object.assign(new Error('삭제할 작업 초안이 없습니다. 게시된 글은 유지됩니다.'),{status:409});
+      await unlink(join(ROOT,'.publishing','drafts',post.id+'.json'));
+    });
+    res.json({ok:true});
+  }catch(e){res.status(e.status || 400).json({error:e.message});}
 });
 
 // Git helpers
@@ -226,49 +190,49 @@ app.get('/api/git-status', (_req, res) => {
   res.json({ dirty: files.length > 0, files, ahead, branch });
 });
 
-// Publish: save (draft off) + commit + push
-app.post('/api/publish', async (req, res) => {
+// Publication receipts distinguish repository delivery from verified public deployment.
+app.post('/api/publish', async(req,res)=>{
+  let draft, promotion, commitSha, phase='validation', toAdd=[];
   try {
-    const c = safeCollection(req.body.collection);
-    const slug = safeSlug(req.body.slug);
-    if (!slug) throw new Error('slug required');
-    const fm = req.body.frontmatter || {};
-    if (!fm.title) throw new Error('title required');
-    if (!fm.date) throw new Error('date required');
-
-    const publishFm = { ...fm };
-    delete publishFm.draft;
-    const fmBlock = buildFrontmatter(publishFm);
-
-    const body = req.body.body || '';
-    const hasJsx = /<(TokenFlowDemo|ApiFlowDemo)\b/.test(body);
-    const preferredExt = req.body.ext === '.mdx' || hasJsx ? '.mdx' : '.md';
-    const existing = findPostFile(c, slug);
-    if (existing && existing.ext !== preferredExt) await unlink(existing.path);
-    const relPath = `src/content/${c}/${slug}${preferredExt}`;
-    await writeFile(join(ROOT, relPath), fmBlock + '\n' + body, 'utf8');
-
-    const toAdd = [relPath];
-    if (existsSync(join(ROOT, 'public', 'img'))) toAdd.push('public/img');
-    const add = git(['add', ...toAdd]);
-    if (add.status !== 0) throw new Error(`git add failed: ${add.stderr || add.stdout}`);
-
-    const msg = req.body.message || `content: publish "${fm.title}"`;
-    const commit = git(['commit', '-m', msg]);
-    if (commit.status !== 0) {
-      // commit might fail if nothing to commit — that's OK for re-publish with no changes
-      if (!/nothing to commit/.test(commit.stdout + commit.stderr)) {
-        throw new Error(`git commit failed: ${commit.stderr || commit.stdout}`);
+    const result=await withPublishingLock(ROOT,async()=>{
+      try {
+        if(git(['branch','--show-current']).stdout.trim()!=='main')throw new Error('발행은 main 브랜치에서 실행하세요.');
+        draft=await posts.save(req.body);
+        await posts.record(draft.id,{state:'building',revision:draft.revision});phase='build';
+        promotion=await posts.promote(draft);
+        const build=spawnSync('npm',['run','build'],{cwd:ROOT,encoding:'utf8',timeout:120000});
+        if(build.status!==0)throw new Error('Astro 빌드 실패: '+(build.stderr || build.stdout || build.error?.message).slice(-2000));
+        const relPath=`src/content/${draft.collection}/${draft.slug}${draft.ext}`;
+        toAdd=[relPath];
+        if(promotion.old && promotion.old.ext!==draft.ext)toAdd.push(`src/content/${draft.collection}/${draft.slug}${promotion.old.ext}`);
+        for(const match of draft.body.matchAll(/\/img\/([a-zA-Z0-9_\p{L}.-]+)/gu)) {
+          const image=`public/img/${match[1]}`;if(existsSync(join(ROOT,image)))toAdd.push(image);
+        }
+        phase='commit';
+        const add=git(['add',...toAdd]);if(add.status!==0)throw new Error(add.stderr);
+        const diff=git(['diff','--quiet','HEAD','--',...toAdd]);
+        if(![0,1].includes(diff.status))throw new Error(diff.stderr);
+        if(diff.status===1) {const commit=git(['commit','--only','-m',`content: publish "${draft.frontmatter.title}"`,'--',...toAdd]);if(commit.status!==0)throw new Error(commit.stderr || commit.stdout);}
+        commitSha=git(['rev-parse','HEAD']).stdout.trim();
+        await posts.record(draft.id,{state:'committed',commitSha,revision:promotion.revision});phase='push';
+        const push=git(['push','origin','HEAD']);if(push.status!==0)throw new Error(push.stderr);
+        await posts.record(draft.id,{state:'pushed',commitSha,revision:promotion.revision});
+        const document=await posts.finish(draft,promotion);
+        return {ok:true,path:relPath,ext:draft.ext,document,state:'pushed',commitSha,deploymentVerified:false,deploymentUrl:'https://github.com/Bunnykey/bunnykey.github.io/actions'};
+      }catch(error){
+        if(draft){
+          if(promotion && !commitSha){
+            await posts.rollback(promotion);
+            if(toAdd.length)git(['reset','-q','HEAD','--',...toAdd]);
+          }else if(promotion && commitSha){draft=await posts.rebase(draft,promotion);}
+          await posts.record(draft.id,{state:'failed',phase,commitSha,error:error.message,revision:draft.revision});
+          error.document={id:draft.id,revision:draft.revision,collection:draft.collection,slug:draft.slug};
+        }
+        throw error;
       }
-    }
-
-    const push = git(['push', 'origin', 'HEAD']);
-    if (push.status !== 0) throw new Error(`git push failed: ${push.stderr}`);
-
-    res.json({ ok: true, path: relPath, committed: commit.status === 0 });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
+    });
+    res.json(result);
+  }catch(e){res.status(e.status || 400).json({error:e.message,phase,state:'failed',document:e.document});}
 });
 
 // All tags (union across posts)
@@ -373,11 +337,11 @@ app.post('/api/complete', async (req, res) => {
 });
 
 // Check slug uniqueness
-app.get('/api/check-slug', (req, res) => {
+app.get('/api/check-slug', async (req, res) => {
   try {
     const c = safeCollection(req.query.collection);
     const slug = safeSlug(req.query.slug);
-    const hit = findPostFile(c, slug);
+    const hit = await posts.read(c, slug);
     res.json({ exists: !!hit, ext: hit?.ext || null });
   } catch (e) {
     res.status(400).json({ error: e.message });
@@ -385,15 +349,9 @@ app.get('/api/check-slug', (req, res) => {
 });
 
 // Demo enum from config.ts (parsed simply)
-app.get('/api/demos', async (_req, res) => {
-  const cfg = await readFile(join(CONTENT, 'config.ts'), 'utf8');
-  const matches = [...cfg.matchAll(/demo:\s*z\.enum\(\[([^\]]+)\]\)/g)];
-  const all = new Set();
-  for (const m of matches) {
-    for (const v of m[1].matchAll(/'([^']+)'/g)) all.add(v[1]);
-  }
-  res.json([...all]);
-});
+app.get('/api/demos', (_req,res)=>res.json([...new Set(Object.values(DEMOS).flat())]));
+
+app.use((error, _req, res, _next) => res.status(400).json({error:error.message}));
 
 let tailnet = null;
 try {
@@ -402,7 +360,7 @@ try {
   tailnet = (self.DNSName || '').replace(/\.$/, '') || (self.TailscaleIPs || [])[0] || null;
 } catch {}
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, process.env.EDITOR_HOST || '127.0.0.1', () => {
   console.log(`Editor running:`);
   console.log(`  local:    http://localhost:${PORT}`);
   if (tailnet) console.log(`  tailnet:  http://${tailnet}:${PORT}`);

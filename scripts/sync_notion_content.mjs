@@ -1,5 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { withPublishingLock } from '../src/lib/publishing/lock.mjs';
+import { createPostStore } from '../src/lib/publishing/store.mjs';
 
 import { fetchNotionEntries, entryToMarkdown } from '../src/content/notion-sync.mjs';
 
@@ -38,13 +40,15 @@ function requiredEnv(name) {
 async function loadGitOwnedSlugs(section) {
   const dir = CONTENT_DIRS[section];
   const files = await fs.readdir(dir);
-  return new Set(files.filter((file) => file.endsWith('.md')).map((file) => file.replace(/\.md$/, '')));
+  return new Set(files.filter((file) => /\.mdx?$/.test(file)).map((file) => file.replace(/\.mdx?$/, '')));
 }
 
 async function main() {
   await loadEnvFileIfPresent(ENV_LOCAL_PATH);
 
+  const ownedPosts=await createPostStore(PROJECT_ROOT).list();
   const config = {
+    ownedIds:new Set(ownedPosts.map(p=>p.id)),
     token: requiredEnv('NOTION_TOKEN'),
     dataSourceId: requiredEnv('NOTION_BLOG_DATA_SOURCE_ID'),
     gitOwnedSlugs: {
@@ -55,10 +59,13 @@ async function main() {
     publicImgDir: path.join(PROJECT_ROOT, 'public/img'),
   };
 
+  for(const post of ownedPosts)config.gitOwnedSlugs[post.collection].add(post.slug);
   const results = await fetchNotionEntries(config);
   let written = 0;
   let skipped = 0;
 
+  await withPublishingLock(PROJECT_ROOT, async()=>{
+  const store=createPostStore(PROJECT_ROOT);
   for (const result of results) {
     if (result.status !== 'ready') {
       skipped += 1;
@@ -66,10 +73,12 @@ async function main() {
     }
 
     const filePath = path.join(CONTENT_DIRS[result.entry.section], `${result.entry.slug}.md`);
-    await fs.writeFile(filePath, entryToMarkdown(result.entry), 'utf8');
+    if (await store.read(result.entry.section,result.entry.slug) || (await store.list()).some(p=>p.id===result.entry.id)) {skipped+=1;continue;}
+    await fs.writeFile(filePath, entryToMarkdown(result.entry), {encoding:'utf8',flag:'wx'});
     written += 1;
   }
 
+  });
   console.log(`Notion sync complete: written=${written} skipped=${skipped}`);
 }
 

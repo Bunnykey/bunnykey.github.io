@@ -1,0 +1,65 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { mkdtemp, mkdir, cp, writeFile, readFile, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
+import { spawn, execFileSync } from 'node:child_process';
+
+test('save, image, preview, build and publish preserve unrelated staged files', {timeout:180000}, async () => {
+ const root=await mkdtemp(join(tmpdir(),'bunny-publish-'));
+ const repo=join(root,'repo'); await mkdir(repo);
+ const source=resolve('.');
+ for(const path of ['scripts','src','public','astro.config.mjs','package.json','tsconfig.json']) await cp(join(source,path),join(repo,path),{recursive:true});
+ await cp(join(source,'node_modules'),join(repo,'node_modules'),{recursive:true});
+ const git=(...args)=>execFileSync('git',args,{cwd:repo,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ git('init','-b','main'); git('config','user.name','Publishing test'); git('config','user.email','test@example.invalid');
+ await writeFile(join(repo,'.gitignore'),'node_modules/\ndist/\n.astro/\n');
+ git('add','.');git('commit','-m','fixture');git('init','--bare',join(root,'remote.git'));git('remote','add','origin',join(root,'remote.git'));git('push','-u','origin','main');
+ await writeFile(join(repo,'unrelated.txt'),'keep staged');git('add','unrelated.txt');
+ const port=14322;
+ const server=spawn(process.execPath,['scripts/editor/server.mjs'],{cwd:repo,env:{...process.env,EDITOR_PORT:String(port)},stdio:['ignore','pipe','pipe']});
+ try {
+  await new Promise((ok,fail)=>{server.stdout.on('data',()=>ok());server.on('exit',code=>fail(new Error('server exited '+code)));});
+  const request=async(path,body)=>{const r=await fetch(`http://127.0.0.1:${port}${path}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();assert.equal(r.status,200,JSON.stringify(data));return data;};
+  const file=new FormData();file.append('file',new Blob([Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')],{type:'image/png'}),'pixel.png');
+  const uploaded=await (await fetch(`http://127.0.0.1:${port}/api/upload`,{method:'POST',body:file})).json();
+  assert.equal((await fetch(`http://127.0.0.1:${port}${uploaded.url}`)).status,200);
+  const body=`Hello **studio**\n\n![pixel](${uploaded.url})\n\n\`\`\`embed\nhttps://youtu.be/dQw4w9WgXcQ\n\`\`\`\n\n\`\`\`embed\nhttps://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT\n\`\`\`\n\n\`\`\`embed\nhttps://github.com/Bunnykey/bunnykey.github.io\n\`\`\``;
+  const post={document:{id:'post_0123456789abcdef0123456789abcdef',revision:null,collection:'seeds',slug:'publishing-test'},collection:'seeds',slug:'publishing-test',frontmatter:{title:'Publishing Test',date:'2026-09-16',draft:true},body};
+  await writeFile(join(repo,'src/content/seeds/mdx-media-test.mdx'), '---\ntitle: MDX media\ndate: 2026-09-16\n---\n\n'+body);
+  const saved=await request('/api/save',post);post.document=saved.document;
+  await assert.rejects(readFile(join(repo,'src/content/seeds/publishing-test.md'),'utf8'),{code:'ENOENT'});
+  assert.equal(saved.frontmatter.draft,true);
+  const stale=await fetch(`http://127.0.0.1:${port}/api/save`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...post,document:{...post.document,revision:null},body:'stale device'})});
+  assert.equal(stale.status,409);
+  const preview=await request('/api/render',{markdown:body});
+  assert.match(preview.html,/data-provider="Spotify"/);
+  const published=await request('/api/publish',post);
+  assert.equal(published.state,'pushed');
+  const mdxHtml=await readFile(join(repo,'dist/seeds/mdx-media-test/index.html'),'utf8');
+  assert.ok(mdxHtml.includes('data-provider="Spotify"'));
+  const html=await readFile(join(repo,'dist/seeds/publishing-test/index.html'),'utf8');
+  for(const provider of ['Spotify','YouTube','GitHub']) assert.ok(html.includes(`data-provider="${provider}"`));
+  assert.equal(git('diff','--cached','--name-only'),'unrelated.txt');
+  assert.ok(!git('show','--pretty=','--name-only','HEAD').includes('unrelated.txt'));
+  assert.equal(git('rev-parse','HEAD'),git('rev-parse','origin/main'));
+  post.document=published.document;
+  const republished=await request('/api/publish',post); // idempotent republish, with unrelated staged file remaining
+  post.document=republished.document;
+  const publicBeforeFailure=await readFile(join(repo,'src/content/seeds/publishing-test.md'),'utf8');
+  const broken={...post,ext:'.mdx',body:'import Missing from \"./missing-component.js\";\n\n<Missing />'};
+  const failure=await fetch(`http://127.0.0.1:${port}/api/publish`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(broken)});
+  assert.equal(failure.status,400);
+  const failureData=await failure.json();assert.equal(failureData.phase,'build');assert.ok(failureData.document.revision);
+  assert.equal(await readFile(join(repo,'src/content/seeds/publishing-test.md'),'utf8'),publicBeforeFailure);
+  await assert.rejects(readFile(join(repo,'src/content/seeds/publishing-test.mdx')),{code:'ENOENT'});
+  const recovered=await request('/api/save',{...post,document:failureData.document});
+  post.document=recovered.document;
+  git('remote','set-url','origin',join(root,'missing-remote.git'));
+  const pushFailure=await fetch(`http://127.0.0.1:${port}/api/publish`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({...post,body:body+'\n\nRetry test'})});
+  const pushError=await pushFailure.json();assert.equal(pushFailure.status,400);assert.equal(pushError.phase,'push');
+  git('remote','set-url','origin',join(root,'remote.git'));
+  const retry=await request('/api/publish',{...post,document:pushError.document,body:body+'\n\nRetry test'});
+  assert.equal(retry.state,'pushed');assert.equal(git('diff','--cached','--name-only'),'unrelated.txt');
+ } finally { server.kill(); await new Promise(r=>server.once('exit',r)); await rm(root,{recursive:true,force:true}); }
+});

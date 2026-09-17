@@ -1,0 +1,33 @@
+---
+import { SITE, toCanonicalUrl } from '../consts/site';
+interface Props {title:string; description?:string; date?:Date; image?:string}
+const {title,description='Bunnykey의 글과 기록',date,image}=Astro.props;
+const canonical=toCanonicalUrl(Astro.url.pathname);
+---
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title} · Bunnykey</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+<link rel="icon" href="/favicon.svg" />
+<link rel="stylesheet" href="/design/reading.css" />
+<link rel="preload" href="/fonts/MaruBuri-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<meta property="og:title" content={title} /><meta property="og:description" content={description} />
+<meta property="og:type" content={date?'article':'website'} /><meta property="og:url" content={canonical} />
+{image && <meta property="og:image" content={new URL(image,SITE.siteUrl).href} />}
+{date && <meta property="article:published_time" content={date.toISOString()} />}
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-src https://open.spotify.com https://www.youtube-nocookie.com; base-uri 'self'; form-action 'self';" />
+</head>
+<body>
+<a class="skip" href="#content">본문으로 이동</a>
+<header class="site-head"><a href="/" class="brand">Bunnykey</a><nav aria-label="주 메뉴"><a href="/">글 모음</a><a href="/rss.xml">RSS</a></nav></header>
+<main id="content"><slot /></main>
+<footer class="site-foot">Bunnykey</footer>
+</body>
+</html>
+<style is:global>
+body{margin:0;background:var(--journal-paper);color:var(--journal-ink);font-family:var(--journal-ui);line-height:1.6}*{box-sizing:border-box}a{color:inherit}a:focus-visible,button:focus-visible{outline:2px solid var(--journal-accent);outline-offset:5px}.site-head,.site-foot{width:min(calc(100% - 48px),64rem);margin:auto}.site-head{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0;border-bottom:1px solid var(--journal-line)}.site-head a{text-decoration:none}.brand{font-size:19px;font-weight:600}.site-head nav{display:flex;gap:24px;font-size:14px;color:var(--journal-muted)}.site-foot{border-top:1px solid var(--journal-line);padding:22px 0 40px;color:var(--journal-muted);font-size:13px}.skip{position:absolute;left:24px;top:-80px;background:var(--journal-paper);padding:12px}.skip:focus{top:4px}.reading-page{width:min(calc(100% - 48px),var(--journal-width));margin:64px auto 88px}.reading-meta{font:13px/1.6 var(--journal-ui);color:var(--journal-muted);margin:0 0 14px}.reading-title{font:600 clamp(30px,5vw,42px)/1.4 var(--journal-body);letter-spacing:0;overflow-wrap:anywhere;margin:0 0 20px}.reading-summary{font:400 18px/1.8 var(--journal-body);margin:0 0 24px}.reading-header{margin-bottom:48px}.reading-back{margin-top:48px;font-size:14px}.reading-back a{text-underline-offset:5px}@media(max-width:600px){.reading-page{margin-top:36px;margin-bottom:56px}.site-head{padding:20px 0}.reading-header{margin-bottom:32px}}
+</style>

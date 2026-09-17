@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import remarkMedia from './src/lib/remark-media.mjs';
 
 export default defineConfig({
   site: 'https://bunnykey.github.io',
@@ -11,6 +12,7 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   markdown: {
+    remarkPlugins: [remarkMedia],
     shikiConfig: {
       themes: {
         light: 'github-light',
