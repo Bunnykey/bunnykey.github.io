@@ -47,7 +47,7 @@ const stageEmoji = NURSERY_STAGE_EMOJI[entry.data.stage || 'seed'];
             <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
             <span title={`Stage: ${entry.data.stage || 'seed'}`}>{stageEmoji}</span>
           </div>
-          <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
+          <h1 data-pagefind-body data-pagefind-meta="title" class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
           {entry.data.summary && (
             <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>
           )}

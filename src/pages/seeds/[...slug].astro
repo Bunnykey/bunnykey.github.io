@@ -38,7 +38,7 @@ const description = entry.data.summary || sectionDescription('seeds');
           <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>
           <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
         </div>
-        <h1 class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
+        <h1 data-pagefind-body data-pagefind-meta="title" class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
         {entry.data.summary && (
           <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>
         )}
