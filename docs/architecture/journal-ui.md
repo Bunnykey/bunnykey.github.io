@@ -1,6 +1,6 @@
 # Journal UI — representative article
 
-The home page features Clearance Sale. Other source posts and existing URLs are preserved; this change does not archive or delete them.
+The original home, topic directory, recent posts, navigation and atmosphere controls are restored. Clearance Sale uses the shared site layout, with Maru Buri reading typography. All source posts and URLs are preserved.
 
 - `/nursery/clearance-sale/`: Korean reading layout, original article body and photograph.
 - `public/design/reading.css`: shared typography and reading tokens, served by Astro and the editor. Fonts are self-hosted; no external font CDN is required.

@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import JournalLayout from '../../layouts/JournalLayout.astro';
 import PostSidebar from '../../components/PostSidebar.astro';
 import TableOfContents from '../../components/TableOfContents.astro';
 import SeriesNav from '../../components/SeriesNav.astro';
@@ -28,19 +27,6 @@ const seriesNav = series
 const stageEmoji = NURSERY_STAGE_EMOJI[entry.data.stage || 'seed'];
 ---
 
-{entry.slug === 'clearance-sale' ? (
-<JournalLayout title={entry.data.title} description={entry.data.summary || '클리어런스 세일의 의미'} date={entry.data.date} image="/img/notion-33afd41ccc4c803f9945c92d518856d5.jpeg">
-  <article class="reading-page">
-    <header class="reading-header">
-      <p class="reading-meta"><time datetime={entry.data.date.toISOString()}>{formatArchiveDate(entry.data.date)}</time></p>
-      <h1 class="reading-title">{entry.data.title}</h1>
-      {entry.data.summary && <p class="reading-summary">{entry.data.summary}</p>}
-    </header>
-    <div class="journal-prose" data-pagefind-body><Content /></div>
-    <nav class="reading-back" aria-label="글 탐색"><a href="/">글 모음으로 돌아가기</a></nav>
-  </article>
-</JournalLayout>
-) : (
 <Layout
   title={entry.data.title}
   description={description}
@@ -118,5 +104,3 @@ const stageEmoji = NURSERY_STAGE_EMOJI[entry.data.stage || 'seed'];
     </div>
   </div>
 </Layout>
-
-)}

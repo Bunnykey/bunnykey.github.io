@@ -54,7 +54,7 @@
     --color-error: #9e422c;
 
     /* Typography */
-    --font-sans: "Inter", system-ui, sans-serif;
+    --font-sans: "Pretendard", system-ui, sans-serif;
 }
 
 @layer base {
@@ -560,3 +560,10 @@ body {
 .journal-article .greenhouse-prose h2 { font-size: clamp(1.8rem, 3vw, 2.55rem); }
 .journal-article .greenhouse-prose :is(img, video) { border-radius: 0; }
 @media (max-width: 640px) { .journal-article-shell { width: min(100% - 2rem, 70rem); padding-top: 3rem; }.journal-article-header { padding-bottom: 1.75rem; margin-bottom: 1.75rem; } }
+
+/* Preserve the existing navigation and atmosphere, updating only reading typography. */
+.journal-article-header h1 { font-family: MaruBuri, serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.45; letter-spacing: 0; font-weight: 600; }
+.journal-article .greenhouse-prose { font-family: MaruBuri, serif; font-size: 18px; line-height: 1.9; letter-spacing: 0; word-break: keep-all; overflow-wrap: anywhere; }
+.journal-article .greenhouse-prose :is(h2,h3) { font-family: MaruBuri, serif; line-height: 1.5; letter-spacing: 0; font-weight: 600; }
+.journal-article .greenhouse-prose h2 { font-size: 1.3em; }
+@media(max-width:640px) { .journal-article .greenhouse-prose { font-size: 17px; line-height: 1.85; } }
