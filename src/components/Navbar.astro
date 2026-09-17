@@ -12,10 +12,10 @@ const navLinks = [
 ];
 ---
 
-<nav class="relative px-6 md:px-10 py-6 bg-surface-raised" aria-label="주요 메뉴">
+<nav class="relative px-4 md:px-10 py-6 bg-surface-raised" aria-label="주요 메뉴">
   <div class="flex items-center justify-between">
-    <a href="/" class="text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">{SITE.name}</a>
-    <div class="flex items-center gap-4">
+    <a href="/" class="text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">{SITE.name}</a>
+    <div class="flex items-center gap-0 md:gap-4">
       <div class="hidden md:flex items-center gap-6">
         {navLinks.map((link) => {
           const isActive = currentPath.startsWith(link.href);
@@ -23,15 +23,15 @@ const navLinks = [
         })}
       </div>
       <ThemeToggle />
-      <a href="/search/" class="p-1.5 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
+      <a href="/search/" class="flex items-center justify-center w-11 h-11 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </a>
-      <button id="menu-toggle" class="md:hidden flex flex-col justify-center gap-1.5 w-6 h-6" aria-expanded="false" aria-controls="mobile-drawer" aria-label="메뉴">
+      <button id="menu-toggle" class="md:hidden flex flex-col justify-center gap-1.5 w-11 h-11 px-2.5" aria-expanded="false" aria-controls="mobile-drawer" aria-label="메뉴">
         <span id="burger-top" class="block w-full h-0.5 bg-foreground transition-all duration-300 origin-center"></span><span id="burger-mid" class="block w-full h-0.5 bg-foreground transition-all duration-300"></span><span id="burger-bot" class="block w-full h-0.5 bg-foreground transition-all duration-300 origin-center"></span>
       </button>
     </div>
   </div>
-  <div id="mobile-drawer" class="nav-drawer md:hidden overflow-hidden max-h-0 opacity-0 transition-all duration-300 ease-in-out">
+  <div id="mobile-drawer" class="nav-drawer md:hidden" inert aria-hidden="true">
     <div class="pt-4 pb-2 flex flex-col">
       {navLinks.map((link) => {
         const isActive = currentPath.startsWith(link.href);
@@ -51,18 +51,31 @@ const navLinks = [
       if (!toggle || !drawer || toggle.dataset.initialized) return;
       toggle.dataset.initialized = 'true';
       function set(open) {
-        drawer.classList.toggle('max-h-0', !open); drawer.classList.toggle('opacity-0', !open);
-        drawer.classList.toggle('max-h-64', open); drawer.classList.toggle('opacity-100', open);
+        drawer.inert = !open;
+        drawer.setAttribute('aria-hidden', String(!open));
         toggle.setAttribute('aria-expanded', String(open));
         document.getElementById('burger-top')?.classList.toggle('rotate-45', open); document.getElementById('burger-top')?.classList.toggle('translate-y-[7px]', open);
         document.getElementById('burger-mid')?.classList.toggle('opacity-0', open);
         document.getElementById('burger-bot')?.classList.toggle('-rotate-45', open); document.getElementById('burger-bot')?.classList.toggle('-translate-y-[7px]', open);
       }
+      set(false);
+      drawer.addEventListener('click', (event) => { if (event.target.closest('a')) set(false); });
+      document.addEventListener('astro:before-swap', () => set(false));
       toggle.addEventListener('click', () => set(toggle.getAttribute('aria-expanded') !== 'true'));
-      document.addEventListener('keydown', (event) => { if (event.key === 'Escape') set(false); });
+      document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { set(false); toggle.focus(); } });
       document.addEventListener('click', (event) => { if (toggle.getAttribute('aria-expanded') === 'true' && !toggle.contains(event.target) && !drawer.contains(event.target)) set(false); });
     }
     document.addEventListener('astro:page-load', init);
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
   })();
 </script>
+
+<style>
+  .nav-drawer { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .3s ease, opacity .3s ease; }
+  .nav-drawer[aria-hidden="false"] { max-height: min(75dvh, 28rem); overflow-y: auto; opacity: 1; }
+  @media (max-width: 767px) {
+    nav :global(.theme-trigger) { width: 44px; min-height: 44px; padding: 0; justify-content: center; }
+    nav :global(.theme-trigger > span) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nav-drawer { transition: none; } }
+</style>
