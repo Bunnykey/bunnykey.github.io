@@ -18,3 +18,5 @@ scripts/editor/public/rich.bundle.js
 .publishing-lock/
 scripts/editor/public/radix.css
 scripts/editor/.shell-render.mjs
+writing-trial-dist/
+.vercel/

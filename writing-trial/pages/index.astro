@@ -1,0 +1,14 @@
+---
+import Layout from '../../src/layouts/Layout.astro';
+const files = import.meta.glob('../posts/*.mdx', { eager: true });
+---
+<Layout title="글쓰기 시험" noindex>
+  <div class="journal-article-shell greenhouse-prose">
+    <h1>글쓰기 시험</h1>
+    <p>시험용 글은 실제 블로그에 발행되지 않습니다. 편집기에서 저장한 뒤 미리보기를 열어주세요.</p>
+    <p><a href="/keystatic" data-astro-reload>편집기 열기 →</a></p>
+    <ul>{Object.entries(files).map(([path, post]) => <li>
+      <a href={`/writing-preview/${path.split('/').pop().replace(/\.mdx$/, '')}/`}>{post.frontmatter.title}</a>
+    </li>)}</ul>
+  </div>
+</Layout>

@@ -13,13 +13,19 @@
     "sync:notion": "node scripts/sync_notion_content.mjs",
     "editor": "node scripts/editor/server.mjs",
     "preeditor": "node scripts/editor/build.mjs",
-    "prebuild": "node scripts/verify-content.mjs"
+    "prebuild": "node scripts/verify-content.mjs",
+    "writing:dev": "node scripts/keystatic-trial.mjs",
+    "writing:build": "node scripts/keystatic-trial.mjs --build",
+    "writing:deploy-build": "node scripts/keystatic-trial.mjs --build --remote"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/react": "^4.2.0",
     "@astrojs/rss": "^4.0.0",
     "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^8.2.11",
+    "@keystatic/astro": "^6.0.0",
+    "@keystatic/core": "^0.6.9",
     "@kfonts/maruburi": "^0.1.0",
     "@radix-ui/themes": "^3.3.0",
     "@tailwindcss/vite": "^4.2.1",
@@ -50,6 +56,7 @@
     "marked": "^18.0.0",
     "multer": "^2.1.1",
     "pagefind": "^1.4.0",
+    "sirv": "^3.0.2",
     "typescript-eslint": "^8.57.1"
   }
 }
