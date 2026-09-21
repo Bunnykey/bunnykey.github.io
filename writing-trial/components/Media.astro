@@ -1,0 +1,5 @@
+---
+import { renderMedia } from '../../src/lib/media.mjs';
+const { url = '' } = Astro.props;
+---
+<Fragment set:html={renderMedia(url)} />

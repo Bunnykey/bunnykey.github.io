@@ -14,6 +14,7 @@ interface Props {
   ogImage?: string;
   ogType?: 'website' | 'article';
   articleDate?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
   ogImage,
   ogType = 'website',
   articleDate,
+  noindex = false,
 } = Astro.props;
 const canonicalUrl = toCanonicalUrl(canonicalPath);
 const currentPath = Astro.url.pathname;
@@ -46,6 +48,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="theme-color" id="meta-theme-color" content="#fafafa" />
     <script is:inline src="/theme.js"></script>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
@@ -60,7 +63,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="generator" content={Astro.generator} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content={`default-src 'self'; script-src 'self' 'unsafe-inline'${currentPath === '/search/' || currentPath === '/search' ? " 'wasm-unsafe-eval'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;`} />
+    <meta http-equiv="Content-Security-Policy" content={`default-src 'self'; script-src 'self' 'unsafe-inline'${currentPath === '/search/' || currentPath === '/search' ? " 'wasm-unsafe-eval'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; frame-src https://www.youtube-nocookie.com https://open.spotify.com; connect-src 'self' https://formspree.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;`} />
     <title>{title}</title>
     <ViewTransitions />
     {ogType === 'article' && articleDate ? (

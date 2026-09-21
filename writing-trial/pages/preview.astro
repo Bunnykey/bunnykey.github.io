@@ -1,0 +1,33 @@
+---
+import Layout from '../../src/layouts/Layout.astro';
+import Media from '../components/Media.astro';
+
+export async function getStaticPaths() {
+  const files = import.meta.glob('../posts/*.mdx', { eager: true });
+  return Object.entries(files).map(([path, post]) => ({
+    params: { slug: path.split('/').pop().replace(/\.mdx$/, '') },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+const { Content, frontmatter } = post;
+---
+<Layout title={frontmatter.title} description={frontmatter.summary} noindex>
+  <div class="journal-article-shell">
+    <p class="trial-notice" data-pagefind-ignore>저장한 글의 미리보기입니다. 블로그에 발행되지 않습니다.
+      <a href="/keystatic" data-astro-reload>편집기로 돌아가기</a>
+    </p>
+    <article class="journal-article">
+      <header class="journal-article-header">
+        <p>{String(frontmatter.date).slice(0, 10)}</p>
+        <h1>{frontmatter.title}</h1>
+        {frontmatter.summary && <p>{frontmatter.summary}</p>}
+      </header>
+      <div class="greenhouse-prose"><Content components={{ Media }} /></div>
+    </article>
+  </div>
+</Layout>
+<style>
+  .trial-notice { font: 14px/1.7 sans-serif; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid #8884; }
+  .trial-notice a { display: block; text-decoration: underline; }
+</style>
