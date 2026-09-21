@@ -15,13 +15,15 @@
     "preeditor": "node scripts/editor/build.mjs",
     "prebuild": "node scripts/verify-content.mjs",
     "writing:dev": "node scripts/keystatic-trial.mjs",
-    "writing:build": "node scripts/keystatic-trial.mjs --build"
+    "writing:build": "node scripts/keystatic-trial.mjs --build",
+    "writing:deploy-build": "node scripts/keystatic-trial.mjs --build --remote"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/react": "^4.2.0",
     "@astrojs/rss": "^4.0.0",
     "@astrojs/sitemap": "^3.7.0",
+    "@astrojs/vercel": "^8.2.11",
     "@keystatic/astro": "^6.0.0",
     "@keystatic/core": "^0.6.9",
     "@kfonts/maruburi": "^0.1.0",

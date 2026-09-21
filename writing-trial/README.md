@@ -46,4 +46,20 @@ python3 scripts/verify_dist.py dist
 
 ## 원격 사용 전
 
-현재 로컬 모드는 로그인 기능이 없으며 의도적으로 루프백 주소에만 바인딩합니다. 이 서버를 공개 URL로 노출하지 마세요. iPhone에서 독립적으로 쓰려면 관리 화면의 별도 서버 호스팅과 Keystatic GitHub/Cloud 인증을 연결해야 합니다. 공개 블로그는 GitHub Pages에 유지할 수 있습니다. 이 시험 PR에서는 계정 생성·서비스 결제·기존 글 이전을 하지 않습니다.
+현재 로컬 모드는 로그인 기능이 없으며 의도적으로 루프백 주소에만 바인딩합니다. 이 서버를 공개 URL로 노출하지 마세요. 공개 블로그는 GitHub Pages에 유지합니다.
+
+## Vercel + Keystatic Cloud 배포
+
+배포 코드까지 준비된 상태입니다. 실제 Vercel 연결과 Keystatic Cloud 프로젝트 생성·접근 승인은 아직 필요합니다.
+
+1. Keystatic Cloud에서 본인 팀의 프로젝트를 만들고 `Bunnykey/bunnykey.github.io` 저장소를 연결합니다. 해당 팀에는 글을 편집할 본인만 둡니다.
+2. Cloud 설정의 `team/project` 값을 Vercel 환경 변수 `PUBLIC_KEYSTATIC_CLOUD_PROJECT`에 입력합니다. 공개 프로젝트 식별자이며 비밀번호나 토큰이 아닙니다.
+3. Vercel에 **별도 프로젝트**를 만듭니다. 저장소는 동일하고, 배포 브랜치는 `feat/keystatic-trial`로 지정합니다. 기존 GitHub Pages와 `main`은 유지합니다.
+4. 프레임워크는 Astro, 루트는 저장소 루트, Node.js는 22, 설치 명령은 `npm ci`, 빌드 명령은 `npm run writing:deploy-build`로 설정합니다. Output Directory는 별도로 덮어쓰지 않습니다. Astro Vercel 어댑터가 `.vercel/output`을 만듭니다.
+5. 발급된 주소의 `/keystatic`에서 Cloud 로그인을 완료합니다. `/writing-preview/`에서 배포된 시험 글을 확인합니다.
+
+Cloud 설정이 없거나 Vercel이 `main`을 배포하려 하면 빌드를 중단합니다. 편집기 브랜치 선택기는 `feat/keystatic-trial` 접두사만 표시합니다. **이 필터는 GitHub 권한을 제한하는 보안 경계가 아닙니다.** Cloud 앱에 부여하는 접근 범위를 저장소 단위로 확인해야 합니다.
+
+시험 중에는 정확히 `feat/keystatic-trial` 브랜치에 저장합니다. Vercel의 Git 연동이 이 커밋을 다시 빌드한 후 미리보기를 새로고침합니다. 현재는 실시간 미리보기가 아니며, 새 글도 배포가 완료되기 전에는 미리보기 주소가 없습니다. 시험 글은 공개 GitHub 저장소에 저장되므로 비공개 자료를 쓰지 않습니다.
+
+원격 인증·저장·배포 E2E와 iPhone Safari 검증은 실제 계정 연결 뒤에 수행해야 합니다. 원격 빌드 성공만으로 이 검증을 완료했다고 보지 않습니다. PR #7은 계속 Draft로 둡니다.

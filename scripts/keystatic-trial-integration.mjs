@@ -18,7 +18,10 @@ export default function writingTrial() {
         }] } });
       },
       'astro:build:done': async ({ dir }) => {
-        const destination = new URL('writing-assets/', dir);
+        // Vercel serves static assets from its Build Output API directory.
+        const output = process.env.KEYSTATIC_TRIAL === 'remote'
+          ? new URL('../.vercel/output/static/', import.meta.url) : dir;
+        const destination = new URL('writing-assets/', output);
         await mkdir(destination, { recursive: true });
         await cp(assets, destination, { recursive: true });
       },

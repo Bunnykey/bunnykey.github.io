@@ -2,10 +2,11 @@ import React from 'react';
 import { config, collection, fields } from '@keystatic/core';
 import { block } from '@keystatic/core/content-components';
 import { renderMedia } from './src/lib/media.mjs';
+import { writingStorage } from './scripts/writing-deployment.mjs';
 
 // This collection intentionally cannot edit any published post.
 export default config({
-  storage: { kind: 'local' },
+  ...writingStorage(import.meta.env?.PUBLIC_KEYSTATIC_CLOUD_PROJECT),
   locale: 'ko-KR',
   ui: { brand: { name: 'Bunnykey · 글쓰기 시험' } },
   collections: {

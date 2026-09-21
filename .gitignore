@@ -19,3 +19,4 @@ scripts/editor/public/rich.bundle.js
 scripts/editor/public/radix.css
 scripts/editor/.shell-render.mjs
 writing-trial-dist/
+.vercel/

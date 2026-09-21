@@ -11,12 +11,17 @@ export async function getStaticPaths() {
 }
 const { post } = Astro.props;
 const { Content, frontmatter } = post;
+const remote = import.meta.env.KEYSTATIC_TRIAL === 'remote';
+const version = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7);
 ---
 <Layout title={frontmatter.title} description={frontmatter.summary} noindex>
   <div class="journal-article-shell">
     <p class="trial-notice" data-pagefind-ignore>저장한 글의 미리보기입니다. 블로그에 발행되지 않습니다.
       <a href="/keystatic" data-astro-reload>편집기로 돌아가기</a>
     </p>
+    {remote && <p class="trial-notice">이 화면은 마지막 배포에 저장된 글입니다. 편집기에서 저장한 뒤 배포가 끝나면 새로고침하세요.
+      {version && <span> 배포 버전: {version}</span>}
+    </p>}
     <article class="journal-article">
       <header class="journal-article-header">
         <p>{String(frontmatter.date).slice(0, 10)}</p>
