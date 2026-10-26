@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { SECTION_KEYS, sortByDateDesc } from '../../consts/sections';
+import { isSharedPreview, postUrl, cmsEditUrl } from '../../lib/publishing/paths.mjs';
+const entries = sortByDateDesc((await Promise.all(SECTION_KEYS.map(async collection =>
+  (await getCollection(collection)).filter(isSharedPreview).map(entry => ({...entry, collection})),
+))).flat());
+---
+<Layout title="초안 미리보기 | The Greenhouse" description="공개 미리보기를 선택한 초안을 확인합니다." noIndex>
+  <section class="preview-index">
+    <a class="back" href="/write/" data-astro-reload>← 글쓰기</a>
+    <h1>초안 미리보기</h1>
+    <p class="intro">CMS에서 <strong>공개 미리보기 링크 만들기</strong>를 켜고 저장한 글만 나타납니다. 저장한 뒤 배포가 끝날 때까지 잠시 기다려 주세요.</p>
+    <p class="notice">이 링크는 누구나 열 수 있습니다. 비공개 검토 공간은 아닙니다.</p>
+    <ul>
+      {entries.map(entry => <li>
+        <div><span>{entry.collection} · {entry.data.date.toISOString().slice(0, 10)}</span><a class="title" href={postUrl(entry.collection, entry)}>{entry.data.title}</a></div>
+        {entry.id.endsWith('.md') && <a class="edit" href={cmsEditUrl(entry.collection, entry.slug)} target="_blank" rel="noopener noreferrer">수정 ↗</a>}
+      </li>)}
+    </ul>
+    {!entries.length && <div class="empty"><h2>아직 미리보기가 없어요.</h2><p>초안에서 공개 미리보기를 켠 뒤 저장하세요. <a href="/write/#publishing-status" data-astro-reload>배포 상태 확인</a></p></div>}
+  </section>
+</Layout>
+<style>
+  .preview-index { width: min(100% - 2.75rem, 48rem); margin: auto; padding: 2rem 0 5rem; }
+  .back { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-foreground-muted); font-size: .85rem; }
+  h1 { margin: 1rem 0; font-size: 1.85rem; font-weight: 700; }
+  .intro { max-width: 40rem; color: var(--color-foreground-muted); line-height: 1.85; word-break: keep-all; }
+  .notice { margin-top: 1rem; font-size: .8rem; color: var(--color-foreground-muted); }
+  ul { margin-top: 2rem; }
+  li { display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--color-outline-subtle); padding: 1rem 0; }
+  li div { min-width: 0; }
+  li span { font-size: .75rem; color: var(--color-foreground-muted); }
+  .title { display: block; padding: .5rem 0; font-size: 1.1rem; overflow-wrap: anywhere; }
+  .edit { display: inline-flex; align-items: center; min-height: 44px; flex-shrink: 0; font-size: .85rem; color: var(--color-accent); }
+  .empty { margin-top: 2rem; padding: 2rem 0; border-top: 1px solid var(--color-outline-subtle); }
+  .empty h2 { font-size: 1.1rem; }
+  .empty p { margin-top: .5rem; color: var(--color-foreground-muted); font-size: .9rem; }
+  .empty a { text-decoration: underline; text-underline-offset: .2em; }
+</style>

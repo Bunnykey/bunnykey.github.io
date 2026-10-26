@@ -20,5 +20,7 @@ export default defineConfig({
       },
     },
   },
-  integrations: [mdx(), sitemap(), react()]
+  integrations: [mdx(), sitemap({
+    filter: url => !/^\/(preview|write|og)(\/|$)/.test(new URL(url).pathname) && !url.endsWith('/og-default.png'),
+  }), react()]
 });

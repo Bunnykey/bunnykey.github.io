@@ -53,9 +53,9 @@ const show = filtered.length >= 3;
 <script is:inline>
   (function() {
     function init() {
-      const currentPath = window.location.pathname;
-      if (window.__tocInitialized === currentPath) return;
-      window.__tocInitialized = currentPath;
+      const indicatorRoot = document.getElementById('toc-indicator');
+      if (!indicatorRoot || indicatorRoot.dataset.initialized) return;
+      indicatorRoot.dataset.initialized = 'true';
 
       const tocLinks = document.querySelectorAll('.toc-link[data-slug]');
       if (tocLinks.length > 0) {
@@ -87,6 +87,7 @@ const show = filtered.length >= 3;
       }, { rootMargin: '-80px 0px -70% 0px' });
 
         headingEls.forEach(function(el) { observer.observe(el); });
+        document.addEventListener('astro:before-swap', () => observer.disconnect(), {once: true});
       }
     }
     document.addEventListener('astro:page-load', init);

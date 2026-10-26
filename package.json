@@ -5,11 +5,11 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "build": "astro build",
-    "postbuild": "pagefind --site dist",
+    "postbuild": "pagefind --site dist && node scripts/verify-reader-links.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test",
-    "test:e2e": "playwright test",
+    "test:e2e": "node scripts/browser-check.mjs",
     "sync:notion": "node scripts/sync_notion_content.mjs",
     "editor": "node scripts/editor/server.mjs",
     "preeditor": "node scripts/editor/build.mjs",

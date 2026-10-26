@@ -1,6 +1,6 @@
 # Publishing contract v1
 
-Status: implemented in the working branch. No production migration or deployment performed.
+Status: the storage/API contract is implemented. Account and physical-device authoring acceptance is tracked in [blog readiness](../operations/blog-readiness.md).
 
 ## Scope and authority
 
@@ -81,6 +81,8 @@ The root `.pages.yml` maps the three existing Markdown collections and `public/i
 Pages CMS commits source files to the selected GitHub branch; it does not call the local editor API, save into `.publishing/`, hold the local lock or produce a local publication receipt. Its `draft: true` files are source-level drafts excluded from production routes, feeds, search and OG generation, rather than the local editor's private working-draft layer. The public repository and uploaded public images remain readable. Saving a live `draft: false` post on main republishes it; switching that source to `draft: true` removes its public route on the next deploy. Use a working branch when retaining the old live version during revision.
 
 CMS defaults new posts to draft. Existing sources explicitly record `draft: false` so the default cannot unpublish them on their first CMS save. The CMS preserves unmanaged metadata with `settings.content.merge: true`; it does not expose IDs/version/source IDs for editing. ID-less CMS files use the existing route-derived fallback until an existing writer persists the ID. CMS filenames are fixed after creation; MDX remains under the local/Git editing path.
+
+`sharePreview: true` is a separate, explicit opt-in for a **public** Astro preview of a source-level draft. Its default is false. Only `draft === true && sharePreview === true` creates `/preview/<collection>/<slug>/`. The preview uses the same article renderer, is marked noindex/nofollow/noarchive, and is excluded from Pagefind, RSS, normal article/series lists, OG generation and sitemap output. It is not an authenticated/private area. Disabling the opt-in or publishing the post removes the preview HTML in the next successful full build. Existing working drafts in `.publishing/` are never read by the static renderer. Anyone who already copied a public preview cannot have that copy revoked.
 
 Switching writers requires refreshing the Git source and reopening the document. A pulled CMS change is an external source change: existing revision checks reject a stale local save/promotion and require manual reconciliation. The hosted CMS cannot inspect unpushed local drafts. Notion remains import-only and respects a CMS-created source as Git-owned. These rules preserve the local API contract without claiming cross-service locking or atomicity.
 

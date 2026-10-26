@@ -17,10 +17,10 @@ interface Props {
 const { title, date, summary, tags, href, highlight, seriesName, stage, variant = 'flora', readingMin } = Astro.props;
 ---
 
-<a href={href} class="block py-6 border-t border-outline-subtle hover:pl-3 transition-all duration-200 group" data-tags={tags?.join(',') || undefined}>
+<a href={href} class="block py-6 border-t border-outline-subtle hover:pl-3 transition-all duration-200 group" data-tags={JSON.stringify(tags || [])}>
   <div class="flex items-center gap-2 mb-3">
     <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(date)}</span>
-    {readingMin && <span class="text-xs text-foreground-muted">· {readingMin} min</span>}
+    {readingMin && <span class="text-xs text-foreground-muted">· {readingMin}분</span>}
     <div class="flex items-center gap-2 ml-auto">
       {highlight && <span class="text-xs text-earth-muted">★</span>}
       {stage && NURSERY_STAGE_DOTS[stage] && (
@@ -53,7 +53,7 @@ const { title, date, summary, tags, href, highlight, seriesName, stage, variant 
       ))}
       {seriesName && (
         <span class="text-[10px] bg-earth-muted text-foreground px-2 py-0.5 rounded">
-          Series
+          시리즈
         </span>
       )}
     </div>

@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CMS_ROOT, ACTIONS_URL, STATUS_URL, cmsCollectionUrl } from '../lib/publishing/paths.mjs';
+const formats = [
+  {name: 'seeds', label: '짧은 기록', description: '생각과 순간을 가볍게 남길 때'},
+  {name: 'flora', label: '긴 글', description: '경험이나 이야기를 차분하게 풀어낼 때'},
+  {name: 'nursery', label: '계속 다듬는 글', description: '아이디어와 프로젝트를 이어서 키울 때'},
+];
+const liveCommit = process.env.GITHUB_SHA || '';
+---
+<Layout title="글쓰기 | The Greenhouse" description="글을 쓰고, 미리 보고, 공개하는 공간입니다." noIndex>
+  <section class="writing-page">
+    <header class="writing-heading"><h1>글쓰기</h1><p>생각을 적고, 사진을 더하고, 한 편의 글로 남겨보세요.</p></header>
+    <section class="writing-section" aria-labelledby="start-title">
+      <h2 id="start-title">무엇을 써볼까요?</h2>
+      <p>편집기는 Pages CMS에서 열립니다. 처음에는 GitHub 로그인이 필요해요.</p>
+      <div class="format-list">
+        {formats.map(format => <a class="format-link" href={cmsCollectionUrl(format.name, true)} target="_blank" rel="noopener noreferrer">
+          <span><strong>{format.label}</strong><small>{format.description}</small></span><span aria-hidden="true">↗</span>
+        </a>)}
+      </div>
+      <a class="text-link" href={CMS_ROOT} target="_blank" rel="noopener noreferrer">기존 글 이어 쓰기 ↗</a>
+    </section>
+    <section class="writing-section" aria-labelledby="steps-title">
+      <h2 id="steps-title">저장한 다음에는</h2>
+      <ol class="steps">
+        <li><strong>초안으로 저장</strong><p>제목·날짜·본문을 작성하고 사진을 넣으세요. 새 글은 ‘초안’을 켜 둔 채 저장합니다.</p></li>
+        <li><strong>실제 화면으로 확인</strong><p>초안에서 ‘공개 미리보기 링크 만들기’를 켜고 저장하세요. 배포가 끝나면 <a href="/preview/">초안 미리보기</a>에서 사진·플레이어·글 모양을 확인할 수 있어요.</p></li>
+        <li><strong>준비되면 공개</strong><p>CMS에서 ‘초안’을 끄고 저장하세요. 아래에서 배포 완료를 확인한 뒤 <a href="/">글 목록</a>에서 마지막으로 확인합니다.</p></li>
+      </ol>
+      <p class="fine-print">공개 미리보기 링크는 누구나 열 수 있습니다. 기본 초안은 사이트에 표시되지 않지만, 공개 저장소의 원본과 업로드한 사진은 공개됩니다.</p>
+      <div class="writing-links"><a class="button" href="/preview/">초안 미리보기 열기</a><a class="text-link" href="https://github.com/Bunnykey/bunnykey.github.io/blob/main/docs/operations/pages-cms.md" target="_blank" rel="noopener noreferrer">자세한 사용법 ↗</a></div>
+    </section>
+    <section class="writing-section" id="publishing-status" aria-labelledby="status-title" data-status-url={STATUS_URL} data-live-commit={liveCommit}>
+      <h2 id="status-title">사이트에 반영됐나요?</h2>
+      <p id="deployment-message" role="status" aria-live="polite">저장 성공과 배포 완료는 달라요. 최신 배포 상태를 확인해 주세요.</p>
+      <div class="writing-links"><button type="button" class="button" id="check-deployment">배포 상태 확인</button><button type="button" class="button secondary" id="refresh-writing" hidden>새로고침</button><a class="text-link" id="deployment-link" href={ACTIONS_URL} target="_blank" rel="noopener noreferrer">GitHub에서 직접 확인 ↗</a></div>
+      <noscript><p>자동 상태 확인에는 JavaScript가 필요합니다. GitHub 배포 기록으로 확인할 수 있어요.</p></noscript>
+    </section>
+    <section class="writing-section" aria-labelledby="media-title">
+      <h2 id="media-title">음악·영상·저장소 넣기</h2>
+      <p>Spotify, YouTube, GitHub 주소를 넣으면 붙여 넣을 형식을 만들어 드려요. CMS 본문의 <strong>Source</strong>에 붙여 넣으세요.</p>
+      <form id="writing-media-form">
+        <label for="writing-media-url">미디어 주소</label>
+        <div class="media-input"><input id="writing-media-url" type="url" inputmode="url" autocomplete="off" placeholder="https://…" required /><button class="button" type="submit">삽입 형식 만들기</button></div>
+      </form>
+      <p id="writing-media-message" role="status" aria-live="polite"></p>
+      <div id="writing-media-result" hidden>
+        <label for="writing-media-source">CMS에 붙여 넣을 내용</label>
+        <textarea id="writing-media-source" readonly rows="3" spellcheck="false"></textarea>
+        <button class="button secondary" id="copy-media-source" type="button">내용 복사</button>
+        <div id="writing-media-preview" aria-label="미디어 미리보기"></div>
+      </div>
+    </section>
+    <section class="writing-section help" aria-labelledby="help-title">
+      <h2 id="help-title">막히는 부분이 있나요?</h2>
+      <details><summary>저장소가 보이지 않아요</summary><p>Pages CMS의 GitHub App에 이 저장소의 편집 권한이 필요합니다. ChatGPT의 GitHub 연결과는 별개예요. 로그인한 계정과 저장소 이름을 확인해 주세요.</p></details>
+      <details><summary>사진이 올라가지 않아요</summary><p>JPG·PNG·GIF·WebP·AVIF를 지원합니다. HEIC 사진은 JPG/PNG로 내보내 다시 선택해 주세요. 업로드한 뒤 본문에 사진이 들어갔는지, 저장 후 다시 열었을 때 남아 있는지도 확인하세요.</p></details>
+      <details><summary>미리보기가 아직 없어요</summary><p>초안과 공개 미리보기가 모두 켜져 있는지, main 브랜치에 저장했는지 확인하세요. 배포 중이라면 완료 후 이 화면을 새로고침합니다. 실패했다면 위의 배포 기록에서 원인을 확인할 수 있어요.</p></details>
+      <details><summary>공개 글을 고치는 동안 이전 글을 유지하고 싶어요</summary><p>공개 글에서 초안을 켜면 다음 배포 때 글이 내려갑니다. 기존 글을 유지하며 수정하려면 작업 브랜치에서 수정한 뒤 병합하세요. 구체적인 절차는 자세한 사용법에 정리했습니다.</p></details>
+      <details><summary>로컬 편집기나 Notion과 함께 써도 되나요?</summary><p>가능합니다. 같은 글을 동시에 수정하지 말고, 로컬 도구로 돌아갈 때는 최신 Git 원본을 먼저 받아 주세요. 충돌이 나면 입력을 보관하고 최신본을 비교합니다. Notion에서 기존 글을 다시 덮어쓰지는 않습니다.</p></details>
+    </section>
+  </section>
+</Layout>
+<script>
+  import { initWriting } from '../scripts/writing';
+  initWriting();
+  document.addEventListener('astro:page-load', initWriting);
+</script>
+<style>
+  .writing-page { width: min(100% - 2.75rem, 48rem); margin: auto; padding: 3.5rem 0 5rem; }
+  h1 { margin: 0 0 .6rem; font-size: 1.85rem; font-weight: 700; letter-spacing: -.025em; }
+  .writing-heading p, .writing-section > p { color: var(--color-foreground-muted); line-height: 1.85; word-break: keep-all; }
+  .writing-section { margin-top: 2.75rem; padding-top: 1.8rem; border-top: 1px solid var(--color-outline-subtle); }
+  h2 { margin: 0 0 .65rem; font-size: 1.15rem; font-weight: 600; }
+  .format-list { margin: 1.1rem 0 .25rem; }
+  .format-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 72px; padding: .8rem 0; }
+  .format-link + .format-link { border-top: 1px solid var(--color-outline-subtle); }
+  .format-link strong { font-size: 1rem; font-weight: 500; }
+  .format-link small { display: block; margin-top: .2rem; color: var(--color-foreground-muted); font-size: .82rem; }
+  .format-link:hover strong { text-decoration: underline; text-underline-offset: .2em; }
+  .text-link { display: inline-flex; align-items: center; min-height: 44px; font-size: .85rem; color: var(--color-accent); text-decoration: underline; text-underline-offset: .2em; }
+  .steps { list-style: decimal; margin: 1.25rem 0 0; padding-left: 1.4rem; }
+  .steps li + li { margin-top: 1.1rem; }
+  .steps strong { font-weight: 500; }
+  .steps p { margin-top: .25rem; color: var(--color-foreground-muted); font-size: .9rem; line-height: 1.85; word-break: keep-all; }
+  .steps a { color: var(--color-accent); text-decoration: underline; text-underline-offset: .2em; }
+  .fine-print { margin-top: 1.25rem; font-size: .8rem; }
+  .writing-links { display: flex; flex-wrap: wrap; align-items: center; gap: .65rem 1rem; margin-top: 1rem; }
+  .button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: .65rem 1rem; border: 1px solid var(--color-foreground); background: var(--color-foreground); color: var(--color-surface); border-radius: 5px; font-size: .85rem; font-weight: 500; cursor: pointer; }
+  .button:disabled { opacity: .6; cursor: wait; }
+  .button.secondary { background: transparent; color: var(--color-foreground); border-color: var(--color-outline-subtle); }
+  label { display: block; margin: 1rem 0 .4rem; font-size: .8rem; }
+  .media-input { display: flex; flex-wrap: wrap; gap: .65rem; }
+  input, textarea { min-width: 0; border: 1px solid var(--color-outline-subtle); border-radius: 5px; background: var(--color-surface); color: var(--color-foreground); padding: .65rem .8rem; font-size: 1rem; }
+  input { flex: 1 1 16rem; min-height: 44px; }
+  textarea { display: block; width: 100%; margin-bottom: .75rem; font-family: ui-monospace, monospace; resize: vertical; }
+  #writing-media-message { margin-top: .75rem; font-size: .85rem; }
+  .help details { border-top: 1px solid var(--color-outline-subtle); }
+  .help summary { padding: .85rem 0; min-height: 44px; font-size: .9rem; cursor: pointer; }
+  .help details p { padding: 0 0 1rem; color: var(--color-foreground-muted); font-size: .85rem; line-height: 1.85; word-break: keep-all; }
+  [hidden] { display: none !important; }
+  @media (max-width: 640px) { .writing-page { padding-top: 2.2rem; }.writing-section { margin-top: 2rem; }.media-input .button { width: 100%; } }
+</style>

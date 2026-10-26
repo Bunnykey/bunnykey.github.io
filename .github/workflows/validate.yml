@@ -26,3 +26,16 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: python3 scripts/verify_dist.py dist
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium webkit
+      - name: Test desktop and mobile Safari flows
+        run: npm run test:e2e
+      - name: Save browser results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-results
+          path: |
+            test-results/
+            playwright-report/
+          retention-days: 7

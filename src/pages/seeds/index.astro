@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostCard from '../../components/PostCard.astro';
+import TagFilter from '../../components/TagFilter.astro';
 import { SECTION_INDEX_CONFIG, sortByDateDesc, filterPublished } from '../../consts/sections';
 import { readingTime } from '../../utils/reading-time';
 
@@ -16,23 +17,12 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
       <h1 class="text-3xl tracking-tight mb-3">{config.heading}</h1>
       <p class="text-base text-foreground-muted leading-relaxed max-w-xl">{config.description}</p>
     </header>
-    {allTags.length > 0 && (
-      <div class="flex flex-wrap gap-2 mb-6" id="tag-filter">
-        {allTags.map(tag => (
-          <button
-            data-tag={tag}
-            class="tag-btn text-xs px-3 py-1 rounded border border-outline-subtle/30 text-foreground-muted hover:border-accent transition-colors"
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-    )}
+    <TagFilter tags={allTags} />
     <div id="post-list">
       {posts.length > 0 ? (
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           {posts.map((post, i) => (
-            <div class="animate-entrance" style={`--delay: ${i * 50}ms`}>
+            <div data-tag-item class="animate-entrance" style={`--delay: ${i * 50}ms`}>
               <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/seeds/${post.slug}/`} variant="seeds" readingMin={readingTime(post.body)} />
             </div>
           ))}
@@ -43,66 +33,6 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
     </div>
   </div>
 </Layout>
-<script is:inline>
-  (function() {
-    function init() {
-      const tagFilter = document.getElementById('tag-filter');
-      if (!tagFilter || tagFilter.dataset.initialized) return;
-      tagFilter.dataset.initialized = 'true';
-
-      const buttons = document.querySelectorAll('.tag-btn');
-      const cards = document.querySelectorAll('#post-list [data-tags]');
-      const active = new Set();
-
-      function update() {
-        const hash = active.size > 0 ? '#' + Array.from(active).join(',') : window.location.pathname;
-        history.replaceState(null, '', hash);
-        buttons.forEach(function(btn) {
-          const tag = btn.dataset.tag;
-          if (active.has(tag)) {
-            btn.classList.add('bg-accent-muted', 'text-accent-on-muted', 'border-accent-muted');
-            btn.classList.remove('text-foreground-muted', 'border-outline-subtle/30');
-          } else {
-            btn.classList.remove('bg-accent-muted', 'text-accent-on-muted', 'border-accent-muted');
-            btn.classList.add('text-foreground-muted', 'border-outline-subtle/30');
-          }
-        });
-        cards.forEach(function(card) {
-          if (active.size === 0) {
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-            card.style.transition = 'opacity 300ms ease, transform 300ms ease';
-            card.style.pointerEvents = '';
-            return;
-          }
-          const cardTags = (card.dataset.tags || '').split(',');
-          const match = cardTags.some(function(t) { return active.has(t); });
-          card.style.opacity = match ? '1' : '0';
-          card.style.transform = match ? 'translateY(0)' : 'translateY(0.5rem)';
-          card.style.transition = 'opacity 300ms ease, transform 300ms ease';
-          card.style.pointerEvents = match ? '' : 'none';
-        });
-      }
-
-      buttons.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          const tag = btn.dataset.tag;
-          if (active.has(tag)) { active.delete(tag); } else { active.add(tag); }
-          update();
-        });
-      });
-
-      const hash = window.location.hash.slice(1);
-      if (hash) { hash.split(',').forEach(function(t) { active.add(t); }); update(); }
-    }
-    document.addEventListener('astro:page-load', init);
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', init);
-    } else {
-      init();
-    }
-  })();
-</script>
 <style>
   .animate-entrance {
     opacity: 0;
