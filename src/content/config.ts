@@ -10,11 +10,21 @@ const seriesSchema = z.object({
   order: z.number().int().positive(),
 }).optional();
 
+// Git/Notion use YAML dates; browser CMS writers may quote YYYY-MM-DD strings.
+// Validate the original string before converting so February 30 cannot roll into March.
+const contentDate = z.union([
+  z.date(),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(
+    value => Number.isFinite(Date.parse(value)) && new Date(value).toISOString().slice(0, 10) === value,
+    'date must be a valid YYYY-MM-DD',
+  ).transform(value => new Date(`${value}T00:00:00.000Z`)),
+]);
+
 const baseSchema = z.object({
   id: z.string().optional(),
   contractVersion: z.literal(1).optional(),
   title: z.string(),
-  date: z.date(),
+  date: contentDate,
   summary: z.string().optional(),
   tags: z.array(z.string()).optional(),
   category: z.enum(['life', 'food', 'music', 'travel', 'tech', 'notes']).default('notes'),

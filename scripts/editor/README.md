@@ -1,5 +1,7 @@
 # Local Editor
 
+For iPhone editing without a running local host, use [the Pages CMS workflow](../../docs/operations/pages-cms.md). It commits to GitHub directly and does not share this editor's working-draft store. Refresh Git and reopen the document when switching writers; existing source revision checks still apply after pull.
+
 Local publishing studio with Tiptap visual editing and a Markdown source mode. Renders with the same Shiki dual theme the production site uses, so the preview matches the deployed page.
 
 ## Run

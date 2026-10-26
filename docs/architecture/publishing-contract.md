@@ -74,6 +74,16 @@ Notion is an import-only source in v1. Imported files become Git-owned. Re-impor
 
 Notion's Published flag selects import candidates; it does not mean this editor has verified a Pages deployment. Bidirectional sync is not enabled.
 
+## Pages CMS as an external Git writer
+
+The root `.pages.yml` maps the three existing Markdown collections and `public/img/` to the hosted Pages CMS editor. Astro and the existing main-branch Pages workflow remain the public renderer and delivery path. See [the Pages CMS runbook](../operations/pages-cms.md) for iPhone steps and verification limits.
+
+Pages CMS commits source files to the selected GitHub branch; it does not call the local editor API, save into `.publishing/`, hold the local lock or produce a local publication receipt. Its `draft: true` files are source-level drafts excluded from production routes, feeds, search and OG generation, rather than the local editor's private working-draft layer. The public repository and uploaded public images remain readable. Saving a live `draft: false` post on main republishes it; switching that source to `draft: true` removes its public route on the next deploy. Use a working branch when retaining the old live version during revision.
+
+CMS defaults new posts to draft. Existing sources explicitly record `draft: false` so the default cannot unpublish them on their first CMS save. The CMS preserves unmanaged metadata with `settings.content.merge: true`; it does not expose IDs/version/source IDs for editing. ID-less CMS files use the existing route-derived fallback until an existing writer persists the ID. CMS filenames are fixed after creation; MDX remains under the local/Git editing path.
+
+Switching writers requires refreshing the Git source and reopening the document. A pulled CMS change is an external source change: existing revision checks reject a stale local save/promotion and require manual reconciliation. The hosted CMS cannot inspect unpushed local drafts. Notion remains import-only and respects a CMS-created source as Git-owned. These rules preserve the local API contract without claiming cross-service locking or atomicity.
+
 ## Validation
 
 `npm test` covers the shared contract, serializer, stale device writes, missing versions, source isolation, route/ID collisions, locking, explicit reconciliation, real Astro MD/MDX builds, isolated Git push, build rollback and push-failure retry. `npm run build` also runs the content-contract gate. These are API/unit/build checks, not Desktop/iPhone browser E2E.

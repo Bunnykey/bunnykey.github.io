@@ -6,6 +6,7 @@ summary: "200K 컨텍스트 윈도우 안에서 시스템 프롬프트, 스킬, 
 tags: ["AI", "Context Engineering", "Interactive"]
 category: tech
 demo: "TokenFlowDemo"
+draft: false
 ---
 
 AI 에이전트의 컨텍스트 윈도우는 한정된 자원이다. 200K 토큰 안에서 각 레이어가 순서대로 자리를 차지한다.

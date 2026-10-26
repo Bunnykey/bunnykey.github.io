@@ -4,6 +4,7 @@ date: 2026-04-16
 summary: ""
 tags: ["nursery"]
 category: life
+draft: false
 ---
 
 ## 클리어런스 세일의 의미

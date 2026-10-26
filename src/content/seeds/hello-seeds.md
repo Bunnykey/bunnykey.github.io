@@ -5,6 +5,7 @@ summary: Seed부터 시작하는 씨앗과의 인사
 tags:
   - test
 category: notes
+draft: false
 ---
 
 ## 테스트용 글

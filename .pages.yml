@@ -1,0 +1,189 @@
+# Hosted editor: https://app.pagescms.org — Astro/GitHub Pages still publish the site.
+# Operating instructions and verification limits: docs/operations/pages-cms.md
+media:
+  - name: images
+    label: 글 이미지
+    input: public/img
+    output: /img
+    extensions: [jpg, jpeg, png, gif, webp, avif]
+    rename: random
+
+settings:
+  content:
+    # Preserve id, contractVersion, sourceId and other metadata owned by existing writers.
+    merge: true
+
+components:
+  post-title:
+    label: 제목
+    type: string
+    required: true
+    pattern:
+      regex: '\S'
+      message: 제목을 입력해 주세요.
+  post-date:
+    label: 날짜
+    type: date
+    required: true
+    options:
+      format: yyyy-MM-dd
+      time: false
+  post-summary:
+    label: 요약
+    type: text
+  post-tags:
+    label: 태그
+    type: string
+    list: true
+  post-category:
+    label: 주제
+    type: select
+    required: true
+    default: notes
+    options:
+      values:
+        - {name: life, label: 일상}
+        - {name: food, label: 음식}
+        - {name: music, label: 음악}
+        - {name: travel, label: 여행}
+        - {name: tech, label: 기술}
+        - {name: notes, label: 메모}
+  post-series:
+    label: 시리즈 (선택)
+    type: object
+    description: 연재할 때만 이름·제목·순서를 모두 입력하세요. 비워 두면 단독 글입니다.
+    fields:
+      - name: name
+        label: 시리즈 주소
+        type: string
+        required: true
+        pattern:
+          regex: '^[a-z0-9]+(?:-[a-z0-9]+)*$'
+          message: 영문 소문자·숫자·하이픈으로 입력하세요.
+      - name: title
+        label: 시리즈 제목
+        type: string
+        required: true
+        pattern: '\S'
+      - name: order
+        label: 읽는 순서
+        type: number
+        required: true
+        options:
+          min: 1
+          step: 1
+  post-draft:
+    label: 초안 (공개하지 않음)
+    type: boolean
+    default: true
+    description: 새 글은 켠 상태로 저장하세요. 끄고 main에 저장하면 배포가 시작됩니다. 공개 글에서 켜면 다음 배포 때 글이 내려갑니다. GitHub 파일과 업로드 이미지는 공개 저장소에 남습니다.
+  post-body:
+    label: 본문
+    type: rich-text
+    description: Editor에서 글과 이미지를 확인하세요. 블로그의 글꼴·임베드·데모는 Astro에서 확인해야 합니다. embed 코드 블록이나 HTML을 수정할 때는 Source 모드를 사용하세요.
+    options:
+      format: markdown
+      switcher: true
+      media: images
+      rename: random
+
+content:
+  - name: flora
+    label: Flora · 에세이
+    type: collection
+    path: src/content/flora
+    format: yaml-frontmatter
+    # A timestamp works for Korean-only titles too; title edits never change the route.
+    filename:
+      template: '{year}-{month}-{day}-{hour}{minute}{second}.md'
+      field: create
+    subfolders: false
+    exclude: [README.md]
+    operations: {create: true, rename: false, delete: false}
+    view:
+      primary: title
+      fields: [title, date, category, draft]
+      sort: [date]
+      default: {sort: date, order: desc}
+    fields:
+      - {name: title, component: post-title}
+      - {name: date, component: post-date}
+      - {name: summary, component: post-summary}
+      - {name: category, component: post-category}
+      - {name: tags, component: post-tags}
+      - {name: series, component: post-series}
+      - name: highlight
+        label: 대표 글
+        type: boolean
+      - name: demo
+        label: 인터랙티브 데모 (선택)
+        type: select
+        options:
+          values: [TokenFlowDemo, ApiFlowDemo]
+      - {name: draft, component: post-draft}
+      - {name: body, component: post-body}
+
+  - name: seeds
+    label: Seeds · 짧은 기록
+    type: collection
+    path: src/content/seeds
+    format: yaml-frontmatter
+    filename:
+      template: '{year}-{month}-{day}-{hour}{minute}{second}.md'
+      field: create
+    subfolders: false
+    exclude: [README.md]
+    operations: {create: true, rename: false, delete: false}
+    view:
+      primary: title
+      fields: [title, date, category, draft]
+      sort: [date]
+      default: {sort: date, order: desc}
+    fields:
+      - {name: title, component: post-title}
+      - {name: date, component: post-date}
+      - {name: summary, component: post-summary}
+      - {name: category, component: post-category}
+      - {name: tags, component: post-tags}
+      - {name: series, component: post-series}
+      - name: demo
+        label: 인터랙티브 데모 (선택)
+        type: select
+        options:
+          values: [ApiFlowDemo]
+      - {name: draft, component: post-draft}
+      - {name: body, component: post-body}
+
+  - name: nursery
+    label: Nursery · 자라는 글
+    type: collection
+    path: src/content/nursery
+    format: yaml-frontmatter
+    filename:
+      template: '{year}-{month}-{day}-{hour}{minute}{second}.md'
+      field: create
+    subfolders: false
+    exclude: [README.md]
+    operations: {create: true, rename: false, delete: false}
+    view:
+      primary: title
+      fields: [title, date, category, draft]
+      sort: [date]
+      default: {sort: date, order: desc}
+    fields:
+      - {name: title, component: post-title}
+      - {name: date, component: post-date}
+      - {name: summary, component: post-summary}
+      - {name: category, component: post-category}
+      - {name: tags, component: post-tags}
+      - {name: series, component: post-series}
+      - name: stage
+        label: 성장 단계 (선택)
+        type: select
+        options:
+          values:
+            - {name: seed, label: 씨앗}
+            - {name: growing, label: 성장 중}
+            - {name: evergreen, label: 늘 푸름}
+      - {name: draft, component: post-draft}
+      - {name: body, component: post-body}
