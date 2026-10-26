@@ -1,0 +1,28 @@
+name: Validate changes
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: python3 scripts/verify_repo_state.py
+      - run: python3 scripts/verify_content_structure.py
+      - run: npm test
+      - run: npm run build
+      - run: python3 scripts/verify_dist.py dist

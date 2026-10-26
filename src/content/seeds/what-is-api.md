@@ -5,6 +5,7 @@ summary: "카페 카운터에서 SOAP, REST, GraphQL까지 — API의 개념과 
 tags: ["note"]
 category: tech
 demo: "ApiFlowDemo"
+draft: false
 ---
 
 날씨 앱을 열면 기상청 서버에서 데이터가 온다. 카카오톡을 보내면 카카오 서버가 전달한다. 이 연결을 만드는 게 API다.

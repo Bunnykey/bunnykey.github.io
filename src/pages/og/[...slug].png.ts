@@ -3,7 +3,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 
 import { getSeriesPostsFromEntries } from '../../utils/series.ts';
-import { SECTION_KEYS, type SectionKey } from '../../consts/sections';
+import { SECTION_KEYS, filterPublished, type SectionKey } from '../../consts/sections';
 
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
@@ -127,7 +127,7 @@ async function loadOgEntries(): Promise<OgContentEntry[]> {
   const { getCollection } = await import('astro:content');
   const collections = await Promise.all(
     SECTION_KEYS.map(async (collection) => {
-      const entries = await getCollection(collection);
+      const entries = filterPublished(await getCollection(collection));
       return entries.map((entry) => ({
         ...entry,
         collection,
