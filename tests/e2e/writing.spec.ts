@@ -81,7 +81,7 @@ test('opted-in previews use the real article renderer and stay out of feeds, sit
     expect(text).not.toContain('/preview/');
   }
   await page.goto('/search/');
-  await page.getByRole('searchbox').fill('미리보기전용확인문구');
+  await page.getByPlaceholder('검색어를 입력하세요', {exact: true}).fill('미리보기전용확인문구');
   await expect(page.locator('.pagefind-ui__message')).toContainText('검색 결과가 없습니다');
   await expect(page.locator('.pagefind-ui__result')).toHaveCount(0);
 });

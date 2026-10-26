@@ -44,7 +44,7 @@ test('search starts without test-side repairs, returns results and recovers from
   await expect(page.locator('#search-status')).toContainText('검색을 불러오지 못했어요');
   fail = false;
   await page.getByRole('button', {name: '다시 시도', exact: true}).click();
-  const input = page.getByRole('searchbox');
+  const input = page.getByPlaceholder('검색어를 입력하세요', {exact: true});
   await expect(input).toBeVisible();
   await input.fill('AI');
   await expect(page.locator('.pagefind-ui__result').first()).toBeVisible();
