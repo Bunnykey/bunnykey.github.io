@@ -48,7 +48,7 @@ test('search starts without test-side repairs, returns results and recovers from
   await expect(input).toBeVisible();
   await input.fill('AI');
   await expect(page.locator('.pagefind-ui__result').first()).toBeVisible();
-  await input.fill('존재하지않는검색어확인문구');
+  await input.fill('zzqvnonexistent987654321');
   await expect(page.locator('.pagefind-ui__message')).toContainText('검색 결과가 없습니다');
 });
 
