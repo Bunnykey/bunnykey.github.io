@@ -1,68 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import Layout from '../../layouts/Layout.astro';
-import TableOfContents from '../../components/TableOfContents.astro';
-import ApiFlowDemo from '../../components/demos/ApiFlowDemo';
-import TokenFlowDemo from '../../components/demos/TokenFlowDemo';
-import { sectionDescription } from '../../consts/site';
-import { filterPublished, formatArchiveDate } from '../../consts/sections';
-import { readingTime } from '../../utils/reading-time';
+import PostArticle from '../../components/PostArticle.astro';
+import { filterPublished } from '../../consts/sections';
 
 export async function getStaticPaths() {
   const entries = filterPublished(await getCollection('seeds'));
-  return entries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  return entries.map(entry => ({params: {slug: entry.slug}, props: {entry, allEntries: entries}}));
 }
-
-const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
-const description = entry.data.summary || sectionDescription('seeds');
 ---
-
-<Layout
-  title={entry.data.title}
-  description={description}
-  canonicalPath={`/seeds/${entry.slug}/`}
-  ogTitle={entry.data.title}
-  ogDescription={description}
-  ogType="article"
-  articleDate={entry.data.date.toISOString()}
->
-  <div class="scroll-progress"></div>
-  <div class="journal-article-shell">
-    <article class="journal-article max-w-prose">
-      <header class="journal-article-header">
-        <div class="flex items-center gap-3 mb-4">
-          <span class="text-xs bg-earth-muted text-foreground px-2 py-0.5 rounded">Seeds</span>
-          <span class="text-xs font-mono text-foreground-muted">{formatArchiveDate(entry.data.date)}</span>
-          <span class="text-xs text-foreground-muted">· {readingTime(entry.body)} min</span>
-        </div>
-        <h1 data-pagefind-body data-pagefind-meta="title" class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
-        {entry.data.summary && (
-          <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>
-        )}
-      </header>
-
-      <TableOfContents headings={headings} mobile />
-
-      <div class="greenhouse-prose" data-pagefind-body>
-        <Content components={{ ApiFlowDemo, TokenFlowDemo }} />
-      </div>
-
-      {entry.data.demo === 'ApiFlowDemo' && !/<ApiFlowDemo\b/.test(entry.body) && (
-        <div class="mt-10">
-          <ApiFlowDemo client:visible />
-        </div>
-      )}
-
-      {entry.data.tags && entry.data.tags.length > 0 && (
-        <div class="mt-8 pt-6 border-t border-outline-subtle/20 flex flex-wrap gap-1.5">
-          {entry.data.tags.map((tag) => (
-            <span class="text-xs bg-earth-muted/50 text-foreground px-2 py-0.5 rounded">{tag}</span>
-          ))}
-        </div>
-      )}
-    </article>
-  </div>
-</Layout>
+<PostArticle collection="seeds" {...Astro.props} />

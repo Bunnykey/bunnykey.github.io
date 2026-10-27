@@ -6,6 +6,10 @@ import Layout from '../layouts/Layout.astro';
   <div class="journal-utility-page">
     <header class="utility-heading"><h1>검색</h1><p>키워드로 모든 기록을 찾아보세요.</p></header>
     <div id="search"></div>
+    <p id="search-status" role="status" aria-live="polite">검색을 준비하고 있어요…</p>
+    <button type="button" id="search-retry" hidden>다시 시도</button>
+    <p class="search-fallback"><a href="/">전체 글 보기</a></p>
+    <noscript><p>검색에는 JavaScript가 필요합니다. 전체 글 목록에서 글을 읽을 수 있어요.</p></noscript>
   </div>
 
 
@@ -14,13 +18,10 @@ import Layout from '../layouts/Layout.astro';
   .journal-utility-page { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 3.5rem 0 5rem; } .utility-heading { padding-bottom: 2.5rem; border-bottom: 1px solid var(--color-outline-subtle); } .utility-heading p:first-child { font-size: .66rem; font-weight: 700; letter-spacing: .14em; color: var(--color-foreground-muted); } .utility-heading h1 { margin: .7rem 0; font-family: var(--font-sans); font-size: 1.85rem; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; } .utility-heading p:last-child { color: var(--color-foreground-muted); } #search { margin-top: 2.5rem; }
   :root { --pagefind-ui-scale: .95; --pagefind-ui-primary: var(--color-foreground); --pagefind-ui-text: var(--color-foreground); --pagefind-ui-background: var(--color-surface); --pagefind-ui-border: var(--color-outline-subtle); --pagefind-ui-border-width: 1px; --pagefind-ui-border-radius: 0; --pagefind-ui-font: var(--font-sans); }
 </style>
-<script is:inline src="/pagefind/pagefind-ui.js" data-astro-rerun></script>
-<script is:inline data-astro-rerun>
-  (function () {
-    const container = document.getElementById('search');
-    if (container && !container.children.length && window.PagefindUI) {
-      new window.PagefindUI({ element: '#search', showSubResults: true, translations: { placeholder: '검색어를 입력하세요', zero_results: '검색 결과가 없습니다.' } });
-    }
-  })();
-</script>
+<script is:inline src="/search.js" data-astro-rerun></script>
+<style>
+  #search-status { margin-top: 1rem; color: var(--color-foreground-muted); font-size: .9rem; }
+  #search-retry, .search-fallback a { display: inline-flex; align-items: center; min-height: 44px; margin-top: .5rem; color: var(--color-accent); font-size: .85rem; text-decoration: underline; text-underline-offset: .2em; }
+  [hidden] { display: none !important; }
+</style>
 </Layout>

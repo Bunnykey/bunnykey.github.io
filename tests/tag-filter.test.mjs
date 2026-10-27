@@ -1,0 +1,25 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {JSDOM} from 'jsdom';
+const script = readFileSync(new URL('../public/tag-filter.js', import.meta.url), 'utf8');
+test('filtering removes unmatched cards from focus and layout, preserves router state and restores comma/Unicode tags', () => {
+  const dom = new JSDOM(`<div id="tag-filter" hidden><button data-tag="음악, jazz"></button><button id="tag-reset" hidden></button><p id="tag-status"></p></div><div id="post-list"><div data-tag-item id="one"><a data-tags='["음악, jazz"]' href="/one/">One</a></div><div data-tag-item id="two"><a data-tags='[]' href="/two/">Two</a></div></div>`, {url: 'https://example.com/seeds/', runScripts: 'outside-only'});
+  const w = dom.window;
+  w.history.replaceState({router: 1}, '', '/seeds/');
+  w.eval(script);
+  w.document.dispatchEvent(new w.Event('DOMContentLoaded'));
+  const button = w.document.querySelector('[data-tag]');
+  button.click();
+  assert.equal(button.getAttribute('aria-pressed'), 'true');
+  assert.equal(w.document.getElementById('two').hidden, true);
+  assert.equal(w.document.getElementById('two').inert, true);
+  assert.deepEqual(w.history.state, {router: 1});
+  assert.match(w.location.hash, /%2C/);
+  w.document.getElementById('tag-reset').click();
+  assert.equal(w.document.getElementById('two').hidden, false);
+  w.location.hash = encodeURIComponent('음악, jazz');
+  w.dispatchEvent(new w.Event('hashchange'));
+  assert.equal(button.getAttribute('aria-pressed'), 'true');
+  dom.window.close();
+});

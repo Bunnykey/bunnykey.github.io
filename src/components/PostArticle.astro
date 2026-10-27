@@ -1,0 +1,92 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PostSidebar from './PostSidebar.astro';
+import TableOfContents from './TableOfContents.astro';
+import SeriesNav from './SeriesNav.astro';
+import TokenFlowDemo from './demos/TokenFlowDemo';
+import ApiFlowDemo from './demos/ApiFlowDemo';
+import { sectionDescription } from '../consts/site';
+import { formatArchiveDate, NURSERY_STAGE_EMOJI, type SectionKey } from '../consts/sections';
+import { getSeriesPostsFromEntries, getSeriesNavigationFromEntries } from '../utils/series';
+import { readingTime } from '../utils/reading-time';
+import { cmsEditUrl, postUrl } from '../lib/publishing/paths.mjs';
+
+interface Props {
+  collection: SectionKey;
+  entry: CollectionEntry<SectionKey>;
+  allEntries: CollectionEntry<SectionKey>[];
+  preview?: boolean;
+}
+const { collection, entry, allEntries, preview = false } = Astro.props;
+const { Content, headings } = await entry.render();
+const description = entry.data.summary || sectionDescription(collection);
+const series = entry.data.series;
+const seriesPosts = series ? getSeriesPostsFromEntries(allEntries, series.name) : [];
+const seriesNav = series ? getSeriesNavigationFromEntries(seriesPosts, entry.slug) : {previous: undefined, next: undefined};
+const seriesPath = series && seriesPosts.some(post => !post.data.draft) ? `/${collection}/series/${series.name}/` : null;
+const label = {flora: 'Flora', seeds: 'Seeds', nursery: 'Nursery'}[collection];
+const narrow = collection === 'seeds';
+---
+
+<Layout
+  title={preview ? `${entry.data.title} · 초안 미리보기` : entry.data.title}
+  description={description}
+  canonicalPath={preview ? `/preview/${collection}/${entry.slug}/` : `/${collection}/${entry.slug}/`}
+  ogTitle={entry.data.title} ogDescription={description} ogType="article"
+  articleDate={entry.data.date.toISOString()} noIndex={preview}
+>
+  {preview && <aside class="preview-notice" aria-label="초안 미리보기">
+    <strong>초안 미리보기 · 공개 링크</strong>
+    <p>실제 블로그 화면입니다. 링크는 누구나 열 수 있으며 글 목록·검색·RSS에는 나오지 않습니다.</p>
+    <div>
+      {entry.id.endsWith('.md') && <a href={cmsEditUrl(collection, entry.slug)} target="_blank" rel="noopener noreferrer">CMS에서 수정 ↗</a>}
+      <a href="/write/" data-astro-reload>글쓰기로 돌아가기</a>
+    </div>
+  </aside>}
+  <div class="scroll-progress"></div>
+  <div class="journal-article-shell">
+    <div class:list={[!narrow && 'flex flex-col lg:flex-row gap-10']}>
+      <article class:list={['journal-article flex-1 min-w-0', narrow && 'max-w-prose']}>
+        <header class="journal-article-header">
+          <div class="flex items-center gap-3 mb-4 flex-wrap">
+            <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">{label}</span>
+            <time class="text-xs font-mono text-foreground-muted" datetime={entry.data.date.toISOString()}>{formatArchiveDate(entry.data.date)}</time>
+            <span class="text-xs text-foreground-muted">· {readingTime(entry.body)}분</span>
+            {collection === 'flora' && entry.data.highlight && <span class="text-xs text-earth">★ 대표 글</span>}
+            {collection === 'nursery' && <span title={`성장 단계: ${entry.data.stage || 'seed'}`}>{NURSERY_STAGE_EMOJI[entry.data.stage || 'seed']}</span>}
+          </div>
+          <h1 data-pagefind-body={!preview || undefined} data-pagefind-meta={preview ? undefined : 'title'} class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
+          {entry.data.summary && <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>}
+        </header>
+        {series && <SeriesNav collection={collection} currentSlug={entry.slug} currentOrder={series.order}
+          seriesName={series.name} seriesTitle={series.title} posts={seriesPosts} seriesPath={seriesPath || undefined} />}
+        <div class:list={[!narrow && 'lg:hidden']}><TableOfContents headings={headings} mobile /></div>
+        <div class="greenhouse-prose" data-pagefind-body={!preview || undefined}>
+          <Content components={{TokenFlowDemo, ApiFlowDemo}} />
+        </div>
+        {entry.data.demo === 'TokenFlowDemo' && !/<TokenFlowDemo\b/.test(entry.body) && <div class="mt-10"><TokenFlowDemo client:visible /></div>}
+        {entry.data.demo === 'ApiFlowDemo' && !/<ApiFlowDemo\b/.test(entry.body) && <div class="mt-10"><ApiFlowDemo client:visible /></div>}
+        {entry.data.tags?.length > 0 && <div class="mt-8 pt-6 border-t border-outline-subtle/20 flex flex-wrap gap-1.5" aria-label="태그">
+          {entry.data.tags.map(tag => <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">{tag}</span>)}
+        </div>}
+        {series && (seriesNav.previous || seriesNav.next) && <nav class="series-pagination" aria-label="시리즈 이전·다음 글">
+          <div>{seriesNav.previous && <a href={postUrl(collection, seriesNav.previous)}>← {seriesNav.previous.data.title}</a>}</div>
+          <div>{seriesNav.next && <a href={postUrl(collection, seriesNav.next)}>{seriesNav.next.data.title} →</a>}</div>
+        </nav>}
+      </article>
+      {!narrow && <PostSidebar seriesTitle={series?.title} seriesName={series?.name} seriesPosts={seriesPosts}
+        currentSlug={entry.slug} seriesPath={seriesPath} collection={collection} tags={entry.data.tags} headings={headings} />}
+    </div>
+  </div>
+</Layout>
+<style>
+  .preview-notice { width: min(100% - 2.75rem, 70rem); margin: 1.5rem auto 0; padding: 1.1rem 1.25rem; background: var(--color-surface-raised); border-left: 3px solid var(--color-accent); }
+  .preview-notice strong { font-size: .9rem; }
+  .preview-notice p { margin: .4rem 0; font-size: .85rem; color: var(--color-foreground-muted); }
+  .preview-notice div { display: flex; flex-wrap: wrap; gap: 0 1.5rem; }
+  .preview-notice a, .series-pagination a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-accent); text-decoration: underline; text-underline-offset: .2em; font-size: .85rem; }
+  .series-pagination { display: flex; justify-content: space-between; gap: 1rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--color-outline-subtle); }
+  .series-pagination div { flex: 1; overflow-wrap: anywhere; }
+  .series-pagination div:last-child { text-align: right; }
+</style>

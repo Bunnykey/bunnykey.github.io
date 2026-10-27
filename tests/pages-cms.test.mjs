@@ -45,6 +45,7 @@ test('Pages CMS exposes the existing collections, metadata choices and flat imag
     assert.deepEqual(collection.operations, {create: true, rename: false, delete: false});
     assert.deepEqual(values(fields.find(field => field.name === 'category')), CATEGORIES);
     assert.equal(fields.find(field => field.name === 'draft').default, true);
+    assert.equal(fields.find(field => field.name === 'sharePreview').default, false);
     assert.equal(fields.find(field => field.name === 'date').options.format, 'yyyy-MM-dd');
     assert.equal(fields.find(field => field.name === 'body').options.media, 'images');
     assert.equal(fields.find(field => field.name === 'body').options.format, 'markdown');
@@ -66,6 +67,8 @@ test('CMS defaults and quoted dates pass the actual Astro schema; malformed date
     const parsed = collections[collection].schema.parse(metadata);
     assert.equal(parsed.date.toISOString(), '2026-10-26T00:00:00.000Z');
     assert.equal(parsed.draft, true);
+    assert.equal(parsed.sharePreview, false);
+    assert.equal(collections[collection].schema.safeParse({...metadata, sharePreview: 'true'}).success, false);
     assert.equal(parsed.category, 'notes');
     assert.ok(collections[collection].schema.safeParse({...metadata, date: new Date('2026-10-26')}).success);
     for (const date of ['2026-02-30', '2026-13-01', '26/10/2026', '', null, 1792972800000]) {

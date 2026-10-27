@@ -1,17 +1,20 @@
 ---
 import type { SeriesEntry } from '../utils/series';
+import { postUrl } from '../lib/publishing/paths.mjs';
 
 interface Props {
   collection: 'flora' | 'nursery' | 'seeds';
   currentOrder: number;
+  currentSlug?: string;
   seriesName: string;
   seriesTitle: string;
   posts: SeriesEntry[];
   seriesPath?: string;
 }
 
-const { collection, currentOrder, seriesName, seriesTitle, posts, seriesPath } = Astro.props;
+const { collection, currentOrder, currentSlug, seriesName, seriesTitle, posts, seriesPath } = Astro.props;
 const totalPosts = posts.length;
+const position = posts.findIndex(post => currentSlug ? post.slug === currentSlug : post.data.series?.order === currentOrder) + 1;
 ---
 
 <aside
@@ -19,23 +22,23 @@ const totalPosts = posts.length;
   aria-labelledby={`series-${seriesName}`}
 >
   <div class="mb-3">
-    <p class="text-xs uppercase tracking-widest text-foreground-muted mb-1">Series</p>
+    <p class="text-xs uppercase tracking-widest text-foreground-muted mb-1">시리즈</p>
     <h2 id={`series-${seriesName}`} class="text-base font-semibold">
       {seriesPath ? (
         <a href={seriesPath} class="text-foreground hover:text-accent transition-colors">{seriesTitle}</a>
       ) : seriesTitle}
-      <span class="ml-2 text-accent font-normal">({currentOrder}/{totalPosts})</span>
+      <span class="ml-2 text-accent font-normal">({position}/{totalPosts})</span>
     </h2>
   </div>
 
   <details>
     <summary class="text-sm font-semibold cursor-pointer hover:text-accent transition-colors">
-      Show series outline
+      시리즈 전체 보기
     </summary>
     <ol class="mt-3 space-y-2 list-none pl-0">
       {posts.map((post) => {
-        const isCurrent = post.data.series?.order === currentOrder;
-        const postHref = `/${collection}/${post.slug}/`;
+        const isCurrent = currentSlug ? post.slug === currentSlug : post.data.series?.order === currentOrder;
+        const postHref = postUrl(collection, post);
         return (
           <li>
             <a

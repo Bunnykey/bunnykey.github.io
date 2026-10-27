@@ -10,6 +10,8 @@ export type SeriesEntry = {
   slug: string;
   data: {
     title: string;
+    draft?: boolean;
+    sharePreview?: boolean;
     series?: SeriesMetadata;
   };
 };
@@ -29,13 +31,13 @@ export function getSeriesPostsFromEntries<T extends SeriesEntry>(
 
 export function getSeriesNavigationFromEntries<T extends SeriesEntry>(
   entries: readonly T[],
-  currentOrder: number,
+  current: number | string,
 ): {
   previous: T | undefined;
   next: T | undefined;
 } {
   const currentIndex = entries.findIndex(
-    (entry) => entry.data.series?.order === currentOrder,
+    (entry) => typeof current === 'string' ? entry.slug === current : entry.data.series?.order === current,
   );
 
   if (currentIndex === -1) {

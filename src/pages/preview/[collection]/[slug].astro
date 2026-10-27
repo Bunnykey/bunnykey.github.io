@@ -1,0 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import PostArticle from '../../../components/PostArticle.astro';
+import { SECTION_KEYS, filterPublished } from '../../../consts/sections';
+import { isSharedPreview } from '../../../lib/publishing/paths.mjs';
+
+export async function getStaticPaths() {
+  const groups = await Promise.all(SECTION_KEYS.map(async collection => {
+    const entries = await getCollection(collection);
+    const published = filterPublished(entries);
+    return entries.filter(isSharedPreview).map(entry => ({
+      params: {collection, slug: entry.slug},
+      props: {collection, entry, allEntries: [...published.filter(post => post.slug !== entry.slug), entry]},
+    }));
+  }));
+  return groups.flat();
+}
+---
+<PostArticle {...Astro.props} preview />

@@ -26,6 +26,7 @@ export function normalizeMetadata(collection, fm) {
   if (fm.tags !== undefined && (!Array.isArray(fm.tags) || fm.tags.some(t=>typeof t !== 'string'))) throw new Error('tags must be strings');
   if (fm.summary !== undefined && typeof fm.summary !== 'string') throw new Error('summary must be text');
   if (fm.draft !== undefined && typeof fm.draft !== 'boolean') throw new Error('draft must be boolean');
+  if (fm.sharePreview !== undefined && typeof fm.sharePreview !== 'boolean') throw new Error('sharePreview must be boolean');
   if (fm.id !== undefined) validateId(fm.id);
   if (fm.contractVersion !== undefined && fm.contractVersion !== CONTRACT_VERSION) throw new Error('Unsupported content contract version');
   if (fm.stage && (collection !== 'nursery' || !STAGES.includes(fm.stage))) throw new Error('stage is only valid for nursery');

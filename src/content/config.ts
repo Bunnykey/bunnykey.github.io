@@ -30,6 +30,7 @@ const baseSchema = z.object({
   category: z.enum(['life', 'food', 'music', 'travel', 'tech', 'notes']).default('notes'),
   series: seriesSchema,
   draft: z.boolean().optional(),
+  sharePreview: z.boolean().optional(),
 });
 
 export const collections = {

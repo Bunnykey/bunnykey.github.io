@@ -1,0 +1,21 @@
+---
+interface Props { tags: string[]; }
+const {tags} = Astro.props;
+---
+{tags.length > 0 && <div id="tag-filter" hidden>
+  <div class="tag-buttons" role="group" aria-label="태그로 글 거르기">
+    {tags.map(tag => <button type="button" class="tag-btn" data-tag={tag} aria-pressed="false">{tag}</button>)}
+    <button type="button" class="tag-reset" id="tag-reset" hidden>선택 해제</button>
+  </div>
+  <p id="tag-status" role="status" aria-live="polite"></p>
+</div>}
+<script is:inline src="/tag-filter.js" data-astro-rerun></script>
+<style>
+  #tag-filter { margin-bottom: 1.25rem; }
+  .tag-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
+  button { min-height: 44px; padding: .5rem .8rem; border: 1px solid var(--color-outline-subtle); border-radius: 5px; font-size: .8rem; color: var(--color-foreground-muted); cursor: pointer; }
+  .tag-btn[aria-pressed="true"] { background: var(--color-accent-muted); color: var(--color-accent-on-muted); border-color: var(--color-accent); }
+  .tag-reset { border-color: transparent; text-decoration: underline; text-underline-offset: .2em; }
+  #tag-status { min-height: 1.5em; margin-top: .4rem; font-size: .75rem; color: var(--color-foreground-muted); }
+  [hidden] { display: none !important; }
+</style>

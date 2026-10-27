@@ -1,0 +1,57 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import { getSeriesPostsFromEntries } from '../../../utils/series';
+import { getCollection } from 'astro:content';
+import { filterPublished } from '../../../consts/sections';
+
+export async function getStaticPaths() {
+  const entries = filterPublished(await getCollection('seeds'));
+  const seriesMap = new Map<string, string>();
+
+  for (const entry of entries) {
+    const series = entry.data.series;
+    if (!series || seriesMap.has(series.name)) continue;
+    seriesMap.set(series.name, series.title);
+  }
+
+  return Array.from(seriesMap.entries()).map(([name, title]) => ({
+    params: { name },
+    props: {
+      name,
+      title,
+      posts: getSeriesPostsFromEntries(entries, name),
+    },
+  }));
+}
+
+const { name, title, posts } = Astro.props;
+---
+
+<Layout
+  title={`${title} | The Greenhouse`}
+  description={`${title} 시리즈의 글과 읽는 순서입니다.`}
+  canonicalPath={`/seeds/series/${name}/`}
+  ogTitle={title}
+  ogDescription={`${posts.length} published posts in the ${title} series.`}
+>
+  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
+    <header class="mb-10">
+      <p class="text-xs uppercase tracking-widest text-foreground-muted mb-2">Seeds Series</p>
+      <h1 class="text-3xl tracking-tight mb-3">{title}</h1>
+      <p class="text-sm text-foreground-muted">
+        {posts.length}편
+      </p>
+    </header>
+
+    <ol class="space-y-3">
+      {posts.map((post) => (
+        <li>
+          <a href={`/seeds/${post.slug}/`} class="flex gap-3 items-baseline text-foreground-muted/70 hover:text-foreground transition-colors">
+            <span class="tabular-nums w-6 shrink-0 text-sm">{post.data.series?.order}.</span>
+            <span class="text-base">{post.data.title}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Layout>

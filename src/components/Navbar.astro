@@ -36,6 +36,7 @@ const navLinks = [
         return <a href={link.href} class:list={['py-3 text-sm transition-colors border-b border-outline-subtle/10', isActive ? 'text-foreground font-medium' : 'text-foreground-muted hover:text-foreground']} aria-current={isActive ? 'page' : undefined}>{link.label}</a>;
       })}
       <a href="/gardener/" class="py-3 text-sm">소개</a>
+      <a href="/write/" data-astro-reload class="py-3 text-sm">글쓰기</a>
       <a href="/topics/notes/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">기록</a>
       <a href="/search/" data-astro-reload class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
     </div>
@@ -47,6 +48,14 @@ const navLinks = [
     function init() {
       const toggle = document.getElementById('menu-toggle');
       const drawer = document.getElementById('mobile-drawer');
+      // Navbar persists through Astro navigation; refresh its active topic each time.
+      drawer?.querySelectorAll('a[href]').forEach(link => {
+        const active = window.location.pathname.startsWith(link.getAttribute('href'));
+        if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+        link.classList.toggle('font-medium', active);
+        link.classList.toggle('text-foreground', active);
+        link.classList.toggle('text-foreground-muted', !active);
+      });
       if (!toggle || !drawer || toggle.dataset.initialized) return;
       toggle.dataset.initialized = 'true';
       function set(open) {

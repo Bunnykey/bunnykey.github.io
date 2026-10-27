@@ -21,6 +21,8 @@ test('CMS-style Markdown builds images and embeds while drafts stay out of publi
       'https://github.com/Bunnykey/bunnykey.github.io',
     ].map(url => `\`\`\`embed\n${url}\n\`\`\``).join('\n\n');
     for (const collection of ['flora', 'seeds', 'nursery']) {
+      await writeFile(join(root, `src/content/${collection}/cms-shared.md`),
+        `---\ntitle: CMS_SHARED_SENTINEL ${collection}\ndate: "2026-10-26"\ndraft: true\nsharePreview: true\n---\n\n${body}\n`);
       for (const draft of [true, false]) {
         const slug = `cms-${draft ? 'draft' : 'published'}`;
         const series = collection === 'seeds' ? '' : `series:\n  name: cms-series\n  title: CMS Series\n  order: ${draft ? 2 : 1}\n`;
@@ -35,12 +37,19 @@ test('CMS-style Markdown builds images and embeds while drafts stay out of publi
       for (const provider of ['YouTube', 'Spotify', 'GitHub']) assert.ok(html.includes(`data-provider="${provider}"`));
       assert.match(html, /frame-src https:\/\/open.spotify.com https:\/\/www.youtube-nocookie.com/);
       await access(join(root, `dist/og/${collection}/cms-published.png`));
+      const shared = await readFile(join(root, `dist/preview/${collection}/cms-shared/index.html`), 'utf8');
+      assert.match(shared, /name="robots" content="noindex, nofollow, noarchive"/);
+      assert.match(shared, /data-pagefind-ignore="all"/);
+      assert.match(shared, /data-provider="YouTube"/);
+      assert.ok(!shared.includes('data-pagefind-body'));
+      await assert.rejects(access(join(root, `dist/${collection}/cms-shared/index.html`)), {code: 'ENOENT'});
+      await assert.rejects(access(join(root, `dist/og/${collection}/cms-shared.png`)), {code: 'ENOENT'});
       for (const path of [`${collection}/cms-draft/index.html`, `og/${collection}/cms-draft.png`]) {
         await assert.rejects(access(join(root, 'dist', path)), {code: 'ENOENT'});
       }
       if (collection !== 'seeds') {
         const series = await readFile(join(root, `dist/${collection}/series/cms-series/index.html`), 'utf8');
-        assert.match(series, /1 posts/);
+        assert.match(series, /1편/);
         assert.ok(!series.includes('cms-draft'));
       }
     }
@@ -52,11 +61,28 @@ test('CMS-style Markdown builds images and embeds while drafts stay out of publi
           const text = await readFile(path, 'utf8');
           assert.ok(!text.includes('CMS_DRAFT_SENTINEL'), `Draft title leaked into ${path}`);
           assert.ok(!text.includes('/cms-draft/'), `Draft route leaked into ${path}`);
+          if (!path.startsWith(join(root, 'dist/preview') + '/')) {
+            assert.ok(!text.includes('CMS_SHARED_SENTINEL'), `Preview leaked into ${path}`);
+            assert.ok(!text.includes('/cms-shared/'), `Preview route leaked into ${path}`);
+          }
         }
       }
     }
     await checkPublicText(join(root, 'dist'));
     assert.deepEqual(await readFile(join(root, 'dist/img/cms-contract.png')), image);
+    // Withdrawing a shared preview and publishing a draft both remove the old preview HTML.
+    for (const collection of ['flora', 'seeds', 'nursery']) {
+      const file = join(root, `src/content/${collection}/cms-shared.md`);
+      let raw = (await readFile(file, 'utf8')).replace('sharePreview: true', 'sharePreview: false');
+      if (collection === 'seeds') raw = raw.replace('draft: true', 'draft: false');
+      await writeFile(file, raw);
+    }
+    execFileSync('npm', ['run', 'build'], {cwd: root, stdio: 'pipe', timeout: 100000});
+    for (const collection of ['flora', 'seeds', 'nursery']) {
+      await assert.rejects(access(join(root, `dist/preview/${collection}/cms-shared/index.html`)), {code: 'ENOENT'});
+      if (collection === 'seeds') await access(join(root, `dist/${collection}/cms-shared/index.html`));
+      else await assert.rejects(access(join(root, `dist/${collection}/cms-shared/index.html`)), {code: 'ENOENT'});
+    }
   } finally {
     await rm(root, {recursive: true, force: true});
   }
