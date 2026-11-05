@@ -30,6 +30,18 @@ export function init() {
     else {if(mode==='shared'){clearHash();load();}mode=next;tell('');}
     render();
   }
+  function createArt(track, extraClass='') {
+    const art=el('span',undefined,`kt-art ${extraClass}`.trim());
+    art.style.setProperty('--art-color',/^#[0-9a-f]{6}$/i.test(track.color)?track.color:'#687b6c');
+    art.setAttribute('aria-hidden','true');
+    const cover=safeCoverPath(track.cover);
+    if(cover){
+      const image=el('img');image.src=cover;image.alt='';image.draggable=false;image.loading=extraClass?'eager':'lazy';
+      image.addEventListener('error',()=>{image.remove();art.append(el('b',track.title.slice(0,2)));},{once:true});
+      art.append(image);
+    }else art.append(el('b',track.title.slice(0,2)));
+    return art;
+  }
   function render(){
     $('month').value=month.month;$('demo').hidden=!month.demo;
     $('title').textContent=`${Number(month.month.slice(5))}월의 ${mode==='author'?'블로그 티어':mode==='shared'?'공유받은 티어':'내 티어'}${month.demo?' · 예시':''}`;
@@ -46,10 +58,16 @@ export function init() {
       const cards=el('div',undefined,'kt-cards');
       for(const id of rows[tier]){
         const track=month.tracks.find(t=>t.id===id),card=el('button',undefined,'kt-card');card.type='button';card.dataset.song=id;card.draggable=mode==='mine';card.setAttribute('aria-label',`${track.artist}, ${track.title}, ${labels[tier]} 티어. 상세 보기${mode==='mine'?' 및 이동':''}`);
-        const art=el('span',undefined,'kt-art');art.style.setProperty('--art-color',/^#[0-9a-f]{6}$/i.test(track.color)?track.color:'#687b6c');art.setAttribute('aria-hidden','true');const cover=safeCoverPath(track.cover);if(cover){const image=el('img');image.src=cover;image.alt='';image.loading='lazy';image.addEventListener('error',()=>{image.remove();art.append(el('b',track.title.slice(0,2)));},{once:true});art.append(image);}else art.append(el('b',track.title.slice(0,2)));card.append(art,el('strong',track.title),el('span',track.artist,'kt-artist'));
+        const art=createArt(track);card.append(art,el('strong',track.title),el('span',track.artist,'kt-artist'));
         if(mode!=='author' && $('compare').checked)card.append(el('span',`블로그 ${labels[track.tier]||'미평가'}`,'kt-badge'));
         card.addEventListener('click',()=>openSong(track));
-        card.addEventListener('dragstart',e=>{if(mode!=='mine')return;dragged=id;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',id);});
+        card.addEventListener('dragstart',e=>{
+          if(mode!=='mine'||!e.dataTransfer)return;
+          dragged=id;e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',id);
+          // Capture the complete visible cover rather than a nested image or text selection.
+          const rect=art.getBoundingClientRect();
+          e.dataTransfer.setDragImage(art,Math.round(Math.max(0,Math.min(rect.width,e.clientX-rect.left))),Math.round(Math.max(0,Math.min(rect.height,e.clientY-rect.top))));
+        });
         card.addEventListener('dragend',()=>{dragged=null;board.querySelectorAll('.kt-over').forEach(n=>n.classList.remove('kt-over'));});
         card.addEventListener('dragover',e=>{if(mode==='mine' && dragged)e.preventDefault();});
         card.addEventListener('drop',e=>{if(mode!=='mine'||!dragged)return;e.preventDefault();e.stopPropagation();const moving=dragged;dragged=null;row.classList.remove('kt-over');commit(moveTrack(mine,moving,tier,id),'곡 순서를 변경했습니다.',moving);});
@@ -60,10 +78,26 @@ export function init() {
     }
   }
   function openSong(track){
-    const box=$('song');box.replaceChildren();const h=el('h3',track.title);h.id='kt-song-title';box.append(el('p',`${track.artist} · ${track.released}`),h,el('p',`블로그 평가: ${labels[track.tier]||'미평가'}${month.demo?' · 가상 평가':''}`),el('p',track.note||'아직 한줄평이 없습니다.'));
-    const url=safeListenUrl(track.listenUrl);if(url){const a=el('a','공식 음원·영상 듣기 ↗');a.href=url;a.target='_blank';a.rel='noopener noreferrer';box.append(a);}
+    const box=$('song');box.replaceChildren();
+    const sequence=TIERS.flatMap(tier=>activeRows()[tier]);
+    const index=sequence.indexOf(track.id);
+    const layout=el('div',undefined,'kt-story-layout');
+    const visual=el('div',undefined,'kt-story-visual');visual.append(createArt(track,'kt-story-art'));
+    const caption=el('span',`${month.month.replace('-','.')} / ${month.demo?'SAMPLE TRACK':'MONTHLY K-POP'}`,'kt-story-caption');visual.append(caption);
+    const copy=el('div',undefined,'kt-story-copy');
+    copy.append(el('p','THE MONTHLY LIST','kt-story-eyebrow'));
+    const h=el('h3',track.title);h.id='kt-song-title';copy.append(h,el('p',track.artist,'kt-story-artist'));
+    const meta=el('div',undefined,'kt-story-meta');
+    const badge=el('span',`블로그 ${labels[track.tier]||'미평가'}`,'kt-story-tier');
+    badge.style.setProperty('--rank-color',colors[Math.max(0,TIERS.indexOf(track.tier))]);
+    const date=el('time',track.released);date.dateTime=track.released;meta.append(badge,date);copy.append(meta);
+    const review=el('div',undefined,'kt-story-review');review.append(el('p','이 곡을 듣고','kt-story-review-label'),el('blockquote',track.note||'아직 한줄평이 없습니다.'));copy.append(review);
+    if(month.demo)copy.append(el('p','화면 확인용 가상 곡 · 가상 평가','kt-story-demo'));
+    const url=safeListenUrl(track.listenUrl);
+    if(url){const a=el('a','공식 음원·영상 듣기 ↗','kt-story-listen');a.href=url;a.target='_blank';a.rel='noopener noreferrer';copy.append(a);}
+    layout.append(visual,copy);box.append(layout);
     if(mode==='mine'){
-      box.append(el('p','이 곡은 어느 티어인가요?'));
+      const heading=el('p','이 곡은 어느 티어인가요?','kt-edit-label');box.append(heading);
       const choices=el('div',undefined,'kt-choice'),current=TIERS.find(t=>mine[t].includes(track.id));
       for(const tier of TIERS){const b=el('button',labels[tier]);b.type='button';b.setAttribute('aria-pressed',String(current===tier));b.addEventListener('click',()=>{dialog.close();commit(moveTrack(mine,track.id,tier),`${track.title}: ${labels[tier]} 티어`,track.id);});choices.append(b);}box.append(choices);
       const order=el('div',undefined,'kt-reorder'),position=mine[current].indexOf(track.id);
@@ -71,8 +105,22 @@ export function init() {
       prev.addEventListener('click',()=>{dialog.close();commit(moveTrack(mine,track.id,current,mine[current][position-1]),'앞으로 옮겼습니다.',track.id);});
       next.addEventListener('click',()=>{dialog.close();commit(moveTrack(mine,track.id,current,mine[current][position+2]),'뒤로 옮겼습니다.',track.id);});order.append(prev,next);box.append(order);
     }
-    dialog.showModal();
+
+    const navigation=el('nav',undefined,'kt-story-nav');navigation.setAttribute('aria-label','곡 상세 탐색');
+    const previous=el('button','← 이전 곡'),next=el('button','다음 곡 →');previous.type=next.type='button';
+    previous.disabled=index<=0;next.disabled=index>=sequence.length-1;
+    previous.addEventListener('click',()=>openSong(month.tracks.find(t=>t.id===sequence[index-1])));
+    next.addEventListener('click',()=>openSong(month.tracks.find(t=>t.id===sequence[index+1])));
+    const count=el('span',`${String(index+1).padStart(2,'0')} / ${String(sequence.length).padStart(2,'0')}`);count.setAttribute('aria-live','polite');
+    navigation.append(previous,count,next);box.append(navigation);
+    if(!dialog.open)dialog.showModal();
+    dialog.scrollTop=0;
   }
+  dialog.addEventListener('click',event=>{
+    if(event.target!==dialog)return;
+    const rect=dialog.getBoundingClientRect();
+    if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
+  });
   root.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   $('month').addEventListener('change',()=>{month=catalog.find(m=>m.month===$('month').value);clearHash();if(mode==='shared')mode='author';tell('');load();render();});
   $('compare').addEventListener('change',render);
