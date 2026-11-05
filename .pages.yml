@@ -197,7 +197,7 @@ content:
       - {name: body, component: post-body}
 
   - name: kpop-tiers
-    label: 음악 · 월별 케이팝 티어
+    label: 음악 · 발매곡 목록
     type: file
     path: src/data/kpop-months.json
     format: json
@@ -249,6 +249,55 @@ content:
             required: true
             options: {format: yyyy-MM-dd, time: false}
           - name: tier
+            label: 이전 형식 평가
+            hidden: true
+            type: select
+            required: true
+            default: unranked
+            options:
+              values:
+                - {name: S, label: S}
+                - {name: A, label: A}
+                - {name: B, label: B}
+                - {name: C, label: C}
+                - {name: D, label: D}
+                - {name: unranked, label: 미평가}
+          - {name: note, label: 이전 형식 한줄평, type: text, hidden: true}
+          - name: color
+            label: 카드 색상 (#RRGGBB)
+            type: string
+            pattern: '^#[0-9a-fA-F]{6}$'
+          - {name: cover, label: 앨범 이미지 (선택), type: image}
+          - name: listenUrl
+            label: YouTube·Spotify·벅스 링크 (선택)
+            type: string
+            pattern: '^https://(www\.)?(youtube\.com|youtu\.be|open\.spotify\.com|music\.bugs\.co\.kr)/'
+
+
+  - name: kpop-listening
+    label: 음악 · 공개 감상 목록
+    type: file
+    path: src/data/kpop-listening.json
+    format: json
+    list: true
+    fields:
+      - name: period
+        label: '발매 분기 (예: 2026-Q4)'
+        type: string
+        required: true
+        pattern: '^[0-9]{4}-Q[1-4]$'
+      - name: picks
+        label: 들은 곡 (여기에 담은 곡만 공개)
+        description: 사이트에서 곡을 고르고 공개 평가용 파일을 내보내면 감상 목록으로 반영할 수 있습니다. 발매곡 정보는 별도 목록에 유지됩니다.
+        type: object
+        list:
+          max: 900
+          collapsible:
+            collapsed: true
+            summary: '{id} · {tier}'
+        fields:
+          - {name: id, label: 곡 ID, type: string, required: true}
+          - name: tier
             label: 내 평가
             type: select
             required: true
@@ -261,13 +310,8 @@ content:
                 - {name: C, label: C}
                 - {name: D, label: D}
                 - {name: unranked, label: 미평가}
-          - {name: note, label: 한줄평, type: text}
-          - name: color
-            label: 카드 색상 (#RRGGBB)
-            type: string
-            pattern: '^#[0-9a-fA-F]{6}$'
-          - {name: cover, label: 앨범 이미지 (선택), type: image}
-          - name: listenUrl
-            label: YouTube·Spotify·벅스 링크 (선택)
-            type: string
-            pattern: '^https://(www\.)?(youtube\.com|youtu\.be|open\.spotify\.com|music\.bugs\.co\.kr)/'
+          - name: note
+            label: 한줄평
+            type: text
+            default: ''
+            options: {maxlength: 500}

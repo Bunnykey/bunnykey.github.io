@@ -1,34 +1,37 @@
 ---
 import catalog from '../../data/kpop-months.json';
+import listening from '../../data/kpop-listening.json';
 import '../../styles/kpop-tiers.css';
-import { assertCatalog } from '../../../public/music-tiers/state.mjs';
-const published = assertCatalog(catalog).filter(month => month.published);
-const months = (published.some(month => !month.demo) ? published.filter(month => !month.demo) : published).sort((a,b) => b.month.localeCompare(a.month));
+import { buildPeriods } from '../../../public/music-tiers/curated.mjs';
+const periods = buildPeriods(catalog,listening,true);
+const live = catalog.some(m=>m.published&&!m.demo);
+const months = catalog.filter(m=>m.published&&(!live||!m.demo)).map(m=>({month:m.month,revision:m.revision,tracks:m.tracks.map(t=>({id:t.id}))}));
 ---
 <section class="kt" id="kpop-tiers">
   <header class="kt-header">
     <a href="/topics/music/" class="kt-back">음악 기록 ↗</a>
-    <p class="kt-eyebrow">THE MONTHLY LIST / K-POP</p>
-    <h1>이번 달, 어떤 곡이 남았나요.</h1>
-    <p class="kt-description">한 달의 신곡을 듣고 나만의 순서로.<br />블로그의 취향을 구경하고, 당신의 티어도 남겨 보세요.</p>
+    <p class="kt-eyebrow">LISTENING NOTES / K-POP</p>
+    <h1>듣고 남긴 곡들.</h1>
+    <p class="kt-description">들은 곡만 골라 담고,<br />한 분기의 취향을 기록합니다.</p>
   </header>
   <div class="kt-toolbar">
-    <label class="kt-month-label">발매 월 <select id="kt-month" aria-label="발매 월">{months.map(m => <option value={m.month}>{m.month.replace('-', '년 ')}월{m.demo ? ' · 샘플' : ''}</option>)}</select></label>
-    <div class="kt-tabs" role="group" aria-label="티어 보기">
-      <button type="button" data-mode="author" aria-pressed="true">블로그 티어</button>
-      <button type="button" data-mode="mine" aria-pressed="false">내 티어 만들기</button>
+    <label class="kt-month-label">발매 분기 <select id="kt-month" aria-label="발매 분기">{periods.map(p=><option value={p.id}>{p.label}{p.demo?' · 샘플':''}</option>)}</select></label>
+    <div class="kt-tabs" role="group" aria-label="감상 목록 보기">
+      <button type="button" data-mode="author" aria-pressed="true">블로그 감상</button>
+      <button type="button" data-mode="mine" aria-pressed="false">내 감상 목록</button>
     </div>
   </div>
   <p id="kt-demo" class="kt-demo" hidden>화면 확인용 가상 곡 · 실제 발매곡이나 본인 평가가 아닙니다.</p>
-  <div class="kt-heading"><div><h2 id="kt-title">월별 케이팝 티어</h2><p id="kt-intro"></p></div><span id="kt-count"></span></div>
+  <div class="kt-heading"><div><h2 id="kt-title">분기별 케이팝 감상</h2><p id="kt-intro"></p></div><span id="kt-count"></span></div>
+  <div class="kt-library-toolbar"><p id="kt-library-summary"></p><button type="button" id="kt-add" class="kt-primary">곡 골라 담기 ＋</button></div>
   <div id="kt-actions" class="kt-actions" hidden>
     <label class="kt-compare"><input type="checkbox" id="kt-compare" /> 블로그 평가와 비교</label>
     <button type="button" id="kt-undo" disabled>되돌리기</button>
-    <button type="button" id="kt-reset">초기화</button>
+    <button type="button" id="kt-reset">티어 비우기</button>
   </div>
-  <p id="kt-hint" class="kt-hint">곡을 누르면 한줄평을 볼 수 있어요.</p>
-  <label class="kt-search"><span>곡 찾기</span><input id="kt-filter" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label>
-  <div id="kt-board" aria-label="월별 티어 보드"></div>
+  <p id="kt-hint" class="kt-hint"></p>
+  <label class="kt-search" id="kt-board-search"><span>담은 곡 찾기</span><input id="kt-filter" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label>
+  <div id="kt-board" aria-label="선택한 곡의 분기별 티어 보드"></div>
   <div class="kt-footer-actions">
     <button type="button" id="kt-share" class="kt-primary">링크로 공유 ↗</button>
     <button type="button" id="kt-image">이미지 저장</button>
@@ -36,17 +39,26 @@ const months = (published.some(month => !month.demo) ? published.filter(month =>
     <button type="button" id="kt-author-export" hidden>공개 평가용 파일</button>
     <label class="kt-file">파일 불러오기<input type="file" id="kt-import" accept="application/json,.json" /></label>
   </div>
-  <p id="kt-storage" class="kt-small">내 티어는 이 브라우저에 자동 저장됩니다. 다른 기기로 옮길 때는 공유 링크나 파일을 이용하세요.</p>
+  <p id="kt-storage" class="kt-small">내 감상 목록과 한줄평은 이 브라우저에 자동 저장됩니다. 다른 기기로 옮길 때는 공유 링크나 파일을 이용하세요.</p>
   <p id="kt-status" role="status" aria-live="polite" class="kt-status"></p>
-  <details class="kt-rules"><summary>이 페이지의 기준</summary><p>티어는 곡에 대한 개인적인 취향입니다. S부터 D까지 같은 티어 안에서도 순서를 정할 수 있습니다. 듣지 않은 곡은 미평가로 남겨 두세요. 월별 목록은 블로그 주인이 고른 곡이며, 전체 발매곡을 모두 포함하지 않을 수 있습니다.</p><p>방문자의 결과는 서버에 수집되지 않습니다. 공유 링크에는 곡의 배치가 포함됩니다.</p></details>
+  <details class="kt-rules"><summary>이 페이지의 기준</summary><p>분기는 곡의 발매일 기준입니다. 전체 발매곡은 검색 목록에 보관하고, 골라 담은 곡만 티어 보드에 표시합니다. 아직 듣지 않은 곡은 담지 않아도 됩니다. 담았지만 점수를 정하지 않은 곡은 미평가로 남길 수 있습니다.</p><p>방문자의 감상 목록은 서버에 수집되지 않습니다. 공유 링크에는 선택한 곡과 배치가 포함되며, 개인 한줄평은 포함되지 않습니다. 발매곡 목록은 확인된 곡을 모은 것으로 전체 발매곡을 모두 포함하지 않을 수 있습니다.</p></details>
+  <dialog id="kt-picker" class="kt-dialog kt-picker" aria-labelledby="kt-picker-title">
+    <form method="dialog" class="kt-story-dismiss"><button aria-label="곡 선택 닫기">×</button></form>
+    <h3 id="kt-picker-title">들은 곡을 골라 담으세요.</h3>
+    <p class="kt-small">선택은 자동 저장됩니다. 목록에서 빼도 곡 정보는 그대로 남아요.</p>
+    <div class="kt-picker-filters"><label><span>발매곡 검색</span><input id="kt-pool-search" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label><label><span>발매 월</span><select id="kt-pool-month" aria-label="발매 월 필터"></select></label></div>
+    <p id="kt-pool-count" class="kt-small" role="status" aria-live="polite"></p>
+    <div id="kt-pool" class="kt-pool"></div>
+    <form method="dialog" class="kt-picker-done"><button class="kt-primary">선택 완료</button></form>
+  </dialog>
   <dialog id="kt-dialog" class="kt-dialog kt-story-dialog" aria-labelledby="kt-song-title"><form method="dialog" class="kt-story-dismiss"><button type="submit" aria-label="곡 상세 닫기">×</button></form><div id="kt-song"></div></dialog>
   <dialog id="kt-share-dialog" class="kt-dialog" aria-labelledby="kt-share-title"><h3 id="kt-share-title">공유 링크</h3><p>아래 링크를 복사해 공유하세요.</p><textarea id="kt-share-url" readonly aria-label="공유 링크"></textarea><form method="dialog"><button class="kt-close">닫기</button></form></dialog>
-  <dialog id="kt-reset-dialog" class="kt-dialog" aria-labelledby="kt-reset-title"><h3 id="kt-reset-title">이달의 내 티어를 비울까요?</h3><p>모든 곡을 미평가로 옮깁니다. 되돌리기로 복구할 수 있어요.</p><button type="button" id="kt-confirm-reset">초기화</button><form method="dialog"><button class="kt-close">취소</button></form></dialog>
-  <noscript><p>내 티어 만들기에는 JavaScript가 필요합니다. 블로그 평가는 아래에서 볼 수 있습니다.</p>{months.map(m => <section><h2>{m.month}{m.demo ? ' · 가상 데이터' : ''}</h2><ul>{m.tracks.map(t => <li>{t.tier === 'unranked' ? '미평가' : t.tier} — {t.artist} / {t.title}: {t.note}</li>)}</ul></section>)}</noscript>
+  <dialog id="kt-reset-dialog" class="kt-dialog" aria-labelledby="kt-reset-title"><h3 id="kt-reset-title">이 분기의 티어를 비울까요?</h3><p>담은 곡은 유지하고, 배치만 모두 미평가로 옮깁니다. 되돌리기로 복구할 수 있어요.</p><button type="button" id="kt-confirm-reset">티어 비우기</button><form method="dialog"><button class="kt-close">취소</button></form></dialog>
+  <noscript><p>곡 선택에는 JavaScript가 필요합니다. 블로그가 공개한 감상곡은 아래에서 볼 수 있습니다.</p>{periods.map(p=><section><h2>{p.label}</h2><ul>{Object.values(p.rows).flat().map(id=>{const t=p.tracks.find(t=>t.id===id)!;return <li>{t.tier==='unranked'?'미평가':t.tier} — {t.artist} / {t.title}: {t.note}</li>;})}</ul></section>)}</noscript>
 </section>
-<script type="application/json" id="kt-catalog" set:html={JSON.stringify(months).replace(/</g, '\\u003c')} />
+<script type="application/json" id="kt-catalog" set:html={JSON.stringify({periods,months}).replace(/</g,'\\u003c')} />
 <script>
   import { init } from '../../../public/music-tiers/app.mjs';
-  document.addEventListener('astro:page-load', init);
+  document.addEventListener('astro:page-load',init);
   init();
 </script>

@@ -4,18 +4,24 @@ import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {init} from '../public/music-tiers/app.mjs';
 const catalog=JSON.parse(readFileSync(new URL('./fixtures/kpop-demo-months.json',import.meta.url)));
-function setup(){
-  const ids=['title','intro','count','demo','actions','hint','storage','status'];
-  const buttons=['undo','reset','confirm-reset','export','share','image'];
-  const dom=new JSDOM(`<section id="kpop-tiers"><select id="kt-month">${catalog.map(m=>`<option>${m.month}</option>`).join('')}</select><button data-mode="author"></button><button data-mode="mine"></button>${ids.map(id=>`<div id="kt-${id}"></div>`).join('')}${buttons.map(id=>`<button id="kt-${id}"></button>`).join('')}<input type="checkbox" id="kt-compare"><input type="file" id="kt-import"><textarea id="kt-share-url"></textarea><div id="kt-board"></div><dialog id="kt-dialog"><div id="kt-song"></div></dialog><dialog id="kt-reset-dialog"></dialog><dialog id="kt-share-dialog"></dialog></section><script id="kt-catalog" type="application/json"></script>`,{url:'https://example.test/music/tiers/'});
+function setup(storage={},customCatalog=catalog){
+  const ids=['title','intro','count','demo','actions','hint','storage','status','library-summary','pool-count'];
+  const buttons=['undo','reset','confirm-reset','export','share','image','add','author-export'];
+  const dom=new JSDOM(`<section id="kpop-tiers"><select id="kt-month">${catalog.map(m=>`<option>${m.month}</option>`).join('')}</select><button data-mode="author"></button><button data-mode="mine"></button>${ids.map(id=>`<div id="kt-${id}"></div>`).join('')}${buttons.map(id=>`<button id="kt-${id}"></button>`).join('')}<dialog id="kt-picker"><input id="kt-pool-search"><select id="kt-pool-month"></select><div id="kt-pool"></div></dialog><input id="kt-filter"><input type="checkbox" id="kt-compare"><input type="file" id="kt-import"><textarea id="kt-share-url"></textarea><div id="kt-board"></div><dialog id="kt-dialog"><div id="kt-song"></div></dialog><dialog id="kt-reset-dialog"></dialog><dialog id="kt-share-dialog"></dialog></section><script id="kt-catalog" type="application/json"></script>`,{url:'https://example.test/music/tiers/'});
   const {window}=dom;
-  const data=structuredClone(catalog);data[0].tracks[0].cover='/img/album.png';
+  const data=structuredClone(customCatalog);data[0].tracks[0].cover='/img/album.png';
   window.document.getElementById('kt-catalog').textContent=JSON.stringify(data);
   for(const d of window.document.querySelectorAll('dialog')){d.showModal=()=>{d.open=true;};d.close=()=>{d.open=false;};}
   const originals=new Map();
   for(const key of ['window','document','location','localStorage','navigator']){originals.set(key,Object.getOwnPropertyDescriptor(globalThis,key));Object.defineProperty(globalThis,key,{configurable:true,value:window[key]});}
+  for(const [key,value]of Object.entries(storage))window.localStorage.setItem(key,JSON.stringify(value));
   init();
   return {window,document:window.document,cleanup(){for(const [key,descriptor]of originals){if(descriptor)Object.defineProperty(globalThis,key,descriptor);else delete globalThis[key];}window.close();}};
+}
+function pick(f,id){
+  f.document.querySelector('#kt-add').click();
+  const check=f.document.querySelector(`[data-pick="${id}"]`);check.checked=true;check.dispatchEvent(new f.window.Event('change',{bubbles:true}));
+  f.document.querySelector('#kt-picker').close();
 }
 test('blog cards open a reading layout and next/previous keep the modal open',()=>{
   const f=setup();try{
@@ -33,6 +39,7 @@ test('blog cards open a reading layout and next/previous keep the modal open',()
 test('dragging uses the full cover as its preview and moves exactly one song',()=>{
   const f=setup();try{
     const {document:d,window:w}=f;d.querySelector('[data-mode="mine"]').click();
+    pick(f,'demo-oct-01');
     const card=d.querySelector('[data-song="demo-oct-01"]'),art=card.querySelector('.kt-art');
     assert.equal(art.querySelector('img').draggable,false);
     art.getBoundingClientRect=()=>({left:100,top:200,width:90,height:90});
@@ -46,10 +53,52 @@ test('dragging uses the full cover as its preview and moves exactly one song',()
 });
 test('tier choice remains editable in the new reading layout',()=>{
   const f=setup();try{
-    const d=f.document;d.querySelector('[data-mode="mine"]').click();d.querySelector('[data-song="demo-oct-01"]').click();
+    const d=f.document;d.querySelector('[data-mode="mine"]').click();pick(f,'demo-oct-01');d.querySelector('[data-song="demo-oct-01"]').click();
     [...d.querySelectorAll('.kt-choice button')].find(b=>b.textContent==='S').click();
     assert.equal(d.querySelector('#kt-dialog').open,false);
     assert.ok(d.querySelector('[data-tier="S"] [data-song="demo-oct-01"]'));
     assert.match(d.querySelector('#kt-status').textContent,/자동 저장됨/);
+  }finally{f.cleanup();}
+});
+
+test('private board contains only explicitly picked songs and removal keeps the catalog',()=>{
+  const f=setup();try{
+    const d=f.document;d.querySelector('[data-mode="mine"]').click();
+    assert.equal(d.querySelectorAll('#kt-board [data-song]').length,0);
+    pick(f,'demo-oct-01');assert.equal(d.querySelectorAll('#kt-board [data-song]').length,1);
+    d.querySelector('[data-song="demo-oct-01"]').click();d.querySelector('.kt-remove').click();
+    assert.equal(d.querySelectorAll('#kt-board [data-song]').length,0);
+    d.querySelector('#kt-add').click();assert.equal(d.querySelectorAll('[data-pick]').length,8);
+    assert.equal(d.querySelector('[data-pick="demo-oct-01"]').checked,false);
+    d.querySelector('#kt-picker').close();d.querySelector('#kt-undo').click();
+    assert.equal(d.querySelectorAll('#kt-board [data-song]').length,1);
+  }finally{f.cleanup();}
+});
+test('month-based saved ratings migrate without adding all unheard songs',()=>{
+  const rows={S:[],A:['demo-oct-01'],B:[],C:[],D:[],unranked:catalog[0].tracks.slice(1).map(t=>t.id)};
+  const month=catalog[0],key=`greenhouse:kpop:v1:${month.month}:${month.revision}`;
+  const f=setup({[key]:{v:1,month:month.month,revision:month.revision,rows,notes:{'demo-oct-01':'보관한 감상'}}});
+  try{
+    const d=f.document;d.querySelector('[data-mode="mine"]').click();
+    assert.equal(d.querySelectorAll('#kt-board [data-song]').length,1);
+    d.querySelector('[data-song="demo-oct-01"]').click();assert.equal(d.querySelector('#kt-my-note').value,'보관한 감상');
+    assert.ok(f.window.localStorage.getItem('greenhouse:kpop:v2:2026-Q4'));
+  }finally{f.cleanup();}
+});
+
+test('importing an old monthly file preserves selections from another month in the quarter',async()=>{
+  const source=structuredClone(catalog),month=source[0];
+  source.push({...structuredClone(month),month:'2026-11',tracks:[{...month.tracks[0],id:'nov-picked',released:'2026-11-02',tier:'unranked',note:''}]});
+  const rows={S:['nov-picked'],A:[],B:[],C:[],D:[],unranked:[]};
+  const f=setup({'greenhouse:kpop:v2:2026-Q4':{v:2,period:'2026-Q4',rows,notes:{'nov-picked':'11월 메모'}}},source);
+  try{
+    const d=f.document;d.querySelector('[data-mode="mine"]').click();
+    const input=d.querySelector('#kt-import');
+    const value={v:1,month:month.month,revision:month.revision,rows:{S:[],A:[],B:['demo-oct-01'],C:[],D:[],unranked:month.tracks.slice(1).map(t=>t.id)}};
+    Object.defineProperty(input,'files',{value:[{size:100,text:async()=>JSON.stringify(value)}]});
+    input.dispatchEvent(new f.window.Event('change',{bubbles:true}));await new Promise(setImmediate);
+    assert.ok(d.querySelector('[data-tier="S"] [data-song="nov-picked"]'));
+    assert.ok(d.querySelector('[data-tier="B"] [data-song="demo-oct-01"]'));
+    assert.equal(JSON.parse(f.window.localStorage.getItem('greenhouse:kpop:v2:2026-Q4')).notes['nov-picked'],'11월 메모');
   }finally{f.cleanup();}
 });
