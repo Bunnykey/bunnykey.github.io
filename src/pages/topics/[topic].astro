@@ -9,5 +9,12 @@ const topic = TOPICS[topicKey];
 const posts = (await getAllPosts()).filter(post => topicFor(post.data.category) === topicKey);
 ---
 <Layout title={`${topic.label} | The Greenhouse`} description={topic.description} canonicalPath={`/topics/${topicKey}/`}>
+  {topicKey === 'music' && <aside class="music-tier-entry"><a href="/music/tiers/">월별 케이팝 티어 ↗</a><span>블로그의 평가를 보고, 내 취향으로 다시 배치해 보세요.</span></aside>}
   <JournalList posts={posts} topic={topicKey} />
 </Layout>
+
+<style>
+  .music-tier-entry { width: min(100% - 2.75rem, 48rem); margin: 2rem auto 0; padding: 1rem 0; display: flex; flex-wrap: wrap; gap: .5rem 1rem; border-bottom: 1px solid var(--color-outline-subtle); }
+  .music-tier-entry a { font-size: .9rem; color: var(--color-accent); }
+  .music-tier-entry span { font-size: .8rem; color: var(--color-foreground-muted); }
+</style>

@@ -1,0 +1,9 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import KpopTierBoard from '../../../components/music/KpopTierBoard.astro';
+import catalog from '../../../data/kpop-months.json';
+const onlyDemo = !catalog.some(month => month.published && !month.demo);
+---
+<Layout title="월별 케이팝 티어 | The Greenhouse" description="월별 케이팝 발매곡을 듣고 블로그의 평가와 나만의 티어를 비교해 보세요." canonicalPath="/music/tiers/" noIndex={onlyDemo}>
+  <KpopTierBoard />
+</Layout>

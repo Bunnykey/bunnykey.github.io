@@ -195,3 +195,78 @@ content:
       - {name: draft, component: post-draft}
       - {name: sharePreview, component: post-preview}
       - {name: body, component: post-body}
+
+  - name: kpop-tiers
+    label: 음악 · 월별 케이팝 티어
+    type: file
+    path: src/data/kpop-months.json
+    format: json
+    list: true
+    fields:
+      - name: month
+        label: 발매 월 (YYYY-MM)
+        type: string
+        required: true
+        pattern: '^[0-9]{4}-(0[1-9]|1[0-2])$'
+      - name: revision
+        label: 곡 목록 버전
+        type: string
+        required: true
+        description: 곡을 추가·삭제하거나 ID를 변경하면 버전을 올리세요. 평가·한줄평 변경에는 유지합니다. 목록 버전이 바뀌면 이전 방문자 배치와 공유 링크는 새 목록에 적용되지 않습니다.
+      - name: demo
+        label: 가상 데이터 표시
+        type: boolean
+        default: false
+      - name: published
+        label: 공개
+        type: boolean
+        default: false
+        description: 공개를 켜고 main에 저장하면 GitHub Pages 배포 후 목록에 나타납니다. 비공개 항목도 공개 저장소 파일에는 남습니다.
+      - name: intro
+        label: 이달의 짧은 소개
+        type: text
+      - name: tracks
+        label: 곡 목록 (같은 티어에서는 이 순서로 표시)
+        type: object
+        list:
+          min: 1
+          max: 300
+          collapsible:
+            collapsed: true
+            summary: '{artist} · {title}'
+        fields:
+          - name: id
+            label: 고유 ID (평가 후 변경하지 마세요)
+            type: string
+            required: true
+            pattern: '^[a-zA-Z0-9_-]{1,80}$'
+          - {name: title, label: 곡 제목, type: string, required: true}
+          - {name: artist, label: 아티스트, type: string, required: true}
+          - name: released
+            label: 발매일
+            type: date
+            required: true
+            options: {format: yyyy-MM-dd, time: false}
+          - name: tier
+            label: 내 평가
+            type: select
+            required: true
+            default: unranked
+            options:
+              values:
+                - {name: S, label: S}
+                - {name: A, label: A}
+                - {name: B, label: B}
+                - {name: C, label: C}
+                - {name: D, label: D}
+                - {name: unranked, label: 미평가}
+          - {name: note, label: 한줄평, type: text}
+          - name: color
+            label: 카드 색상 (#RRGGBB)
+            type: string
+            pattern: '^#[0-9a-fA-F]{6}$'
+          - {name: cover, label: 앨범 이미지 (선택), type: image}
+          - name: listenUrl
+            label: 공식 YouTube·Spotify 링크 (선택)
+            type: string
+            pattern: '^https://(www\.)?(youtube\.com|youtu\.be|open\.spotify\.com)/'

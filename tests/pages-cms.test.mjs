@@ -29,12 +29,13 @@ const compiled = await build({
 const { collections } = await import(`data:text/javascript;base64,${Buffer.from(compiled.outputFiles[0].text).toString('base64')}`);
 
 test('Pages CMS exposes the existing collections, metadata choices and flat image contract', () => {
-  assert.deepEqual(config.content.map(item => item.name), COLLECTIONS);
+  const postCollections = config.content.filter(item => item.type === 'collection');
+  assert.deepEqual(postCollections.map(item => item.name), COLLECTIONS);
   assert.equal(config.settings.content.merge, true);
   assert.deepEqual(config.media.map(({input, output, rename}) => ({input, output, rename})), [
     {input: 'public/img', output: '/img', rename: 'random'},
   ]);
-  for (const collection of config.content) {
+  for (const collection of postCollections) {
     const fields = fieldsFor(collection.name);
     assert.equal(collection.path, `src/content/${collection.name}`);
     assert.equal(collection.subfolders, false);
@@ -58,6 +59,18 @@ test('Pages CMS exposes the existing collections, metadata choices and flat imag
     else assert.equal(stage, undefined);
     assert.equal(fields.some(field => field.name === 'highlight'), collection.name === 'flora');
   }
+});
+
+test('monthly music ratings use a separate JSON file with safe publication defaults', () => {
+  const music = config.content.find(item => item.name === 'kpop-tiers');
+  assert.equal(music.type, 'file');
+  assert.equal(music.path, 'src/data/kpop-months.json');
+  assert.equal(music.format, 'json');
+  assert.equal(music.list, true);
+  assert.equal(music.fields.find(field => field.name === 'published').default, false);
+  const tracks = music.fields.find(field => field.name === 'tracks');
+  assert.equal(tracks.list.max, 300);
+  assert.deepEqual(values(tracks.fields.find(field => field.name === 'tier')), ['S', 'A', 'B', 'C', 'D', 'unranked']);
 });
 
 test('CMS defaults and quoted dates pass the actual Astro schema; malformed dates still fail', () => {
