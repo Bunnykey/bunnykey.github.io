@@ -27,11 +27,13 @@ const months = (published.some(month => !month.demo) ? published.filter(month =>
     <button type="button" id="kt-reset">초기화</button>
   </div>
   <p id="kt-hint" class="kt-hint">곡을 누르면 한줄평을 볼 수 있어요.</p>
+  <label class="kt-search"><span>곡 찾기</span><input id="kt-filter" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label>
   <div id="kt-board" aria-label="월별 티어 보드"></div>
   <div class="kt-footer-actions">
     <button type="button" id="kt-share" class="kt-primary">링크로 공유 ↗</button>
     <button type="button" id="kt-image">이미지 저장</button>
     <button type="button" id="kt-export">파일 저장</button>
+    <button type="button" id="kt-author-export" hidden>공개 평가용 파일</button>
     <label class="kt-file">파일 불러오기<input type="file" id="kt-import" accept="application/json,.json" /></label>
   </div>
   <p id="kt-storage" class="kt-small">내 티어는 이 브라우저에 자동 저장됩니다. 다른 기기로 옮길 때는 공유 링크나 파일을 이용하세요.</p>

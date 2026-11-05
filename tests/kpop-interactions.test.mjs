@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {init} from '../public/music-tiers/app.mjs';
-const catalog=JSON.parse(readFileSync(new URL('../src/data/kpop-months.json',import.meta.url)));
+const catalog=JSON.parse(readFileSync(new URL('./fixtures/kpop-demo-months.json',import.meta.url)));
 function setup(){
   const ids=['title','intro','count','demo','actions','hint','storage','status'];
   const buttons=['undo','reset','confirm-reset','export','share','image'];

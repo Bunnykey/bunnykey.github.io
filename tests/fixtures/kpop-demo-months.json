@@ -1,0 +1,26 @@
+[
+  {
+    "month": "2026-10", "revision": "demo-1", "demo": true, "published": true,
+    "intro": "가상의 곡으로 채운 시연 화면입니다. 실제 월별 발매곡과 블로그 주인의 평가로 교체할 수 있습니다.",
+    "tracks": [
+      {"id":"demo-oct-01","title":"Afterglow","artist":"SAMPLE 01","released":"2026-10-02","tier":"S","color":"#675b83","note":"가상 한줄평 · 뒤늦게 찾아오는 후렴이 오래 남는다."},
+      {"id":"demo-oct-02","title":"초록빛","artist":"SAMPLE 02","released":"2026-10-05","tier":"A","color":"#637b68","note":"가상 한줄평 · 가볍게 시작해서 여러 번 돌아오게 되는 곡."},
+      {"id":"demo-oct-03","title":"Satellite","artist":"SAMPLE 03","released":"2026-10-08","tier":"A","color":"#697d92","note":"가상 한줄평 · 보컬과 리듬의 조합이 좋았다."},
+      {"id":"demo-oct-04","title":"한 페이지","artist":"SAMPLE 04","released":"2026-10-12","tier":"B","color":"#9a7865","note":"가상 한줄평 · 계절에 잘 어울리는 담백한 멜로디."},
+      {"id":"demo-oct-05","title":"Pink Noise","artist":"SAMPLE 05","released":"2026-10-15","tier":"B","color":"#a76f81","note":"가상 한줄평 · 소리의 질감이 기억에 남았다."},
+      {"id":"demo-oct-06","title":"Orbit","artist":"SAMPLE 06","released":"2026-10-19","tier":"C","color":"#837956","note":"가상 한줄평 · 조금 더 듣고 싶은 곡."},
+      {"id":"demo-oct-07","title":"Blue Hour","artist":"SAMPLE 07","released":"2026-10-23","tier":"D","color":"#527b82","note":"가상 한줄평 · 이번에는 내 취향과 거리가 있었다."},
+      {"id":"demo-oct-08","title":"다음 장면","artist":"SAMPLE 08","released":"2026-10-28","tier":"unranked","color":"#858178","note":"아직 듣지 않았어요."}
+    ]
+  },
+  {
+    "month":"2026-09","revision":"demo-1","demo":true,"published":true,
+    "intro":"월을 바꾸어도 방문자의 티어는 월별로 따로 보관됩니다. 이 목록도 가상 데이터입니다.",
+    "tracks":[
+      {"id":"demo-sep-01","title":"늦여름","artist":"SAMPLE 09","released":"2026-09-04","tier":"S","color":"#8b7957","note":"가상 한줄평 · 여름의 끝에서 오래 들었다."},
+      {"id":"demo-sep-02","title":"Daydream","artist":"SAMPLE 10","released":"2026-09-11","tier":"A","color":"#85718b","note":"가상 한줄평 · 여백이 마음에 든다."},
+      {"id":"demo-sep-03","title":"Still Here","artist":"SAMPLE 11","released":"2026-09-18","tier":"B","color":"#697a73","note":"가상 한줄평 · 익숙하지만 편안한 곡."},
+      {"id":"demo-sep-04","title":"Moonwalk","artist":"SAMPLE 12","released":"2026-09-25","tier":"C","color":"#66758a","note":"가상 한줄평 · 무대와 함께 보고 싶은 곡."}
+    ]
+  }
+]

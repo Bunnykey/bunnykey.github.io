@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {TIERS, emptyRows, authorRows, moveTrack, snapshot, validateState, encodeState, decodeState, safeListenUrl} from '../public/music-tiers/state.mjs';
-const catalog=JSON.parse(readFileSync(new URL('../src/data/kpop-months.json',import.meta.url)));
+const catalog=JSON.parse(readFileSync(new URL('./fixtures/kpop-demo-months.json',import.meta.url)));
 const month=catalog[0];
 test('moving and reordering preserve each song exactly once',()=>{
   const original=emptyRows(month), first=month.tracks[0].id, second=month.tracks[1].id;

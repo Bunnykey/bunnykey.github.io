@@ -1,0 +1,1209 @@
+{
+  "month": "2026-10",
+  "checkedAt": "2026-11-05",
+  "coverage": "벅스 아이돌 분류 2026년 10월 목록과 우기·민니·리사 국내 유통 앨범. 전체 발매의 완전성을 보장하지 않는 첫 수집본.",
+  "selection": "앨범 페이지의 타이틀 표시 기준. OST·방송 음악·리믹스·라이브·데모·버전 재발매 제외. 같은 아티스트·곡은 최초 확인된 음원 발매일로 중복 제거. MV 선공개일은 음원 발매일로 사용하지 않음.",
+  "listSources": [
+    "https://music.bugs.co.kr/newest/album/nid?page=1",
+    "https://music.bugs.co.kr/newest/album/nid?page=2",
+    "https://music.bugs.co.kr/newest/album/nid?page=3"
+  ],
+  "exceptions": [
+    {
+      "track": "IVE — Looks Can Kill",
+      "released": "2026-10-19",
+      "sources": [
+        "https://www.melon.com/song/detail.htm?songId=603448999",
+        "https://en.yna.co.kr/view/AEN20261019001900315"
+      ],
+      "reason": "EP 발매 10월 26일과 선공개 음원 발매 10월 19일 구분"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "bugs-6510196",
+      "title": "Never Again",
+      "artist": "레오(LEO)",
+      "released": "2026-10-01",
+      "album": "Never Again",
+      "trackSource": "https://music.bugs.co.kr/track/6510196",
+      "albumSource": "https://music.bugs.co.kr/album/4155911",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155911.jpg"
+    },
+    {
+      "id": "bugs-34083396",
+      "title": "Only thing",
+      "artist": "지성 (JISUNG)",
+      "released": "2026-10-01",
+      "album": "ONLY THING",
+      "trackSource": "https://music.bugs.co.kr/track/34083396",
+      "albumSource": "https://music.bugs.co.kr/album/20844156",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208441/20844156.jpg"
+    },
+    {
+      "id": "bugs-34083251",
+      "title": "우리는 사랑하고 있어",
+      "artist": "태유",
+      "released": "2026-10-01",
+      "album": "우리는 사랑하고 있어",
+      "trackSource": "https://music.bugs.co.kr/track/34083251",
+      "albumSource": "https://music.bugs.co.kr/album/20844123",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208441/20844123.jpg"
+    },
+    {
+      "id": "bugs-6509926",
+      "title": "WHERE",
+      "artist": "JAYN (제인)",
+      "released": "2026-10-01",
+      "album": "JAYN",
+      "trackSource": "https://music.bugs.co.kr/track/6509926",
+      "albumSource": "https://music.bugs.co.kr/album/4155844",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155844.jpg"
+    },
+    {
+      "id": "bugs-6510197",
+      "title": "Pandora",
+      "artist": "TESSAR(테사르)",
+      "released": "2026-10-01",
+      "album": "Pandora",
+      "trackSource": "https://music.bugs.co.kr/track/6510197",
+      "albumSource": "https://music.bugs.co.kr/album/4155912",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155912.jpg"
+    },
+    {
+      "id": "bugs-6510019",
+      "title": "다섯시간의 조각들",
+      "artist": "TIOT(티아이오티)",
+      "released": "2026-10-01",
+      "album": "Time for us",
+      "trackSource": "https://music.bugs.co.kr/track/6510019",
+      "albumSource": "https://music.bugs.co.kr/album/4155865",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155865.jpg"
+    },
+    {
+      "id": "bugs-134062696",
+      "title": "Welcome to Heaven",
+      "artist": "tripleS (트리플에스)",
+      "released": "2026-10-01",
+      "album": "Welcome to Heaven",
+      "trackSource": "https://music.bugs.co.kr/track/134062696",
+      "albumSource": "https://music.bugs.co.kr/album/40976636",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/409766/40976636.jpg"
+    },
+    {
+      "id": "bugs-34083018",
+      "title": "너란 섬",
+      "artist": "FTISLAND (FT아일랜드)",
+      "released": "2026-10-02",
+      "album": "너란 섬",
+      "trackSource": "https://music.bugs.co.kr/track/34083018",
+      "albumSource": "https://music.bugs.co.kr/album/20844085",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208440/20844085.jpg"
+    },
+    {
+      "id": "bugs-6510329",
+      "title": "A4M",
+      "artist": "WAYF BOYS",
+      "released": "2026-10-02",
+      "album": "A4M",
+      "trackSource": "https://music.bugs.co.kr/track/6510329",
+      "albumSource": "https://music.bugs.co.kr/album/4155967",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155967.jpg"
+    },
+    {
+      "id": "bugs-6510331",
+      "title": "보기 드문 여자 (Feat. NOWIMYOUNG (나우아임영))",
+      "artist": "YENA (최예나)",
+      "released": "2026-10-02",
+      "album": "보기 드문 여자 (Feat. NOWIMYOUNG (나우아임영))",
+      "trackSource": "https://music.bugs.co.kr/track/6510331",
+      "albumSource": "https://music.bugs.co.kr/album/4155969",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155969.jpg"
+    },
+    {
+      "id": "bugs-6510207",
+      "title": "Bon Voyage",
+      "artist": "효린",
+      "released": "2026-10-03",
+      "album": "ONE SONG, ONE PEACE",
+      "trackSource": "https://music.bugs.co.kr/track/6510207",
+      "albumSource": "https://music.bugs.co.kr/album/4155917",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155917.jpg"
+    },
+    {
+      "id": "bugs-6510330",
+      "title": "Kill the Vibe!",
+      "artist": "NIKA (니카)",
+      "released": "2026-10-03",
+      "album": "Kill the Vibe!",
+      "trackSource": "https://music.bugs.co.kr/track/6510330",
+      "albumSource": "https://music.bugs.co.kr/album/4155968",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155968.jpg"
+    },
+    {
+      "id": "bugs-34083948",
+      "title": "Rhythm Check (같이 걸어가기)",
+      "artist": "xikers(싸이커스)",
+      "released": "2026-10-03",
+      "album": "Rhythm Check (같이 걸어가기)",
+      "trackSource": "https://music.bugs.co.kr/track/34083948",
+      "albumSource": "https://music.bugs.co.kr/album/20844282",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208442/20844282.jpg"
+    },
+    {
+      "id": "bugs-6510338",
+      "title": "너를 보내고 나서야",
+      "artist": "비비안(BBAHN)",
+      "released": "2026-10-04",
+      "album": "너를 보내고 나서야",
+      "trackSource": "https://music.bugs.co.kr/track/6510338",
+      "albumSource": "https://music.bugs.co.kr/album/4155974",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155974.jpg"
+    },
+    {
+      "id": "bugs-6510192",
+      "title": "잘 지내자, 우리",
+      "artist": "수호 (SUHO)",
+      "released": "2026-10-04",
+      "album": "잘 지내자, 우리",
+      "trackSource": "https://music.bugs.co.kr/track/6510192",
+      "albumSource": "https://music.bugs.co.kr/album/4155909",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155909.jpg"
+    },
+    {
+      "id": "bugs-34085446",
+      "title": "noite queima",
+      "artist": "이진혁",
+      "released": "2026-10-04",
+      "album": "D - MALÍCIA",
+      "trackSource": "https://music.bugs.co.kr/track/34085446",
+      "albumSource": "https://music.bugs.co.kr/album/20844586",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208445/20844586.jpg"
+    },
+    {
+      "id": "bugs-6510406",
+      "title": "ICONIC HEART (Korean Ver.)",
+      "artist": "Hearts2Hearts (하츠투하츠)",
+      "released": "2026-10-05",
+      "album": "ICONIC HEART (Korean Ver.)",
+      "trackSource": "https://music.bugs.co.kr/track/6510406",
+      "albumSource": "https://music.bugs.co.kr/album/4156006",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156006.jpg"
+    },
+    {
+      "id": "bugs-6510461",
+      "title": "Pedazos",
+      "artist": "예성 (YESUNG)",
+      "released": "2026-10-06",
+      "album": "Where We Are - The 2nd Album",
+      "trackSource": "https://music.bugs.co.kr/track/6510461",
+      "albumSource": "https://music.bugs.co.kr/album/4155704",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155704.jpg"
+    },
+    {
+      "id": "bugs-6509512",
+      "title": "미완성",
+      "artist": "KickFlip(킥플립)",
+      "released": "2026-10-06",
+      "album": "KICK OFF THE WALL Pt. 1",
+      "trackSource": "https://music.bugs.co.kr/track/6509512",
+      "albumSource": "https://music.bugs.co.kr/album/4155723",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155723.jpg"
+    },
+    {
+      "id": "bugs-6510506",
+      "title": "Kick Off The Wall (Feat. iann dior)",
+      "artist": "KickFlip(킥플립)",
+      "released": "2026-10-06",
+      "album": "KICK OFF THE WALL Pt. 1",
+      "trackSource": "https://music.bugs.co.kr/track/6510506",
+      "albumSource": "https://music.bugs.co.kr/album/4155723",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155723.jpg"
+    },
+    {
+      "id": "bugs-6510476",
+      "title": "ZZIRIT (Feat. Luísa Sonza)",
+      "artist": "X:IN",
+      "released": "2026-10-06",
+      "album": "Chain Reaction",
+      "trackSource": "https://music.bugs.co.kr/track/6510476",
+      "albumSource": "https://music.bugs.co.kr/album/4156036",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156036.jpg"
+    },
+    {
+      "id": "bugs-6510513",
+      "title": "사랑이라 부를지도 모를 거야",
+      "artist": "김재환",
+      "released": "2026-10-07",
+      "album": "Love, From Here",
+      "trackSource": "https://music.bugs.co.kr/track/6510513",
+      "albumSource": "https://music.bugs.co.kr/album/4156046",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156046.jpg"
+    },
+    {
+      "id": "bugs-6510858",
+      "title": "GO해",
+      "artist": "영파씨 (YOUNG POSSE)",
+      "released": "2026-10-07",
+      "album": "GO해",
+      "trackSource": "https://music.bugs.co.kr/track/6510858",
+      "albumSource": "https://music.bugs.co.kr/album/4156187",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156187.jpg"
+    },
+    {
+      "id": "bugs-6510759",
+      "title": "I Guarantee",
+      "artist": "하윤",
+      "released": "2026-10-07",
+      "album": "I Guarantee",
+      "trackSource": "https://music.bugs.co.kr/track/6510759",
+      "albumSource": "https://music.bugs.co.kr/album/4156158",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156158.jpg"
+    },
+    {
+      "id": "bugs-6511126",
+      "title": "OUR",
+      "artist": "황민현",
+      "released": "2026-10-07",
+      "album": "OUR",
+      "trackSource": "https://music.bugs.co.kr/track/6511126",
+      "albumSource": "https://music.bugs.co.kr/album/4156260",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156260.jpg"
+    },
+    {
+      "id": "bugs-34091189",
+      "title": "Weirdo",
+      "artist": "Hypeverse",
+      "released": "2026-10-07",
+      "album": "Weirdo",
+      "trackSource": "https://music.bugs.co.kr/track/34091189",
+      "albumSource": "https://music.bugs.co.kr/album/20845805",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208458/20845805.jpg"
+    },
+    {
+      "id": "bugs-34087571",
+      "title": "KO1KEYZ (Korean ver.)",
+      "artist": "KO1KEYZ",
+      "released": "2026-10-07",
+      "album": "KO1KEYZ (KR)",
+      "trackSource": "https://music.bugs.co.kr/track/34087571",
+      "albumSource": "https://music.bugs.co.kr/album/20844976",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208449/20844976.jpg"
+    },
+    {
+      "id": "bugs-34081893",
+      "title": "눈이 부시게",
+      "artist": "비하트(B.HEART)",
+      "released": "2026-10-08",
+      "album": "좋아하나 봐",
+      "trackSource": "https://music.bugs.co.kr/track/34081893",
+      "albumSource": "https://music.bugs.co.kr/album/20843791",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208437/20843791.jpg"
+    },
+    {
+      "id": "bugs-34081892",
+      "title": "좋아하나 봐",
+      "artist": "비하트(B.HEART)",
+      "released": "2026-10-08",
+      "album": "좋아하나 봐",
+      "trackSource": "https://music.bugs.co.kr/track/34081892",
+      "albumSource": "https://music.bugs.co.kr/album/20843791",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208437/20843791.jpg"
+    },
+    {
+      "id": "bugs-6511193",
+      "title": "잔불 (Still)",
+      "artist": "엔플라잉(N.Flying)",
+      "released": "2026-10-08",
+      "album": "Still",
+      "trackSource": "https://music.bugs.co.kr/track/6511193",
+      "albumSource": "https://music.bugs.co.kr/album/4156282",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156282.jpg"
+    },
+    {
+      "id": "bugs-6511173",
+      "title": "Stay",
+      "artist": "우기 (YUQI)",
+      "released": "2026-10-08",
+      "album": "二十七 (27)",
+      "trackSource": "https://music.bugs.co.kr/track/6511173",
+      "albumSource": "https://music.bugs.co.kr/album/4155841",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155841.jpg"
+    },
+    {
+      "id": "bugs-6510882",
+      "title": "동화",
+      "artist": "크나큰(KNK)",
+      "released": "2026-10-08",
+      "album": "동화",
+      "trackSource": "https://music.bugs.co.kr/track/6510882",
+      "albumSource": "https://music.bugs.co.kr/album/4156196",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156196.jpg"
+    },
+    {
+      "id": "bugs-6511033",
+      "title": "너와 참 행복했는데",
+      "artist": "여은",
+      "released": "2026-10-09",
+      "album": "너와 참 행복했는데",
+      "trackSource": "https://music.bugs.co.kr/track/6511033",
+      "albumSource": "https://music.bugs.co.kr/album/4156214",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156214.jpg"
+    },
+    {
+      "id": "bugs-34089962",
+      "title": "I Can't Give Up",
+      "artist": "EPISODE (에피소드)",
+      "released": "2026-10-09",
+      "album": "I Can't Give Up",
+      "trackSource": "https://music.bugs.co.kr/track/34089962",
+      "albumSource": "https://music.bugs.co.kr/album/20845548",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208455/20845548.jpg"
+    },
+    {
+      "id": "bugs-6511447",
+      "title": "BOYFRIEND",
+      "artist": "호시",
+      "released": "2026-10-10",
+      "album": "BOYFRIEND",
+      "trackSource": "https://music.bugs.co.kr/track/6511447",
+      "albumSource": "https://music.bugs.co.kr/album/4156319",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156319.jpg"
+    },
+    {
+      "id": "bugs-6511071",
+      "title": "사랑한 만큼",
+      "artist": "종호(ATEEZ)",
+      "released": "2026-10-11",
+      "album": "사랑한 만큼",
+      "trackSource": "https://music.bugs.co.kr/track/6511071",
+      "albumSource": "https://music.bugs.co.kr/album/4156234",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156234.jpg"
+    },
+    {
+      "id": "bugs-6511123",
+      "title": "Love Again",
+      "artist": "POW (파우)",
+      "released": "2026-10-11",
+      "album": "Love Again",
+      "trackSource": "https://music.bugs.co.kr/track/6511123",
+      "albumSource": "https://music.bugs.co.kr/album/4156258",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156258.jpg"
+    },
+    {
+      "id": "bugs-34090926",
+      "title": "Good Bye",
+      "artist": "김철민",
+      "released": "2026-10-12",
+      "album": "Good Bye",
+      "trackSource": "https://music.bugs.co.kr/track/34090926",
+      "albumSource": "https://music.bugs.co.kr/album/20845740",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208457/20845740.jpg"
+    },
+    {
+      "id": "bugs-6511285",
+      "title": "UNDEAD",
+      "artist": "성한빈",
+      "released": "2026-10-12",
+      "album": "DEAD:ALIVE",
+      "trackSource": "https://music.bugs.co.kr/track/6511285",
+      "albumSource": "https://music.bugs.co.kr/album/4156305",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156305.jpg"
+    },
+    {
+      "id": "bugs-6511637",
+      "title": "GO HARD",
+      "artist": "MEOVV (미야오)",
+      "released": "2026-10-12",
+      "album": "GO HARD",
+      "trackSource": "https://music.bugs.co.kr/track/6511637",
+      "albumSource": "https://music.bugs.co.kr/album/4156410",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156410.jpg"
+    },
+    {
+      "id": "bugs-34092722",
+      "title": "타! (CAN YOU HEAR THAT)",
+      "artist": "MODYSSEY (모디세이)",
+      "released": "2026-10-12",
+      "album": "2.Multitude: How We Bloom",
+      "trackSource": "https://music.bugs.co.kr/track/34092722",
+      "albumSource": "https://music.bugs.co.kr/album/20846103",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208461/20846103.jpg"
+    },
+    {
+      "id": "bugs-6509528",
+      "title": "I SPY",
+      "artist": "NCT WISH",
+      "released": "2026-10-12",
+      "album": "I SPY - The 4th Mini Album",
+      "trackSource": "https://music.bugs.co.kr/track/6509528",
+      "albumSource": "https://music.bugs.co.kr/album/4155735",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155735.jpg"
+    },
+    {
+      "id": "bugs-6511624",
+      "title": "Star Trace",
+      "artist": "PLAVE",
+      "released": "2026-10-12",
+      "album": "HYPERDRIVE",
+      "trackSource": "https://music.bugs.co.kr/track/6511624",
+      "albumSource": "https://music.bugs.co.kr/album/4156402",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156402.jpg"
+    },
+    {
+      "id": "bugs-6511277",
+      "title": "Obsessed with Youth",
+      "artist": "Xdinary Heroes",
+      "released": "2026-10-12",
+      "album": "IMPULSE",
+      "trackSource": "https://music.bugs.co.kr/track/6511277",
+      "albumSource": "https://music.bugs.co.kr/album/4156304",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156304.jpg"
+    },
+    {
+      "id": "bugs-6511789",
+      "title": "STAMINA",
+      "artist": "박우진",
+      "released": "2026-10-13",
+      "album": "SOLSTICE",
+      "trackSource": "https://music.bugs.co.kr/track/6511789",
+      "albumSource": "https://music.bugs.co.kr/album/4156426",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156426.jpg"
+    },
+    {
+      "id": "bugs-6512032",
+      "title": "미안해, 사랑해서...",
+      "artist": "김예찬",
+      "released": "2026-10-14",
+      "album": "미안해, 사랑해서...",
+      "trackSource": "https://music.bugs.co.kr/track/6512032",
+      "albumSource": "https://music.bugs.co.kr/album/4156503",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156503.jpg"
+    },
+    {
+      "id": "bugs-6512037",
+      "title": "잊지못해",
+      "artist": "김지웅 (ZEROBASEONE)",
+      "released": "2026-10-14",
+      "album": "잊지못해",
+      "trackSource": "https://music.bugs.co.kr/track/6512037",
+      "albumSource": "https://music.bugs.co.kr/album/4156505",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156505.jpg"
+    },
+    {
+      "id": "bugs-6512017",
+      "title": "DEVIL",
+      "artist": "남우현",
+      "released": "2026-10-14",
+      "album": "2X8",
+      "trackSource": "https://music.bugs.co.kr/track/6512017",
+      "albumSource": "https://music.bugs.co.kr/album/4156502",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156502.jpg"
+    },
+    {
+      "id": "bugs-34088401",
+      "title": "미제",
+      "artist": "유주 (YUJU)",
+      "released": "2026-10-14",
+      "album": "file. 07",
+      "trackSource": "https://music.bugs.co.kr/track/34088401",
+      "albumSource": "https://music.bugs.co.kr/album/20845132",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208451/20845132.jpg"
+    },
+    {
+      "id": "bugs-34092846",
+      "title": "BUNZI",
+      "artist": "이한결",
+      "released": "2026-10-14",
+      "album": "NOISE",
+      "trackSource": "https://music.bugs.co.kr/track/34092846",
+      "albumSource": "https://music.bugs.co.kr/album/20846117",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208461/20846117.jpg"
+    },
+    {
+      "id": "bugs-6512054",
+      "title": "WHICH WAY",
+      "artist": "DAILY:DIRECTION",
+      "released": "2026-10-14",
+      "album": "WHICH WAY",
+      "trackSource": "https://music.bugs.co.kr/track/6512054",
+      "albumSource": "https://music.bugs.co.kr/album/4156514",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156514.jpg"
+    },
+    {
+      "id": "bugs-6511054",
+      "title": "너의 계절이 찾아와 (Bloom)",
+      "artist": "FLARE U (플레어 유)",
+      "released": "2026-10-14",
+      "album": "LOVEHOOD",
+      "trackSource": "https://music.bugs.co.kr/track/6511054",
+      "albumSource": "https://music.bugs.co.kr/album/4156224",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156224.jpg"
+    },
+    {
+      "id": "bugs-6511956",
+      "title": "OVERSHOOT",
+      "artist": "muuo:23",
+      "released": "2026-10-14",
+      "album": "NEVERTHELESS",
+      "trackSource": "https://music.bugs.co.kr/track/6511956",
+      "albumSource": "https://music.bugs.co.kr/album/4156483",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156483.jpg"
+    },
+    {
+      "id": "bugs-6511975",
+      "title": "Lover′s Night",
+      "artist": "NIKA (니카)",
+      "released": "2026-10-14",
+      "album": "Osaka - Seoul - Kiel",
+      "trackSource": "https://music.bugs.co.kr/track/6511975",
+      "albumSource": "https://music.bugs.co.kr/album/4156486",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156486.jpg"
+    },
+    {
+      "id": "bugs-6511952",
+      "title": "Wonderful Ending",
+      "artist": "이진솔",
+      "released": "2026-10-15",
+      "album": "Wonderful Ending",
+      "trackSource": "https://music.bugs.co.kr/track/6511952",
+      "albumSource": "https://music.bugs.co.kr/album/4156481",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156481.jpg"
+    },
+    {
+      "id": "bugs-6512180",
+      "title": "DON'T STOP",
+      "artist": "틴 탑(Teen Top)",
+      "released": "2026-10-15",
+      "album": "DON'T STOP",
+      "trackSource": "https://music.bugs.co.kr/track/6512180",
+      "albumSource": "https://music.bugs.co.kr/album/4156564",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156564.jpg"
+    },
+    {
+      "id": "bugs-6511953",
+      "title": "이상기류",
+      "artist": "희재(SEVENUS)",
+      "released": "2026-10-15",
+      "album": "Beyond the Wind",
+      "trackSource": "https://music.bugs.co.kr/track/6511953",
+      "albumSource": "https://music.bugs.co.kr/album/4156482",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156482.jpg"
+    },
+    {
+      "id": "bugs-6512167",
+      "title": "오색 낙원",
+      "artist": "MY:RAKL (미라클)",
+      "released": "2026-10-15",
+      "album": "오색 낙원",
+      "trackSource": "https://music.bugs.co.kr/track/6512167",
+      "albumSource": "https://music.bugs.co.kr/album/4156558",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156558.jpg"
+    },
+    {
+      "id": "bugs-34096546",
+      "title": "상어",
+      "artist": "문석 (Moonsek)",
+      "released": "2026-10-16",
+      "album": "상어",
+      "trackSource": "https://music.bugs.co.kr/track/34096546",
+      "albumSource": "https://music.bugs.co.kr/album/20846875",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208468/20846875.jpg"
+    },
+    {
+      "id": "bugs-6512360",
+      "title": "Next Chapter",
+      "artist": "Hearts2Hearts (하츠투하츠)",
+      "released": "2026-10-16",
+      "album": "Next Chapter",
+      "trackSource": "https://music.bugs.co.kr/track/6512360",
+      "albumSource": "https://music.bugs.co.kr/album/4156633",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41566/4156633.jpg"
+    },
+    {
+      "id": "bugs-6512367",
+      "title": "Andless",
+      "artist": "tripleS (트리플에스)",
+      "released": "2026-10-16",
+      "album": "<LOVE&POP> pt.2",
+      "trackSource": "https://music.bugs.co.kr/track/6512367",
+      "albumSource": "https://music.bugs.co.kr/album/4156636",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41566/4156636.jpg"
+    },
+    {
+      "id": "bugs-6512162",
+      "title": "새벽의 문턱",
+      "artist": "제인",
+      "released": "2026-10-17",
+      "album": "새벽의 문턱",
+      "trackSource": "https://music.bugs.co.kr/track/6512162",
+      "albumSource": "https://music.bugs.co.kr/album/4156554",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41565/4156554.jpg"
+    },
+    {
+      "id": "bugs-6512377",
+      "title": "2016",
+      "artist": "한혜리",
+      "released": "2026-10-17",
+      "album": "2016",
+      "trackSource": "https://music.bugs.co.kr/track/6512377",
+      "albumSource": "https://music.bugs.co.kr/album/4156641",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41566/4156641.jpg"
+    },
+    {
+      "id": "bugs-34096840",
+      "title": "우리가 헤어지지 않았더라면 (Feat. 수아)",
+      "artist": "김태헌",
+      "released": "2026-10-18",
+      "album": "우리가 헤어지지 않았더라면",
+      "trackSource": "https://music.bugs.co.kr/track/34096840",
+      "albumSource": "https://music.bugs.co.kr/album/20846927",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208469/20846927.jpg"
+    },
+    {
+      "id": "bugs-6512427",
+      "title": "초코",
+      "artist": "이동열",
+      "released": "2026-10-18",
+      "album": "초코",
+      "trackSource": "https://music.bugs.co.kr/track/6512427",
+      "albumSource": "https://music.bugs.co.kr/album/4156652",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41566/4156652.jpg"
+    },
+    {
+      "id": "bugs-6512559",
+      "title": "Us (Korean Ver.)",
+      "artist": "신수현",
+      "released": "2026-10-19",
+      "album": "Us (Korean Ver.)",
+      "trackSource": "https://music.bugs.co.kr/track/6512559",
+      "albumSource": "https://music.bugs.co.kr/album/4156713",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41567/4156713.jpg"
+    },
+    {
+      "id": "bugs-6512754",
+      "title": "12 o'clock",
+      "artist": "정한X조슈아 (SEVENTEEN)",
+      "released": "2026-10-19",
+      "album": "DREAMSCAPE",
+      "trackSource": "https://music.bugs.co.kr/track/6512754",
+      "albumSource": "https://music.bugs.co.kr/album/4156801",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156801.jpg"
+    },
+    {
+      "id": "bugs-6512720",
+      "title": "All Of My Life",
+      "artist": "최강창민 (MAX CHANGMIN)",
+      "released": "2026-10-19",
+      "album": "All Of My Life - The 3rd Mini Album",
+      "trackSource": "https://music.bugs.co.kr/track/6512720",
+      "albumSource": "https://music.bugs.co.kr/album/4156788",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41567/4156788.jpg"
+    },
+    {
+      "id": "bugs-6512614",
+      "title": "LOOK AT MA",
+      "artist": "EVNNE(이븐)",
+      "released": "2026-10-19",
+      "album": "on: our noise",
+      "trackSource": "https://music.bugs.co.kr/track/6512614",
+      "albumSource": "https://music.bugs.co.kr/album/4156738",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41567/4156738.jpg"
+    },
+    {
+      "id": "bugs-6512717",
+      "title": "Looks Can Kill",
+      "artist": "IVE (아이브)",
+      "released": "2026-10-19",
+      "album": "Looks Can Kill",
+      "trackSource": "https://music.bugs.co.kr/track/6512717",
+      "albumSource": "https://music.bugs.co.kr/album/4156785",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41567/4156785.jpg"
+    },
+    {
+      "id": "bugs-6512491",
+      "title": "긴 소원 (Birthday Wish)",
+      "artist": "NMIXX",
+      "released": "2026-10-19",
+      "album": "Strange Muse",
+      "trackSource": "https://music.bugs.co.kr/track/6512491",
+      "albumSource": "https://music.bugs.co.kr/album/4156690",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41566/4156690.jpg"
+    },
+    {
+      "id": "bugs-34098356",
+      "title": "Ending Credit",
+      "artist": "V01D(보이드)",
+      "released": "2026-10-19",
+      "album": "YOUTHQUAKE",
+      "trackSource": "https://music.bugs.co.kr/track/34098356",
+      "albumSource": "https://music.bugs.co.kr/album/20847222",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208472/20847222.jpg"
+    },
+    {
+      "id": "bugs-34098357",
+      "title": "My Youth",
+      "artist": "V01D(보이드)",
+      "released": "2026-10-19",
+      "album": "YOUTHQUAKE",
+      "trackSource": "https://music.bugs.co.kr/track/34098357",
+      "albumSource": "https://music.bugs.co.kr/album/20847222",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208472/20847222.jpg"
+    },
+    {
+      "id": "bugs-6512805",
+      "title": "CHOP!",
+      "artist": "비더후드(B THE HOOD)",
+      "released": "2026-10-20",
+      "album": "THE REAL DEAL",
+      "trackSource": "https://music.bugs.co.kr/track/6512805",
+      "albumSource": "https://music.bugs.co.kr/album/4156816",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156816.jpg"
+    },
+    {
+      "id": "bugs-6512750",
+      "title": "착각",
+      "artist": "온유 (ONEW)",
+      "released": "2026-10-20",
+      "album": "착각",
+      "trackSource": "https://music.bugs.co.kr/track/6512750",
+      "albumSource": "https://music.bugs.co.kr/album/4156019",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156019.jpg"
+    },
+    {
+      "id": "bugs-6512873",
+      "title": "PARANOIA",
+      "artist": "Catch The Young(캐치더영)",
+      "released": "2026-10-20",
+      "album": "PARANOIA",
+      "trackSource": "https://music.bugs.co.kr/track/6512873",
+      "albumSource": "https://music.bugs.co.kr/album/4156840",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156840.jpg"
+    },
+    {
+      "id": "bugs-6512848",
+      "title": "APPLE",
+      "artist": "UX1 (유엑스원)",
+      "released": "2026-10-20",
+      "album": "UX1 1st Mini Album",
+      "trackSource": "https://music.bugs.co.kr/track/6512848",
+      "albumSource": "https://music.bugs.co.kr/album/4156833",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156833.jpg"
+    },
+    {
+      "id": "bugs-6512871",
+      "title": "Come into my world!",
+      "artist": "WOODZ",
+      "released": "2026-10-20",
+      "album": "Come into my world!",
+      "trackSource": "https://music.bugs.co.kr/track/6512871",
+      "albumSource": "https://music.bugs.co.kr/album/4156839",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156839.jpg"
+    },
+    {
+      "id": "bugs-34102704",
+      "title": "BANANA",
+      "artist": "ZELO(젤로)",
+      "released": "2026-10-20",
+      "album": "BANANA",
+      "trackSource": "https://music.bugs.co.kr/track/34102704",
+      "albumSource": "https://music.bugs.co.kr/album/20848291",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208482/20848291.jpg"
+    },
+    {
+      "id": "bugs-6512561",
+      "title": "Blue",
+      "artist": "강다니엘(KANG DANIEL)",
+      "released": "2026-10-21",
+      "album": "Blue",
+      "trackSource": "https://music.bugs.co.kr/track/6512561",
+      "albumSource": "https://music.bugs.co.kr/album/4156715",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41567/4156715.jpg"
+    },
+    {
+      "id": "bugs-34101736",
+      "title": "처음 그 자리에",
+      "artist": "송하영 (프로미스나인)",
+      "released": "2026-10-21",
+      "album": "처음 그 자리에",
+      "trackSource": "https://music.bugs.co.kr/track/34101736",
+      "albumSource": "https://music.bugs.co.kr/album/20848012",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208480/20848012.jpg"
+    },
+    {
+      "id": "bugs-34098710",
+      "title": "나를 숨쉬게 만드는 너",
+      "artist": "여은",
+      "released": "2026-10-21",
+      "album": "나를 숨쉬게 만드는 너",
+      "trackSource": "https://music.bugs.co.kr/track/34098710",
+      "albumSource": "https://music.bugs.co.kr/album/20847292",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208472/20847292.jpg"
+    },
+    {
+      "id": "bugs-6512880",
+      "title": "꿈의 정원",
+      "artist": "이은상",
+      "released": "2026-10-21",
+      "album": "꿈의 정원",
+      "trackSource": "https://music.bugs.co.kr/track/6512880",
+      "albumSource": "https://music.bugs.co.kr/album/4156842",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41568/4156842.jpg"
+    },
+    {
+      "id": "bugs-34103456",
+      "title": "B.B.B",
+      "artist": "YUHZ(유어즈)",
+      "released": "2026-10-21",
+      "album": "B",
+      "trackSource": "https://music.bugs.co.kr/track/34103456",
+      "albumSource": "https://music.bugs.co.kr/album/20848467",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208484/20848467.jpg"
+    },
+    {
+      "id": "bugs-34100772",
+      "title": "Love and Hate",
+      "artist": "제현(JEHYUN)",
+      "released": "2026-10-22",
+      "album": "ironic",
+      "trackSource": "https://music.bugs.co.kr/track/34100772",
+      "albumSource": "https://music.bugs.co.kr/album/20847801",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208478/20847801.jpg"
+    },
+    {
+      "id": "bugs-34102117",
+      "title": "Little light",
+      "artist": "지안",
+      "released": "2026-10-22",
+      "album": "Little light",
+      "trackSource": "https://music.bugs.co.kr/track/34102117",
+      "albumSource": "https://music.bugs.co.kr/album/20848136",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208481/20848136.jpg"
+    },
+    {
+      "id": "bugs-6513353",
+      "title": "Golden Pages",
+      "artist": "노민재",
+      "released": "2026-10-23",
+      "album": "Golden Pages",
+      "trackSource": "https://music.bugs.co.kr/track/6513353",
+      "albumSource": "https://music.bugs.co.kr/album/4156992",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41569/4156992.jpg"
+    },
+    {
+      "id": "bugs-6513332",
+      "title": "Tarantino",
+      "artist": "리사(LISA)",
+      "released": "2026-10-23",
+      "album": "PRESS PLAY",
+      "trackSource": "https://music.bugs.co.kr/track/6513332",
+      "albumSource": "https://music.bugs.co.kr/album/4156982",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41569/4156982.jpg"
+    },
+    {
+      "id": "bugs-6513418",
+      "title": "to the moon :)",
+      "artist": "민니 (MINNIE)",
+      "released": "2026-10-23",
+      "album": "i love you to the moon and back",
+      "trackSource": "https://music.bugs.co.kr/track/6513418",
+      "albumSource": "https://music.bugs.co.kr/album/4157005",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41570/4157005.jpg"
+    },
+    {
+      "id": "bugs-34103907",
+      "title": "Tempo",
+      "artist": "아리사 (ARISA)",
+      "released": "2026-10-23",
+      "album": "Tempo",
+      "trackSource": "https://music.bugs.co.kr/track/34103907",
+      "albumSource": "https://music.bugs.co.kr/album/20848578",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208485/20848578.jpg"
+    },
+    {
+      "id": "bugs-6513459",
+      "title": "What유like",
+      "artist": "우진영",
+      "released": "2026-10-23",
+      "album": "What유like",
+      "trackSource": "https://music.bugs.co.kr/track/6513459",
+      "albumSource": "https://music.bugs.co.kr/album/4157021",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41570/4157021.jpg"
+    },
+    {
+      "id": "bugs-134204020",
+      "title": "Drip",
+      "artist": "ATEEZ(에이티즈)",
+      "released": "2026-10-23",
+      "album": "Drip",
+      "trackSource": "https://music.bugs.co.kr/track/134204020",
+      "albumSource": "https://music.bugs.co.kr/album/41026868",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/410268/41026868.jpg"
+    },
+    {
+      "id": "bugs-6513571",
+      "title": "DESERVE",
+      "artist": "BABYMONSTER",
+      "released": "2026-10-23",
+      "album": "DESERVE",
+      "trackSource": "https://music.bugs.co.kr/track/6513571",
+      "albumSource": "https://music.bugs.co.kr/album/4157043",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41570/4157043.jpg"
+    },
+    {
+      "id": "bugs-6513740",
+      "title": "Hey, Somebody",
+      "artist": "샤오쥔 (XIAOJUN)",
+      "released": "2026-10-26",
+      "album": "Hey, Somebody - The 1st Mini Album",
+      "trackSource": "https://music.bugs.co.kr/track/6513740",
+      "albumSource": "https://music.bugs.co.kr/album/4157119",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157119.jpg"
+    },
+    {
+      "id": "bugs-6513869",
+      "title": "체포하겠어",
+      "artist": "아일릿(ILLIT)",
+      "released": "2026-10-26",
+      "album": "BREAK EVEN",
+      "trackSource": "https://music.bugs.co.kr/track/6513869",
+      "albumSource": "https://music.bugs.co.kr/album/4157189",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157189.jpg"
+    },
+    {
+      "id": "bugs-6513863",
+      "title": "Blue Sky",
+      "artist": "은혁 (EUNHYUK)",
+      "released": "2026-10-26",
+      "album": "Blue Sky",
+      "trackSource": "https://music.bugs.co.kr/track/6513863",
+      "albumSource": "https://music.bugs.co.kr/album/4157185",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157185.jpg"
+    },
+    {
+      "id": "bugs-6513728",
+      "title": "Insomnia",
+      "artist": "RIIZE",
+      "released": "2026-10-26",
+      "album": "Insomnia",
+      "trackSource": "https://music.bugs.co.kr/track/6513728",
+      "albumSource": "https://music.bugs.co.kr/album/4157112",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157112.jpg"
+    },
+    {
+      "id": "bugs-6513822",
+      "title": "Lucky Charm",
+      "artist": "WE GO-6",
+      "released": "2026-10-26",
+      "album": "Lucky Charm",
+      "trackSource": "https://music.bugs.co.kr/track/6513822",
+      "albumSource": "https://music.bugs.co.kr/album/4155552",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41555/4155552.jpg"
+    },
+    {
+      "id": "bugs-6513932",
+      "title": "French Kissing",
+      "artist": "AND2BLE (앤더블)",
+      "released": "2026-10-27",
+      "album": "Sequence 02: Attraction",
+      "trackSource": "https://music.bugs.co.kr/track/6513932",
+      "albumSource": "https://music.bugs.co.kr/album/4157224",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157224.jpg"
+    },
+    {
+      "id": "bugs-6513705",
+      "title": "CAME FOR THE GLORY",
+      "artist": "BE BOYS",
+      "released": "2026-10-27",
+      "album": "CAME FOR THE GLORY",
+      "trackSource": "https://music.bugs.co.kr/track/6513705",
+      "albumSource": "https://music.bugs.co.kr/album/4157104",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157104.jpg"
+    },
+    {
+      "id": "bugs-6513871",
+      "title": "Honeydew",
+      "artist": "JAY B",
+      "released": "2026-10-27",
+      "album": "Chptr. 1",
+      "trackSource": "https://music.bugs.co.kr/track/6513871",
+      "albumSource": "https://music.bugs.co.kr/album/4157190",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157190.jpg"
+    },
+    {
+      "id": "bugs-6513627",
+      "title": "Hysteric",
+      "artist": "Yves (이브)",
+      "released": "2026-10-27",
+      "album": "Hysteric / Adam",
+      "trackSource": "https://music.bugs.co.kr/track/6513627",
+      "albumSource": "https://music.bugs.co.kr/album/4157059",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41570/4157059.jpg"
+    },
+    {
+      "id": "bugs-6513924",
+      "title": "Day&Night",
+      "artist": "신원호",
+      "released": "2026-10-28",
+      "album": "Day&Night",
+      "trackSource": "https://music.bugs.co.kr/track/6513924",
+      "albumSource": "https://music.bugs.co.kr/album/4157220",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157220.jpg"
+    },
+    {
+      "id": "bugs-6514035",
+      "title": "Vibes (Feat. 권은비(KWON EUNBI))",
+      "artist": "임슬옹",
+      "released": "2026-10-28",
+      "album": "Vibes (Feat. 권은비(KWON EUNBI))",
+      "trackSource": "https://music.bugs.co.kr/track/6514035",
+      "albumSource": "https://music.bugs.co.kr/album/4157265",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157265.jpg"
+    },
+    {
+      "id": "bugs-6513763",
+      "title": "gun shot",
+      "artist": "필독 (feeldog)",
+      "released": "2026-10-28",
+      "album": "gun shot",
+      "trackSource": "https://music.bugs.co.kr/track/6513763",
+      "albumSource": "https://music.bugs.co.kr/album/4157130",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41571/4157130.jpg"
+    },
+    {
+      "id": "bugs-34111461",
+      "title": "난리나",
+      "artist": "JUSTB",
+      "released": "2026-10-28",
+      "album": "k-pop",
+      "trackSource": "https://music.bugs.co.kr/track/34111461",
+      "albumSource": "https://music.bugs.co.kr/album/20850198",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208501/20850198.jpg"
+    },
+    {
+      "id": "bugs-6513920",
+      "title": "투비(鬪悲)",
+      "artist": "Kei (케이)",
+      "released": "2026-10-28",
+      "album": "투비(鬪悲)",
+      "trackSource": "https://music.bugs.co.kr/track/6513920",
+      "albumSource": "https://music.bugs.co.kr/album/4157217",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157217.jpg"
+    },
+    {
+      "id": "bugs-6514078",
+      "title": "투스젬치와와",
+      "artist": "XLOV",
+      "released": "2026-10-28",
+      "album": "i=!",
+      "trackSource": "https://music.bugs.co.kr/track/6514078",
+      "albumSource": "https://music.bugs.co.kr/album/4157274",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157274.jpg"
+    },
+    {
+      "id": "bugs-6514076",
+      "title": "Hush",
+      "artist": "XLOV",
+      "released": "2026-10-28",
+      "album": "i=!",
+      "trackSource": "https://music.bugs.co.kr/track/6514076",
+      "albumSource": "https://music.bugs.co.kr/album/4157274",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157274.jpg"
+    },
+    {
+      "id": "bugs-6514090",
+      "title": "Silhouette(실루엣)",
+      "artist": "엔탑(N.TOP)",
+      "released": "2026-10-29",
+      "album": "WE:BLOOM",
+      "trackSource": "https://music.bugs.co.kr/track/6514090",
+      "albumSource": "https://music.bugs.co.kr/album/4157278",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41572/4157278.jpg"
+    },
+    {
+      "id": "bugs-34113434",
+      "title": "Sayonara (Japanese)",
+      "artist": "허영생",
+      "released": "2026-10-29",
+      "album": "HEO YOUNGSAENG Mini Album『LOOK BACK』",
+      "trackSource": "https://music.bugs.co.kr/track/34113434",
+      "albumSource": "https://music.bugs.co.kr/album/20850570",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208505/20850570.jpg"
+    },
+    {
+      "id": "bugs-34110340",
+      "title": "RASCALS (Find The Pearl)",
+      "artist": "AM8IC",
+      "released": "2026-10-29",
+      "album": "RASCALS (Find The Pearl)",
+      "trackSource": "https://music.bugs.co.kr/track/34110340",
+      "albumSource": "https://music.bugs.co.kr/album/20849961",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/208499/20849961.jpg"
+    },
+    {
+      "id": "bugs-6514168",
+      "title": "RING IT",
+      "artist": "DXMON (다이몬)",
+      "released": "2026-10-29",
+      "album": "HYPER LINK : Vol.4",
+      "trackSource": "https://music.bugs.co.kr/track/6514168",
+      "albumSource": "https://music.bugs.co.kr/album/4157314",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41573/4157314.jpg"
+    },
+    {
+      "id": "bugs-6514386",
+      "title": "TRAUMA (Feat. Takanashi Kiara)",
+      "artist": "아이리제 (IRISÉ)",
+      "released": "2026-10-30",
+      "album": "TRAUMA (Feat. Takanashi Kiara)",
+      "trackSource": "https://music.bugs.co.kr/track/6514386",
+      "albumSource": "https://music.bugs.co.kr/album/4157387",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41573/4157387.jpg"
+    },
+    {
+      "id": "bugs-6514426",
+      "title": "ADDICTED",
+      "artist": "지수(JISOO)",
+      "released": "2026-10-30",
+      "album": "ADDICTED",
+      "trackSource": "https://music.bugs.co.kr/track/6514426",
+      "albumSource": "https://music.bugs.co.kr/album/4157396",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/41573/4157396.jpg"
+    },
+    {
+      "id": "bugs-134379187",
+      "title": "Give Me Love",
+      "artist": "cosmosy",
+      "released": "2026-10-30",
+      "album": "Give Me Love",
+      "trackSource": "https://music.bugs.co.kr/track/134379187",
+      "albumSource": "https://music.bugs.co.kr/album/41089965",
+      "coverSource": "https://image.bugsm.co.kr/album/images/1200/410899/41089965.jpg"
+    }
+  ],
+  "excluded": [
+    {
+      "albumId": "4157381",
+      "artist": "BOYNEXTDOOR",
+      "album": "포켓몬스터 | 원더보야지",
+      "reason": "OST·방송 음악"
+    },
+    {
+      "albumId": "4156920",
+      "track": "Talk to me (Dance Break Ver.)",
+      "reason": "버전 음원 또는 곡명 미확인"
+    },
+    {
+      "albumId": "4156914",
+      "artist": "백현(BAEKHYUN) 백현(BAEKHYUN)",
+      "album": "스트릿 월드 파이터 : 디렉터스 워 (SDF) Original Vol. 6 (FINAL)",
+      "reason": "OST·방송 음악"
+    },
+    {
+      "id": "bugs-6514104",
+      "artist": "LNGSHOT",
+      "reason": "국내 음원 권리 미보유 표시: 첫 수집본에서 제외",
+      "source": "https://music.bugs.co.kr/track/6514104"
+    }
+  ]
+}

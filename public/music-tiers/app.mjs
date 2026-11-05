@@ -1,4 +1,4 @@
-import {TIERS, emptyRows, authorRows, validateState, moveTrack, snapshot, encodeState, decodeState, safeListenUrl, safeCoverPath} from './state.mjs';
+import {TIERS, emptyRows, authorRows, validateState, moveTrack, snapshot, encodeState, decodeState, safeListenUrl, safeCoverPath, validateNotes} from './state.mjs';
 const labels = {S:'S',A:'A',B:'B',C:'C',D:'D',unranked:'미평가'};
 const colors = ['#b08585','#b79e72','#a7ad7c','#7fa696','#8a97b4','#b3b3b3'];
 const clone = value => JSON.parse(JSON.stringify(value));
@@ -11,12 +11,12 @@ export function init() {
   let catalog;
   try {catalog=JSON.parse(document.getElementById('kt-catalog').textContent);} catch { $('status').textContent='곡 목록을 불러오지 못했습니다.';return; }
   if(!catalog.length){$('status').textContent='아직 공개한 월별 목록이 없습니다.';root.querySelectorAll('button,select,input').forEach(n=>n.disabled=true);return;}
-  let month=catalog[0], mode='author', mine=emptyRows(month), history=[], importedRows=null, dragged=null;
+  let month=catalog[0], mode='author', mine=emptyRows(month), history=[], importedRows=null, dragged=null, notes={};
   const board=$('board'), dialog=$('dialog');
   const tell=message=>{$('status').textContent=message;};
   const key=()=>`greenhouse:kpop:v1:${month.month}:${month.revision}`;
-  function save(){try{localStorage.setItem(key(),JSON.stringify(snapshot(month,mine)));return true;}catch{tell('자동 저장을 사용할 수 없습니다. 파일 저장으로 결과를 보관해 주세요.');return false;}}
-  function load(){mine=emptyRows(month);history=[];try{const raw=localStorage.getItem(key());if(raw)mine=validateState(JSON.parse(raw),month);}catch{tell('저장한 티어를 읽지 못했습니다. 파일을 불러오거나 새로 만들어 주세요.');}}
+  function save(){try{localStorage.setItem(key(),JSON.stringify({...snapshot(month,mine),notes}));return true;}catch{tell('자동 저장을 사용할 수 없습니다. 파일 저장으로 결과를 보관해 주세요.');return false;}}
+  function load(){mine=emptyRows(month);notes={};history=[];try{const raw=localStorage.getItem(key());if(raw){const value=JSON.parse(raw);mine=validateState(value,month);notes=validateNotes(value.notes,month);}}catch{tell('저장한 티어를 읽지 못했습니다. 파일을 불러오거나 새로 만들어 주세요.');}}
   function readHash(){
     if(!location.hash.startsWith('#tier='))return false;
     try{const value=decodeState(location.hash.slice(6));const matched=catalog.find(m=>m.month===value.month);if(!matched)throw new Error('이 링크의 월별 목록을 찾을 수 없습니다.');const rows=validateState(value,matched);month=matched;load();importedRows=clone(rows);mine=rows;mode='shared';history=[];tell('공유받은 티어를 보고 있습니다. 내 티어로 가져오면 기존 내 티어가 교체됩니다.');return true;}catch(error){tell(error.message||'공유 링크를 읽지 못했습니다.');return false;}
@@ -49,14 +49,18 @@ export function init() {
     const rows=activeRows(), ranked=month.tracks.length-rows.unranked.length;
     $('count').textContent=`${ranked} / ${month.tracks.length}곡 평가`;
     root.querySelectorAll('[data-mode]').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.mode===mode));b.textContent=b.dataset.mode==='mine' && mode==='shared'?'내 티어로 가져오기':b.dataset.mode==='mine'?'내 티어 만들기':'블로그 티어';});
-    $('actions').hidden=mode!=='mine';$('undo').disabled=!history.length;
+    $('actions').hidden=mode!=='mine';if($('author-export'))$('author-export').hidden=mode!=='mine';$('undo').disabled=!history.length;
     $('hint').textContent=mode==='mine'?'곡을 눌러 티어를 선택하세요. PC에서는 끌어 놓기로 순서도 바꿀 수 있어요.':'곡을 누르면 블로그의 한줄평을 볼 수 있어요.';
+    const query=($('filter')?.value||'').trim().toLocaleLowerCase();
+    const matches=track=>!query||`${track.title} ${track.artist} ${track.album||''}`.toLocaleLowerCase().includes(query);
     board.replaceChildren();
     for(const [index,tier] of TIERS.entries()){
+      if(mode==='author'&&!ranked&&tier!=='unranked')continue;
+      const visible=rows[tier].filter(id=>matches(month.tracks.find(t=>t.id===id)));
       const row=el('section',undefined,'kt-row');row.dataset.tier=tier;row.setAttribute('aria-label',`${labels[tier]} 티어`);
       const rank=el('div',labels[tier],'kt-rank');rank.style.setProperty('--rank-color',colors[index]);if(tier!=='unranked')rank.append(el('small',`${rows[tier].length}곡`));row.append(rank);
       const cards=el('div',undefined,'kt-cards');
-      for(const id of rows[tier]){
+      for(const id of visible){
         const track=month.tracks.find(t=>t.id===id),card=el('button',undefined,'kt-card');card.type='button';card.dataset.song=id;card.draggable=mode==='mine';card.setAttribute('aria-label',`${track.artist}, ${track.title}, ${labels[tier]} 티어. 상세 보기${mode==='mine'?' 및 이동':''}`);
         const art=createArt(track);card.append(art,el('strong',track.title),el('span',track.artist,'kt-artist'));
         if(mode!=='author' && $('compare').checked)card.append(el('span',`블로그 ${labels[track.tier]||'미평가'}`,'kt-badge'));
@@ -73,7 +77,7 @@ export function init() {
         card.addEventListener('drop',e=>{if(mode!=='mine'||!dragged)return;e.preventDefault();e.stopPropagation();const moving=dragged;dragged=null;row.classList.remove('kt-over');commit(moveTrack(mine,moving,tier,id),'곡 순서를 변경했습니다.',moving);});
         cards.append(card);
       }
-      if(!rows[tier].length)cards.append(el('p',mode==='mine'?'곡을 여기에 놓아 보세요.':'—','kt-empty'));
+      if(!visible.length)cards.append(el('p',query?'검색 결과가 없습니다.':mode==='mine'?'곡을 여기에 놓아 보세요.':'—','kt-empty'));
       row.append(cards);row.addEventListener('dragover',e=>{if(mode!=='mine'||!dragged)return;e.preventDefault();row.classList.add('kt-over');});row.addEventListener('dragleave',e=>{if(!row.contains(e.relatedTarget))row.classList.remove('kt-over');});row.addEventListener('drop',e=>{if(mode!=='mine'||!dragged)return;e.preventDefault();const moving=dragged;dragged=null;commit(moveTrack(mine,moving,tier),`${labels[tier]} 티어로 이동했습니다.`,moving);});board.append(row);
     }
   }
@@ -86,17 +90,21 @@ export function init() {
     const caption=el('span',`${month.month.replace('-','.')} / ${month.demo?'SAMPLE TRACK':'MONTHLY K-POP'}`,'kt-story-caption');visual.append(caption);
     const copy=el('div',undefined,'kt-story-copy');
     copy.append(el('p','THE MONTHLY LIST','kt-story-eyebrow'));
-    const h=el('h3',track.title);h.id='kt-song-title';copy.append(h,el('p',track.artist,'kt-story-artist'));
+    const h=el('h3',track.title);h.id='kt-song-title';copy.append(h,el('p',track.artist,'kt-story-artist'));if(track.album)copy.append(el('p',track.album,'kt-story-album'));
     const meta=el('div',undefined,'kt-story-meta');
     const badge=el('span',`블로그 ${labels[track.tier]||'미평가'}`,'kt-story-tier');
     badge.style.setProperty('--rank-color',colors[Math.max(0,TIERS.indexOf(track.tier))]);
     const date=el('time',track.released);date.dateTime=track.released;meta.append(badge,date);copy.append(meta);
-    const review=el('div',undefined,'kt-story-review');review.append(el('p','이 곡을 듣고','kt-story-review-label'),el('blockquote',track.note||'아직 한줄평이 없습니다.'));copy.append(review);
+    const review=el('div',undefined,'kt-story-review');review.append(el('p','이 곡을 듣고','kt-story-review-label'),el('blockquote',track.note||(track.tier==='unranked'?'아직 평가하지 않은 곡입니다.':'아직 한줄평이 없습니다.')));copy.append(review);
     if(month.demo)copy.append(el('p','화면 확인용 가상 곡 · 가상 평가','kt-story-demo'));
     const url=safeListenUrl(track.listenUrl);
     if(url){const a=el('a','공식 음원·영상 듣기 ↗','kt-story-listen');a.href=url;a.target='_blank';a.rel='noopener noreferrer';copy.append(a);}
     layout.append(visual,copy);box.append(layout);
     if(mode==='mine'){
+      const noteLabel=el('label','내 한줄평','kt-note-label'),textarea=el('textarea');
+      textarea.id='kt-my-note';textarea.maxLength=500;textarea.rows=3;textarea.value=notes[track.id]??track.note??'';textarea.placeholder='듣고 남기고 싶은 이야기 (500자 이내)';noteLabel.htmlFor=textarea.id;
+      textarea.addEventListener('input',()=>{notes[track.id]=textarea.value;save();});
+      box.append(noteLabel,textarea);
       const heading=el('p','이 곡은 어느 티어인가요?','kt-edit-label');box.append(heading);
       const choices=el('div',undefined,'kt-choice'),current=TIERS.find(t=>mine[t].includes(track.id));
       for(const tier of TIERS){const b=el('button',labels[tier]);b.type='button';b.setAttribute('aria-pressed',String(current===tier));b.addEventListener('click',()=>{dialog.close();commit(moveTrack(mine,track.id,tier),`${track.title}: ${labels[tier]} 티어`,track.id);});choices.append(b);}box.append(choices);
@@ -124,12 +132,14 @@ export function init() {
   root.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
   $('month').addEventListener('change',()=>{month=catalog.find(m=>m.month===$('month').value);clearHash();if(mode==='shared')mode='author';tell('');load();render();});
   $('compare').addEventListener('change',render);
+  $('filter')?.addEventListener('input',render);
   $('undo').addEventListener('click',()=>{if(!history.length)return;mine=history.pop();const saved=save();render();tell(saved?'이전 배치로 되돌렸습니다.':'배치를 되돌렸습니다. 자동 저장 불가: 파일로 저장해 주세요.');});
   $('reset').addEventListener('click',()=>$('reset-dialog').showModal());
   $('confirm-reset').addEventListener('click',()=>{$('reset-dialog').close();commit(emptyRows(month),'모든 곡을 미평가로 옮겼습니다.');});
   function download(blob,name){const url=URL.createObjectURL(blob),a=el('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
-  $('export').addEventListener('click',()=>{download(new Blob([JSON.stringify(snapshot(month,activeRows()),null,2)],{type:'application/json'}),`kpop-${month.month}-${mode}.json`);tell('티어 파일을 저장했습니다.');});
-  $('import').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>100000)throw new Error('100KB 이하의 티어 파일을 선택해 주세요.');const value=JSON.parse(await file.text()),matched=catalog.find(m=>m.month===value.month);if(!matched)throw new Error('해당 월의 곡 목록이 없습니다.');const rows=validateState(value,matched);if(mode==='mine' && month.month===matched.month){commit(rows,'티어 파일을 불러왔습니다.');}else{month=matched;mode='mine';load();commit(rows,'티어 파일을 불러왔습니다.');}clearHash();}catch(error){tell(error.message||'파일을 읽지 못했습니다.');}finally{event.target.value='';}});
+  $('export').addEventListener('click',()=>{download(new Blob([JSON.stringify({...snapshot(month,activeRows()),...(mode==='mine'?{notes}: {})},null,2)],{type:'application/json'}),`kpop-${month.month}-${mode}.json`);tell('티어 파일을 저장했습니다.');});
+  $('author-export')?.addEventListener('click',()=>{download(new Blob([JSON.stringify({...snapshot(month,mine),kind:'greenhouse-kpop-ratings',notes},null,2)],{type:'application/json'}),`kpop-${month.month}-public-ratings.json`);tell('공개 평가용 파일을 저장했습니다. 파일에는 티어와 내 한줄평이 포함됩니다. 블로그에는 아직 반영되지 않았습니다.');});
+  $('import').addEventListener('change',async event=>{const file=event.target.files[0];if(!file)return;try{if(file.size>1048576)throw new Error('1MB 이하의 티어 파일을 선택해 주세요.');const value=JSON.parse(await file.text()),matched=catalog.find(m=>m.month===value.month);if(!matched)throw new Error('해당 월의 곡 목록이 없습니다.');const rows=validateState(value,matched),importedNotes=validateNotes(value.notes,matched);if(mode==='mine' && month.month===matched.month){notes=importedNotes;commit(rows,'티어 파일을 불러왔습니다.');}else{month=matched;mode='mine';load();notes=importedNotes;commit(rows,'티어 파일을 불러왔습니다.');}clearHash();}catch(error){tell(error.message||'파일을 읽지 못했습니다.');}finally{event.target.value='';}});
   $('share').addEventListener('click',async()=>{
     const url=new URL(location.href);url.hash='tier='+encodeState(snapshot(month,activeRows()));
     try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(url.href);tell('현재 티어의 공유 링크를 복사했습니다.');return;}}catch{}

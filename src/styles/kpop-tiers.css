@@ -47,3 +47,5 @@
   .kt-story-review blockquote { font-size: 17px; line-height: 1.85; }
   .kt-story-nav { margin-top: 22px; padding-top: 12px; }
 }
+
+.kt-search{display:flex;align-items:center;gap:14px;margin:18px 0;font-size:12px;color:var(--kt-muted)}.kt-search input{min-width:0;width:min(420px,100%);min-height:44px;border:1px solid var(--kt-border);border-radius:3px;background:var(--kt-surface);color:var(--kt-fg);padding:10px 12px;font:inherit;font-size:13px}.kt-dialog .kt-story-album{font-size:11px;margin:-8px 0 16px;color:var(--kt-muted)}.kt-note-label{display:block;margin-top:24px;font-size:12px;color:var(--kt-muted)}.kt-dialog #kt-my-note{display:block;width:100%;height:auto;min-height:100px;resize:vertical;line-height:1.7;font-size:14px;word-break:normal}.kt-story-review blockquote:empty{display:none}

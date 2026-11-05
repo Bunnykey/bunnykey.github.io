@@ -36,7 +36,7 @@ export function decodeState(token) {
   return JSON.parse(new TextDecoder('utf-8', {fatal: true}).decode(Uint8Array.from(atob(encoded), c => c.charCodeAt(0))));
 }
 export function safeListenUrl(value) {
-  try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password && ['open.spotify.com','www.youtube.com','youtube.com','youtu.be'].includes(u.hostname) ? u.href : null; } catch { return null; }
+  try { const u = new URL(value); return u.protocol === 'https:' && !u.username && !u.password && ['open.spotify.com','www.youtube.com','youtube.com','youtu.be','music.bugs.co.kr'].includes(u.hostname) ? u.href : null; } catch { return null; }
 }
 export function safeCoverPath(value) {
   return typeof value === 'string' && /^\/img\/[a-zA-Z0-9_./-]+\.(png|jpg|jpeg|webp|avif|gif)$/i.test(value) && !value.includes('..') ? value : null;
@@ -55,8 +55,24 @@ export function assertCatalog(catalog) {
       if(typeof t.title!=='string'||!t.title.trim()||t.title.length>100||typeof t.artist!=='string'||!t.artist.trim()||t.artist.length>100||!TIERS.includes(t.tier))throw new Error(`${month.month}: 곡 제목·아티스트·평가를 확인하세요.`);
       if(!/^\d{4}-\d{2}-\d{2}$/.test(t.released)||!t.released.startsWith(month.month)||isNaN(Date.parse(t.released))||new Date(t.released).toISOString().slice(0,10)!==t.released)throw new Error(`${month.month}: 곡의 발매일을 확인하세요.`);
       if(t.cover&&!safeCoverPath(t.cover))throw new Error(`${month.month}: 이미지는 /img/ 내부 파일이어야 합니다.`);
-      if(t.listenUrl&&!safeListenUrl(t.listenUrl))throw new Error(`${month.month}: 공식 YouTube 또는 Spotify HTTPS 주소를 입력하세요.`);
+      if(t.listenUrl&&!safeListenUrl(t.listenUrl))throw new Error(`${month.month}: YouTube·Spotify·벅스의 HTTPS 주소를 입력하세요.`);
     }
   }
   return catalog;
+}
+export function validateNotes(value, month) {
+  if(value===undefined)return {};
+  if(!value || typeof value!=='object' || Array.isArray(value))throw new Error('한줄평 파일 형식을 확인해 주세요.');
+  const ids=new Set(month.tracks.map(t=>t.id));const notes={};
+  for(const [id,note] of Object.entries(value)){
+    if(!ids.has(id)||typeof note!=='string'||note.length>500)throw new Error('한줄평은 곡마다 500자 이내로 입력해 주세요.');
+    notes[id]=note;
+  }
+  return notes;
+}
+export function applyPublicRatings(month,value) {
+  const ids=TIERS.flatMap(tier=>value.rows?.[tier]??[]);
+  if(ids.length!==month.tracks.length)throw new Error('모든 곡의 배치가 들어 있는 파일이 필요합니다.');
+  const rows=validateState(value,month),notes=validateNotes(value.notes,month);
+  return {...month,tracks:month.tracks.map(track=>({...track,tier:TIERS.find(tier=>rows[tier].includes(track.id)),note:Object.hasOwn(notes,track.id)?notes[track.id]:track.note||''}))};
 }
