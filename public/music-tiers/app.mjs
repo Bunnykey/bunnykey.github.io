@@ -1,3 +1,4 @@
+import {CREDIT_ROLES,searchableTrack} from './studio/metadata.mjs';
 import {TIERS,moveTrack,encodeState,decodeState,safeListenUrl,safeCoverPath} from './state.mjs';
 import {blankRows,pickedIds,quarterFor,buildPeriods,validateCurated,curatedSnapshot,selectTrack,removeTrack,legacySelection} from './curated.mjs';
 const labels={S:'S',A:'A',B:'B',C:'C',D:'D',unranked:'미평가'};
@@ -73,7 +74,7 @@ export function init(){
     if($('board-search'))$('board-search').hidden=!selected.length;
     $('hint').textContent=mode==='mine'?'곡을 눌러 티어·한줄평을 바꾸세요. 곡을 빼도 발매곡 정보는 남습니다.':'블로그가 골라 담은 곡만 표시합니다.';
     const query=($('filter')?.value||'').trim().toLocaleLowerCase();
-    const matches=t=>!query||`${t.title} ${t.artist} ${t.album||''}`.toLocaleLowerCase().includes(query);
+    const matches=t=>!query||searchableTrack(t).includes(query);
     board.replaceChildren();
     if(!selected.length){
       const empty=el('div',undefined,'kt-curated-empty');empty.append(el('p',mode==='author'?'아직 공개한 감상곡이 없습니다.':'아직 골라 담은 곡이 없습니다.','kt-empty-title'),el('p','발매곡 목록에서 실제로 들은 곡만 골라 담으세요.'));
@@ -105,7 +106,7 @@ export function init(){
     const pool=$('pool');if(!pool)return;
     const query=($('pool-search')?.value||'').trim().toLocaleLowerCase(),month=$('pool-month')?.value||'';
     const selected=new Set(pickedIds(mine));
-    const visible=period.tracks.filter(t=>(!month||t.released.startsWith(month))&&(!query||`${t.title} ${t.artist} ${t.album||''}`.toLocaleLowerCase().includes(query)));
+    const visible=period.tracks.filter(t=>(!month||t.released.startsWith(month))&&(!query||searchableTrack(t).includes(query)));
     pool.replaceChildren();updatePickerCount(visible.length);
     if(!visible.length){pool.append(el('p','검색 결과가 없습니다.','kt-empty'));return;}
     for(const track of visible){
@@ -139,6 +140,15 @@ export function init(){
     badge.style.setProperty('--rank-color',colors[Math.max(0,TIERS.indexOf(track.tier))]);
     const date=el('time',track.released);date.dateTime=track.released;meta.append(badge,date);copy.append(meta);
     const review=el('div',undefined,'kt-story-review');review.append(el('p','이 곡을 듣고','kt-story-review-label'),el('blockquote',track.note||(isPublic?'아직 한줄평이 없습니다.':'아직 공개한 감상이 없는 곡입니다.')));copy.append(review);
+    if(track.details){
+      const details=track.details,credits=el('dl',undefined,'kt-story-credits');
+      const line=(label,text)=>{if(!text)return;const group=el('div');group.append(el('dt',label),el('dd',text));credits.append(group);};
+      for(const [key,label]of Object.entries(CREDIT_ROLES))line(label,(details.credits?.[key]??[]).join(' · '));
+      line('재생시간',details.duration);line('장르',details.genres);line('기획사',details.label);line('유통사',details.distributor);
+      copy.append(credits);
+      if(details.status==='pending')copy.append(el('p','제작진 상세 정보는 제공처 요청 제한으로 확인 중입니다.','kt-small'));
+      else if(details.missing?.length)copy.append(el('p','일부 제작진 정보가 원본에 없거나 확인되지 않았습니다.','kt-small'));
+    }
     if(period.demo)copy.append(el('p','화면 확인용 가상 곡 · 가상 평가','kt-story-demo'));
     const url=safeListenUrl(track.listenUrl);
     if(url){const a=el('a','공식 음원·영상 듣기 ↗','kt-story-listen');a.href=url;a.target='_blank';a.rel='noopener noreferrer';copy.append(a);}

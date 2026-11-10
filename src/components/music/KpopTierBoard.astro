@@ -9,7 +9,7 @@ const months = catalog.filter(m=>m.published&&(!live||!m.demo)).map(m=>({month:m
 ---
 <section class="kt" id="kpop-tiers">
   <header class="kt-header">
-    <a href="/topics/music/" class="kt-back">음악 기록 ↗</a>
+    <div class="kt-entry-links"><a href="/topics/music/" class="kt-back">음악 기록 ↗</a><a href="/music-tiers/studio/" data-astro-reload class="kt-studio-link">감상 작업실 ↗</a></div>
     <p class="kt-eyebrow">LISTENING NOTES / K-POP</p>
     <h1>듣고 남긴 곡들.</h1>
     <p class="kt-description">들은 곡만 골라 담고,<br />한 분기의 취향을 기록합니다.</p>
@@ -30,7 +30,7 @@ const months = catalog.filter(m=>m.published&&(!live||!m.demo)).map(m=>({month:m
     <button type="button" id="kt-reset">티어 비우기</button>
   </div>
   <p id="kt-hint" class="kt-hint"></p>
-  <label class="kt-search" id="kt-board-search"><span>담은 곡 찾기</span><input id="kt-filter" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label>
+  <label class="kt-search" id="kt-board-search"><span>담은 곡 찾기</span><input id="kt-filter" type="search" placeholder="곡명 · 아티스트 · 제작진" autocomplete="off" /></label>
   <div id="kt-board" aria-label="선택한 곡의 분기별 티어 보드"></div>
   <div class="kt-footer-actions">
     <button type="button" id="kt-share" class="kt-primary">링크로 공유 ↗</button>
@@ -46,7 +46,7 @@ const months = catalog.filter(m=>m.published&&(!live||!m.demo)).map(m=>({month:m
     <form method="dialog" class="kt-story-dismiss"><button aria-label="곡 선택 닫기">×</button></form>
     <h3 id="kt-picker-title">들은 곡을 골라 담으세요.</h3>
     <p class="kt-small">선택은 자동 저장됩니다. 목록에서 빼도 곡 정보는 그대로 남아요.</p>
-    <div class="kt-picker-filters"><label><span>발매곡 검색</span><input id="kt-pool-search" type="search" placeholder="곡명 · 아티스트 · 앨범" autocomplete="off" /></label><label><span>발매 월</span><select id="kt-pool-month" aria-label="발매 월 필터"></select></label></div>
+    <div class="kt-picker-filters"><label><span>발매곡 검색</span><input id="kt-pool-search" type="search" placeholder="곡명 · 아티스트 · 제작진" autocomplete="off" /></label><label><span>발매 월</span><select id="kt-pool-month" aria-label="발매 월 필터"></select></label></div>
     <p id="kt-pool-count" class="kt-small" role="status" aria-live="polite"></p>
     <div id="kt-pool" class="kt-pool"></div>
     <form method="dialog" class="kt-picker-done"><button class="kt-primary">선택 완료</button></form>

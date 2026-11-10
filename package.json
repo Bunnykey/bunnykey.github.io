@@ -13,7 +13,7 @@
     "sync:notion": "node scripts/sync_notion_content.mjs",
     "editor": "node scripts/editor/server.mjs",
     "preeditor": "node scripts/editor/build.mjs",
-    "prebuild": "node scripts/verify-content.mjs"
+    "prebuild": "node scripts/verify-content.mjs && node scripts/music/build-listening-studio.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",

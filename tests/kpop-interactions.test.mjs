@@ -102,3 +102,17 @@ test('importing an old monthly file preserves selections from another month in t
     assert.equal(JSON.parse(f.window.localStorage.getItem('greenhouse:kpop:v2:2026-Q4')).notes['nov-picked'],'11월 메모');
   }finally{f.cleanup();}
 });
+
+
+test('public song details show collected credits and picker search includes creators',()=>{
+  const source=structuredClone(catalog);source[0].tracks[0].details={status:'collected',credits:{composers:['검색용 작곡가'],lyricists:['검색용 작사가'],arrangers:[],vocals:[]},duration:'03:13',label:'기획사'};
+  const f=setup({},source);try{
+    const d=f.document;d.querySelector('[data-song="demo-oct-01"]').click();
+    assert.match(d.querySelector('.kt-story-credits').textContent,/검색용 작곡가/);
+    assert.match(d.querySelector('.kt-story-credits').textContent,/03:13/);
+    d.querySelector('#kt-dialog').close();d.querySelector('#kt-add').click();
+    const input=d.querySelector('#kt-pool-search');input.value='검색용 작곡가';input.dispatchEvent(new f.window.Event('input',{bubbles:true}));
+    assert.equal(d.querySelectorAll('[data-pick]').length,1);
+    assert.equal(d.querySelector('[data-pick]').dataset.pick,'demo-oct-01');
+  }finally{f.cleanup();}
+});

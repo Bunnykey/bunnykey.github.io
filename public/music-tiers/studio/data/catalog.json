@@ -1,0 +1,4878 @@
+[
+  {
+    "month": "2026-10",
+    "revision": "2026-10-r1",
+    "demo": false,
+    "published": true,
+    "intro": "2026년 10월 발매곡 116곡. 국내 음원 서비스에서 확인한 아이돌 그룹·솔로의 타이틀곡과 싱글을 모았습니다. 아직 공개 평가는 없으며, 내 티어에서 직접 배치하고 한줄평을 남길 수 있습니다.",
+    "tracks": [
+      {
+        "id": "bugs-6510196",
+        "title": "Never Again",
+        "artist": "레오(LEO)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "Never Again",
+        "cover": "/img/kpop/2026-10/4155911.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510196",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155911",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:47:55+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510196",
+          "albumSource": "https://music.bugs.co.kr/album/4155911",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "레오(LEO)",
+              "라이언(Ryan)",
+              "EJO",
+              "KATCHY",
+              "김채영"
+            ],
+            "lyricists": [
+              "레오(LEO)"
+            ],
+            "arrangers": [
+              "라이언(Ryan)",
+              "EJO",
+              "KATCHY",
+              "김채영"
+            ],
+            "vocals": [
+              "레오(LEO)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:13",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155911.jpg",
+          "sourceTitle": "Never Again",
+          "genres": "알앤비/소울",
+          "styles": "알앤비",
+          "label": "써브라임",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-6510196.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34083396",
+        "title": "Only thing",
+        "artist": "지성 (JISUNG)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "ONLY THING",
+        "cover": "/img/kpop/2026-10/20844156.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34083396",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844156",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:47:55+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34083396",
+          "albumSource": "https://music.bugs.co.kr/album/20844156",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Lagna.",
+              "지성 (JISUNG)"
+            ],
+            "lyricists": [
+              "Lagna."
+            ],
+            "arrangers": [
+              "Lagna."
+            ],
+            "vocals": [
+              "지성 (JISUNG)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:00",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208441/20844156.jpg",
+          "sourceTitle": "Only thing",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "지성",
+          "distributor": "유니버설뮤직코리아",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-34083396.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34083251",
+        "title": "우리는 사랑하고 있어",
+        "artist": "태유",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "우리는 사랑하고 있어",
+        "cover": "/img/kpop/2026-10/20844123.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34083251",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844123",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:47:55+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34083251",
+          "albumSource": "https://music.bugs.co.kr/album/20844123",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "awesome",
+              "Young'n"
+            ],
+            "lyricists": [
+              "awesome"
+            ],
+            "arrangers": [
+              "awesome"
+            ],
+            "vocals": [
+              "태유"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:57",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208441/20844123.jpg",
+          "sourceTitle": "우리는 사랑하고 있어",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "coca",
+          "distributor": "AURORA with Danal Entertainment",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-34083251.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6509926",
+        "title": "WHERE",
+        "artist": "JAYN (제인)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "JAYN",
+        "cover": "/img/kpop/2026-10/4155844.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6509926",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155844",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:48:23+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6509926",
+          "albumSource": "https://music.bugs.co.kr/album/4155844",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "JAYN (제인)",
+              "Brown Panda (THE HUB)"
+            ],
+            "lyricists": [
+              "JAYN (제인)",
+              "LOUDI"
+            ],
+            "arrangers": [
+              "Brown Panda (THE HUB)"
+            ],
+            "vocals": [
+              "JAYN (제인)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:06",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155844.jpg",
+          "sourceTitle": "WHERE",
+          "genres": "알앤비/소울",
+          "styles": "알앤비",
+          "label": "JAYN",
+          "distributor": "Various",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-6509926.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510197",
+        "title": "Pandora",
+        "artist": "TESSAR(테사르)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "Pandora",
+        "cover": "/img/kpop/2026-10/4155912.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510197",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155912",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:48:23+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510197",
+          "albumSource": "https://music.bugs.co.kr/album/4155912",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "달하(김은아)",
+              "LiO"
+            ],
+            "lyricists": [
+              "달하(김은아)"
+            ],
+            "arrangers": [
+              "한덕용"
+            ],
+            "vocals": [
+              "TESSAR(테사르)"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:21",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155912.jpg",
+          "sourceTitle": "Pandora",
+          "genres": "댄스/팝",
+          "styles": "팝 락",
+          "label": "탱크 이엔엠",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-6510197.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510019",
+        "title": "다섯시간의 조각들",
+        "artist": "TIOT(티아이오티)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "Time for us",
+        "cover": "/img/kpop/2026-10/4155865.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510019",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155865",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:48:23+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510019",
+          "albumSource": "https://music.bugs.co.kr/album/4155865",
+          "missing": [
+            "편곡"
+          ],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "콜린(COLL!N)",
+              "Vendors (Abim)",
+              "Judah2",
+              "BEL",
+              "NANO (나노)",
+              "DBLV(CHILLER)",
+              "DBLV(Owl)",
+              "DBLV (July)"
+            ],
+            "lyricists": [
+              "콜린(COLL!N)",
+              "BEL"
+            ],
+            "arrangers": [],
+            "vocals": [
+              "TIOT(티아이오티)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:35",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155865.jpg",
+          "sourceTitle": "다섯시간의 조각들",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝 , 팝 락",
+          "label": "레드스타트이엔엠",
+          "distributor": "YG PLUS",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-6510019.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-134062696",
+        "title": "Welcome to Heaven",
+        "artist": "tripleS (트리플에스)",
+        "released": "2026-10-01",
+        "tier": "unranked",
+        "note": "",
+        "album": "Welcome to Heaven",
+        "cover": "/img/kpop/2026-10/40976636.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/134062696",
+        "sourceUrl": "https://music.bugs.co.kr/album/40976636",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:48:57+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/134062696",
+          "albumSource": "https://music.bugs.co.kr/album/40976636",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [],
+          "credits": {
+            "composers": [],
+            "lyricists": [],
+            "arrangers": [],
+            "vocals": []
+          },
+          "contributors": [
+            {
+              "role": "etc.",
+              "names": [
+                "tripleS (트리플에스)"
+              ]
+            }
+          ],
+          "duration": "03:32",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/409766/40976636.jpg",
+          "sourceTitle": "Welcome to Heaven",
+          "genres": "댄스/팝",
+          "styles": "팝",
+          "label": "Sony Music Labels Inc.",
+          "distributor": "Sony Music",
+          "sourceReleased": "2026.10.01",
+          "coverLocal": "./assets/covers/bugs-134062696.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34083018",
+        "title": "너란 섬",
+        "artist": "FTISLAND (FT아일랜드)",
+        "released": "2026-10-02",
+        "tier": "unranked",
+        "note": "",
+        "album": "너란 섬",
+        "cover": "/img/kpop/2026-10/20844085.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34083018",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844085",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:48:58+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34083018",
+          "albumSource": "https://music.bugs.co.kr/album/20844085",
+          "missing": [
+            "편곡"
+          ],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "김정우 (TOXIC)",
+              "안감독",
+              "임윤성"
+            ],
+            "lyricists": [
+              "김정우 (TOXIC)"
+            ],
+            "arrangers": [],
+            "vocals": [
+              "FTISLAND (FT아일랜드)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:52",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208440/20844085.jpg",
+          "sourceTitle": "너란 섬",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "RIAK",
+          "distributor": "RIAK",
+          "sourceReleased": "2026.10.02",
+          "coverLocal": "./assets/covers/bugs-34083018.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510329",
+        "title": "A4M",
+        "artist": "WAYF BOYS",
+        "released": "2026-10-02",
+        "tier": "unranked",
+        "note": "",
+        "album": "A4M",
+        "cover": "/img/kpop/2026-10/4155967.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510329",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155967",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:48:58+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510329",
+          "albumSource": "https://music.bugs.co.kr/album/4155967",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "ANDERSON",
+              "Eric Minz",
+              "Czaer",
+              "82oom (PAPERMAKER)",
+              "drewboi",
+              "부현석"
+            ],
+            "lyricists": [
+              "ANDERSON",
+              "ANDREW",
+              "SAMUEL",
+              "JUN MYEONG",
+              "thesecret",
+              "Eric Minz",
+              "drewboi",
+              "부현석"
+            ],
+            "arrangers": [
+              "82oom (PAPERMAKER)"
+            ],
+            "vocals": [
+              "WAYF BOYS"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:53",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155967.jpg",
+          "sourceTitle": "A4M",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "주식회사웨이프",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.02",
+          "coverLocal": "./assets/covers/bugs-6510329.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510331",
+        "title": "보기 드문 여자 (Feat. NOWIMYOUNG (나우아임영))",
+        "artist": "YENA (최예나)",
+        "released": "2026-10-02",
+        "tier": "unranked",
+        "note": "",
+        "album": "보기 드문 여자 (Feat. NOWIMYOUNG (나우아임영))",
+        "cover": "/img/kpop/2026-10/4155969.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510331",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155969",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:24+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510331",
+          "albumSource": "https://music.bugs.co.kr/album/4155969",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "네이슨(NATHAN)",
+              "지코 (ZICO)",
+              "Pop Time",
+              "샤넌 배(Shannon Bae)",
+              "NOWIMYOUNG (나우아임영)",
+              "Daily",
+              "배드트리 (BADTREE)",
+              "HAJU"
+            ],
+            "lyricists": [
+              "지코 (ZICO)",
+              "박경",
+              "NOWIMYOUNG (나우아임영)",
+              "샤넌 배(Shannon Bae)",
+              "네이슨(NATHAN)"
+            ],
+            "arrangers": [
+              "네이슨(NATHAN)",
+              "배드트리 (BADTREE)",
+              "Daily",
+              "HAJU"
+            ],
+            "vocals": [
+              "YENA (최예나)"
+            ]
+          },
+          "contributors": [
+            {
+              "role": "피쳐링",
+              "names": [
+                "NOWIMYOUNG (나우아임영)"
+              ]
+            }
+          ],
+          "duration": "02:28",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155969.jpg",
+          "sourceTitle": "보기 드문 여자 (Feat. NOWIMYOUNG (나우아임영))",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "YH 엔터테인먼트",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.02",
+          "coverLocal": "./assets/covers/bugs-6510331.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510207",
+        "title": "Bon Voyage",
+        "artist": "효린",
+        "released": "2026-10-03",
+        "tier": "unranked",
+        "note": "",
+        "album": "ONE SONG, ONE PEACE",
+        "cover": "/img/kpop/2026-10/4155917.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510207",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155917",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:24+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510207",
+          "albumSource": "https://music.bugs.co.kr/album/4155917",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Young Sky",
+              "올다우 (AllThou)",
+              "피터(Peter Hyun)"
+            ],
+            "lyricists": [
+              "KINSHA"
+            ],
+            "arrangers": [
+              "Rhombus"
+            ],
+            "vocals": [
+              "효린"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:57",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155917.jpg",
+          "sourceTitle": "Bon Voyage",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "주식회사 트러스토리(TRUSTORY Inc.)",
+          "distributor": "Dreamus",
+          "sourceReleased": "2026.10.03",
+          "coverLocal": "./assets/covers/bugs-6510207.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510330",
+        "title": "Kill the Vibe!",
+        "artist": "NIKA (니카)",
+        "released": "2026-10-03",
+        "tier": "unranked",
+        "note": "",
+        "album": "Kill the Vibe!",
+        "cover": "/img/kpop/2026-10/4155968.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510330",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155968",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:24+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510330",
+          "albumSource": "https://music.bugs.co.kr/album/4155968",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "NIKA (니카)"
+            ],
+            "lyricists": [
+              "NIKA (니카)"
+            ],
+            "arrangers": [
+              "faekt"
+            ],
+            "vocals": [
+              "NIKA (니카)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:20",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155968.jpg",
+          "sourceTitle": "Kill the Vibe!",
+          "genres": "알앤비/소울",
+          "styles": "알앤비",
+          "label": "Musikant Original",
+          "distributor": "지니뮤직",
+          "sourceReleased": "2026.10.03",
+          "coverLocal": "./assets/covers/bugs-6510330.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34083948",
+        "title": "Rhythm Check (같이 걸어가기)",
+        "artist": "xikers(싸이커스)",
+        "released": "2026-10-03",
+        "tier": "unranked",
+        "note": "",
+        "album": "Rhythm Check (같이 걸어가기)",
+        "cover": "/img/kpop/2026-10/20844282.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34083948",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844282",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:51+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34083948",
+          "albumSource": "https://music.bugs.co.kr/album/20844282",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "wshd",
+              "eldon"
+            ],
+            "lyricists": [
+              "이재니(PNP)",
+              "나류 (INHOUSE)"
+            ],
+            "arrangers": [
+              "wshd"
+            ],
+            "vocals": [
+              "xikers(싸이커스)"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:47",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208442/20844282.jpg",
+          "sourceTitle": "Rhythm Check (같이 걸어가기)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "PNP",
+          "distributor": "사운드리퍼블리카",
+          "sourceReleased": "2026.10.03",
+          "coverLocal": "./assets/covers/bugs-34083948.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510338",
+        "title": "너를 보내고 나서야",
+        "artist": "비비안(BBAHN)",
+        "released": "2026-10-04",
+        "tier": "unranked",
+        "note": "",
+        "album": "너를 보내고 나서야",
+        "cover": "/img/kpop/2026-10/4155974.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510338",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155974",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:51+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510338",
+          "albumSource": "https://music.bugs.co.kr/album/4155974",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "필승불패",
+              "최유진"
+            ],
+            "lyricists": [
+              "필승불패"
+            ],
+            "arrangers": [
+              "최유진"
+            ],
+            "vocals": [
+              "비비안(BBAHN)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:26",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155974.jpg",
+          "sourceTitle": "너를 보내고 나서야",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "숲을 보는 엔터테인먼트",
+          "distributor": "워너뮤직코리아",
+          "sourceReleased": "2026.10.04",
+          "coverLocal": "./assets/covers/bugs-6510338.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510192",
+        "title": "잘 지내자, 우리",
+        "artist": "수호 (SUHO)",
+        "released": "2026-10-04",
+        "tier": "unranked",
+        "note": "",
+        "album": "잘 지내자, 우리",
+        "cover": "/img/kpop/2026-10/4155909.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510192",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155909",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:49:51+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510192",
+          "albumSource": "https://music.bugs.co.kr/album/4155909",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "짙은(Zitten)"
+            ],
+            "lyricists": [
+              "조은영",
+              "짙은(Zitten)"
+            ],
+            "arrangers": [
+              "이도형(AUG)",
+              "편준원(AUG)",
+              "정수완"
+            ],
+            "vocals": [
+              "수호 (SUHO)"
+            ]
+          },
+          "contributors": [],
+          "duration": "04:10",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41559/4155909.jpg",
+          "sourceTitle": "잘 지내자, 우리",
+          "genres": "발라드 , 인디",
+          "styles": "발라드 , 인디 팝",
+          "label": "(주)도너츠컬처",
+          "distributor": "NHN벅스",
+          "sourceReleased": "2026.10.04",
+          "coverLocal": "./assets/covers/bugs-6510192.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34085446",
+        "title": "noite queima",
+        "artist": "이진혁",
+        "released": "2026-10-04",
+        "tier": "unranked",
+        "note": "",
+        "album": "D - MALÍCIA",
+        "cover": "/img/kpop/2026-10/20844586.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34085446",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844586",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:16+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34085446",
+          "albumSource": "https://music.bugs.co.kr/album/20844586",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "이진혁",
+              "flow blow"
+            ],
+            "lyricists": [
+              "이진혁"
+            ],
+            "arrangers": [
+              "flow blow",
+              "이진혁"
+            ],
+            "vocals": [
+              "이진혁"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:43",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208445/20844586.jpg",
+          "sourceTitle": "noite queima",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "엘줄라이엔터테인먼트",
+          "distributor": "뮤직앤뉴",
+          "sourceReleased": "2026.10.04",
+          "coverLocal": "./assets/covers/bugs-34085446.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510406",
+        "title": "ICONIC HEART (Korean Ver.)",
+        "artist": "Hearts2Hearts (하츠투하츠)",
+        "released": "2026-10-05",
+        "tier": "unranked",
+        "note": "",
+        "album": "ICONIC HEART (Korean Ver.)",
+        "cover": "/img/kpop/2026-10/4156006.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510406",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156006",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:16+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510406",
+          "albumSource": "https://music.bugs.co.kr/album/4156006",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "KENZIE",
+              "Ronny Svendsen",
+              "Adrian Thesen",
+              "Anne Judith Wik",
+              "Bobii Lewis"
+            ],
+            "lyricists": [
+              "KENZIE"
+            ],
+            "arrangers": [
+              "KENZIE",
+              "Ronny Svendsen",
+              "Pizzapunk"
+            ],
+            "vocals": [
+              "Hearts2Hearts (하츠투하츠)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:09",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156006.jpg",
+          "sourceTitle": "ICONIC HEART (Korean Ver.)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "SM ENTERTAINMENT",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.05",
+          "coverLocal": "./assets/covers/bugs-6510406.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510461",
+        "title": "Pedazos",
+        "artist": "예성 (YESUNG)",
+        "released": "2026-10-06",
+        "tier": "unranked",
+        "note": "",
+        "album": "Where We Are - The 2nd Album",
+        "cover": "/img/kpop/2026-10/4155704.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510461",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155704",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:16+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510461",
+          "albumSource": "https://music.bugs.co.kr/album/4155704",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "DEΛDVIKINGZ"
+            ],
+            "lyricists": [
+              "DEΛDVIKINGZ"
+            ],
+            "arrangers": [
+              "DEΛDVIKINGZ"
+            ],
+            "vocals": [
+              "예성 (YESUNG)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:51",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155704.jpg",
+          "sourceTitle": "Pedazos",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "SM ENTERTAINMENT",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.06",
+          "coverLocal": "./assets/covers/bugs-6510461.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "정규",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6509512",
+        "title": "미완성",
+        "artist": "KickFlip(킥플립)",
+        "released": "2026-10-06",
+        "tier": "unranked",
+        "note": "",
+        "album": "KICK OFF THE WALL Pt. 1",
+        "cover": "/img/kpop/2026-10/4155723.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6509512",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155723",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:34+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6509512",
+          "albumSource": "https://music.bugs.co.kr/album/4155723",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "심은지",
+              "Rick bridges",
+              "계훈 (KickFlip)"
+            ],
+            "lyricists": [
+              "계훈 (KickFlip)",
+              "Rick bridges",
+              "심은지"
+            ],
+            "arrangers": [
+              "심은지"
+            ],
+            "vocals": [
+              "KickFlip(킥플립)"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:55",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155723.jpg",
+          "sourceTitle": "미완성",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "(주)JYP엔터테인먼트",
+          "distributor": "Dreamus",
+          "sourceReleased": "2026.10.06",
+          "coverLocal": "./assets/covers/bugs-6509512.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510506",
+        "title": "Kick Off The Wall (Feat. iann dior)",
+        "artist": "KickFlip(킥플립)",
+        "released": "2026-10-06",
+        "tier": "unranked",
+        "note": "",
+        "album": "KICK OFF THE WALL Pt. 1",
+        "cover": "/img/kpop/2026-10/4155723.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510506",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155723",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:35+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510506",
+          "albumSource": "https://music.bugs.co.kr/album/4155723",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Greg Bonnick",
+              "동현 (KickFlip)",
+              "Hayden Chapman",
+              "Young Chance",
+              "Michael Olmo",
+              "William Asingh"
+            ],
+            "lyricists": [
+              "J14 (Full8loom)",
+              "동화 (KickFlip)",
+              "jonjon (XYXX)",
+              "danke",
+              "계훈 (KickFlip)",
+              "이이진",
+              "Michael Olmo",
+              "William Asingh"
+            ],
+            "arrangers": [
+              "LDN Noise"
+            ],
+            "vocals": [
+              "KickFlip(킥플립)"
+            ]
+          },
+          "contributors": [
+            {
+              "role": "피쳐링",
+              "names": [
+                "iann dior"
+              ]
+            }
+          ],
+          "duration": "03:00",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155723.jpg",
+          "sourceTitle": "Kick Off The Wall (Feat. iann dior)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "(주)JYP엔터테인먼트",
+          "distributor": "Dreamus",
+          "sourceReleased": "2026.10.06",
+          "coverLocal": "./assets/covers/bugs-6510506.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510476",
+        "title": "ZZIRIT (Feat. Luísa Sonza)",
+        "artist": "X:IN",
+        "released": "2026-10-06",
+        "tier": "unranked",
+        "note": "",
+        "album": "Chain Reaction",
+        "cover": "/img/kpop/2026-10/4156036.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510476",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156036",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:50:35+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510476",
+          "albumSource": "https://music.bugs.co.kr/album/4156036",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "용지태(kruxxbeatz)",
+              "control x",
+              "Carolzinha"
+            ],
+            "lyricists": [
+              "control x",
+              "Luisa Sonza",
+              "노바(NOVA)",
+              "Carolzinha"
+            ],
+            "arrangers": [
+              "용지태(kruxxbeatz)",
+              "control x"
+            ],
+            "vocals": [
+              "X:IN"
+            ]
+          },
+          "contributors": [
+            {
+              "role": "피쳐링",
+              "names": [
+                "Luisa Sonza"
+              ]
+            }
+          ],
+          "duration": "02:21",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156036.jpg",
+          "sourceTitle": "ZZIRIT (Feat. Luísa Sonza)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "주식회사 비바이엔터테인먼트",
+          "distributor": "지니뮤직",
+          "sourceReleased": "2026.10.06",
+          "coverLocal": "./assets/covers/bugs-6510476.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "정규",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510513",
+        "title": "사랑이라 부를지도 모를 거야",
+        "artist": "김재환",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "Love, From Here",
+        "cover": "/img/kpop/2026-10/4156046.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510513",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156046",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:04+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510513",
+          "albumSource": "https://music.bugs.co.kr/album/4156046",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "김재환"
+            ],
+            "lyricists": [
+              "김이나",
+              "김재환"
+            ],
+            "arrangers": [
+              "박용현"
+            ],
+            "vocals": [
+              "김재환"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:52",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41560/4156046.jpg",
+          "sourceTitle": "사랑이라 부를지도 모를 거야",
+          "genres": "발라드 , 락/메탈",
+          "styles": "발라드 , 락",
+          "label": "WAKEONE, 오프더레코드",
+          "distributor": "지니뮤직, STONE MUSIC",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-6510513.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510858",
+        "title": "GO해",
+        "artist": "영파씨 (YOUNG POSSE)",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "GO해",
+        "cover": "/img/kpop/2026-10/4156187.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510858",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156187",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:04+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510858",
+          "albumSource": "https://music.bugs.co.kr/album/4156187",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "키겐"
+            ],
+            "lyricists": [
+              "키겐",
+              "옐라디(YELLA D)"
+            ],
+            "arrangers": [
+              "키겐"
+            ],
+            "vocals": [
+              "영파씨 (YOUNG POSSE)"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:29",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156187.jpg",
+          "sourceTitle": "GO해",
+          "genres": "랩/힙합",
+          "styles": "힙합",
+          "label": "DSP미디어, 비츠엔터테인먼트",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-6510858.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510759",
+        "title": "I Guarantee",
+        "artist": "하윤",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "I Guarantee",
+        "cover": "/img/kpop/2026-10/4156158.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510759",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156158",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:04+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510759",
+          "albumSource": "https://music.bugs.co.kr/album/4156158",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Mule",
+              "Zun (PLZ)",
+              "s’oom (PLZ)"
+            ],
+            "lyricists": [
+              "Zun (PLZ)",
+              "s’oom (PLZ)"
+            ],
+            "arrangers": [
+              "Mule"
+            ],
+            "vocals": [
+              "하윤"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:52",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156158.jpg",
+          "sourceTitle": "I Guarantee",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "라인프로덕션",
+          "distributor": "NHN벅스",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-6510759.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511126",
+        "title": "OUR",
+        "artist": "황민현",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "OUR",
+        "cover": "/img/kpop/2026-10/4156260.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511126",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156260",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:29+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511126",
+          "albumSource": "https://music.bugs.co.kr/album/4156260",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "WWWAVE (PAPERMAKER)",
+              "Rowan (PAPERMAKER)"
+            ],
+            "lyricists": [
+              "이오늘"
+            ],
+            "arrangers": [
+              "WWWAVE (PAPERMAKER)"
+            ],
+            "vocals": [
+              "황민현"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:50",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156260.jpg",
+          "sourceTitle": "OUR",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "플레디스엔터테인먼트",
+          "distributor": "YG PLUS",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-6511126.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34091189",
+        "title": "Weirdo",
+        "artist": "Hypeverse",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "Weirdo",
+        "cover": "/img/kpop/2026-10/20845805.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34091189",
+        "sourceUrl": "https://music.bugs.co.kr/album/20845805",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:29+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34091189",
+          "albumSource": "https://music.bugs.co.kr/album/20845805",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "KZ",
+              "HONEYSWEAT",
+              "DINT(HIGHBRID)",
+              "Nino"
+            ],
+            "lyricists": [
+              "이연우"
+            ],
+            "arrangers": [
+              "HONEYSWEAT"
+            ],
+            "vocals": [
+              "Hypeverse"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:16",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208458/20845805.jpg",
+          "sourceTitle": "Weirdo",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "㈜필랜다트스튜디오",
+          "distributor": "유니버설뮤직코리아",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-34091189.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34087571",
+        "title": "KO1KEYZ (Korean ver.)",
+        "artist": "KO1KEYZ",
+        "released": "2026-10-07",
+        "tier": "unranked",
+        "note": "",
+        "album": "KO1KEYZ (KR)",
+        "cover": "/img/kpop/2026-10/20844976.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34087571",
+        "sourceUrl": "https://music.bugs.co.kr/album/20844976",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:29+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34087571",
+          "albumSource": "https://music.bugs.co.kr/album/20844976",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "NadaNiel",
+              "Enthos"
+            ],
+            "lyricists": [
+              "Ryuki Koike",
+              "Rose Blueming",
+              "Kousuke Miyata",
+              "이리듬 (153Joombas)",
+              "eyan(153/Joombas)",
+              "엄세정(153/Joombas)",
+              "강지혜(153/Joombas)",
+              "HoSHi",
+              "I-NORI"
+            ],
+            "arrangers": [
+              "NadaNiel"
+            ],
+            "vocals": [
+              "KO1KEYZ"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:09",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208449/20844976.jpg",
+          "sourceTitle": "KO1KEYZ (Korean ver.)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "LAPONE ENTERTAINMENT",
+          "distributor": "지니뮤직, STONE MUSIC",
+          "sourceReleased": "2026.10.07",
+          "coverLocal": "./assets/covers/bugs-34087571.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34081893",
+        "title": "눈이 부시게",
+        "artist": "비하트(B.HEART)",
+        "released": "2026-10-08",
+        "tier": "unranked",
+        "note": "",
+        "album": "좋아하나 봐",
+        "cover": "/img/kpop/2026-10/20843791.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34081893",
+        "sourceUrl": "https://music.bugs.co.kr/album/20843791",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:54+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34081893",
+          "albumSource": "https://music.bugs.co.kr/album/20843791",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "awesome",
+              "Young'N"
+            ],
+            "lyricists": [
+              "awesome"
+            ],
+            "arrangers": [
+              "awesome"
+            ],
+            "vocals": [
+              "비하트(B.HEART)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:09",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208437/20843791.jpg",
+          "sourceTitle": "눈이 부시게",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "coca",
+          "distributor": "마운드미디어",
+          "sourceReleased": "2026.10.08",
+          "coverLocal": "./assets/covers/bugs-34081893.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34081892",
+        "title": "좋아하나 봐",
+        "artist": "비하트(B.HEART)",
+        "released": "2026-10-08",
+        "tier": "unranked",
+        "note": "",
+        "album": "좋아하나 봐",
+        "cover": "/img/kpop/2026-10/20843791.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34081892",
+        "sourceUrl": "https://music.bugs.co.kr/album/20843791",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:55+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34081892",
+          "albumSource": "https://music.bugs.co.kr/album/20843791",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "awesome",
+              "Young'N"
+            ],
+            "lyricists": [
+              "awesome"
+            ],
+            "arrangers": [
+              "awesome"
+            ],
+            "vocals": [
+              "비하트(B.HEART)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:27",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208437/20843791.jpg",
+          "sourceTitle": "좋아하나 봐",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "coca",
+          "distributor": "마운드미디어",
+          "sourceReleased": "2026.10.08",
+          "coverLocal": "./assets/covers/bugs-34081892.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511193",
+        "title": "잔불 (Still)",
+        "artist": "엔플라잉(N.Flying)",
+        "released": "2026-10-08",
+        "tier": "unranked",
+        "note": "",
+        "album": "Still",
+        "cover": "/img/kpop/2026-10/4156282.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511193",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156282",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:51:55+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511193",
+          "albumSource": "https://music.bugs.co.kr/album/4156282",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "이승협 (J.DON)",
+              "한성호",
+              "Rapid",
+              "김지형",
+              "Adam Seuba"
+            ],
+            "lyricists": [
+              "이승협 (J.DON)",
+              "한성호"
+            ],
+            "arrangers": [
+              "Rapid",
+              "김지형"
+            ],
+            "vocals": [
+              "엔플라잉(N.Flying)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:07",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156282.jpg",
+          "sourceTitle": "잔불 (Still)",
+          "genres": "댄스/팝",
+          "styles": "팝 락",
+          "label": "FNC엔터테인먼트",
+          "distributor": "YG PLUS",
+          "sourceReleased": "2026.10.08",
+          "coverLocal": "./assets/covers/bugs-6511193.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511173",
+        "title": "Stay",
+        "artist": "우기 (YUQI)",
+        "released": "2026-10-08",
+        "tier": "unranked",
+        "note": "",
+        "album": "二十七 (27)",
+        "cover": "/img/kpop/2026-10/4155841.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511173",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155841",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:15+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511173",
+          "albumSource": "https://music.bugs.co.kr/album/4155841",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Jay Lee",
+              "우기 (YUQI)"
+            ],
+            "lyricists": [
+              "우기 (YUQI)",
+              "Jay Lee"
+            ],
+            "arrangers": [
+              "Jay Lee"
+            ],
+            "vocals": [
+              "우기 (YUQI)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:33",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41558/4155841.jpg",
+          "sourceTitle": "Stay",
+          "genres": "월드뮤직",
+          "styles": "아시아 , 팝",
+          "label": "큐브 엔터테인먼트",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.08",
+          "coverLocal": "./assets/covers/bugs-6511173.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "정규",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6510882",
+        "title": "동화",
+        "artist": "크나큰(KNK)",
+        "released": "2026-10-08",
+        "tier": "unranked",
+        "note": "",
+        "album": "동화",
+        "cover": "/img/kpop/2026-10/4156196.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6510882",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156196",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:15+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6510882",
+          "albumSource": "https://music.bugs.co.kr/album/4156196",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "1Hz",
+              "준지 (Junji)",
+              "GPLP"
+            ],
+            "lyricists": [
+              "준지 (Junji)"
+            ],
+            "arrangers": [
+              "GPLP",
+              "1Hz"
+            ],
+            "vocals": [
+              "크나큰(KNK)"
+            ]
+          },
+          "contributors": [],
+          "duration": "04:06",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41561/4156196.jpg",
+          "sourceTitle": "동화",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "220 엔터테인먼트",
+          "distributor": "지니뮤직, STONE MUSIC",
+          "sourceReleased": "2026.10.08",
+          "coverLocal": "./assets/covers/bugs-6510882.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511033",
+        "title": "너와 참 행복했는데",
+        "artist": "여은",
+        "released": "2026-10-09",
+        "tier": "unranked",
+        "note": "",
+        "album": "너와 참 행복했는데",
+        "cover": "/img/kpop/2026-10/4156214.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511033",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156214",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:16+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511033",
+          "albumSource": "https://music.bugs.co.kr/album/4156214",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "필승불패",
+              "이한"
+            ],
+            "lyricists": [
+              "필승불패"
+            ],
+            "arrangers": [
+              "이한"
+            ],
+            "vocals": [
+              "여은"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:57",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156214.jpg",
+          "sourceTitle": "너와 참 행복했는데",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "숲을 보는 엔터테인먼트",
+          "distributor": "워너뮤직코리아",
+          "sourceReleased": "2026.10.09",
+          "coverLocal": "./assets/covers/bugs-6511033.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34089962",
+        "title": "I Can't Give Up",
+        "artist": "EPISODE (에피소드)",
+        "released": "2026-10-09",
+        "tier": "unranked",
+        "note": "",
+        "album": "I Can't Give Up",
+        "cover": "/img/kpop/2026-10/20845548.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34089962",
+        "sourceUrl": "https://music.bugs.co.kr/album/20845548",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:38+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34089962",
+          "albumSource": "https://music.bugs.co.kr/album/20845548",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Ferry"
+            ],
+            "lyricists": [
+              "박광원",
+              "데이지"
+            ],
+            "arrangers": [
+              "Ferry"
+            ],
+            "vocals": [
+              "EPISODE (에피소드)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:02",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208455/20845548.jpg",
+          "sourceTitle": "I Can't Give Up",
+          "genres": "발라드 , 댄스/팝 , 인디 , 랩/힙합",
+          "styles": "발라드 , 댄스 팝 , 인디힙합",
+          "label": "팝스엔터테인먼트",
+          "distributor": "3.14",
+          "sourceReleased": "2026.10.09",
+          "coverLocal": "./assets/covers/bugs-34089962.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511447",
+        "title": "BOYFRIEND",
+        "artist": "호시",
+        "released": "2026-10-10",
+        "tier": "unranked",
+        "note": "",
+        "album": "BOYFRIEND",
+        "cover": "/img/kpop/2026-10/4156319.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511447",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156319",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:38+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511447",
+          "albumSource": "https://music.bugs.co.kr/album/4156319",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "Jin Jeon",
+              "Heon Seo (헌서)",
+              "Hey Farmer (PRISMFILTER)",
+              "이범훈",
+              "LUKE",
+              "Jakgokga"
+            ],
+            "lyricists": [
+              "호시",
+              "Jin Jeon",
+              "Heon Seo (헌서)"
+            ],
+            "arrangers": [
+              "Hey Farmer (PRISMFILTER)",
+              "이범훈"
+            ],
+            "vocals": [
+              "호시"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:31",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156319.jpg",
+          "sourceTitle": "BOYFRIEND",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "플레디스엔터테인먼트",
+          "distributor": "YG PLUS",
+          "sourceReleased": "2026.10.10",
+          "coverLocal": "./assets/covers/bugs-6511447.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511071",
+        "title": "사랑한 만큼",
+        "artist": "종호(ATEEZ)",
+        "released": "2026-10-11",
+        "tier": "unranked",
+        "note": "",
+        "album": "사랑한 만큼",
+        "cover": "/img/kpop/2026-10/4156234.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511071",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156234",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:52:39+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511071",
+          "albumSource": "https://music.bugs.co.kr/album/4156234",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "김영후"
+            ],
+            "lyricists": [
+              "김영후"
+            ],
+            "arrangers": [
+              "이도형(AUG)",
+              "편준원(AUG)",
+              "고은률(AUG)",
+              "배기필"
+            ],
+            "vocals": [
+              "종호(ATEEZ)"
+            ]
+          },
+          "contributors": [],
+          "duration": "04:37",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156234.jpg",
+          "sourceTitle": "사랑한 만큼",
+          "genres": "발라드",
+          "styles": "발라드",
+          "label": "(주)도너츠컬처",
+          "distributor": "NHN벅스",
+          "sourceReleased": "2026.10.11",
+          "coverLocal": "./assets/covers/bugs-6511071.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511123",
+        "title": "Love Again",
+        "artist": "POW (파우)",
+        "released": "2026-10-11",
+        "tier": "unranked",
+        "note": "",
+        "album": "Love Again",
+        "cover": "/img/kpop/2026-10/4156258.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511123",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156258",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:03+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511123",
+          "albumSource": "https://music.bugs.co.kr/album/4156258",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "현빈 (HYUNBIN)",
+              "요치 (YORCH)",
+              "PADO (PAPERMAKER)",
+              "Cool Cat"
+            ],
+            "lyricists": [
+              "현빈 (HYUNBIN)"
+            ],
+            "arrangers": [
+              "PADO (PAPERMAKER)",
+              "Cool Cat"
+            ],
+            "vocals": [
+              "POW (파우)"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:52",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41562/4156258.jpg",
+          "sourceTitle": "Love Again",
+          "genres": "댄스/팝",
+          "styles": "팝 락",
+          "label": "그리드 엔터테인먼트",
+          "distributor": "Dreamus",
+          "sourceReleased": "2026.10.11",
+          "coverLocal": "./assets/covers/bugs-6511123.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34090926",
+        "title": "Good Bye",
+        "artist": "김철민",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "Good Bye",
+        "cover": "/img/kpop/2026-10/20845740.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34090926",
+        "sourceUrl": "https://music.bugs.co.kr/album/20845740",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:04+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34090926",
+          "albumSource": "https://music.bugs.co.kr/album/20845740",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "김철민"
+            ],
+            "lyricists": [
+              "김철민"
+            ],
+            "arrangers": [
+              "김철민"
+            ],
+            "vocals": [
+              "김철민"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:23",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208457/20845740.jpg",
+          "sourceTitle": "Good Bye",
+          "genres": "락/메탈",
+          "styles": "모던 락",
+          "label": "김철민",
+          "distributor": "오감엔터테인먼트",
+          "sourceReleased": "2026.10.12",
+          "coverLocal": "./assets/covers/bugs-34090926.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511285",
+        "title": "UNDEAD",
+        "artist": "성한빈",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "DEAD:ALIVE",
+        "cover": "/img/kpop/2026-10/4156305.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511285",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156305",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:04+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511285",
+          "albumSource": "https://music.bugs.co.kr/album/4156305",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "HONEY NOISE (THE HUB)",
+              "Ayushy (THE HUB)",
+              "Noerio"
+            ],
+            "lyricists": [
+              "0011Hz (PAPERMAKER)",
+              "Ayushy (THE HUB)",
+              "Noerio"
+            ],
+            "arrangers": [
+              "HONEY NOISE (THE HUB)"
+            ],
+            "vocals": [
+              "성한빈"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:52",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156305.jpg",
+          "sourceTitle": "UNDEAD",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "THE L1VE LABEL",
+          "distributor": "Dreamus",
+          "sourceReleased": "2026.10.12",
+          "coverLocal": "./assets/covers/bugs-6511285.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511637",
+        "title": "GO HARD",
+        "artist": "MEOVV (미야오)",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "GO HARD",
+        "cover": "/img/kpop/2026-10/4156410.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511637",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156410",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:29+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511637",
+          "albumSource": "https://music.bugs.co.kr/album/4156410",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "DCF",
+              "Dominsuk",
+              "24"
+            ],
+            "lyricists": [
+              "나린 (NARIN)",
+              "TEDDY",
+              "가원 (GAWON)",
+              "엘라 (ELLA)",
+              "안나 (ANNA)",
+              "DCF",
+              "24"
+            ],
+            "arrangers": [
+              "Dominsuk",
+              "24",
+              "KUSH"
+            ],
+            "vocals": [
+              "MEOVV (미야오)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:07",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156410.jpg",
+          "sourceTitle": "GO HARD",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "THEBLACKLABEL",
+          "distributor": "YG PLUS",
+          "sourceReleased": "2026.10.12",
+          "coverLocal": "./assets/covers/bugs-6511637.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "싱글",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-34092722",
+        "title": "타! (CAN YOU HEAR THAT)",
+        "artist": "MODYSSEY (모디세이)",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "2.Multitude: How We Bloom",
+        "cover": "/img/kpop/2026-10/20846103.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34092722",
+        "sourceUrl": "https://music.bugs.co.kr/album/20846103",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:29+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34092722",
+          "albumSource": "https://music.bugs.co.kr/album/20846103",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "리암 케이(Liam K)"
+            ],
+            "lyricists": [
+              "캘별 (153/Joombas)",
+              "AK(153/Joombas)",
+              "최유이(153/Joombas)",
+              "이앵두(153/Joombas)",
+              "김채아(153/Joombas)",
+              "Dave(153/Joombas)",
+              "영영(153/Joombas)",
+              "함유라(153/Joombas)",
+              "nung(153/Joombas)",
+              "gracey(153/Joombas)",
+              "700(153/Joombas)"
+            ],
+            "arrangers": [
+              "리암 케이(Liam K)"
+            ],
+            "vocals": [
+              "MODYSSEY (모디세이)"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:07",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/208461/20846103.jpg",
+          "sourceTitle": "타! (CAN YOU HEAR THAT)",
+          "genres": "댄스/팝",
+          "styles": "댄스 팝",
+          "label": "ONECEAD",
+          "distributor": "지니뮤직, STONE MUSIC",
+          "sourceReleased": "2026.10.12",
+          "coverLocal": "./assets/covers/bugs-34092722.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6509528",
+        "title": "I SPY",
+        "artist": "NCT WISH",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "I SPY - The 4th Mini Album",
+        "cover": "/img/kpop/2026-10/4155735.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6509528",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155735",
+        "details": {
+          "status": "collected",
+          "fetchedAt": "2026-11-10T04:53:30+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6509528",
+          "albumSource": "https://music.bugs.co.kr/album/4155735",
+          "missing": [],
+          "errors": [],
+          "credits": {
+            "composers": [
+              "David Wilson",
+              "Alna Hofmeyr",
+              "Louise Lindberg"
+            ],
+            "lyricists": [
+              "1월 8일"
+            ],
+            "arrangers": [
+              "dwilly"
+            ],
+            "vocals": [
+              "NCT WISH"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:05",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41557/4155735.jpg",
+          "sourceTitle": "I SPY",
+          "genres": "발라드 , 댄스/팝 , 알앤비/소울",
+          "styles": "발라드 , 댄스 팝 , 알앤비",
+          "label": "SM ENTERTAINMENT",
+          "distributor": "카카오엔터테인먼트",
+          "sourceReleased": "2026.10.12",
+          "coverLocal": "./assets/covers/bugs-6509528.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "albumType": "EP(미니)",
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511624",
+        "title": "Star Trace",
+        "artist": "PLAVE",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "HYPERDRIVE",
+        "cover": "/img/kpop/2026-10/4156402.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511624",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156402",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:53:53+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511624",
+          "albumSource": "https://music.bugs.co.kr/album/4156402",
+          "missing": [],
+          "errors": [
+            "앨범 상세 수집 실패: HTTP Error 429: Too Many Requests"
+          ],
+          "credits": {
+            "composers": [
+              "PLAVE",
+              "한강(HSND)",
+              "메케(MeQue)",
+              "viewhorse",
+              "yeol"
+            ],
+            "lyricists": [
+              "PLAVE",
+              "ASHER YELO",
+              "Eddy",
+              "Rob Grimaldi",
+              "Samson",
+              "un:named"
+            ],
+            "arrangers": [
+              "PLAVE",
+              "한강(HSND)",
+              "메케(MeQue)",
+              "viewhorse",
+              "yeol"
+            ],
+            "vocals": [
+              "PLAVE"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:59",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156402.jpg",
+          "sourceTitle": "Star Trace",
+          "coverLocal": "./assets/covers/bugs-6511624.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511277",
+        "title": "Obsessed with Youth",
+        "artist": "Xdinary Heroes",
+        "released": "2026-10-12",
+        "tier": "unranked",
+        "note": "",
+        "album": "IMPULSE",
+        "cover": "/img/kpop/2026-10/4156304.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511277",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156304",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:53:53+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511277",
+          "albumSource": "https://music.bugs.co.kr/album/4156304",
+          "missing": [],
+          "errors": [
+            "앨범 상세 수집 실패: HTTP Error 429: Too Many Requests"
+          ],
+          "credits": {
+            "composers": [
+              "이우민 \"collapsedone\"",
+              "Xdinary Heroes"
+            ],
+            "lyricists": [
+              "문지영 (lalala studio)",
+              "Xdinary Heroes",
+              "이우민 \"collapsedone\""
+            ],
+            "arrangers": [
+              "이우민 \"collapsedone\""
+            ],
+            "vocals": [
+              "Xdinary Heroes"
+            ]
+          },
+          "contributors": [],
+          "duration": "03:15",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41563/4156304.jpg",
+          "sourceTitle": "Obsessed with Youth",
+          "coverLocal": "./assets/covers/bugs-6511277.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6511789",
+        "title": "STAMINA",
+        "artist": "박우진",
+        "released": "2026-10-13",
+        "tier": "unranked",
+        "note": "",
+        "album": "SOLSTICE",
+        "cover": "/img/kpop/2026-10/4156426.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511789",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156426",
+        "details": {
+          "status": "partial",
+          "fetchedAt": "2026-11-10T04:53:54+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511789",
+          "albumSource": "https://music.bugs.co.kr/album/4156426",
+          "missing": [],
+          "errors": [
+            "앨범 상세 수집 실패: HTTP Error 429: Too Many Requests"
+          ],
+          "credits": {
+            "composers": [
+              "태그 (ONE PACT)",
+              "LUKE",
+              "이승훈",
+              "ByHVN (153/Joombas)"
+            ],
+            "lyricists": [
+              "태그 (ONE PACT)",
+              "박우진",
+              "LUKE",
+              "김혜원",
+              "김다빈 (PAPERMAKER)",
+              "김채아(153/Joombas)",
+              "이앵두(153/Joombas)",
+              "소해 (PAPERMAKER)",
+              "홍한나 (XYXX)",
+              "outbound(MUMW)",
+              "박랑(XYXX)"
+            ],
+            "arrangers": [
+              "LUKE",
+              "이승훈",
+              "ByHVN (153/Joombas)"
+            ],
+            "vocals": [
+              "박우진"
+            ]
+          },
+          "contributors": [],
+          "duration": "02:26",
+          "coverSource": "https://image.bugsm.co.kr/album/images/1200/41564/4156426.jpg",
+          "sourceTitle": "STAMINA",
+          "coverLocal": "./assets/covers/bugs-6511789.webp",
+          "coverSize": [
+            600,
+            600
+          ],
+          "coverProvenance": "bugs-source"
+        }
+      },
+      {
+        "id": "bugs-6512032",
+        "title": "미안해, 사랑해서...",
+        "artist": "김예찬",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "미안해, 사랑해서...",
+        "cover": "/img/kpop/2026-10/4156503.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512032",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156503",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:35+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512032",
+          "albumSource": "https://music.bugs.co.kr/album/4156503",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한 · Retry-After: 78",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512032.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156503.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512037",
+        "title": "잊지못해",
+        "artist": "김지웅 (ZEROBASEONE)",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "잊지못해",
+        "cover": "/img/kpop/2026-10/4156505.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512037",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156505",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:35+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512037",
+          "albumSource": "https://music.bugs.co.kr/album/4156505",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한 · Retry-After: 78",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512037.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156505.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512017",
+        "title": "DEVIL",
+        "artist": "남우현",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "2X8",
+        "cover": "/img/kpop/2026-10/4156502.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512017",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156502",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512017",
+          "albumSource": "https://music.bugs.co.kr/album/4156502",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512017.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156502.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34088401",
+        "title": "미제",
+        "artist": "유주 (YUJU)",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "file. 07",
+        "cover": "/img/kpop/2026-10/20845132.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34088401",
+        "sourceUrl": "https://music.bugs.co.kr/album/20845132",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34088401",
+          "albumSource": "https://music.bugs.co.kr/album/20845132",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34088401.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20845132.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34092846",
+        "title": "BUNZI",
+        "artist": "이한결",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "NOISE",
+        "cover": "/img/kpop/2026-10/20846117.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34092846",
+        "sourceUrl": "https://music.bugs.co.kr/album/20846117",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34092846",
+          "albumSource": "https://music.bugs.co.kr/album/20846117",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34092846.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20846117.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512054",
+        "title": "WHICH WAY",
+        "artist": "DAILY:DIRECTION",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "WHICH WAY",
+        "cover": "/img/kpop/2026-10/4156514.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512054",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156514",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512054",
+          "albumSource": "https://music.bugs.co.kr/album/4156514",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512054.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156514.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6511054",
+        "title": "너의 계절이 찾아와 (Bloom)",
+        "artist": "FLARE U (플레어 유)",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "LOVEHOOD",
+        "cover": "/img/kpop/2026-10/4156224.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511054",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156224",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511054",
+          "albumSource": "https://music.bugs.co.kr/album/4156224",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6511054.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156224.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6511956",
+        "title": "OVERSHOOT",
+        "artist": "muuo:23",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "NEVERTHELESS",
+        "cover": "/img/kpop/2026-10/4156483.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511956",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156483",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511956",
+          "albumSource": "https://music.bugs.co.kr/album/4156483",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6511956.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156483.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6511975",
+        "title": "Lover′s Night",
+        "artist": "NIKA (니카)",
+        "released": "2026-10-14",
+        "tier": "unranked",
+        "note": "",
+        "album": "Osaka - Seoul - Kiel",
+        "cover": "/img/kpop/2026-10/4156486.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511975",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156486",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511975",
+          "albumSource": "https://music.bugs.co.kr/album/4156486",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6511975.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156486.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6511952",
+        "title": "Wonderful Ending",
+        "artist": "이진솔",
+        "released": "2026-10-15",
+        "tier": "unranked",
+        "note": "",
+        "album": "Wonderful Ending",
+        "cover": "/img/kpop/2026-10/4156481.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511952",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156481",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511952",
+          "albumSource": "https://music.bugs.co.kr/album/4156481",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6511952.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156481.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512180",
+        "title": "DON'T STOP",
+        "artist": "틴 탑(Teen Top)",
+        "released": "2026-10-15",
+        "tier": "unranked",
+        "note": "",
+        "album": "DON'T STOP",
+        "cover": "/img/kpop/2026-10/4156564.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512180",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156564",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512180",
+          "albumSource": "https://music.bugs.co.kr/album/4156564",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512180.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156564.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6511953",
+        "title": "이상기류",
+        "artist": "희재(SEVENUS)",
+        "released": "2026-10-15",
+        "tier": "unranked",
+        "note": "",
+        "album": "Beyond the Wind",
+        "cover": "/img/kpop/2026-10/4156482.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6511953",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156482",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6511953",
+          "albumSource": "https://music.bugs.co.kr/album/4156482",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6511953.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156482.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512167",
+        "title": "오색 낙원",
+        "artist": "MY:RAKL (미라클)",
+        "released": "2026-10-15",
+        "tier": "unranked",
+        "note": "",
+        "album": "오색 낙원",
+        "cover": "/img/kpop/2026-10/4156558.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512167",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156558",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512167",
+          "albumSource": "https://music.bugs.co.kr/album/4156558",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512167.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156558.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34096546",
+        "title": "상어",
+        "artist": "문석 (Moonsek)",
+        "released": "2026-10-16",
+        "tier": "unranked",
+        "note": "",
+        "album": "상어",
+        "cover": "/img/kpop/2026-10/20846875.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34096546",
+        "sourceUrl": "https://music.bugs.co.kr/album/20846875",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34096546",
+          "albumSource": "https://music.bugs.co.kr/album/20846875",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34096546.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20846875.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512360",
+        "title": "Next Chapter",
+        "artist": "Hearts2Hearts (하츠투하츠)",
+        "released": "2026-10-16",
+        "tier": "unranked",
+        "note": "",
+        "album": "Next Chapter",
+        "cover": "/img/kpop/2026-10/4156633.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512360",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156633",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512360",
+          "albumSource": "https://music.bugs.co.kr/album/4156633",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512360.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156633.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512367",
+        "title": "Andless",
+        "artist": "tripleS (트리플에스)",
+        "released": "2026-10-16",
+        "tier": "unranked",
+        "note": "",
+        "album": "<LOVE&POP> pt.2",
+        "cover": "/img/kpop/2026-10/4156636.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512367",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156636",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512367",
+          "albumSource": "https://music.bugs.co.kr/album/4156636",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512367.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156636.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512162",
+        "title": "새벽의 문턱",
+        "artist": "제인",
+        "released": "2026-10-17",
+        "tier": "unranked",
+        "note": "",
+        "album": "새벽의 문턱",
+        "cover": "/img/kpop/2026-10/4156554.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512162",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156554",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512162",
+          "albumSource": "https://music.bugs.co.kr/album/4156554",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512162.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156554.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512377",
+        "title": "2016",
+        "artist": "한혜리",
+        "released": "2026-10-17",
+        "tier": "unranked",
+        "note": "",
+        "album": "2016",
+        "cover": "/img/kpop/2026-10/4156641.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512377",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156641",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512377",
+          "albumSource": "https://music.bugs.co.kr/album/4156641",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512377.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156641.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34096840",
+        "title": "우리가 헤어지지 않았더라면 (Feat. 수아)",
+        "artist": "김태헌",
+        "released": "2026-10-18",
+        "tier": "unranked",
+        "note": "",
+        "album": "우리가 헤어지지 않았더라면",
+        "cover": "/img/kpop/2026-10/20846927.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34096840",
+        "sourceUrl": "https://music.bugs.co.kr/album/20846927",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34096840",
+          "albumSource": "https://music.bugs.co.kr/album/20846927",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34096840.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20846927.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512427",
+        "title": "초코",
+        "artist": "이동열",
+        "released": "2026-10-18",
+        "tier": "unranked",
+        "note": "",
+        "album": "초코",
+        "cover": "/img/kpop/2026-10/4156652.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512427",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156652",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512427",
+          "albumSource": "https://music.bugs.co.kr/album/4156652",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512427.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156652.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512559",
+        "title": "Us (Korean Ver.)",
+        "artist": "신수현",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "Us (Korean Ver.)",
+        "cover": "/img/kpop/2026-10/4156713.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512559",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156713",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512559",
+          "albumSource": "https://music.bugs.co.kr/album/4156713",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512559.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156713.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512754",
+        "title": "12 o'clock",
+        "artist": "정한X조슈아 (SEVENTEEN)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "DREAMSCAPE",
+        "cover": "/img/kpop/2026-10/4156801.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512754",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156801",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512754",
+          "albumSource": "https://music.bugs.co.kr/album/4156801",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512754.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156801.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512720",
+        "title": "All Of My Life",
+        "artist": "최강창민 (MAX CHANGMIN)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "All Of My Life - The 3rd Mini Album",
+        "cover": "/img/kpop/2026-10/4156788.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512720",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156788",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512720",
+          "albumSource": "https://music.bugs.co.kr/album/4156788",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512720.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156788.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512614",
+        "title": "LOOK AT MA",
+        "artist": "EVNNE(이븐)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "on: our noise",
+        "cover": "/img/kpop/2026-10/4156738.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512614",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156738",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512614",
+          "albumSource": "https://music.bugs.co.kr/album/4156738",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512614.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156738.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512717",
+        "title": "Looks Can Kill",
+        "artist": "IVE (아이브)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "Looks Can Kill",
+        "cover": "/img/kpop/2026-10/4156785.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512717",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156785",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512717",
+          "albumSource": "https://music.bugs.co.kr/album/4156785",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512717.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156785.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512491",
+        "title": "긴 소원 (Birthday Wish)",
+        "artist": "NMIXX",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "Strange Muse",
+        "cover": "/img/kpop/2026-10/4156690.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512491",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156690",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512491",
+          "albumSource": "https://music.bugs.co.kr/album/4156690",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512491.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156690.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34098356",
+        "title": "Ending Credit",
+        "artist": "V01D(보이드)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "YOUTHQUAKE",
+        "cover": "/img/kpop/2026-10/20847222.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34098356",
+        "sourceUrl": "https://music.bugs.co.kr/album/20847222",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34098356",
+          "albumSource": "https://music.bugs.co.kr/album/20847222",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34098356.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20847222.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34098357",
+        "title": "My Youth",
+        "artist": "V01D(보이드)",
+        "released": "2026-10-19",
+        "tier": "unranked",
+        "note": "",
+        "album": "YOUTHQUAKE",
+        "cover": "/img/kpop/2026-10/20847222.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34098357",
+        "sourceUrl": "https://music.bugs.co.kr/album/20847222",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34098357",
+          "albumSource": "https://music.bugs.co.kr/album/20847222",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34098357.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20847222.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512805",
+        "title": "CHOP!",
+        "artist": "비더후드(B THE HOOD)",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "THE REAL DEAL",
+        "cover": "/img/kpop/2026-10/4156816.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512805",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156816",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512805",
+          "albumSource": "https://music.bugs.co.kr/album/4156816",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512805.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156816.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512750",
+        "title": "착각",
+        "artist": "온유 (ONEW)",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "착각",
+        "cover": "/img/kpop/2026-10/4156019.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512750",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156019",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512750",
+          "albumSource": "https://music.bugs.co.kr/album/4156019",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512750.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156019.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512873",
+        "title": "PARANOIA",
+        "artist": "Catch The Young(캐치더영)",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "PARANOIA",
+        "cover": "/img/kpop/2026-10/4156840.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512873",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156840",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512873",
+          "albumSource": "https://music.bugs.co.kr/album/4156840",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512873.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156840.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512848",
+        "title": "APPLE",
+        "artist": "UX1 (유엑스원)",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "UX1 1st Mini Album",
+        "cover": "/img/kpop/2026-10/4156833.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512848",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156833",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512848",
+          "albumSource": "https://music.bugs.co.kr/album/4156833",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512848.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156833.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512871",
+        "title": "Come into my world!",
+        "artist": "WOODZ",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "Come into my world!",
+        "cover": "/img/kpop/2026-10/4156839.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512871",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156839",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512871",
+          "albumSource": "https://music.bugs.co.kr/album/4156839",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512871.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156839.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34102704",
+        "title": "BANANA",
+        "artist": "ZELO(젤로)",
+        "released": "2026-10-20",
+        "tier": "unranked",
+        "note": "",
+        "album": "BANANA",
+        "cover": "/img/kpop/2026-10/20848291.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34102704",
+        "sourceUrl": "https://music.bugs.co.kr/album/20848291",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34102704",
+          "albumSource": "https://music.bugs.co.kr/album/20848291",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34102704.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20848291.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512561",
+        "title": "Blue",
+        "artist": "강다니엘(KANG DANIEL)",
+        "released": "2026-10-21",
+        "tier": "unranked",
+        "note": "",
+        "album": "Blue",
+        "cover": "/img/kpop/2026-10/4156715.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512561",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156715",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512561",
+          "albumSource": "https://music.bugs.co.kr/album/4156715",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512561.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156715.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34101736",
+        "title": "처음 그 자리에",
+        "artist": "송하영 (프로미스나인)",
+        "released": "2026-10-21",
+        "tier": "unranked",
+        "note": "",
+        "album": "처음 그 자리에",
+        "cover": "/img/kpop/2026-10/20848012.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34101736",
+        "sourceUrl": "https://music.bugs.co.kr/album/20848012",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34101736",
+          "albumSource": "https://music.bugs.co.kr/album/20848012",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34101736.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20848012.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34098710",
+        "title": "나를 숨쉬게 만드는 너",
+        "artist": "여은",
+        "released": "2026-10-21",
+        "tier": "unranked",
+        "note": "",
+        "album": "나를 숨쉬게 만드는 너",
+        "cover": "/img/kpop/2026-10/20847292.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34098710",
+        "sourceUrl": "https://music.bugs.co.kr/album/20847292",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34098710",
+          "albumSource": "https://music.bugs.co.kr/album/20847292",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34098710.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20847292.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6512880",
+        "title": "꿈의 정원",
+        "artist": "이은상",
+        "released": "2026-10-21",
+        "tier": "unranked",
+        "note": "",
+        "album": "꿈의 정원",
+        "cover": "/img/kpop/2026-10/4156842.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6512880",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156842",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6512880",
+          "albumSource": "https://music.bugs.co.kr/album/4156842",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6512880.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156842.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34103456",
+        "title": "B.B.B",
+        "artist": "YUHZ(유어즈)",
+        "released": "2026-10-21",
+        "tier": "unranked",
+        "note": "",
+        "album": "B",
+        "cover": "/img/kpop/2026-10/20848467.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34103456",
+        "sourceUrl": "https://music.bugs.co.kr/album/20848467",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34103456",
+          "albumSource": "https://music.bugs.co.kr/album/20848467",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34103456.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20848467.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34100772",
+        "title": "Love and Hate",
+        "artist": "제현(JEHYUN)",
+        "released": "2026-10-22",
+        "tier": "unranked",
+        "note": "",
+        "album": "ironic",
+        "cover": "/img/kpop/2026-10/20847801.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34100772",
+        "sourceUrl": "https://music.bugs.co.kr/album/20847801",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34100772",
+          "albumSource": "https://music.bugs.co.kr/album/20847801",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34100772.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20847801.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34102117",
+        "title": "Little light",
+        "artist": "지안",
+        "released": "2026-10-22",
+        "tier": "unranked",
+        "note": "",
+        "album": "Little light",
+        "cover": "/img/kpop/2026-10/20848136.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34102117",
+        "sourceUrl": "https://music.bugs.co.kr/album/20848136",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34102117",
+          "albumSource": "https://music.bugs.co.kr/album/20848136",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34102117.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20848136.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513353",
+        "title": "Golden Pages",
+        "artist": "노민재",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "Golden Pages",
+        "cover": "/img/kpop/2026-10/4156992.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513353",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156992",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513353",
+          "albumSource": "https://music.bugs.co.kr/album/4156992",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513353.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156992.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513332",
+        "title": "Tarantino",
+        "artist": "리사(LISA)",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "PRESS PLAY",
+        "cover": "/img/kpop/2026-10/4156982.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513332",
+        "sourceUrl": "https://music.bugs.co.kr/album/4156982",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513332",
+          "albumSource": "https://music.bugs.co.kr/album/4156982",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513332.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4156982.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513418",
+        "title": "to the moon :)",
+        "artist": "민니 (MINNIE)",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "i love you to the moon and back",
+        "cover": "/img/kpop/2026-10/4157005.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513418",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157005",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513418",
+          "albumSource": "https://music.bugs.co.kr/album/4157005",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513418.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157005.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34103907",
+        "title": "Tempo",
+        "artist": "아리사 (ARISA)",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "Tempo",
+        "cover": "/img/kpop/2026-10/20848578.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34103907",
+        "sourceUrl": "https://music.bugs.co.kr/album/20848578",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34103907",
+          "albumSource": "https://music.bugs.co.kr/album/20848578",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34103907.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20848578.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513459",
+        "title": "What유like",
+        "artist": "우진영",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "What유like",
+        "cover": "/img/kpop/2026-10/4157021.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513459",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157021",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513459",
+          "albumSource": "https://music.bugs.co.kr/album/4157021",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513459.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157021.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-134204020",
+        "title": "Drip",
+        "artist": "ATEEZ(에이티즈)",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "Drip",
+        "cover": "/img/kpop/2026-10/41026868.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/134204020",
+        "sourceUrl": "https://music.bugs.co.kr/album/41026868",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/134204020",
+          "albumSource": "https://music.bugs.co.kr/album/41026868",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-134204020.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/41026868.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513571",
+        "title": "DESERVE",
+        "artist": "BABYMONSTER",
+        "released": "2026-10-23",
+        "tier": "unranked",
+        "note": "",
+        "album": "DESERVE",
+        "cover": "/img/kpop/2026-10/4157043.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513571",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157043",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513571",
+          "albumSource": "https://music.bugs.co.kr/album/4157043",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513571.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157043.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513740",
+        "title": "Hey, Somebody",
+        "artist": "샤오쥔 (XIAOJUN)",
+        "released": "2026-10-26",
+        "tier": "unranked",
+        "note": "",
+        "album": "Hey, Somebody - The 1st Mini Album",
+        "cover": "/img/kpop/2026-10/4157119.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513740",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157119",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513740",
+          "albumSource": "https://music.bugs.co.kr/album/4157119",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513740.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157119.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513869",
+        "title": "체포하겠어",
+        "artist": "아일릿(ILLIT)",
+        "released": "2026-10-26",
+        "tier": "unranked",
+        "note": "",
+        "album": "BREAK EVEN",
+        "cover": "/img/kpop/2026-10/4157189.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513869",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157189",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513869",
+          "albumSource": "https://music.bugs.co.kr/album/4157189",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513869.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157189.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513863",
+        "title": "Blue Sky",
+        "artist": "은혁 (EUNHYUK)",
+        "released": "2026-10-26",
+        "tier": "unranked",
+        "note": "",
+        "album": "Blue Sky",
+        "cover": "/img/kpop/2026-10/4157185.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513863",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157185",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513863",
+          "albumSource": "https://music.bugs.co.kr/album/4157185",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513863.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157185.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513728",
+        "title": "Insomnia",
+        "artist": "RIIZE",
+        "released": "2026-10-26",
+        "tier": "unranked",
+        "note": "",
+        "album": "Insomnia",
+        "cover": "/img/kpop/2026-10/4157112.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513728",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157112",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513728",
+          "albumSource": "https://music.bugs.co.kr/album/4157112",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513728.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157112.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513822",
+        "title": "Lucky Charm",
+        "artist": "WE GO-6",
+        "released": "2026-10-26",
+        "tier": "unranked",
+        "note": "",
+        "album": "Lucky Charm",
+        "cover": "/img/kpop/2026-10/4155552.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513822",
+        "sourceUrl": "https://music.bugs.co.kr/album/4155552",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513822",
+          "albumSource": "https://music.bugs.co.kr/album/4155552",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513822.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4155552.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513932",
+        "title": "French Kissing",
+        "artist": "AND2BLE (앤더블)",
+        "released": "2026-10-27",
+        "tier": "unranked",
+        "note": "",
+        "album": "Sequence 02: Attraction",
+        "cover": "/img/kpop/2026-10/4157224.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513932",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157224",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513932",
+          "albumSource": "https://music.bugs.co.kr/album/4157224",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513932.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157224.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513705",
+        "title": "CAME FOR THE GLORY",
+        "artist": "BE BOYS",
+        "released": "2026-10-27",
+        "tier": "unranked",
+        "note": "",
+        "album": "CAME FOR THE GLORY",
+        "cover": "/img/kpop/2026-10/4157104.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513705",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157104",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513705",
+          "albumSource": "https://music.bugs.co.kr/album/4157104",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513705.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157104.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513871",
+        "title": "Honeydew",
+        "artist": "JAY B",
+        "released": "2026-10-27",
+        "tier": "unranked",
+        "note": "",
+        "album": "Chptr. 1",
+        "cover": "/img/kpop/2026-10/4157190.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513871",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157190",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513871",
+          "albumSource": "https://music.bugs.co.kr/album/4157190",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513871.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157190.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513627",
+        "title": "Hysteric",
+        "artist": "Yves (이브)",
+        "released": "2026-10-27",
+        "tier": "unranked",
+        "note": "",
+        "album": "Hysteric / Adam",
+        "cover": "/img/kpop/2026-10/4157059.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513627",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157059",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513627",
+          "albumSource": "https://music.bugs.co.kr/album/4157059",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513627.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157059.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513924",
+        "title": "Day&Night",
+        "artist": "신원호",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "Day&Night",
+        "cover": "/img/kpop/2026-10/4157220.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513924",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157220",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513924",
+          "albumSource": "https://music.bugs.co.kr/album/4157220",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513924.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157220.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514035",
+        "title": "Vibes (Feat. 권은비(KWON EUNBI))",
+        "artist": "임슬옹",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "Vibes (Feat. 권은비(KWON EUNBI))",
+        "cover": "/img/kpop/2026-10/4157265.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514035",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157265",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514035",
+          "albumSource": "https://music.bugs.co.kr/album/4157265",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514035.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157265.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513763",
+        "title": "gun shot",
+        "artist": "필독 (feeldog)",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "gun shot",
+        "cover": "/img/kpop/2026-10/4157130.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513763",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157130",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513763",
+          "albumSource": "https://music.bugs.co.kr/album/4157130",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513763.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157130.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34111461",
+        "title": "난리나",
+        "artist": "JUSTB",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "k-pop",
+        "cover": "/img/kpop/2026-10/20850198.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34111461",
+        "sourceUrl": "https://music.bugs.co.kr/album/20850198",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34111461",
+          "albumSource": "https://music.bugs.co.kr/album/20850198",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34111461.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20850198.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6513920",
+        "title": "투비(鬪悲)",
+        "artist": "Kei (케이)",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "투비(鬪悲)",
+        "cover": "/img/kpop/2026-10/4157217.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6513920",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157217",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6513920",
+          "albumSource": "https://music.bugs.co.kr/album/4157217",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6513920.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157217.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514078",
+        "title": "투스젬치와와",
+        "artist": "XLOV",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "i=!",
+        "cover": "/img/kpop/2026-10/4157274.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514078",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157274",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514078",
+          "albumSource": "https://music.bugs.co.kr/album/4157274",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514078.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157274.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514076",
+        "title": "Hush",
+        "artist": "XLOV",
+        "released": "2026-10-28",
+        "tier": "unranked",
+        "note": "",
+        "album": "i=!",
+        "cover": "/img/kpop/2026-10/4157274.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514076",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157274",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514076",
+          "albumSource": "https://music.bugs.co.kr/album/4157274",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514076.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157274.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514090",
+        "title": "Silhouette(실루엣)",
+        "artist": "엔탑(N.TOP)",
+        "released": "2026-10-29",
+        "tier": "unranked",
+        "note": "",
+        "album": "WE:BLOOM",
+        "cover": "/img/kpop/2026-10/4157278.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514090",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157278",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514090",
+          "albumSource": "https://music.bugs.co.kr/album/4157278",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514090.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157278.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34113434",
+        "title": "Sayonara (Japanese)",
+        "artist": "허영생",
+        "released": "2026-10-29",
+        "tier": "unranked",
+        "note": "",
+        "album": "HEO YOUNGSAENG Mini Album『LOOK BACK』",
+        "cover": "/img/kpop/2026-10/20850570.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34113434",
+        "sourceUrl": "https://music.bugs.co.kr/album/20850570",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34113434",
+          "albumSource": "https://music.bugs.co.kr/album/20850570",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34113434.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20850570.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-34110340",
+        "title": "RASCALS (Find The Pearl)",
+        "artist": "AM8IC",
+        "released": "2026-10-29",
+        "tier": "unranked",
+        "note": "",
+        "album": "RASCALS (Find The Pearl)",
+        "cover": "/img/kpop/2026-10/20849961.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/34110340",
+        "sourceUrl": "https://music.bugs.co.kr/album/20849961",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/34110340",
+          "albumSource": "https://music.bugs.co.kr/album/20849961",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-34110340.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/20849961.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514168",
+        "title": "RING IT",
+        "artist": "DXMON (다이몬)",
+        "released": "2026-10-29",
+        "tier": "unranked",
+        "note": "",
+        "album": "HYPER LINK : Vol.4",
+        "cover": "/img/kpop/2026-10/4157314.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514168",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157314",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514168",
+          "albumSource": "https://music.bugs.co.kr/album/4157314",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514168.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157314.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514386",
+        "title": "TRAUMA (Feat. Takanashi Kiara)",
+        "artist": "아이리제 (IRISÉ)",
+        "released": "2026-10-30",
+        "tier": "unranked",
+        "note": "",
+        "album": "TRAUMA (Feat. Takanashi Kiara)",
+        "cover": "/img/kpop/2026-10/4157387.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514386",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157387",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514386",
+          "albumSource": "https://music.bugs.co.kr/album/4157387",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514386.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157387.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-6514426",
+        "title": "ADDICTED",
+        "artist": "지수(JISOO)",
+        "released": "2026-10-30",
+        "tier": "unranked",
+        "note": "",
+        "album": "ADDICTED",
+        "cover": "/img/kpop/2026-10/4157396.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/6514426",
+        "sourceUrl": "https://music.bugs.co.kr/album/4157396",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/6514426",
+          "albumSource": "https://music.bugs.co.kr/album/4157396",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-6514426.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/4157396.webp",
+          "coverProvenance": "existing-blog"
+        }
+      },
+      {
+        "id": "bugs-134379187",
+        "title": "Give Me Love",
+        "artist": "cosmosy",
+        "released": "2026-10-30",
+        "tier": "unranked",
+        "note": "",
+        "album": "Give Me Love",
+        "cover": "/img/kpop/2026-10/41089965.webp",
+        "listenUrl": "https://music.bugs.co.kr/track/134379187",
+        "sourceUrl": "https://music.bugs.co.kr/album/41089965",
+        "details": {
+          "status": "pending",
+          "fetchedAt": "2026-11-10T04:58:42+00:00",
+          "trackSource": "https://music.bugs.co.kr/track/134379187",
+          "albumSource": "https://music.bugs.co.kr/album/41089965",
+          "missing": [
+            "작곡",
+            "작사",
+            "편곡"
+          ],
+          "errors": [
+            "곡 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기",
+            "앨범 상세 수집 실패: HTTP 429 호출 제한으로 수집 대기"
+          ],
+          "coverLocal": "./assets/covers/bugs-134379187.webp",
+          "coverSize": [
+            480,
+            480
+          ],
+          "coverSource": "https://bunnykey.github.io/img/kpop/2026-10/41089965.webp",
+          "coverProvenance": "existing-blog"
+        }
+      }
+    ]
+  }
+]

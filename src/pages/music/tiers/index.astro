@@ -4,6 +4,6 @@ import KpopTierBoard from '../../../components/music/KpopTierBoard.astro';
 import catalog from '../../../data/kpop-months.json';
 const onlyDemo = !catalog.some(month => month.published && !month.demo);
 ---
-<Layout title="분기별 케이팝 감상 | The Greenhouse" description="들은 케이팝 곡만 골라 담고 분기별 티어와 한줄평을 기록하세요." canonicalPath="/music/tiers/" noIndex={onlyDemo}>
+<Layout title="분기별 케이팝 감상 | Bunny Side" description="들은 케이팝 곡만 골라 담고 분기별 티어와 한줄평을 기록하세요." canonicalPath="/music/tiers/" noIndex={onlyDemo}>
   <KpopTierBoard />
 </Layout>
