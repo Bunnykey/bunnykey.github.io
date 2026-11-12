@@ -1,12 +1,12 @@
 ---
 import { SITE } from '../consts/site';
 import ThemeToggle from './ThemeToggle.astro';
+import { PRIMARY_LINKS } from '../consts/navigation.mjs';
 
 const currentPath = Astro.url.pathname;
 const navLinks = [
   { label: '일상', href: '/topics/life/' },
   { label: '요리', href: '/topics/food/' },
-  { label: '음악', href: '/topics/music/' },
   { label: '여행', href: '/topics/travel/' },
   { label: '기술', href: '/topics/tech/' },
 ];
@@ -17,8 +17,7 @@ const navLinks = [
     <a href="/" class="text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">{SITE.name}</a>
     <div class="flex items-center gap-0 md:gap-4">
       <div class="hidden md:flex items-center gap-6">
-        <a href="/" class="text-sm">글</a>
-        <a href="/gardener/" class="text-sm">소개</a>
+        {PRIMARY_LINKS.map(link => <a href={link.href} data-site-link data-active-paths={link.activePaths || link.href} data-astro-reload={link.reload} class="text-sm">{link.label}</a>)}
       </div>
       <ThemeToggle />
       <a href="/search/" data-astro-reload class="flex items-center justify-center w-11 h-11 text-foreground-muted hover:text-foreground transition-colors" aria-label="검색" title="검색">
@@ -31,12 +30,11 @@ const navLinks = [
   </div>
   <div id="mobile-drawer" class="nav-drawer md:hidden" inert aria-hidden="true">
     <div class="pt-4 pb-2 flex flex-col">
+      {PRIMARY_LINKS.map(link => <a href={link.href} data-site-link data-active-paths={link.activePaths || link.href} data-astro-reload={link.reload} class="py-3 text-sm border-b border-outline-subtle/10">{link.label}</a>)}
       {navLinks.map((link) => {
         const isActive = currentPath.startsWith(link.href);
         return <a href={link.href} class:list={['py-3 text-sm transition-colors border-b border-outline-subtle/10', isActive ? 'text-foreground font-medium' : 'text-foreground-muted hover:text-foreground']} aria-current={isActive ? 'page' : undefined}>{link.label}</a>;
       })}
-      <a href="/gardener/" class="py-3 text-sm">소개</a>
-      <a href="/write/" data-astro-reload class="py-3 text-sm">글쓰기</a>
       <a href="/topics/notes/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">기록</a>
       <a href="/search/" data-astro-reload class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
     </div>
@@ -48,9 +46,10 @@ const navLinks = [
     function init() {
       const toggle = document.getElementById('menu-toggle');
       const drawer = document.getElementById('mobile-drawer');
-      // Navbar persists through Astro navigation; refresh its active topic each time.
-      drawer?.querySelectorAll('a[href]').forEach(link => {
-        const active = window.location.pathname.startsWith(link.getAttribute('href'));
+      // The persisted navbar must follow the route after every Astro navigation.
+      document.querySelectorAll('[data-site-link], #mobile-drawer a[href]').forEach(link => {
+        const active = (link.dataset.activePaths || link.getAttribute('href')).split(' ').some(path =>
+          path === '/' ? window.location.pathname === '/' : window.location.pathname.replace(/\/?$/, '/').startsWith(path));
         if (active) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
         link.classList.toggle('font-medium', active);
         link.classList.toggle('text-foreground', active);

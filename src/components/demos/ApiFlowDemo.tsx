@@ -114,6 +114,7 @@ export default function ApiFlowDemo() {
   const [completedStages, setCompletedStages] = useState<Set<StageId>>(new Set());
   const [result, setResult] = useState<RunResult | null>(null);
   const [running, setRunning] = useState(false);
+  const [error, setError] = useState('');
   const [postId, setPostId] = useState(1);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -124,6 +125,7 @@ export default function ApiFlowDemo() {
     abortRef.current = controller;
 
     setRunning(true);
+    setError('');
     setResult(null);
     setCompletedStages(new Set());
 
@@ -142,6 +144,7 @@ export default function ApiFlowDemo() {
         const t0 = performance.now();
         try {
           const res = await fetch(url, { signal: controller.signal });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
           const json = await res.json();
           const fetchMs = Math.round(performance.now() - t0);
 
@@ -171,6 +174,7 @@ export default function ApiFlowDemo() {
           return;
         } catch {
           if (!controller.signal.aborted) {
+            setError('예제 API에 연결하지 못했습니다. 네트워크 상태를 확인하고 Send를 눌러 다시 시도해 주세요.');
             setCurrentStage('idle');
             setRunning(false);
           }
@@ -200,6 +204,7 @@ export default function ApiFlowDemo() {
         }
       `}</style>
 
+      {error && <p role="alert" style={{color: 'var(--color-error)', marginBottom: '1rem'}}>{error}</p>}
       {/* Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.25rem', flexWrap: 'wrap' }}>
         <code style={{

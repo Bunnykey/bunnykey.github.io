@@ -9,7 +9,8 @@ const topic = TOPICS[topicKey];
 const posts = (await getAllPosts()).filter(post => topicFor(post.data.category) === topicKey);
 ---
 <Layout title={`${topic.label} | The Greenhouse`} description={topic.description} canonicalPath={`/topics/${topicKey}/`}>
-  {topicKey === 'music' && <aside class="music-tier-entry"><a href="/music/tiers/">들은 곡 · 분기별 티어 ↗</a><span>들은 곡만 골라 담아 한 분기의 취향을 기록합니다.</span></aside>}
+  {topicKey === 'tech' && <aside class="music-tier-entry"><a href="/demos/">인터랙티브 데모 →</a><span>토큰 배분과 API 요청 흐름을 직접 살펴봅니다.</span></aside>}
+  {topicKey === 'music' && <aside class="music-tier-entry"><a href="/music/tiers/">들은 곡 · 분기별 티어 →</a><a href="/music-tiers/studio/" data-astro-reload>감상 작업실 →</a><span>들은 곡만 골라 담아 한 분기의 취향을 기록합니다.</span></aside>}
   <JournalList posts={posts} topic={topicKey} />
 </Layout>
 

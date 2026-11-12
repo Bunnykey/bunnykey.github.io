@@ -1,0 +1,11 @@
+---
+import { QUICK_LINKS } from '../consts/navigation.mjs';
+---
+<nav class="quick-links" aria-label="자주 쓰는 기능">
+  {QUICK_LINKS.map(link => <a href={link.href} data-astro-reload={link.reload}>{link.label}<span aria-hidden="true"> →</span></a>)}
+</nav>
+<style>
+  .quick-links { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; margin-top: 1.25rem; padding: .6rem 0; border-block: 1px solid var(--color-outline-subtle); }
+  a { display: inline-flex; align-items: center; min-height: 44px; font-size: .85rem; color: var(--color-accent); }
+  a:hover { text-decoration: underline; text-underline-offset: .2em; }
+</style>

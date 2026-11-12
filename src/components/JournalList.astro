@@ -1,4 +1,5 @@
 ---
+import QuickLinks from './QuickLinks.astro';
 import { TOPICS, topicFor, type TopicKey } from '../consts/topics';
 import type { PostWithSection } from '../utils/posts';
 interface Props { posts: PostWithSection[]; topic?: TopicKey; }
@@ -9,6 +10,7 @@ const { posts, topic } = Astro.props;
     <h1>{topic ? TOPICS[topic].label : '글'}</h1>
     <p>{topic ? TOPICS[topic].description : '살면서 배우고, 듣고, 남겨두고 싶은 것들.'}</p>
   </header>
+  {!topic && <QuickLinks />}
   <nav class="topic-nav" aria-label="글 주제">
     <a href="/" aria-current={!topic ? 'page' : undefined}>전체</a>
     {Object.entries(TOPICS).map(([key, item]) => <a href={`/topics/${key}/`} aria-current={key === topic ? 'page' : undefined}>{item.label}</a>)}

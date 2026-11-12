@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { WORKSPACE_GROUPS } from '../consts/navigation.mjs';
+const repo = 'https://github.com/Bunnykey/bunnykey.github.io/blob/main/';
+---
+<Layout title="작업실 | The Greenhouse" description="감상 목록, 글쓰기, 미리보기, 인터랙티브 데모와 블로그 도구를 한곳에서 찾습니다.">
+  <div class="workbench">
+    <header><h1>작업실</h1><p>듣고, 쓰고, 만들어 둔 것들. 여기서 이어 가세요.</p></header>
+    <nav class="contents" aria-label="작업실 바로가기">
+      {WORKSPACE_GROUPS.map((group, i) => <a href={`#group-${i}`}>{group.title}</a>)}
+      <a href="#connected-tools">로컬·연결 도구</a>
+    </nav>
+    {WORKSPACE_GROUPS.map((group, i) => <section id={`group-${i}`} aria-labelledby={`heading-${i}`}>
+      <h2 id={`heading-${i}`}>{group.title}</h2>
+      <div class="tool-list">{group.items.map(item => <article>
+        <a class="tool-title" href={item.href} data-astro-reload={item.reload}>{item.label}<span aria-hidden="true"> →</span></a>
+        <p>{item.description}</p>{item.note && <small>{item.note}</small>}
+      </article>)}</div>
+    </section>)}
+    <section id="connected-tools" aria-labelledby="connected-title">
+      <h2 id="connected-title">로컬·연결 도구</h2>
+      <p class="section-intro">별도로 실행하거나 연결을 준비한 뒤 사용하는 도구입니다.</p>
+      <details><summary>로컬 편집기 · 실행 방법</summary>
+        <p>블로그 저장소를 내려받은 컴퓨터에서 실행하세요. 시각 편집, Markdown, 이미지·미디어 삽입, 미리보기와 발행을 지원합니다.</p>
+        <pre><code>npm ci<br />npm run editor</code></pre>
+        <p>실행 후 같은 컴퓨터의 브라우저에서 <code>http://localhost:4322</code>를 여세요. 휴대폰 연결에는 실행 중인 컴퓨터와 신뢰할 수 있는 네트워크가 필요합니다.</p>
+        <a href={`${repo}scripts/editor/README.md`} target="_blank" rel="noopener noreferrer">로컬 편집기 사용법 ↗</a>
+      </details>
+      <details><summary>Notion에서 글 가져오기 · 연결 방법</summary>
+        <p>Notion 연결과 데이터 소스를 설정한 뒤 저장소가 있는 컴퓨터에서 <code>npm run sync:notion</code>을 실행합니다. Flora와 Seeds 글을 가져오며, 기존 Git 소유 글을 덮어쓰지 않습니다. 가져온 뒤 미리보기와 발행을 진행하세요.</p>
+        <a href={`${repo}docs/architecture/notion-cms.md`} target="_blank" rel="noopener noreferrer">Notion 연결 사용법 ↗</a>
+      </details>
+      <details><summary>감상 작업실에서 내보낸 평가를 블로그에 공개하기</summary>
+        <p>감상 작업실의 발행 전 검수와 변경 내역을 확인하고 연결용 v:2 JSON을 내보내세요. 파일 반영은 해당 분기의 감상 목록 전체를 교체하므로, 다른 월에 담아 둔 곡이 있다면 먼저 합쳐 주세요. 저장소에서 가져온 뒤 변경 내용을 확인하고 발행합니다.</p>
+        <pre><code>node scripts/music/import-kpop-ratings.mjs ratings.json</code></pre>
+        <a href={`${repo}docs/music/listening-studio.md`} target="_blank" rel="noopener noreferrer">평가 파일 반영 사용법 ↗</a>
+      </details>
+    </section>
+  </div>
+</Layout>
+<style>
+  .workbench { width: min(100% - 2.75rem, 48rem); margin: auto; padding: 3.5rem 0 5rem; }
+  h1 { margin: 0 0 .6rem; font-size: 1.85rem; font-weight: 700; letter-spacing: -.025em; }
+  header p, .section-intro { color: var(--color-foreground-muted); word-break: keep-all; }
+  .contents { display: flex; flex-wrap: wrap; gap: .2rem 1.25rem; margin-top: 1.5rem; }
+  a { color: var(--color-accent); }
+  a:hover { text-decoration: underline; text-underline-offset: .2em; }
+  .contents a, details > a { display: inline-flex; align-items: center; min-height: 44px; font-size: .85rem; }
+  section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--color-outline-subtle); scroll-margin-top: 2rem; }
+  h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: .8rem; }
+  .tool-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem 2rem; }
+  .tool-title { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; font-weight: 500; }
+  article p { font-size: .9rem; color: var(--color-foreground-muted); word-break: keep-all; overflow-wrap: anywhere; }
+  small { display: block; font-size: .78rem; color: var(--color-foreground-muted); margin-top: .45rem; }
+  details { padding: 1rem 0; border-bottom: 1px solid var(--color-outline-subtle); }
+  summary { min-height: 44px; cursor: pointer; padding-block: .6rem; font-size: .95rem; }
+  details p { margin-top: .7rem; font-size: .9rem; line-height: 1.85; word-break: keep-all; overflow-wrap: anywhere; color: var(--color-foreground-muted); }
+  pre { margin-top: .8rem; padding: .8rem; background: var(--color-surface-raised); overflow-x: auto; font-size: .8rem; }
+  @media (max-width: 640px) { .workbench { padding-top: 2.2rem; }.tool-list { grid-template-columns: 1fr; gap: 1rem; } }
+</style>
