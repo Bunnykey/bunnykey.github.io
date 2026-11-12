@@ -1,12 +1,13 @@
 import {test, expect} from '@playwright/test';
 
-test('writing starts from the blog, offers each format and stays within a mobile viewport', async ({page}, info) => {
+test('writing starts from the blog, offers one writing path and stays within a mobile viewport', async ({page}, info) => {
   await page.goto('/');
   await page.getByRole('navigation', {name: '하단 메뉴'}).getByRole('link', {name: '글쓰기', exact: true}).click();
   await expect(page.getByRole('heading', {name: '글쓰기', exact: true})).toBeVisible();
-  for (const [label, name] of [['짧은 기록', 'seeds'], ['긴 글', 'flora'], ['계속 다듬는 글', 'nursery']]) {
-    await expect(page.locator(`a[href="https://app.pagescms.org/Bunnykey/bunnykey.github.io/main/collection/${name}/new"]`)).toContainText(label);
-  }
+  const start = page.locator('a[href="https://app.pagescms.org/Bunnykey/bunnykey.github.io/main/collection/flora/new"]');
+  await expect(start).toContainText('새 글 쓰기');
+  await expect(page.locator('.format-link')).toHaveCount(1);
+  await expect(page.locator('a[href*="/collection/seeds/new"], a[href*="/collection/nursery/new"]')).toHaveCount(0);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
   await page.screenshot({path: info.outputPath('writing.png'), fullPage: true});
 });
