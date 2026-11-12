@@ -1,18 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { CMS_ROOT, ACTIONS_URL, STATUS_URL, cmsCollectionUrl } from '../lib/publishing/paths.mjs';
-const formats = [
-  {name: 'seeds', label: '짧은 기록', description: '생각과 순간을 가볍게 남길 때'},
-  {name: 'flora', label: '긴 글', description: '경험이나 이야기를 차분하게 풀어낼 때'},
-  {name: 'nursery', label: '계속 다듬는 글', description: '아이디어와 프로젝트를 이어서 키울 때'},
-];
+const formats = [{name: 'flora', label: '새 글 쓰기', description: '형식이나 주제를 고르지 않고 바로 작성합니다.'}];
 const liveCommit = process.env.GITHUB_SHA || '';
 ---
 <Layout title="글쓰기 | The Greenhouse" description="글을 쓰고, 미리 보고, 공개하는 공간입니다." noIndex>
   <section class="writing-page">
     <a class="text-link" href="/workbench/">← 작업실</a><header class="writing-heading"><h1>글쓰기</h1><p>생각을 적고, 사진을 더하고, 한 편의 글로 남겨보세요.</p></header>
     <section class="writing-section" aria-labelledby="start-title">
-      <h2 id="start-title">무엇을 써볼까요?</h2>
+      <h2 id="start-title">새 글을 시작하세요</h2>
       <p>편집기는 Pages CMS에서 열립니다. 처음에는 GitHub 로그인이 필요해요.</p>
       <div class="format-list">
         {formats.map(format => <a class="format-link" href={cmsCollectionUrl(format.name, true)} target="_blank" rel="noopener noreferrer">

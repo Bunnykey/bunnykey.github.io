@@ -8,7 +8,6 @@ from pathlib import Path
 PINNED_DIST_FILES = [
     "index.html",
     "flora/index.html",
-    "flora/context-engineering-token-flow/index.html",
     "nursery/index.html",
     "seeds/index.html",
     "gardener/index.html",
@@ -28,7 +27,6 @@ METADATA_EXPECTATIONS = {
     "flora/index.html": [],
     "nursery/index.html": [],
     "seeds/index.html": [],
-    "flora/context-engineering-token-flow/index.html": [],
 }
 
 

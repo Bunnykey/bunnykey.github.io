@@ -42,18 +42,18 @@ export default function StudioShell(){return <Theme id="studio-theme" accentColo
           <details className="post-settings">
             <summary>글 설정</summary>
             <div className="fm-row">
-              <label>분류
+              <label hidden>분류
                 <select id="fm-collection">
-                  <option value="seeds">짧은 기록 (seeds)</option>
-                  <option value="flora">긴 글 (flora)</option>
+                  <option value="flora">글</option>
+                  <option value="seeds">글 (이전 저장 형식)</option>
                   <option value="nursery">프로젝트 (nursery)</option>
                 </select>
               </label>
-              <label>주제<select id="fm-category"><option value="notes">기록</option><option value="life">일상</option><option value="food">요리</option><option value="music">음악</option><option value="travel">여행</option><option value="tech">기술</option></select></label>
-              <label>프로젝트 단계<select id="fm-stage"><option value="">해당 없음</option><option value="seed">시작</option><option value="growing">진행</option><option value="evergreen">유지</option></select></label>
-              <label>시리즈 주소<TextField.Root id="fm-series-name" placeholder="예: making-music" /></label>
-              <label>시리즈 제목<TextField.Root id="fm-series-title" /></label>
-              <label>시리즈 순서<TextField.Root id="fm-series-order" type="number" min="1" step="1" /></label>
+              <label hidden>주제<select id="fm-category"><option value="notes">기록</option><option value="life">일상</option><option value="food">요리</option><option value="music">음악</option><option value="travel">여행</option><option value="tech">기술</option></select></label>
+              <label hidden>프로젝트 단계<select id="fm-stage"><option value="">해당 없음</option><option value="seed">시작</option><option value="growing">진행</option><option value="evergreen">유지</option></select></label>
+              <label hidden>시리즈 주소<TextField.Root id="fm-series-name" placeholder="예: making-music" /></label>
+              <label hidden>시리즈 제목<TextField.Root id="fm-series-title" /></label>
+              <label hidden>시리즈 순서<TextField.Root id="fm-series-order" type="number" min="1" step="1" /></label>
               <label>주소
                 <TextField.Root id="fm-slug" type="text" placeholder="자동으로 만들어집니다" />
                 <span id="slug-warn" className="warn"></span>
@@ -61,7 +61,7 @@ export default function StudioShell(){return <Theme id="studio-theme" accentColo
               <label>날짜
                 <TextField.Root id="fm-date" type="date" />
               </label>
-              <label>태그
+              <label hidden>태그
                 <TextField.Root id="fm-tags" type="text" list="tag-suggestions" placeholder="예: 일상, 책, 사진" />
                 <datalist id="tag-suggestions"></datalist>
               </label>

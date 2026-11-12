@@ -1,43 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import PostCard from '../../components/PostCard.astro';
-import TagFilter from '../../components/TagFilter.astro';
-import { SECTION_INDEX_CONFIG, sortByDateDesc, filterPublished } from '../../consts/sections';
-import { readingTime } from '../../utils/reading-time';
-
-const config = SECTION_INDEX_CONFIG.flora;
-const posts = sortByDateDesc(filterPublished(await getCollection('flora')));
-const allTags = [...new Set(posts.flatMap(p => p.data.tags || []))].sort();
+import JournalList from '../../components/JournalList.astro';
+import { getAllPosts } from '../../utils/posts';
+const posts = await getAllPosts();
 ---
-
-<Layout title={config.pageTitle} description={config.description} canonicalPath="/flora/">
-  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16">
-    <header class="mb-10">
-      <h1 class="text-3xl tracking-tight mb-3">{config.heading}</h1>
-      <p class="text-base text-foreground-muted leading-relaxed max-w-xl">{config.description}</p>
-    </header>
-    <TagFilter tags={allTags} />
-    <div id="post-list">
-      {posts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {posts.map((post, i) => (
-            <div data-tag-item class="animate-entrance" style={`--delay: ${i * 50}ms`}>
-              <PostCard title={post.data.title} date={post.data.date} summary={post.data.summary} tags={post.data.tags} href={`/flora/${post.slug}/`} highlight={post.data.highlight} seriesName={post.data.series?.name} variant="flora" readingMin={readingTime(post.body)} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <p class="text-sm text-foreground-muted">{config.emptyMessage}</p>
-      )}
-    </div>
-  </div>
-</Layout>
-<style>
-  .animate-entrance {
-    opacity: 0;
-    transform: translateY(1rem);
-    animation: fade-slide-in 0.5s ease-out forwards;
-    animation-delay: var(--delay, 0ms);
-  }
-</style>
+<Layout title="글 | The Greenhouse" canonicalPath="/" noIndex><JournalList posts={posts} /></Layout>

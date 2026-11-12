@@ -25,8 +25,7 @@ const series = entry.data.series;
 const seriesPosts = series ? getSeriesPostsFromEntries(allEntries, series.name) : [];
 const seriesNav = series ? getSeriesNavigationFromEntries(seriesPosts, entry.slug) : {previous: undefined, next: undefined};
 const seriesPath = series && seriesPosts.some(post => !post.data.draft) ? `/${collection}/series/${series.name}/` : null;
-const label = {flora: 'Flora', seeds: 'Seeds', nursery: 'Nursery'}[collection];
-const narrow = collection === 'seeds';
+const narrow = false;
 ---
 
 <Layout
@@ -50,11 +49,8 @@ const narrow = collection === 'seeds';
       <article class:list={['journal-article flex-1 min-w-0', narrow && 'max-w-prose']}>
         <header class="journal-article-header">
           <div class="flex items-center gap-3 mb-4 flex-wrap">
-            <span class="text-xs bg-accent-muted text-accent-on-muted px-2 py-0.5 rounded">{label}</span>
             <time class="text-xs font-mono text-foreground-muted" datetime={entry.data.date.toISOString()}>{formatArchiveDate(entry.data.date)}</time>
             <span class="text-xs text-foreground-muted">· {readingTime(entry.body)}분</span>
-            {collection === 'flora' && entry.data.highlight && <span class="text-xs text-earth">★ 대표 글</span>}
-            {collection === 'nursery' && <span title={`성장 단계: ${entry.data.stage || 'seed'}`}>{NURSERY_STAGE_EMOJI[entry.data.stage || 'seed']}</span>}
           </div>
           <h1 data-pagefind-body={!preview || undefined} data-pagefind-meta={preview ? undefined : 'title'} class="text-3xl md:text-4xl tracking-tight mb-3">{entry.data.title}</h1>
           {entry.data.summary && <p class="text-base text-foreground-muted leading-relaxed">{entry.data.summary}</p>}

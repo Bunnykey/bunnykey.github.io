@@ -28,9 +28,10 @@ const compiled = await build({
 });
 const { collections } = await import(`data:text/javascript;base64,${Buffer.from(compiled.outputFiles[0].text).toString('base64')}`);
 
-test('Pages CMS exposes the existing collections, metadata choices and flat image contract', () => {
+test('Pages CMS offers one unclassified writing path and the flat image contract', () => {
   const postCollections = config.content.filter(item => item.type === 'collection');
-  assert.deepEqual(postCollections.map(item => item.name), COLLECTIONS);
+  assert.deepEqual(postCollections.map(item => item.name), ['flora']);
+  assert.equal(postCollections[0].label, '글');
   assert.equal(config.settings.content.merge, true);
   assert.deepEqual(config.media.map(({input, output, rename}) => ({input, output, rename})), [
     {input: 'public/img', output: '/img', rename: 'random'},
@@ -44,7 +45,7 @@ test('Pages CMS exposes the existing collections, metadata choices and flat imag
     assert.ok(collection.filename.template.endsWith('.md')); // .mdx is not offered by this collection.
     validateRoute(collection.name, '2026-10-26-123456');
     assert.deepEqual(collection.operations, {create: true, rename: false, delete: false});
-    assert.deepEqual(values(fields.find(field => field.name === 'category')), CATEGORIES);
+    for (const removed of ['category', 'tags', 'series', 'stage', 'highlight']) assert.equal(fields.some(field => field.name === removed), false);
     assert.equal(fields.find(field => field.name === 'draft').default, true);
     assert.equal(fields.find(field => field.name === 'sharePreview').default, false);
     assert.equal(fields.find(field => field.name === 'date').options.format, 'yyyy-MM-dd');
@@ -55,9 +56,7 @@ test('Pages CMS exposes the existing collections, metadata choices and flat imag
     const demo = fields.find(field => field.name === 'demo');
     assert.deepEqual(demo ? values(demo) : [], DEMOS[collection.name]);
     const stage = fields.find(field => field.name === 'stage');
-    if (collection.name === 'nursery') assert.deepEqual(values(stage), STAGES);
-    else assert.equal(stage, undefined);
-    assert.equal(fields.some(field => field.name === 'highlight'), collection.name === 'flora');
+    assert.equal(stage, undefined);
   }
 });
 
@@ -74,7 +73,7 @@ test('monthly music ratings use a separate JSON file with safe publication defau
 });
 
 test('CMS defaults and quoted dates pass the actual Astro schema; malformed dates still fail', () => {
-  for (const collection of COLLECTIONS) {
+  for (const collection of ['flora']) {
     const defaults = Object.fromEntries(fieldsFor(collection).filter(field => field.default !== undefined).map(field => [field.name, field.default]));
     const metadata = {title: '아이폰에서 쓴 글', date: '2026-10-26', ...defaults};
     const parsed = collections[collection].schema.parse(metadata);

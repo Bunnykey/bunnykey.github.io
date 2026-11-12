@@ -15,7 +15,7 @@ const entries = sortByDateDesc((await Promise.all(SECTION_KEYS.map(async collect
     <p class="notice">이 링크는 누구나 열 수 있습니다. 비공개 검토 공간은 아닙니다.</p>
     <ul>
       {entries.map(entry => <li>
-        <div><span>{entry.collection} · {entry.data.date.toISOString().slice(0, 10)}</span><a class="title" href={postUrl(entry.collection, entry)}>{entry.data.title}</a></div>
+        <div><span>{entry.data.date.toISOString().slice(0, 10)}</span><a class="title" href={postUrl(entry.collection, entry)}>{entry.data.title}</a></div>
         {entry.id.endsWith('.md') && <a class="edit" href={cmsEditUrl(entry.collection, entry.slug)} target="_blank" rel="noopener noreferrer">수정 ↗</a>}
       </li>)}
     </ul>

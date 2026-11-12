@@ -84,10 +84,6 @@ async function loadList() {
   listCache = await api('/api/list');
   els.postList.innerHTML = '';
   for (const [c, posts] of Object.entries(listCache)) {
-    const group = document.createElement('div');
-    group.className = 'collection-group';
-    group.textContent = ({seeds:'짧은 기록',flora:'긴 글',nursery:'프로젝트'})[c] || c;
-    els.postList.appendChild(group);
     for (const p of posts) {
       const item = document.createElement('button');
       item.type = 'button';
@@ -198,6 +194,7 @@ $('#new-post').addEventListener('click', () => {
   if (mutationBusy) return;
   saveAutosave();
   currentDocument={id:newDocumentId(),revision:null};
+  els.collection.value='flora';
   setMetadataFields({});lockRoute();
   els.slug.value = '';
   els.title.value = '';
@@ -302,7 +299,7 @@ function clearAutosave() {
 }
 function restoreSnapshot(s) {
   currentDocument=s.document || {id:newDocumentId(),revision:null};
-  els.collection.value=s.collection || 'seeds';els.slug.value=s.slug || '';els.title.value=s.title || '';
+  els.collection.value=s.collection || 'flora';els.slug.value=s.slug || '';els.title.value=s.title || '';
   els.summary.value=s.summary || '';els.date.value=s.date || new Date().toISOString().slice(0,10);
   els.tags.value=s.tags || '';els.draft.checked=true;els.demo.value=s.demo || '';els.editor.value=s.body || '';
   currentSlug=currentDocument.revision ? s.slug : null;currentExt=s.ext || '.md';setMetadataFields(s.metadata || {});lockRoute();

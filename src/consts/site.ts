@@ -5,7 +5,7 @@ export const SITE = {
   siteUrl: "https://bunnykey.github.io",
   defaultDescription: "The Greenhouse —  Digital Garden. Growing thoughts.",
   defaultOgImage: "/og-default.png",
-  pinnedRoutes: ["/", "/gardener/", "/flora/", "/nursery/", "/seeds/"],
+  pinnedRoutes: ["/", "/gardener/", "/workbench/", "/music/tiers/"],
 } as const;
 
 export const PAGE_DESCRIPTIONS = {

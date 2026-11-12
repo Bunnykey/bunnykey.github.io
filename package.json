@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev --port 4321",
     "build": "astro build",
-    "postbuild": "pagefind --site dist && node scripts/verify-reader-links.mjs",
+    "postbuild": "pagefind --site dist && node scripts/verify-built-posts.mjs && node scripts/verify-reader-links.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "test": "node --test",
@@ -13,7 +13,7 @@
     "sync:notion": "node scripts/sync_notion_content.mjs",
     "editor": "node scripts/editor/server.mjs",
     "preeditor": "node scripts/editor/build.mjs",
-    "prebuild": "node scripts/verify-content.mjs && node scripts/music/build-listening-studio.mjs"
+    "prebuild": "node scripts/verify-content.mjs && node scripts/music/build-listening-studio.mjs && astro sync --force"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.14",

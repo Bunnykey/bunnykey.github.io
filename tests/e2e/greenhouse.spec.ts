@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 
-test('readers can open articles, empty topics and return to the complete list', async ({page}) => {
+test('readers can open articles, the workspace and return to the complete list', async ({page}) => {
   await page.goto('/');
   await expect(page.getByRole('heading', {name: '글', exact: true})).toBeVisible();
   const first = page.locator('.post-row h2 a').first();
@@ -8,30 +8,30 @@ test('readers can open articles, empty topics and return to the complete list', 
   await first.click();
   await expect(page.getByRole('heading', {level: 1, name: title!, exact: true})).toBeVisible();
   await expect(page.locator('.greenhouse-prose')).toBeVisible();
-  await page.goto('/topics/music/');
-  await expect(page.getByText('아직 이 주제의 글이 없습니다.')).toBeVisible();
-  await page.getByRole('link', {name: '전체 글 보기', exact: true}).click();
+  await page.goto('/workbench/');
+  await expect(page.getByRole('heading', {name: '작업실', exact: true})).toBeVisible();
+  await page.getByRole('link', {name: '전체 글', exact: true}).click();
   await expect(page.locator('.post-row').first()).toBeVisible();
 });
 
-test('mobile menu closes on navigation and updates the persisted current topic', async ({page}) => {
+test('mobile menu closes on navigation and updates the persisted current destination', async ({page}) => {
   await page.setViewportSize({width: 390, height: 844});
   await page.goto('/');
   const toggle = page.getByRole('button', {name: '메뉴', exact: true});
   const drawer = page.locator('#mobile-drawer');
   await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-  await drawer.getByRole('link', {name: '기술', exact: true}).click();
-  await expect(page).toHaveURL(/\/topics\/tech\//);
+  await drawer.getByRole('link', {name: '작업실', exact: true}).click();
+  await expect(page).toHaveURL(/\/workbench\//);
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await expect(drawer).toHaveAttribute('aria-hidden', 'true');
   await toggle.click();
-  await expect(drawer.getByRole('link', {name: '기술', exact: true})).toHaveAttribute('aria-current', 'page');
+  await expect(drawer.getByRole('link', {name: '작업실', exact: true})).toHaveAttribute('aria-current', 'page');
   await drawer.getByRole('link', {name: '음악', exact: true}).click();
-  await expect(page).toHaveURL(/\/topics\/music\//);
+  await expect(page).toHaveURL(/\/music\/tiers\//);
   await toggle.click();
   await expect(drawer.getByRole('link', {name: '음악', exact: true})).toHaveAttribute('aria-current', 'page');
-  await expect(drawer.getByRole('link', {name: '기술', exact: true})).not.toHaveAttribute('aria-current');
+  await expect(drawer.getByRole('link', {name: '작업실', exact: true})).not.toHaveAttribute('aria-current');
   await page.keyboard.press('Escape');
   await expect(toggle).toBeFocused();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
@@ -46,23 +46,10 @@ test('search starts without test-side repairs, returns results and recovers from
   await page.getByRole('button', {name: '다시 시도', exact: true}).click();
   const input = page.getByPlaceholder('검색어를 입력하세요', {exact: true});
   await expect(input).toBeVisible();
-  await input.fill('AI');
+  await input.fill('브라우저');
   await expect(page.locator('.pagefind-ui__result').first()).toBeVisible();
   await input.fill('zzqvnonexistent987654321');
   await expect(page.locator('.pagefind-ui__message')).toContainText('검색 결과가 없습니다');
-});
-
-test('tag filters remove unmatched cards from the layout and restore selection after reload', async ({page}) => {
-  await page.goto('/seeds/');
-  const button = page.locator('.tag-btn').filter({hasText: /^test$/});
-  await button.click();
-  await expect(button).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-tag-item]:visible')).toHaveCount(1);
-  await page.reload();
-  await expect(button).toHaveAttribute('aria-pressed', 'true');
-  await expect(page.locator('[data-tag-item]:visible')).toHaveCount(1);
-  await page.getByRole('button', {name: '선택 해제', exact: true}).click();
-  await expect(page.locator('[data-tag-item]:visible')).toHaveCount(await page.locator('[data-tag-item]').count());
 });
 
 test('404 offers a working return path and the default social image exists', async ({page, request}) => {

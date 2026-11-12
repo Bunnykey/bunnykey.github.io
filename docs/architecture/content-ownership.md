@@ -24,3 +24,7 @@ Phase 1 production content is Git-owned. Astro is the only public presentation l
 - Git-owned routes and content always win during phase 1.
 - A future CMS entry may not replace a Git-owned slug without a later migration decision.
 - Astro templates remain the only public renderer even after future CMS integration.
+
+## 2026-11-12: 글 구분 제거
+
+공개 글 6개를 삭제하고 사용자 화면에서 글 종류·주제·성장 단계·태그 선택을 제거했다. CMS 새 글과 로컬 편집기의 새 글은 기존 `flora` 저장 경로 한 곳을 사용한다. `flora`·`seeds`·`nursery`는 이전 백업·발행 계약과 충돌 검사의 호환을 위한 내부 키로만 유지한다. 저장 계약의 강제 마이그레이션은 이번 컨셉 정리 범위에 포함하지 않는다. 이전 목록 주소도 분류 없이 하나의 전체 글 목록을 보여 준다. Git 커밋 이력에는 복원 가능한 원본이 남는다.

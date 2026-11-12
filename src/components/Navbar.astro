@@ -4,12 +4,7 @@ import ThemeToggle from './ThemeToggle.astro';
 import { PRIMARY_LINKS } from '../consts/navigation.mjs';
 
 const currentPath = Astro.url.pathname;
-const navLinks = [
-  { label: '일상', href: '/topics/life/' },
-  { label: '요리', href: '/topics/food/' },
-  { label: '여행', href: '/topics/travel/' },
-  { label: '기술', href: '/topics/tech/' },
-];
+
 ---
 
 <nav class="site-nav relative" aria-label="주요 메뉴">
@@ -31,11 +26,6 @@ const navLinks = [
   <div id="mobile-drawer" class="nav-drawer md:hidden" inert aria-hidden="true">
     <div class="pt-4 pb-2 flex flex-col">
       {PRIMARY_LINKS.map(link => <a href={link.href} data-site-link data-active-paths={link.activePaths || link.href} data-astro-reload={link.reload} class="py-3 text-sm border-b border-outline-subtle/10">{link.label}</a>)}
-      {navLinks.map((link) => {
-        const isActive = currentPath.startsWith(link.href);
-        return <a href={link.href} class:list={['py-3 text-sm transition-colors border-b border-outline-subtle/10', isActive ? 'text-foreground font-medium' : 'text-foreground-muted hover:text-foreground']} aria-current={isActive ? 'page' : undefined}>{link.label}</a>;
-      })}
-      <a href="/topics/notes/" class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">기록</a>
       <a href="/search/" data-astro-reload class="py-3 text-sm text-foreground-muted hover:text-foreground transition-colors">검색</a>
     </div>
   </div>

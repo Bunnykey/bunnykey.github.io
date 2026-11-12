@@ -32,7 +32,7 @@ test('mobile navigation opens, closes on Escape and navigation, and disables hid
 });
 
 test('persisted desktop and mobile navigation follow the route without marking home active everywhere', () => {
-  const dom = new JSDOM(`<nav><a href="/" data-site-link>글</a><a href="/topics/music/" data-site-link data-active-paths="/topics/music/ /music/ /music-tiers/">음악</a><a href="/workbench/" data-site-link>작업실</a></nav><button id="menu-toggle"></button><div id="mobile-drawer"><a href="/" data-site-link>글</a><a href="/topics/music/" data-site-link data-active-paths="/topics/music/ /music/ /music-tiers/">음악</a><a href="/workbench/" data-site-link>작업실</a></div>`, { runScripts: 'outside-only', url: 'https://bunnykey.github.io/' });
+  const dom = new JSDOM(`<nav><a href="/" data-site-link>글</a><a href="/music/tiers/" data-site-link data-active-paths="/music/ /music-tiers/">음악</a><a href="/workbench/" data-site-link>작업실</a></nav><button id="menu-toggle"></button><div id="mobile-drawer"><a href="/" data-site-link>글</a><a href="/music/tiers/" data-site-link data-active-paths="/music/ /music-tiers/">음악</a><a href="/workbench/" data-site-link>작업실</a></div>`, { runScripts: 'outside-only', url: 'https://bunnykey.github.io/' });
   const { document, Event } = dom.window;
   dom.window.eval(script);
   document.dispatchEvent(new Event('DOMContentLoaded'));
