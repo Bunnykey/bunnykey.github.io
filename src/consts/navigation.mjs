@@ -3,7 +3,6 @@ export const PRIMARY_LINKS = [
   { label: '글', href: '/' },
   { label: '음악', href: '/music/tiers/', activePaths: '/music/ /music-tiers/' },
   { label: '작업실', href: '/workbench/' },
-  { label: '글쓰기', href: '/write/', reload: true },
   { label: '소개', href: '/gardener/' },
 ];
 export const QUICK_LINKS = [

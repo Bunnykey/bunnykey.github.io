@@ -1,11 +1,12 @@
 <footer class="journal-footer">
-  <small>© {new Date().getFullYear()} Bunnykey</small>
+  <small>© {new Date().getFullYear()} Bunnyside</small>
   <nav aria-label="하단 메뉴"><a href="/workbench/">작업실</a><a href="/music/tiers/">케이팝 감상</a><a href="/write/" data-astro-reload>글쓰기</a><a href="/gardener/">소개</a><a href="/privacy/">개인정보</a><a href="/rss.xml">RSS</a></nav>
 </footer>
 <style>
-  .journal-footer { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 1.5rem 0 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--color-foreground-muted); }
+  .journal-footer { width: min(100% - 2.75rem, 68rem); margin: 0 auto; padding: 1.5rem 0 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; color: var(--color-foreground-muted); }
   small, a { font-size: .75rem; }
   nav { display: flex; flex-wrap: wrap; gap: 0 1rem; justify-content: flex-end; }
   a { display: inline-flex; align-items: center; min-height: 44px; }
   a:hover { color: var(--color-foreground); }
+@media(max-width:680px){.journal-footer{align-items:flex-start;flex-direction:column;gap:.5rem}nav{justify-content:flex-start}}
 </style>

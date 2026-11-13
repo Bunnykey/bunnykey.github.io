@@ -1,48 +1,60 @@
 ---
-import QuickLinks from './QuickLinks.astro';
 import type { PostWithSection } from '../utils/posts';
 interface Props { posts: PostWithSection[]; }
 const { posts } = Astro.props;
 ---
-<div class="journal-list">
-  <header class="list-heading">
-    <h1>글</h1>
-    <p>살면서 배우고, 듣고, 남겨두고 싶은 것들.</p>
+<div class="blog-home">
+  <header class="blog-intro">
+    <p class="intro-label">BUNNYSIDE · PERSONAL BLOG</p>
+    <p class="intro-copy">일상에서 발견한 것들,<br class="mobile-break" /> 조금 더 오래 남겨두고 싶은 이야기.</p>
   </header>
-  <QuickLinks />
-  <section aria-label="글 목록">
-    {posts.map(post => <article class="post-row">
-      <div class="post-copy">
-        <h2><a href={post.url}>{post.data.title}</a></h2>
-        {post.data.summary && <p>{post.data.summary}</p>}
-      </div>
-      <time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10).replaceAll('-', '. ')}</time>
-    </article>)}
-    {!posts.length && <div class="empty-state"><p>아직 공개한 글이 없습니다.</p><a href="/write/" data-astro-reload>새 글 쓰기 →</a></div>}
-  </section>
+  <div class="blog-columns">
+    <section class="post-feed" aria-labelledby="posts-heading">
+      <header class="feed-heading"><h1 id="posts-heading">글</h1><span>{posts.length}개의 글 · 최신순</span></header>
+      {posts.map(post => <article class="post-row">
+        <div class="post-copy">
+          <time datetime={post.data.date.toISOString()}>{post.data.date.toISOString().slice(0, 10).replaceAll('-', '. ')}</time>
+          <h2><a href={post.url}>{post.data.title}</a></h2>
+          {post.data.summary && <p>{post.data.summary}</p>}
+          <a class="read-post" href={post.url} aria-label={`${post.data.title} 읽기`}>글 읽기 <span aria-hidden="true">↗</span></a>
+        </div>
+      </article>)}
+      {!posts.length && <div class="empty-state"><span class="empty-rule" aria-hidden="true"></span><h2>첫 번째 글을 준비하고 있습니다.</h2><p>일상과 음악, 기술에 관한 이야기를<br />차근차근 채워갈 예정입니다.</p><a href="/music/tiers/">음악 감상 먼저 둘러보기 <span aria-hidden="true">↗</span></a></div>}
+    </section>
+    <aside class="blog-sidebar" aria-label="블로그 안내">
+      <section class="author-card">
+        <img class="author-mark" src="/favicon.svg?v=2" width="48" height="48" alt="" />
+        <h2>Bunnykey</h2><p>반갑습니다. 버니사이드입니다.<br />살면서 배우고, 듣고, 남겨두고 싶은 것들을 씁니다.</p>
+        <a class="about-link" href="/gardener/">블로그 소개 <span aria-hidden="true">→</span></a>
+        <div class="author-links"><a href="https://github.com/Bunnykey" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/rss.xml">RSS 구독 ↗</a></div>
+      </section>
+      <section class="sidebar-section"><h2>음악 감상</h2><a class="music-link" href="/music/tiers/"><span class="record" aria-hidden="true"><i></i></span><span><strong>요즘 듣는 케이팝</strong><small>분기별 감상 목록과 한줄평</small></span><span aria-hidden="true">↗</span></a></section>
+      <section class="sidebar-section"><h2>찾아보기</h2><nav aria-label="블로그 둘러보기"><a href="/search/" data-astro-reload>글 검색 <span aria-hidden="true">→</span></a><a href="/workbench/">작업실과 도구 <span aria-hidden="true">→</span></a></nav></section>
+      <p class="sidebar-note">이곳의 기록은 개인적인 생각과 취향을 담고 있습니다.</p>
+    </aside>
+  </div>
 </div>
 <style>
-  .journal-list { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 3.5rem 0 4rem; }
-  .list-heading h1 { margin: 0; font-size: 1.85rem; font-weight: 700; line-height: 1.4; letter-spacing: -.025em; }
-  .list-heading p { margin-top: .6rem; font-size: 1rem; color: var(--color-foreground-muted); word-break: keep-all; }
-  .topic-nav { display: flex; gap: 1.7rem; overflow-x: auto; margin-top: 2.4rem; padding-bottom: .4rem; }
-  .topic-nav a { display: flex; align-items: center; min-height: 44px; flex: none; font-size: .95rem; color: var(--color-foreground-muted); border-bottom: 2px solid transparent; }
-  .topic-nav a[aria-current='page'] { color: var(--color-foreground); border-color: currentColor; font-weight: 700; }
-  .post-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2rem; padding: 1.85rem 0; }
-  .post-row + .post-row { border-top: 1px solid color-mix(in srgb, var(--color-outline-subtle) 70%, transparent); }
-  .post-row h2 { margin: 0; font-size: 1.4rem; font-weight: 400; line-height: 1.5; letter-spacing: -.015em; word-break: keep-all; overflow-wrap: anywhere; }
-  .post-row h2 a:hover { text-decoration: underline; text-underline-offset: .2em; }
-  .post-copy p { margin-top: .4rem; font-size: .95rem; line-height: 1.7; color: var(--color-foreground-muted); word-break: keep-all; overflow-wrap: anywhere; }
-  .post-topic { display: inline-block; margin-top: .6rem; font-size: .8rem; color: var(--color-accent); }
-  .post-row time { padding-top: .4rem; font-size: .8rem; color: var(--color-foreground-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
-  .empty-state { padding: 3rem 0; color: var(--color-foreground-muted); }
-  .empty-state a { display: inline-block; margin-top: 1rem; text-decoration: underline; text-underline-offset: .2em; }
-  @media (max-width: 640px) {
-    .journal-list { padding-top: 2.2rem; }
-    .topic-nav { gap: 1.2rem; margin-top: 1.6rem; }
-    .topic-nav a { font-size: .85rem; }
-    .post-row { grid-template-columns: 1fr; gap: .35rem; padding: 1.6rem 0; }
-    .post-row h2 { font-size: 1.3rem; }
-    .post-row time { padding: 0; }
-  }
+  .blog-home{width:min(100% - 3rem,68rem);margin:0 auto;padding-bottom:6rem}
+  .blog-intro{padding:3rem 0 2.7rem;border-bottom:1px solid var(--color-outline-subtle)}
+  .intro-label{font-size:.68rem;font-weight:600;letter-spacing:.16em;color:var(--color-foreground-muted)}
+  .intro-copy{margin-top:1rem;font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:500;line-height:1.7;letter-spacing:-.035em;word-break:keep-all}.mobile-break{display:none}
+  .blog-columns{display:grid;grid-template-columns:minmax(0,1fr) 16rem;gap:4rem;padding-top:2.5rem}
+  .feed-heading{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.2rem;border-bottom:2px solid var(--color-foreground)}
+  .feed-heading h1{font-size:1.15rem;font-weight:700}.feed-heading>span{font-size:.75rem;color:var(--color-foreground-muted)}
+  .post-row{padding:2.1rem 0;border-bottom:1px solid var(--color-outline-subtle)}
+  .post-row time{font-size:.75rem;color:var(--color-foreground-muted);font-variant-numeric:tabular-nums}
+  .post-row h2{margin:.7rem 0;font-size:1.5rem;font-weight:650;line-height:1.5;letter-spacing:-.035em;overflow-wrap:anywhere;word-break:keep-all}
+  .post-row h2 a:hover{text-decoration:underline;text-underline-offset:.2em}.post-copy>p{font-size:.95rem;line-height:1.85;color:var(--color-foreground-muted);overflow-wrap:anywhere}
+  .read-post{display:inline-flex;align-items:center;gap:.65rem;margin-top:.9rem;min-height:44px;font-size:.78rem;color:var(--color-foreground-muted)}
+  .blog-sidebar{border-left:1px solid var(--color-outline-subtle);padding-left:2rem}.author-mark{margin-bottom:1rem}.author-card h2{font-size:1.05rem;font-weight:650;letter-spacing:-.02em}
+  .author-card p{margin:.8rem 0 .5rem;font-size:.82rem;line-height:1.9;color:var(--color-foreground-muted);word-break:keep-all}.about-link{display:inline-flex;align-items:center;gap:1.5rem;min-height:44px;font-size:.8rem}
+  .author-links{display:flex;gap:1.2rem;margin-top:.6rem}.author-links a{font-size:.7rem;min-height:44px;display:inline-flex;align-items:center;color:var(--color-foreground-muted)}
+  .sidebar-section{margin-top:1.8rem;padding-top:1.5rem;border-top:1px solid var(--color-outline-subtle)}.sidebar-section h2{font-size:.72rem;font-weight:650;margin-bottom:1rem;color:var(--color-foreground-muted)}
+  .music-link{display:flex;gap:.8rem;align-items:center}.music-link>span:last-child{margin-left:auto;font-size:.8rem}.music-link strong{display:block;font-size:.8rem;font-weight:550}.music-link small{display:block;font-size:.68rem;color:var(--color-foreground-muted);margin-top:.35rem;line-height:1.6}
+  .record{width:36px;height:36px;flex:none;border-radius:50%;background:#2d3030;display:grid;place-items:center;box-shadow:inset 0 0 0 5px #3e4141,inset 0 0 0 6px #555}.record i{width:11px;height:11px;border-radius:50%;background:#eac66b;border:4px solid #eac66b;box-shadow:inset 0 0 0 2px #2d3030}
+  .sidebar-section nav a{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:.8rem}.sidebar-note{font-size:.7rem;line-height:1.8;color:var(--color-foreground-muted);margin-top:2.5rem;word-break:keep-all}
+  .empty-state{padding:4.5rem 1rem 5rem;text-align:center}.empty-rule{display:block;width:28px;height:3px;background:#d7b45e;margin:0 auto 1.5rem}.empty-state h2{font-size:1.1rem;font-weight:550;letter-spacing:-.025em}.empty-state p{margin-top:1rem;font-size:.88rem;line-height:1.9;color:var(--color-foreground-muted)}.empty-state a{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;margin-top:1.5rem;font-size:.8rem;text-decoration:underline;text-underline-offset:.3em}
+  @media(max-width:900px){.blog-columns{gap:2rem;grid-template-columns:minmax(0,1fr) 14rem}.blog-sidebar{padding-left:1.5rem}}
+  @media(max-width:680px){.blog-home{width:calc(100% - 2.5rem);padding-bottom:3rem}.blog-intro{padding:2rem 0}.intro-label{font-size:.6rem}.intro-copy{font-size:1.2rem}.mobile-break{display:block}.blog-columns{grid-template-columns:1fr;padding-top:1.8rem;gap:2rem}.blog-sidebar{border-left:0;padding:2rem 0 0;border-top:1px solid var(--color-outline-subtle)}.post-row h2{font-size:1.3rem}.empty-state{padding:3rem 0}.author-card{position:relative;padding-left:4rem}.author-mark{position:absolute;left:0;top:0;width:40px;height:40px}.sidebar-note{margin-top:1.5rem}}
 </style>

@@ -9,7 +9,7 @@ const currentPath = Astro.url.pathname;
 
 <nav class="site-nav relative" aria-label="주요 메뉴">
   <div class="flex items-center justify-between">
-    <a href="/" class="text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity">{SITE.name}</a>
+    <a href="/" class="brand text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity"><img src="/favicon.svg?v=2" width="30" height="30" alt="" /><span>{SITE.name}</span><span class="brand-english" aria-hidden="true">Bunnyside</span></a>
     <div class="flex items-center gap-0 md:gap-4">
       <div class="hidden md:flex items-center gap-6">
         {PRIMARY_LINKS.map(link => <a href={link.href} data-site-link data-active-paths={link.activePaths || link.href} data-astro-reload={link.reload} class="text-sm">{link.label}</a>)}
@@ -68,8 +68,9 @@ const currentPath = Astro.url.pathname;
 </script>
 
 <style>
-  .site-nav { width: min(100% - 2.75rem, 48rem); margin: 0 auto; padding: 1.4rem 0; border-bottom: 1px solid var(--color-outline-subtle); }
+  .site-nav { width: min(100% - 2.75rem, 68rem); margin: 0 auto; padding: 1.5rem 0; border-bottom: 1px solid var(--color-outline-subtle); }
 
+  .brand {display:inline-flex;align-items:center;gap:.7rem;} .brand-english {font-size:.7rem;font-weight:400;color:var(--color-foreground-muted);margin-left:.2rem;letter-spacing:.02em;} @media(max-width:680px){.brand-english{display:none}}
   .nav-drawer { max-height: 0; overflow: hidden; opacity: 0; transition: max-height .3s ease, opacity .3s ease; }
   .nav-drawer[aria-hidden="false"] { max-height: min(75dvh, 28rem); overflow-y: auto; opacity: 1; }
   @media (prefers-reduced-motion: reduce) { .nav-drawer { transition: none; } }
