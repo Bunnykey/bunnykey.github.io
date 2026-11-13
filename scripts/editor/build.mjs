@@ -10,5 +10,5 @@ try {
  const {default:Shell}=await import(shellPath.href+'?v='+Date.now());
  const body=renderToStaticMarkup(createElement(Shell));
  await writeFile(new URL('./public/index.html',import.meta.url),`<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bunnykey 글쓰기</title><link rel="stylesheet" href="/radix.css"><link rel="stylesheet" href="/design/reading.css"><link rel="stylesheet" href="/styles.css"></head><body>${body}<script type="module" src="/app.js"></script></body></html>\n`);
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>버니사이드 글쓰기</title><link rel="stylesheet" href="/radix.css"><link rel="stylesheet" href="/design/reading.css"><link rel="stylesheet" href="/styles.css"></head><body>${body}<script type="module" src="/app.js"></script></body></html>\n`);
 } finally {await rm(shellPath,{force:true});}

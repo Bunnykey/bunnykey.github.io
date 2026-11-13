@@ -7,7 +7,7 @@ const entries = sortByDateDesc((await Promise.all(SECTION_KEYS.map(async collect
   (await getCollection(collection)).filter(isSharedPreview).map(entry => ({...entry, collection})),
 ))).flat());
 ---
-<Layout title="초안 미리보기 | The Greenhouse" description="공개 미리보기를 선택한 초안을 확인합니다." noIndex>
+<Layout title="초안 미리보기 | Bunnyside" description="공개 미리보기를 선택한 초안을 확인합니다." noIndex>
   <section class="preview-index">
     <a class="back" href="/write/" data-astro-reload>← 글쓰기</a>
     <h1>초안 미리보기</h1>

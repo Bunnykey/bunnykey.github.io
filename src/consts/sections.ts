@@ -12,21 +12,21 @@ export const SECTION_INDEX_CONFIG: Record<
   }
 > = {
   flora: {
-    pageTitle: "Flora - The Greenhouse",
+    pageTitle: "Flora - Bunnyside",
     heading: "Flora",
     description: "Blooming thoughts, flowering essays.",
     emptyMessage: "No flora posts yet.",
     accentClass: "text-accent",
   },
   nursery: {
-    pageTitle: "Nursery - The Greenhouse",
+    pageTitle: "Nursery - Bunnyside",
     heading: "Nursery",
     description: "Growing ideas, evergreen notes.",
     emptyMessage: "No nursery notes yet.",
     accentClass: "text-accent",
   },
   seeds: {
-    pageTitle: "Seeds - The Greenhouse",
+    pageTitle: "Seeds - Bunnyside",
     heading: "Seeds",
     description: "Seeds of thought, one line at a time.",
     emptyMessage: "No seeds yet.",

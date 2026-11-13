@@ -4,6 +4,8 @@ import { createPostStore } from '../../src/lib/publishing/store.mjs';
 import { withPublishingLock } from '../../src/lib/publishing/lock.mjs';
 import { renderMedia } from '../../src/lib/media.mjs';
 import multer from 'multer';
+import sharp from 'sharp';
+import { randomUUID } from 'node:crypto';
 import { marked } from 'marked';
 import matter from 'gray-matter';
 import { codeToHtml } from 'shiki';
@@ -137,18 +139,7 @@ app.post('/api/save', async(req,res)=>{
 
 // Image upload
 const upload = multer({
-  storage: multer.diskStorage({
-    destination: async (_req, _file, cb) => {
-      await mkdir(PUBLIC_IMG, { recursive: true });
-      cb(null, PUBLIC_IMG);
-    },
-    filename: (_req, file, cb) => {
-      const ts = Date.now();
-      const ext = extname(file.originalname).toLowerCase() || '.png';
-      const base = safeSlug(basename(file.originalname, ext)) || 'img';
-      cb(null, `${ts}-${base}${ext}`);
-    },
-  }),
+  storage: multer.memoryStorage(),
   fileFilter: (_req, file, cb) => {
     const valid = /^image\/(png|jpeg|gif|webp|avif)$/.test(file.mimetype) && /\.(png|jpe?g|gif|webp|avif)$/i.test(file.originalname);
     cb(valid ? null : new Error('PNG, JPEG, GIF, WebP, AVIF 이미지를 선택하세요.'), valid);
@@ -156,9 +147,25 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-app.post('/api/upload', upload.single('file'), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'no file' });
-  res.json({ url: `/img/${req.file.filename}`, name: req.file.originalname });
+app.post('/api/upload', upload.single('file'), async (req, res, next) => {
+  if (!req.file) return res.status(400).json({ error: '사진 파일을 선택하세요.' });
+  try {
+    // Never write unverified bytes to the publicly served image directory.
+    const image = sharp(req.file.buffer, { limitInputPixels: 40_000_000 });
+    const metadata = await image.metadata();
+    const formats = { jpeg: '.jpg', png: '.png', gif: '.gif', webp: '.webp', avif: '.avif', heif: '.avif' };
+    const extension = formats[metadata.format];
+    if (!extension || (metadata.format === 'heif' && metadata.compression !== 'av1')) {
+      throw new Error('unsupported image');
+    }
+    await image.stats(); // Decode pixels too; a plausible header alone is insufficient.
+    await mkdir(PUBLIC_IMG, { recursive: true });
+    const filename = `${randomUUID()}${extension}`;
+    await writeFile(join(PUBLIC_IMG, filename), req.file.buffer, { flag: 'wx' });
+    res.json({ url: `/img/${filename}`, name: req.file.originalname });
+  } catch {
+    next(new Error('사진을 읽거나 저장하지 못했습니다. 4천만 화소 이하의 JPG, PNG, GIF, WebP, AVIF로 다시 선택하세요.'));
+  }
 });
 
 // Discard only a working draft. Removing an already published URL needs a separate lifecycle.

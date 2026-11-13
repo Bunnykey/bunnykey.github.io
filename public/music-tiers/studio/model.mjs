@@ -37,7 +37,7 @@ export function diff(w){
  for(const t of base)if(!tracks.some(x=>x.id===t.id))result.push({id:t.id,title:t.title,field:'catalog',before:'수집본에 있음',after:'누락'});return result;
 }
 export function parseWorkspace(value){
- if(!value||value.schema!=='bunnyside-listening/v1'||value.month!==MONTH||!Array.isArray(value.catalog)||value.catalog.length!==1)throw Error('2026년 10월 Bunny Side 백업 파일이 필요합니다.');
+ if(!value||value.schema!=='bunnyside-listening/v1'||value.month!==MONTH||!Array.isArray(value.catalog)||value.catalog.length!==1)throw Error('2026년 10월 Bunnyside 백업 파일이 필요합니다.');
  const month=value.catalog[0];if(month.month!==MONTH||!Array.isArray(month.tracks)||month.tracks.length>300)throw Error('곡 목록 형식을 확인해 주세요.');
  const w=fresh([{month:MONTH,revision:String(month.revision??'import').slice(0,80),published:true,demo:false,tracks:month.tracks.map(t=>{
  if(!t||typeof t.id!=='string'||!/^[\w-]{1,80}$/.test(t.id))throw Error('곡 ID 형식 오류');

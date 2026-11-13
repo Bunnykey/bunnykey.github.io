@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, cp, writeFile, readFile, rm } from 'node:fs/promises';
+import sharp from 'sharp';
+import { mkdtemp, mkdir, cp, writeFile, readFile, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawn, execFileSync } from 'node:child_process';
@@ -21,8 +22,20 @@ test('save, image, preview, build and publish preserve unrelated staged files', 
  try {
   await new Promise((ok,fail)=>{server.stdout.on('data',()=>ok());server.on('exit',code=>fail(new Error('server exited '+code)));});
   const request=async(path,body)=>{const r=await fetch(`http://127.0.0.1:${port}${path}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});const data=await r.json();assert.equal(r.status,200,JSON.stringify(data));return data;};
-  const file=new FormData();file.append('file',new Blob([Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')],{type:'image/png'}),'pixel.png');
-  const uploaded=await (await fetch(`http://127.0.0.1:${port}/api/upload`,{method:'POST',body:file})).json();
+  const uploadImage = async (bytes, name = 'pixel.png') => {
+    const file = new FormData(); file.append('file', new Blob([bytes], {type:'image/png'}), name);
+    return fetch(`http://127.0.0.1:${port}/api/upload`, {method:'POST',body:file});
+  };
+  const before = await readdir(join(repo, 'public/img'));
+  const invalid = await uploadImage(Buffer.from('<html>not an image</html>'));
+  assert.equal(invalid.status, 400);
+  assert.match((await invalid.json()).error, /写真|사진/);
+  assert.deepEqual(await readdir(join(repo, 'public/img')), before);
+  const pixel = await sharp({create:{width:1,height:1,channels:3,background:'#ffffff'}}).png().toBuffer();
+  const responses = await Promise.all([uploadImage(pixel), uploadImage(pixel)]);
+  for (const response of responses) assert.equal(response.status, 200);
+  const [uploaded, second] = await Promise.all(responses.map(response => response.json()));
+  assert.notEqual(uploaded.url, second.url);
   assert.equal((await fetch(`http://127.0.0.1:${port}${uploaded.url}`)).status,200);
   const body=`Hello **studio**\n\n![pixel](${uploaded.url})\n\n\`\`\`embed\nhttps://youtu.be/dQw4w9WgXcQ\n\`\`\`\n\n\`\`\`embed\nhttps://open.spotify.com/track/4cOdK2wGLETKBW3PvgPWqT\n\`\`\`\n\n\`\`\`embed\nhttps://github.com/Bunnykey/bunnykey.github.io\n\`\`\``;
   const post={document:{id:'post_0123456789abcdef0123456789abcdef',revision:null,collection:'seeds',slug:'publishing-test'},collection:'seeds',slug:'publishing-test',frontmatter:{title:'Publishing Test',date:'2026-09-16',draft:true},body};

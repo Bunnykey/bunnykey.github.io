@@ -196,7 +196,7 @@ function buildSvg(entry: OgContentEntry, totalSeriesPosts: number, fonts: Awaite
       ${seriesBadge}
       <text x="96" y="294" fill="#2f3430" font-size="48" font-weight="700">${titleText}</text>
       <text x="96" y="420" fill="#5c605c" font-size="20" font-weight="400">${escapeXml(metaLine)}</text>
-      <text x="96" y="564" fill="#2f3430" font-size="14" font-weight="700">The Greenhouse</text>
+      <text x="96" y="564" fill="#2f3430" font-size="14" font-weight="700">Bunnyside</text>
     </svg>
   `;
 }

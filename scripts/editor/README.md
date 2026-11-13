@@ -45,7 +45,7 @@ For iPhone on a **trusted** home LAN or tailnet, start with `EDITOR_HOST=0.0.0.0
 - Toolbar button → file picker
 - Paste image from clipboard
 - Drag-drop onto the editor pane
-- All uploads land in `public/img/<timestamp>-<name>.<ext>` and the markdown is inserted at the cursor
+- Uploads are limited to 10 MiB and 40 million pixels, decoded before saving, and land in `public/img/<random-UUID>.<detected-ext>` and the markdown is inserted at the cursor
 
 ### Demos (React components, MDX)
 - "+ 데모 삽입" dropdown inserts `<DemoName client:visible />` at cursor

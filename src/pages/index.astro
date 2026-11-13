@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import JournalList from '../components/JournalList.astro';
-import { PAGE_DESCRIPTIONS } from '../consts/site';
+import { SITE, PAGE_DESCRIPTIONS } from '../consts/site';
 import { getAllPosts } from '../utils/posts';
 const posts = await getAllPosts();
 ---
-<Layout title="The Greenhouse" description={PAGE_DESCRIPTIONS.home} canonicalPath="/">
+<Layout title={SITE.name} description={PAGE_DESCRIPTIONS.home} canonicalPath="/">
   <JournalList posts={posts} />
 </Layout>

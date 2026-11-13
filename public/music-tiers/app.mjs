@@ -199,13 +199,13 @@ export function init(){
     const rows=activeRows(),width=1080,cell=140,cols=6;
     let y=190;
     const heading=`${period.label} K-POP · ${mode==='author'?'블로그 티어':mode==='shared'?'공유 티어':'내 티어'}`;
-    let body=`<rect width="1080" height="100%" fill="#fafafa"/><text x="40" y="65" font-size="30" fill="#252525">${xml(heading)}</text><text x="40" y="105" font-size="17" fill="#666">${period.demo?'화면 확인용 가상 곡 · 가상 평가':'The Greenhouse · 개인의 취향을 담은 티어리스트'}</text>`;
+    let body=`<rect width="1080" height="100%" fill="#fafafa"/><text x="40" y="65" font-size="30" fill="#252525">${xml(heading)}</text><text x="40" y="105" font-size="17" fill="#666">${period.demo?'화면 확인용 가상 곡 · 가상 평가':'Bunnyside · 개인의 취향을 담은 티어리스트'}</text>`;
     for(const [i,tier]of TIERS.entries()){
       const height=Math.max(110,Math.ceil(rows[tier].length/cols)*115+20);
       body+=`<rect x="40" y="${y}" width="1000" height="${height}" fill="none" stroke="#ddd"/><rect x="40" y="${y}" width="80" height="${height}" fill="${colors[i]}"/><text x="80" y="${y+height/2+7}" text-anchor="middle" font-size="${tier==='unranked'?18:28}" fill="#252525">${labels[tier]}</text>`;
       rows[tier].forEach((id,j)=>{const t=period.tracks.find(t=>t.id===id),x=140+(j%cols)*cell,top=y+20+Math.floor(j/cols)*115;body+=`<rect x="${x}" y="${top}" width="125" height="55" rx="2" fill="${/^#[0-9a-f]{6}$/i.test(t.color)?t.color:'#687b6c'}"/><text x="${x+10}" y="${top+36}" font-size="25" fill="white">${xml(t.title.slice(0,2))}</text><text x="${x}" y="${top+78}" font-size="15" fill="#252525">${xml(t.title.slice(0,14))}</text><text x="${x}" y="${top+98}" font-size="12" fill="#666">${xml(t.artist.slice(0,20))}</text>`;});y+=height+12;
     }
-    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${y+55}" viewBox="0 0 ${width} ${y+55}"><style>text{font-family:system-ui,sans-serif}</style>${body}<text x="40" y="${y+28}" font-size="13" fill="#666">The Greenhouse / 분기별 케이팝 감상</text></svg>`;
+    const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${y+55}" viewBox="0 0 ${width} ${y+55}"><style>text{font-family:system-ui,sans-serif}</style>${body}<text x="40" y="${y+28}" font-size="13" fill="#666">Bunnyside / 분기별 케이팝 감상</text></svg>`;
     try{const img=new Image();img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);await img.decode();const canvas=document.createElement('canvas');canvas.width=width;canvas.height=y+55;const context=canvas.getContext('2d');if(!context)throw new Error();context.drawImage(img,0,0);const png=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!png)throw new Error();download(png,`kpop-${period.id}-${mode}.png`);tell('티어 이미지를 PNG로 저장했습니다.');}catch{download(new Blob([svg],{type:'image/svg+xml;charset=utf-8'}),`kpop-${period.id}-${mode}.svg`);tell('티어 이미지를 SVG로 저장했습니다.');}
   });
   load();readShared();render();

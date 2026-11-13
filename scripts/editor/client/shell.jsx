@@ -8,7 +8,7 @@ export default function StudioShell(){return <Theme id="studio-theme" accentColo
       <aside id="sidebar">
         <div className="sidebar-header">
           <div>
-            <p className="eyebrow">BUNNYKEY</p>
+            <p className="eyebrow">Bunnyside</p>
             <h1>내 글</h1>
           </div>
           <div className="header-actions">
