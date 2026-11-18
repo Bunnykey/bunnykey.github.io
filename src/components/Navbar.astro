@@ -3,13 +3,11 @@ import { SITE } from '../consts/site';
 import ThemeToggle from './ThemeToggle.astro';
 import { PRIMARY_LINKS } from '../consts/navigation.mjs';
 
-const currentPath = Astro.url.pathname;
-
 ---
 
 <nav class="site-nav relative" aria-label="주요 메뉴">
   <div class="flex items-center justify-between">
-    <a href="/" class="brand text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity"><img src="/favicon.svg?v=2" width="30" height="30" alt="" /><span>{SITE.name}</span><span class="brand-english" aria-hidden="true">Bunnyside</span></a>
+    <a href="/" class="brand text-base md:text-lg font-semibold tracking-tight text-foreground hover:opacity-80 transition-opacity"><img src={SITE.favicon} width="30" height="30" alt="" /><span>{SITE.name}</span><span class="brand-english" aria-hidden="true">{SITE.englishName}</span></a>
     <div class="flex items-center gap-0 md:gap-4">
       <div class="hidden md:flex items-center gap-6">
         {PRIMARY_LINKS.map(link => <a href={link.href} data-site-link data-active-paths={link.activePaths || link.href} data-astro-reload={link.reload} class="text-sm">{link.label}</a>)}

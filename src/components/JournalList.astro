@@ -1,11 +1,11 @@
 ---
+import { SITE } from '../consts/site';
 import type { PostWithSection } from '../utils/posts';
 interface Props { posts: PostWithSection[]; }
 const { posts } = Astro.props;
 ---
 <div class="blog-home">
   <header class="blog-intro">
-    <p class="intro-label">BUNNYSIDE · PERSONAL BLOG</p>
     <p class="intro-copy">일상에서 발견한 것들,<br class="mobile-break" /> 조금 더 오래 남겨두고 싶은 이야기.</p>
   </header>
   <div class="blog-columns">
@@ -23,12 +23,12 @@ const { posts } = Astro.props;
     </section>
     <aside class="blog-sidebar" aria-label="블로그 안내">
       <section class="author-card">
-        <img class="author-mark" src="/favicon.svg?v=2" width="48" height="48" alt="" />
+        <img class="author-mark" src={SITE.favicon} width="48" height="48" alt="" />
         <h2>Bunnykey</h2><p>반갑습니다. 버니사이드입니다.<br />살면서 배우고, 듣고, 남겨두고 싶은 것들을 씁니다.</p>
         <a class="about-link" href="/gardener/">블로그 소개 <span aria-hidden="true">→</span></a>
         <div class="author-links"><a href="https://github.com/Bunnykey" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="/rss.xml">RSS 구독 ↗</a></div>
       </section>
-      <section class="sidebar-section"><h2>음악 감상</h2><a class="music-link" href="/music/tiers/"><span class="record" aria-hidden="true"><i></i></span><span><strong>요즘 듣는 케이팝</strong><small>분기별 감상 목록과 한줄평</small></span><span aria-hidden="true">↗</span></a></section>
+      <section class="sidebar-section"><h2>음악 감상</h2><a class="music-link" href="/music/tiers/"><span class="record" aria-hidden="true"><i></i></span><span><strong>요즘 듣는 케이팝</strong><small>분기별 감상 목록과 한줄평</small></span><span aria-hidden="true">↗</span></a><nav aria-label="음악 감상 도구"><a href="/music-tiers/studio/" data-astro-reload>감상 작업실 <span aria-hidden="true">→</span></a></nav></section>
       <section class="sidebar-section"><h2>찾아보기</h2><nav aria-label="블로그 둘러보기"><a href="/search/" data-astro-reload>글 검색 <span aria-hidden="true">→</span></a><a href="/workbench/">작업실과 도구 <span aria-hidden="true">→</span></a></nav></section>
       <p class="sidebar-note">이곳의 기록은 개인적인 생각과 취향을 담고 있습니다.</p>
     </aside>
@@ -37,8 +37,7 @@ const { posts } = Astro.props;
 <style>
   .blog-home{width:min(100% - 3rem,68rem);margin:0 auto;padding-bottom:6rem}
   .blog-intro{padding:3rem 0 2.7rem;border-bottom:1px solid var(--color-outline-subtle)}
-  .intro-label{font-size:.68rem;font-weight:600;letter-spacing:.16em;color:var(--color-foreground-muted)}
-  .intro-copy{margin-top:1rem;font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:500;line-height:1.7;letter-spacing:-.035em;word-break:keep-all}.mobile-break{display:none}
+  .intro-copy{font-size:clamp(1.2rem,2.2vw,1.6rem);font-weight:500;line-height:1.7;letter-spacing:-.035em;word-break:keep-all}.mobile-break{display:none}
   .blog-columns{display:grid;grid-template-columns:minmax(0,1fr) 16rem;gap:4rem;padding-top:2.5rem}
   .feed-heading{display:flex;align-items:center;justify-content:space-between;padding-bottom:1.2rem;border-bottom:2px solid var(--color-foreground)}
   .feed-heading h1{font-size:1.15rem;font-weight:700}.feed-heading>span{font-size:.75rem;color:var(--color-foreground-muted)}
@@ -56,5 +55,5 @@ const { posts } = Astro.props;
   .sidebar-section nav a{display:flex;align-items:center;justify-content:space-between;min-height:44px;font-size:.8rem}.sidebar-note{font-size:.7rem;line-height:1.8;color:var(--color-foreground-muted);margin-top:2.5rem;word-break:keep-all}
   .empty-state{padding:4.5rem 1rem 5rem;text-align:center}.empty-rule{display:block;width:28px;height:3px;background:#d7b45e;margin:0 auto 1.5rem}.empty-state h2{font-size:1.1rem;font-weight:550;letter-spacing:-.025em}.empty-state p{margin-top:1rem;font-size:.88rem;line-height:1.9;color:var(--color-foreground-muted)}.empty-state a{display:inline-flex;align-items:center;gap:.6rem;min-height:44px;margin-top:1.5rem;font-size:.8rem;text-decoration:underline;text-underline-offset:.3em}
   @media(max-width:900px){.blog-columns{gap:2rem;grid-template-columns:minmax(0,1fr) 14rem}.blog-sidebar{padding-left:1.5rem}}
-  @media(max-width:680px){.blog-home{width:calc(100% - 2.5rem);padding-bottom:3rem}.blog-intro{padding:2rem 0}.intro-label{font-size:.6rem}.intro-copy{font-size:1.2rem}.mobile-break{display:block}.blog-columns{grid-template-columns:1fr;padding-top:1.8rem;gap:2rem}.blog-sidebar{border-left:0;padding:2rem 0 0;border-top:1px solid var(--color-outline-subtle)}.post-row h2{font-size:1.3rem}.empty-state{padding:3rem 0}.author-card{position:relative;padding-left:4rem}.author-mark{position:absolute;left:0;top:0;width:40px;height:40px}.sidebar-note{margin-top:1.5rem}}
+  @media(max-width:680px){.blog-home{width:calc(100% - 2.5rem);padding-bottom:3rem}.blog-intro{padding:2rem 0}.intro-copy{font-size:1.2rem}.mobile-break{display:block}.blog-columns{grid-template-columns:1fr;padding-top:1.8rem;gap:2rem}.blog-sidebar{border-left:0;padding:2rem 0 0;border-top:1px solid var(--color-outline-subtle)}.post-row h2{font-size:1.3rem}.empty-state{padding:3rem 0}.author-card{position:relative;padding-left:4rem}.author-mark{position:absolute;left:0;top:0;width:40px;height:40px}.sidebar-note{margin-top:1.5rem}}
 </style>

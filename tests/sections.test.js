@@ -12,21 +12,21 @@ const NURSERY_STAGE_DOTS = {
 
 const SECTION_INDEX_CONFIG = {
   flora: {
-    pageTitle: 'Flora - The Greenhouse',
+    pageTitle: 'Flora - Bunnyside',
     heading: 'Flora',
     description: 'AI 런칭, 모델 변화, 에이전트 제품에 대한 큐레이션 노트.',
     emptyMessage: 'No flora posts yet.',
     accentClass: 'text-secondary',
   },
   nursery: {
-    pageTitle: 'Nursery - The Greenhouse',
+    pageTitle: 'Nursery - Bunnyside',
     heading: 'Nursery',
     description: '자라는 아이디어, 미완의 생각, 에버그린 노트.',
     emptyMessage: 'No nursery notes yet.',
     accentClass: 'text-secondary',
   },
   seeds: {
-    pageTitle: 'Seeds - The Greenhouse',
+    pageTitle: 'Seeds - Bunnyside',
     heading: 'Seeds',
     description: '짧은 메모, 순간 포착, 씨앗 단계의 글.',
     emptyMessage: 'No seeds yet.',

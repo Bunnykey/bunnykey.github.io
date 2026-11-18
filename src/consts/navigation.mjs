@@ -1,6 +1,6 @@
 // Shared destinations for desktop, mobile, home and the workspace index.
 export const PRIMARY_LINKS = [
-  { label: '글', href: '/' },
+  { label: '글', href: '/', activePaths: '/ /flora/ /nursery/ /seeds/' },
   { label: '음악', href: '/music/tiers/', activePaths: '/music/ /music-tiers/' },
   { label: '작업실', href: '/workbench/' },
   { label: '소개', href: '/gardener/' },

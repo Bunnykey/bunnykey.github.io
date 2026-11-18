@@ -28,6 +28,7 @@ const {
   articleDate,
   noIndex = false,
 } = Astro.props;
+const pageTitle = title === SITE.name ? title : `${title} | ${SITE.name}`;
 const canonicalUrl = toCanonicalUrl(canonicalPath);
 const currentPath = Astro.url.pathname;
 const inferredOgImage =
@@ -50,8 +51,10 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="description" content={description} />
     {noIndex && <meta name="robots" content="noindex, nofollow, noarchive" />}
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
+    <link rel="icon" type="image/svg+xml" href={SITE.favicon} />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" type="application/rss+xml" title={SITE.name} href="/rss.xml" />
+    <meta property="og:site_name" content={SITE.name} />
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content={ogType} />
@@ -64,7 +67,7 @@ const ogImageUrl = resolvedOgImage.startsWith('http')
     <meta name="generator" content={Astro.generator} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Content-Security-Policy" content={`default-src 'self'; script-src 'self' 'unsafe-inline'${currentPath === '/search/' || currentPath === '/search' ? " 'wasm-unsafe-eval'" : ''}; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; frame-src https://open.spotify.com https://www.youtube-nocookie.com; connect-src 'self' https://formspree.io https://jsonplaceholder.typicode.com${currentPath === '/write/' || currentPath === '/write' ? ' https://api.github.com' : ''}; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://formspree.io;`} />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <ViewTransitions />
     {ogType === 'article' && articleDate ? (
       <script type="application/ld+json" set:html={JSON.stringify({

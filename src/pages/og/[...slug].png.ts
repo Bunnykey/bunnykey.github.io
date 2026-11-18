@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
+import { SITE } from '../../consts/site';
 
 import { getSeriesPostsFromEntries } from '../../utils/series.ts';
 import { SECTION_KEYS, filterPublished, type SectionKey } from '../../consts/sections';
@@ -196,7 +197,7 @@ function buildSvg(entry: OgContentEntry, totalSeriesPosts: number, fonts: Awaite
       ${seriesBadge}
       <text x="96" y="294" fill="#2f3430" font-size="48" font-weight="700">${titleText}</text>
       <text x="96" y="420" fill="#5c605c" font-size="20" font-weight="400">${escapeXml(metaLine)}</text>
-      <text x="96" y="564" fill="#2f3430" font-size="14" font-weight="700">Bunnyside</text>
+      <text x="132" y="548" fill="#2f3430" font-size="18" font-weight="700">${SITE.englishName}</text>
     </svg>
   `;
 }
@@ -225,7 +226,11 @@ export async function GET({ params }: { params: { slug?: string | string[] } }) 
     : [];
 
   const svg = buildSvg(entry, seriesPosts.length || 1, await loadFontData());
-  const png = await sharp(Buffer.from(svg)).png().toBuffer();
+  const mark = await sharp(await fs.readFile('public/favicon.svg')).resize(24, 24).png().toBuffer();
+  const png = await sharp(Buffer.from(svg))
+    .composite([{ input: mark, left: 96, top: 530 }])
+    .png()
+    .toBuffer();
 
   return new Response(png, {
     headers: {

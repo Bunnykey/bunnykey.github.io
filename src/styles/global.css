@@ -107,7 +107,7 @@
 }
 
 @layer utilities {
-    .greenhouse-prose {
+    .article-prose {
         @apply border-t border-outline-subtle/20 pt-8 prose max-w-none text-foreground prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-foreground prose-li:text-foreground prose-strong:text-foreground prose-blockquote:text-foreground-muted prose-a:text-accent hover:prose-a:text-accent/80 prose-pre:bg-surface-sunken prose-code:text-foreground;
     }
 
@@ -207,15 +207,15 @@
 .journal-article-header { padding-bottom: 2.5rem; margin-bottom: 2.5rem; border-bottom: 1px solid var(--color-outline-subtle); }
 .journal-article-header h1 { margin-top: 1rem; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 400; line-height: .98; letter-spacing: -.065em; }
 .journal-article-header > p { max-width: 42rem; margin-top: 1rem; color: var(--color-foreground-muted); line-height: 1.8; }
-.journal-article .greenhouse-prose { border-top: 0; padding-top: 0; font-size: 1.02rem; line-height: 1.9; }
-.journal-article .greenhouse-prose :is(h2, h3) { margin-top: 3rem; font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.04em; }
-.journal-article .greenhouse-prose h2 { font-size: clamp(1.8rem, 3vw, 2.55rem); }
-.journal-article .greenhouse-prose :is(img, video) { border-radius: 0; }
+.journal-article .article-prose { border-top: 0; padding-top: 0; font-size: 1.02rem; line-height: 1.9; }
+.journal-article .article-prose :is(h2, h3) { margin-top: 3rem; font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.04em; }
+.journal-article .article-prose h2 { font-size: clamp(1.8rem, 3vw, 2.55rem); }
+.journal-article .article-prose :is(img, video) { border-radius: 0; }
 @media (max-width: 640px) { .journal-article-shell { width: min(100% - 2rem, 70rem); padding-top: 3rem; }.journal-article-header { padding-bottom: 1.75rem; margin-bottom: 1.75rem; } }
 
 /* Korean reading typography. */
 .journal-article-header h1 { font-family: MaruBuri, serif; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.45; letter-spacing: 0; font-weight: 600; }
-.journal-article .greenhouse-prose { font-family: MaruBuri, serif; font-size: 18px; line-height: 1.9; letter-spacing: 0; word-break: keep-all; overflow-wrap: anywhere; }
-.journal-article .greenhouse-prose :is(h2,h3) { font-family: MaruBuri, serif; line-height: 1.5; letter-spacing: 0; font-weight: 600; }
-.journal-article .greenhouse-prose h2 { font-size: 1.3em; }
-@media(max-width:640px) { .journal-article .greenhouse-prose { font-size: 17px; line-height: 1.85; } }
+.journal-article .article-prose { font-family: MaruBuri, serif; font-size: 18px; line-height: 1.9; letter-spacing: 0; word-break: keep-all; overflow-wrap: anywhere; }
+.journal-article .article-prose :is(h2,h3) { font-family: MaruBuri, serif; line-height: 1.5; letter-spacing: 0; font-weight: 600; }
+.journal-article .article-prose h2 { font-size: 1.3em; }
+@media(max-width:640px) { .journal-article .article-prose { font-size: 17px; line-height: 1.85; } }

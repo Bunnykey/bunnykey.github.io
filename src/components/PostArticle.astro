@@ -58,7 +58,7 @@ const narrow = false;
         {series && <SeriesNav collection={collection} currentSlug={entry.slug} currentOrder={series.order}
           seriesName={series.name} seriesTitle={series.title} posts={seriesPosts} seriesPath={seriesPath || undefined} />}
         <div class:list={[!narrow && 'lg:hidden']}><TableOfContents headings={headings} mobile /></div>
-        <div class="greenhouse-prose" data-pagefind-body={!preview || undefined}>
+        <div class="article-prose" data-pagefind-body={!preview || undefined}>
           <Content components={{TokenFlowDemo, ApiFlowDemo}} />
         </div>
         {entry.data.demo === 'TokenFlowDemo' && !/<TokenFlowDemo\b/.test(entry.body) && <div class="mt-10"><TokenFlowDemo client:visible /></div>}

@@ -7,7 +7,11 @@ test('readers can open articles, the workspace and return to the complete list',
   const title = await first.textContent();
   await first.click();
   await expect(page.getByRole('heading', {level: 1, name: title!, exact: true})).toBeVisible();
-  await expect(page.locator('.greenhouse-prose')).toBeVisible();
+  await expect(page.locator('.article-prose')).toBeVisible();
+  await expect(page).toHaveTitle(/ \| 버니사이드$/);
+  if ((page.viewportSize()?.width ?? 0) >= 768) {
+    await expect(page.getByRole('navigation', {name: '주요 메뉴'}).getByRole('link', {name: '글', exact: true})).toHaveAttribute('aria-current', 'page');
+  }
   await page.goto('/workbench/');
   await expect(page.getByRole('heading', {name: '작업실', exact: true})).toBeVisible();
   await page.getByRole('link', {name: '전체 글', exact: true}).click();
@@ -59,6 +63,7 @@ test('404 offers a working return path and the default social image exists', asy
   await expect(page.locator('main')).toHaveCount(1);
   await page.getByRole('link', {name: '홈으로 돌아가기 →', exact: true}).click();
   await expect(page.getByRole('heading', {name: '글', exact: true})).toBeVisible();
+  await expect(page.locator('meta[property="og:site_name"]')).toHaveAttribute('content', '버니사이드');
   const og = await request.get('/og-default.png');
   expect(og.status()).toBe(200);
   expect(og.headers()['content-type']).toContain('image/png');
