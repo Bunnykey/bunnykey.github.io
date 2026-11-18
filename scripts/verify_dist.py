@@ -11,12 +11,8 @@ PINNED_DIST_FILES = [
     "nursery/index.html",
     "seeds/index.html",
     "gardener/index.html",
-    "workbench/index.html",
     "demos/index.html",
-    "write/index.html",
-    "preview/index.html",
     "music/tiers/index.html",
-    "music-tiers/studio/index.html",
     "search/index.html",
     "privacy/index.html",
     "404.html",
@@ -51,6 +47,9 @@ def main() -> int:
     if errors:
         print("\n".join(errors))
         return 1
+
+    for rel in ("write", "workbench", "preview", "music-tiers/studio"):
+        require(not (dist / rel).exists(), f"operator output published: {rel}", errors)
 
     for rel in PINNED_DIST_FILES:
         require((dist / rel).exists(), f"missing built route file: {rel}", errors)

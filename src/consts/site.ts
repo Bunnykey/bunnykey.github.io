@@ -7,7 +7,7 @@ export const SITE = {
   siteUrl: "https://bunnykey.github.io",
   defaultDescription: "버니사이드 — 일상과 음악, 기술을 기록합니다.",
   defaultOgImage: "/og-default.png",
-  pinnedRoutes: ["/", "/gardener/", "/workbench/", "/music/tiers/"],
+  pinnedRoutes: ["/", "/gardener/", "/music/tiers/"],
 } as const;
 
 export const PAGE_DESCRIPTIONS = {

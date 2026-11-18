@@ -1,8 +1,7 @@
 import {test, expect} from '@playwright/test';
 
-test('writing starts from the blog, offers one writing path and stays within a mobile viewport', async ({page}, info) => {
-  await page.goto('/');
-  await page.getByRole('navigation', {name: '하단 메뉴'}).getByRole('link', {name: '글쓰기', exact: true}).click();
+test('local writing guide opens, offers one writing path and stays within a mobile viewport', async ({page}, info) => {
+  await page.goto('/write/');
   await expect(page.getByRole('heading', {name: '글쓰기', exact: true})).toBeVisible();
   const start = page.locator('a[href="https://app.pagescms.org/Bunnykey/bunnykey.github.io/main/collection/flora/new"]');
   await expect(start).toContainText('새 글 쓰기');
@@ -34,8 +33,7 @@ test('publishing status reports pending, cached, failed and unavailable states w
   let response = {status: 'in_progress', conclusion: null as string | null, head_sha: 'new'};
   let http = 200;
   await page.route('https://api.github.com/repos/Bunnykey/bunnykey.github.io/actions/runs**', route => route.fulfill({status: http, contentType: 'application/json', body: JSON.stringify({workflow_runs: [{...response, name: 'Deploy to GitHub Pages', head_branch: 'main', html_url: 'https://github.com/Bunnykey/bunnykey.github.io/actions/runs/123'}]})}));
-  await page.goto('/');
-  await page.getByRole('navigation', {name: '하단 메뉴'}).getByRole('link', {name: '글쓰기', exact: true}).click();
+  await page.goto('/write/');
   const button = page.getByRole('button', {name: '배포 상태 확인', exact: true});
   const panel = page.locator('#publishing-status');
   await button.click();

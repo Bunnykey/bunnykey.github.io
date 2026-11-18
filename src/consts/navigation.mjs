@@ -2,7 +2,6 @@
 export const PRIMARY_LINKS = [
   { label: '글', href: '/', activePaths: '/ /flora/ /nursery/ /seeds/' },
   { label: '음악', href: '/music/tiers/', activePaths: '/music/ /music-tiers/' },
-  { label: '작업실', href: '/workbench/' },
   { label: '소개', href: '/gardener/' },
 ];
 export const QUICK_LINKS = [
@@ -18,7 +17,7 @@ export const WORKSPACE_GROUPS = [
   ]},
   { title: '글쓰기와 발행', items: [
     { label: '글쓰기', href: '/write/', reload: true, description: 'Pages CMS에서 새 글을 쓰거나 기존 글을 이어 씁니다.' },
-    { label: '초안 미리보기', href: '/preview/', description: '공개 미리보기를 켜고 저장한 초안을 실제 글 화면으로 확인합니다.', note: '링크를 아는 누구나 열 수 있는 미리보기입니다.' },
+    { label: '초안 미리보기', href: '/preview/', description: '로컬 미리보기에 표시를 켠 초안을 실제 글 화면으로 확인합니다.', note: '내 컴퓨터에서 실행 중인 서버에서 확인합니다.' },
     { label: '배포 상태 확인', href: '/write/#publishing-status', reload: true, description: '저장한 변경이 블로그에 반영됐는지 확인합니다.' },
     { label: '미디어 삽입 도우미', href: '/write/#media-title', reload: true, description: 'Spotify·YouTube·GitHub 주소를 본문에 넣을 형식으로 바꿉니다.' },
   ]},

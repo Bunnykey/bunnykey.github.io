@@ -15,7 +15,7 @@ In repository settings, confirm Pages uses GitHub Actions. With GitHub CLI acces
 
 ## After deploying
 
-Confirm the workflow succeeded for the intended commit. Open the homepage and follow the links to an article, search, about, music and the workspace. From the workspace, confirm the writing, preview, listening studio and demo entry points. Check that `/rss.xml`, `/favicon.svg` and `/og-default.png` load. Inspect an article's share metadata and open its `og:image` URL.
+Confirm the workflow succeeded for the intended commit. Open the homepage and follow the links to an article, search, about, music and demos. Confirm that /write/, /workbench/, /preview/ and /music-tiers/studio/ return 404. The local development server provides the operator workspace. Check that `/rss.xml`, `/favicon.svg` and `/og-default.png` load. Inspect an article's share metadata and open its `og:image` URL.
 
 ## Rollback
 

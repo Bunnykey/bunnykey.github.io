@@ -30,7 +30,7 @@ test('CMS-style Markdown builds images and embeds while drafts stay out of publi
           `---\ntitle: ${draft ? 'CMS_DRAFT_SENTINEL' : 'CMS 발행'} ${collection}\ndate: "2026-10-26"\ncategory: notes\ndraft: ${draft}\n${series}---\n\n${body}\n`);
       }
     }
-    execFileSync('npm', ['run', 'build'], {cwd: root, stdio: 'pipe', timeout: 100000});
+    execFileSync('npm', ['run', 'build'], {cwd: root, stdio: 'pipe', timeout: 100000, env: {...process.env, GITHUB_ACTIONS: '', BUNNYSIDE_LOCAL_TOOLS: '1'}});
     for (const collection of ['flora', 'seeds', 'nursery']) {
       const html = await readFile(join(root, `dist/${collection}/cms-published/index.html`), 'utf8');
       assert.match(html, /src="\/img\/cms-contract.png"/);
@@ -77,7 +77,10 @@ test('CMS-style Markdown builds images and embeds while drafts stay out of publi
       if (collection === 'seeds') raw = raw.replace('draft: true', 'draft: false');
       await writeFile(file, raw);
     }
-    execFileSync('npm', ['run', 'build'], {cwd: root, stdio: 'pipe', timeout: 100000});
+    execFileSync('npm', ['run', 'build'], {cwd: root, stdio: 'pipe', timeout: 100000, env: {...process.env, BUNNYSIDE_LOCAL_TOOLS: '0'}});
+    for (const route of ['preview', 'write', 'workbench', 'music-tiers/studio']) {
+      await assert.rejects(access(join(root, 'dist', route)), {code: 'ENOENT'});
+    }
     for (const collection of ['flora', 'seeds', 'nursery']) {
       await assert.rejects(access(join(root, `dist/preview/${collection}/cms-shared/index.html`)), {code: 'ENOENT'});
       if (collection === 'seeds') await access(join(root, `dist/${collection}/cms-shared/index.html`));

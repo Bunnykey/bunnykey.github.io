@@ -1,3 +1,4 @@
+import { includesLocalTools } from '../src/consts/site-output.mjs';
 import {readdir, readFile, stat} from 'node:fs/promises';
 import {join} from 'node:path';
 import {JSDOM} from 'jsdom';
@@ -6,6 +7,7 @@ import {parsePost} from '../src/lib/publishing/serialization.mjs';
 
 async function exists(path) {try {return (await stat(path)).isFile();} catch {return false;}}
 async function children(path) {try {return await readdir(path,{withFileTypes:true});} catch(error) {if(error.code==='ENOENT')return [];throw error;}}
+const localTools = includesLocalTools();
 let publicCount=0;
 for(const collection of COLLECTIONS){
   const published=new Set(), previews=new Set();
@@ -14,7 +16,7 @@ for(const collection of COLLECTIONS){
     const slug=file.replace(/\.mdx?$/,'');
     const {frontmatter}=parsePost(await readFile(join('src/content',collection,file),'utf8'));
     if(frontmatter.draft!==true)published.add(slug);
-    else if(frontmatter.sharePreview===true)previews.add(slug);
+    else if(localTools && frontmatter.sharePreview===true)previews.add(slug);
   }
   publicCount+=published.size;
   for(const [directory,expected] of [[join('dist',collection),published],[join('dist/preview',collection),previews]]){

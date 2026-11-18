@@ -1,3 +1,4 @@
+import { includesLocalTools, OPERATOR_PATHS } from '../src/consts/site-output.mjs';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, join, relative } from 'node:path';
 import { JSDOM } from 'jsdom';
@@ -58,7 +59,19 @@ for (const file of queue) {
     }
   }
 }
-const destinations = ['/workbench/', '/demos/', ...WORKSPACE_GROUPS.flatMap(group => group.items.map(item => item.href))];
+const destinations = ['/search/', '/gardener/', '/music/tiers/', '/demos/', '/rss.xml'];
+const localTools = includesLocalTools();
+if (localTools) {
+  const workspace = pages.get(await targetFile('/workbench/'));
+  for (const { href } of WORKSPACE_GROUPS.flatMap(group => group.items)) {
+    if (!workspace?.links.some(link => link.value === href)) errors.push(`missing workspace link: ${href}`);
+  }
+} else {
+  for (const route of OPERATOR_PATHS) {
+    const href = '/' + route;
+    if (await targetFile(href)) errors.push(`operator route in public output: ${href}`);
+  }
+}
 for (const href of new Set(destinations)) {
   const target = await targetFile(new URL(href, origin).pathname);
   if (!target || !distance.has(target)) errors.push(`unreachable feature from home: ${href}`);

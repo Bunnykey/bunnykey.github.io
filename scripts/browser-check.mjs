@@ -21,7 +21,7 @@ try {
       await writeFile(join(site, `src/content/${collection}/acceptance-${state}.md`), `---\n${metadata}---\n\n${body}`);
     }
   }
-  const build = spawnSync('npm', ['run', 'build'], {cwd: site, stdio: 'inherit'});
+  const build = spawnSync('npm', ['run', 'build'], {cwd: site, stdio: 'inherit', env: {...process.env, GITHUB_ACTIONS: '', BUNNYSIDE_LOCAL_TOOLS: '1'}});
   if (build.status === 0) {
     const result = spawnSync(process.execPath, [resolve('node_modules/@playwright/test/cli.js'), 'test', ...process.argv.slice(2)], {
       cwd: process.cwd(), stdio: 'inherit', env: {...process.env, E2E_SITE_ROOT: site},
